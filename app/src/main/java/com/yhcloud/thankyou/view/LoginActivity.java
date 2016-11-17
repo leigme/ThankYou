@@ -1,6 +1,7 @@
 package com.yhcloud.thankyou.view;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -103,7 +104,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @Override
     public void pushMainActivity() {
-
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     @Override

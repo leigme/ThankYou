@@ -15,6 +15,9 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         Log.e(TAG, "初始化APP开始...");
+
+
+
         Log.e(TAG, "初始化APP结束...");
     }
 }

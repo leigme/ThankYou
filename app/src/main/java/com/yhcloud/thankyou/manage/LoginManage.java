@@ -35,6 +35,7 @@ public class LoginManage {
             //实现登录成功的回调,如:传递对象到下一个activity或者存储对象到数据库
             Log.e(TAG, "登录成功...");
             mILoginView.hideDialog();
+            mILoginView.pushMainActivity();
         }
 
         @Override

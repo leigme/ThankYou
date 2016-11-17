@@ -11,4 +11,5 @@ interface AIDLService {
     void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat,
             double aDouble, String aString);
     void success();
+    void login(String username, String password);
 }

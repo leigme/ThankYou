@@ -1,5 +1,7 @@
 package com.yhcloud.thankyou.manage;
 
+import android.util.Log;
+
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.logic.HomeLogic;
 import com.yhcloud.thankyou.logic.ICallListener;
@@ -32,7 +34,8 @@ public class HomeManage {
         public void callSuccess(ArrayList<SpreadBean> been) {
             ArrayList<String> arrayList = new ArrayList<>();
             for (SpreadBean sb: been) {
-                arrayList.add(sb.getSummaryPicUrl());
+                arrayList.add("http://www.k12chn.com" + sb.getSummaryPicLink());
+                Log.e(TAG, "http://www.k12chn.com" + sb.getSummaryPicLink());
             }
             mIHomeView.showBanner(arrayList);
         }

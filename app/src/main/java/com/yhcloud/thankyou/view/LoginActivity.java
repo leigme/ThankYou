@@ -10,7 +10,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.bean.ClassInfo;
 import com.yhcloud.thankyou.manage.LoginManage;
+
+import java.util.ArrayList;
 
 import rx.Observable;
 import rx.Observer;
@@ -89,12 +92,14 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @Override
     public void showDialog() {
-
+        mProgressDialog = ProgressDialog.show(this, null, "登录中,请稍候...");
     }
 
     @Override
     public void hideDialog() {
-
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override
@@ -103,8 +108,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
-    public void pushMainActivity() {
+    public void pushMainActivity(ArrayList<ClassInfo> classInfos) {
         Intent intent = new Intent(this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ClassInfos", classInfos);
+        intent.putExtras(bundle);
         startActivity(intent);
     }
 
@@ -116,5 +124,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     @Override
     public void clearPassword() {
 
+    }
+
+    @Override
+    public void closeActivity() {
+        finish();
     }
 }

@@ -31,11 +31,12 @@ public class LoginManage {
     public class CallListener implements ICallListener<UserInfo> {
 
         @Override
-        public void callSuccess(UserInfo UserInfo) {
+        public void callSuccess(UserInfo userInfo) {
             //实现登录成功的回调,如:传递对象到下一个activity或者存储对象到数据库
             Log.e(TAG, "登录成功...");
+            mILoginView.pushMainActivity(userInfo.getClassInfos());
             mILoginView.hideDialog();
-            mILoginView.pushMainActivity();
+            mILoginView.closeActivity();
         }
 
         @Override

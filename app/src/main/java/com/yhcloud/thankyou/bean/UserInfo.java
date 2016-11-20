@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016/11/11.
@@ -15,6 +16,7 @@ public class UserInfo implements Serializable, Parcelable {
     private int uid;
     private String username;
     private String password;
+    private ArrayList<ClassInfo> classInfos;
 
     @Override
     public int describeContents() {
@@ -68,5 +70,13 @@ public class UserInfo implements Serializable, Parcelable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public ArrayList<ClassInfo> getClassInfos() {
+        return classInfos;
+    }
+
+    public void setClassInfos(ArrayList<ClassInfo> classInfos) {
+        this.classInfos = classInfos;
     }
 }

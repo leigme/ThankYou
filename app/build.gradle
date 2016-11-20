@@ -26,11 +26,8 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
-//    compile 'com.android.support:appcompat-v7:24.2.1', {
-//        exclude 'com.android.support:support-v4'
-//    }
     compile project(':easeui')
+    compile 'com.android.support:support-v4:24.2.1'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
     //网络请求
@@ -46,4 +43,7 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.0'
     //Glide辅助库
     compile 'jp.wasabeef:glide-transformations:2.0.1'
+    //轮播图
+    compile 'com.youth.banner:banner:1.4.2'
+    testCompile 'junit:junit:4.12'
 }

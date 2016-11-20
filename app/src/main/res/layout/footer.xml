@@ -18,12 +18,12 @@
             android:id="@+id/iv_footer_home"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:src="@mipmap/icon_home"/>
+            android:src="@mipmap/icon_home_un"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:id="@+id/tv_home"
+            android:id="@+id/tv_footer_home"
             android:layout_gravity="center_horizontal"
             android:textSize="14sp"
             android:textColor="#8E908D"
@@ -44,7 +44,7 @@
             android:id="@+id/iv_footer_class"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="5dp"
-            android:src="@mipmap/icon_class"/>
+            android:src="@mipmap/icon_class_un"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="0dp"

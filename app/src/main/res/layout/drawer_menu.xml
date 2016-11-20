@@ -19,7 +19,7 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+id/drawer_photo"
+                android:id="@+id/iv_drawer_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:src="@mipmap/ic_launcher"
@@ -40,7 +40,7 @@
                 android:layout_weight="1.8">
 
                 <TextView
-                    android:id="@+id/drawer_username"
+                    android:id="@+id/tv_drawer_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="用户名"
@@ -59,7 +59,7 @@
                 android:layout_weight="1">
 
                 <TextView
-                    android:id="@+id/drawer_class"
+                    android:id="@+id/tv_drawer_class"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="班级"
@@ -117,16 +117,22 @@
 
         </RelativeLayout>
 
-        <ListView
-            android:id="@+id/drawer_listView"
+        <!--<ListView-->
+            <!--android:id="@+id/drawer_listView"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="40dp"-->
+            <!--android:layout_marginBottom="30dp"-->
+            <!--android:divider="@null"-->
+            <!--android:listSelector="#00000000"-->
+            <!--android:choiceMode="singleChoice"/>-->
+        <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:id="@+id/rv_drawer_list"
             android:layout_marginTop="40dp"
             android:layout_marginBottom="30dp"
-            android:divider="@null"
-            android:listSelector="#00000000"
-            android:choiceMode="singleChoice"/>
-
+            ></android.support.v7.widget.RecyclerView>
     </RelativeLayout>
 
 

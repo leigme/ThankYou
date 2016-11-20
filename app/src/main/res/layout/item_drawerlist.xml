@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content">
+    <RelativeLayout
+        android:id="@+id/rl_drawer_btn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/item_drawer_selector"
+        >
+
+        <TextView
+            android:id="@+id/tv_itemdrawer_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="五年级一班"
+            android:layout_centerVertical="true"
+            android:textColor="@color/colorWhite"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginLeft="40dp"
+            />
+    </RelativeLayout>
+</LinearLayout>

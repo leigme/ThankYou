@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.logic.HomeLogic;
-import com.yhcloud.thankyou.logic.ICallListener;
+import com.yhcloud.thankyou.mInterface.MyCallListener;
 import com.yhcloud.thankyou.logic.IHomeLogic;
 import com.yhcloud.thankyou.view.IHomeView;
 
@@ -28,7 +28,7 @@ public class HomeManage {
         mIHomeLogic.getImageUrls(updateTime, new CallListener());
     }
 
-    public class CallListener implements ICallListener<ArrayList<SpreadBean>> {
+    public class CallListener implements MyCallListener<ArrayList<SpreadBean>> {
 
         @Override
         public void callSuccess(ArrayList<SpreadBean> been) {

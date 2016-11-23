@@ -1,7 +1,7 @@
 package com.yhcloud.thankyou.manage;
 
 import com.yhcloud.thankyou.bean.ClassInfo;
-import com.yhcloud.thankyou.logic.ICallListener;
+import com.yhcloud.thankyou.mInterface.MyCallListener;
 import com.yhcloud.thankyou.logic.IMainLogic;
 import com.yhcloud.thankyou.view.IMainView;
 
@@ -24,7 +24,7 @@ public class MainManage {
         mIMainLogic.getClassInfoList("3237", new CallListener());
     }
 
-    public class CallListener implements ICallListener<ArrayList<ClassInfo>> {
+    public class CallListener implements MyCallListener<ArrayList<ClassInfo>> {
 
         @Override
         public void callSuccess(ArrayList<ClassInfo> infos) {

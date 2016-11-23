@@ -3,7 +3,7 @@ package com.yhcloud.thankyou.manage;
 import android.util.Log;
 
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.logic.ICallListener;
+import com.yhcloud.thankyou.mInterface.MyCallListener;
 import com.yhcloud.thankyou.logic.ILoginLogic;
 import com.yhcloud.thankyou.logic.LoginLogic;
 import com.yhcloud.thankyou.view.ILoginView;
@@ -28,7 +28,7 @@ public class LoginManage {
         mILoginLogic.login(mILoginView.getUserName(), mILoginView.getPassWord(), new CallListener());
     }
 
-    public class CallListener implements ICallListener<UserInfo> {
+    public class CallListener implements MyCallListener<UserInfo> {
 
         @Override
         public void callSuccess(UserInfo userInfo) {

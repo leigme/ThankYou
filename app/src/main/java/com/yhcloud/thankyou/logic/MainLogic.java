@@ -3,6 +3,7 @@ package com.yhcloud.thankyou.logic;
 import android.util.Log;
 
 import com.yhcloud.thankyou.bean.ClassInfo;
+import com.yhcloud.thankyou.mInterface.MyCallListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -19,7 +20,7 @@ public class MainLogic implements IMainLogic {
     private String TAG = getClass().getSimpleName();
 
     @Override
-    public void getClassInfoList(String userId, final ICallListener iCallListener) {
+    public void getClassInfoList(String userId, final MyCallListener myCallListener) {
         OkHttpUtils.post()
                 .url("")
                 .addParams("userId", userId)
@@ -28,7 +29,7 @@ public class MainLogic implements IMainLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.e(TAG, "请求失败:" + e);
-                        iCallListener.callFailed();
+                        myCallListener.callFailed();
                     }
 
                     @Override
@@ -37,7 +38,7 @@ public class MainLogic implements IMainLogic {
                         ArrayList<ClassInfo> classInfos = new ArrayList<>();
                         ClassInfo classInfo = new ClassInfo();
                         classInfos.add(classInfo);
-                        iCallListener.callSuccess(classInfos);
+                        myCallListener.callSuccess(classInfos);
                     }
                 });
     }

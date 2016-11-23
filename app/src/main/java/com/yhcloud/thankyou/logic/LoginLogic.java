@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.bean.ClassInfo;
 import com.yhcloud.thankyou.bean.UserInfo;
+import com.yhcloud.thankyou.mInterface.MyCallListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -25,7 +26,7 @@ public class LoginLogic implements ILoginLogic {
     private String TAG = getClass().getSimpleName();
 
     @Override
-    public void login(String username, String password, final ICallListener iCallListener) {
+    public void login(String username, String password, final MyCallListener myCallListener) {
         final UserInfo userInfo = new UserInfo();
         userInfo.setUsername(username);
         userInfo.setPassword(password);
@@ -40,7 +41,7 @@ public class LoginLogic implements ILoginLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.e(TAG, "请求失败..." + e);
-                        iCallListener.callFailed();
+                        myCallListener.callFailed();
                     }
 
                     @Override
@@ -55,17 +56,17 @@ public class LoginLogic implements ILoginLogic {
                                     ArrayList<ClassInfo> classInfos = gson.fromJson(jsonClassInfos, new TypeToken<ArrayList<ClassInfo>>(){}.getType());
                                     if (null != classInfos) {
                                         userInfo.setClassInfos(classInfos);
-                                        iCallListener.callSuccess(userInfo);
+                                        myCallListener.callSuccess(userInfo);
                                     }
                                 } else {
-                                    iCallListener.callFailed();
+                                    myCallListener.callFailed();
                                 }
                             } else {
-                                iCallListener.callFailed();
+                                myCallListener.callFailed();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            iCallListener.callFailed();
+                            myCallListener.callFailed();
                         }
                     }
                 });

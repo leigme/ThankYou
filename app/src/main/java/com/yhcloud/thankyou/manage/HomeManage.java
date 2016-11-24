@@ -1,11 +1,17 @@
 package com.yhcloud.thankyou.manage;
 
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Handler;
+import android.os.IBinder;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.logic.HomeLogic;
 import com.yhcloud.thankyou.mInterface.MyCallListener;
-import com.yhcloud.thankyou.logic.IHomeLogic;
+import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.view.IHomeView;
 
 import java.util.ArrayList;
@@ -15,17 +21,32 @@ import java.util.ArrayList;
  */
 
 public class HomeManage {
-    private String TAG = getClass().getSimpleName();
-    private IHomeLogic mIHomeLogic;
-    private IHomeView mIHomeView;
 
-    public HomeManage(IHomeView homeView) {
+    private String TAG = getClass().getSimpleName();
+    private IHomeView mIHomeView;
+    private LogicService mService;
+
+    public HomeManage(IHomeView homeView, final Handler handler) {
         this.mIHomeView = homeView;
-        this.mIHomeLogic = new HomeLogic();
+        Fragment fragment = (Fragment) homeView;
+        Intent intent = new Intent(fragment.getActivity(), LogicService.class);
+        fragment.getActivity().bindService(intent, new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder binder) {
+                Log.e(TAG, "服务绑定成功...");
+                mService = ((LogicService.MyBinder)binder).getService();
+                handler.obtainMessage(1).sendToTarget();
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                handler.obtainMessage(0).sendToTarget();
+            }
+        }, Context.BIND_AUTO_CREATE);
     }
 
     public void showBanner(String updateTime) {
-        mIHomeLogic.getImageUrls(updateTime, new CallListener());
+        mService.getImageUrls(updateTime, new CallListener());
     }
 
     public class CallListener implements MyCallListener<ArrayList<SpreadBean>> {

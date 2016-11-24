@@ -3,6 +3,8 @@ package com.yhcloud.thankyou.view;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -39,8 +41,20 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     private OnFragmentInteractionListener mListener;
 
+    private Handler mHandler = new Handler(new Handler.Callback() {
+        @Override
+        public boolean handleMessage(Message message) {
+            switch (message.what) {
+                case 0:
+                    break;
+                case 1:
+                    mManage.showBanner("-1");
+                    break;
+            }
+            return false;
+        }
+    });
     private HomeManage mManage;
-
     private Banner mBanner;
 
 
@@ -85,9 +99,8 @@ public class HomeFragment extends Fragment implements IHomeView {
     }
 
     private void initView(View view) {
-        mManage = new HomeManage(this);
+        mManage = new HomeManage(this, mHandler);
         mBanner = (Banner) view.findViewById(R.id.banner);
-        mManage.showBanner("-1");
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -123,7 +136,7 @@ public class HomeFragment extends Fragment implements IHomeView {
         //设置图片集合
         mBanner.setImages(imageUrls);
         //设置banner动画效果
-        mBanner.setBannerAnimation(Transformer.DepthPage);
+        mBanner.setBannerAnimation(Transformer.Default);
         //设置标题集合（当banner样式有显示title时）
 //        mBanner.setBannerTitles(Arrays.asList(titles));
         //设置自动轮播，默认为true

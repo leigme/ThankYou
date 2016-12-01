@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.bean.ClassInfo;
+import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.mInterface.MyOnClickListener;
 
 import java.util.ArrayList;
@@ -21,11 +21,11 @@ import java.util.ArrayList;
 public class ClassDrawerListAdapter extends RecyclerView.Adapter<ClassDrawerListAdapter.MyViewHolder> {
 
     private Context mContext;
-    private ArrayList<ClassInfo> mDatas;
+    private ArrayList<ClassInfoBean> mDatas;
     private LayoutInflater mInflater;
     private MyOnClickListener mListener;
 
-    public ClassDrawerListAdapter(Context context, ArrayList<ClassInfo> list) {
+    public ClassDrawerListAdapter(Context context, ArrayList<ClassInfoBean> list) {
         this.mContext = context;
         this.mDatas = list;
         mInflater = LayoutInflater.from(mContext);
@@ -84,7 +84,7 @@ public class ClassDrawerListAdapter extends RecyclerView.Adapter<ClassDrawerList
         }
     }
 
-    public void reflreshList(ArrayList<ClassInfo> list) {
+    public void reflreshList(ArrayList<ClassInfoBean> list) {
         this.mDatas = list;
         this.notifyDataSetChanged();
     }

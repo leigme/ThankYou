@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.view;
 
-import com.yhcloud.thankyou.bean.ClassInfo;
+import com.yhcloud.thankyou.bean.ClassInfoBean;
 
 import java.util.ArrayList;
 
@@ -41,7 +41,7 @@ public interface ILoginView {
     /**
      * 跳入MainActivity
      */
-    public void pushMainActivity(ArrayList<ClassInfo> classInfos);
+    public void pushMainActivity(ArrayList<ClassInfoBean> classInfoBeen);
 
     public void clearUsername();
 

@@ -10,7 +10,7 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.mInterface.MyCallListener;
+import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.view.IHomeView;
 
@@ -49,7 +49,7 @@ public class HomeManage {
         mService.getImageUrls(updateTime, new CallListener());
     }
 
-    public class CallListener implements MyCallListener<ArrayList<SpreadBean>> {
+    public class CallListener implements ICallListener<ArrayList<SpreadBean>> {
 
         @Override
         public void callSuccess(ArrayList<SpreadBean> been) {

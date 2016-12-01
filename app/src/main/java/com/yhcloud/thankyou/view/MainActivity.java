@@ -19,7 +19,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.ClassDrawerListAdapter;
-import com.yhcloud.thankyou.bean.ClassInfo;
+import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.mInterface.MyOnClickListener;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.utils.myview.MyToast;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     private NoScrollViewPager nsvpList;
     private MyFragmentViewPagerAdapter mfvpa;
 
-    private ArrayList<ClassInfo> classInfos;
+    private ArrayList<ClassInfoBean> mClassInfoBeen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
         mFragments = new ArrayList<>();
         if (null != getIntent()) {
             Bundle bundle = getIntent().getExtras();
-            classInfos = (ArrayList<ClassInfo>) bundle.getSerializable("ClassInfos");
+            mClassInfoBeen = (ArrayList<ClassInfoBean>) bundle.getSerializable("ClassInfos");
         }
     }
 
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
                 switch (view.getId()) {
                     case R.id.ll_header_left:
 //                        mManage.getClassInfo("");
-                        showDrawer(classInfos);
+                        showDrawer(mClassInfoBeen);
                         break;
                     case R.id.ll_footer_home:
                         showFragment(0);
@@ -126,18 +126,18 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     }
 
     @Override
-    public void showDrawer(final ArrayList<ClassInfo> classInfos) {
+    public void showDrawer(final ArrayList<ClassInfoBean> classInfoBeen) {
         if (null == cdla) {
-            cdla = new ClassDrawerListAdapter(this, classInfos);
+            cdla = new ClassDrawerListAdapter(this, classInfoBeen);
             cdla.setMyOnClickListener(new MyOnClickListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     Log.e(TAG, "设置默认班级:" + position);
-                    for (ClassInfo ci: classInfos) {
+                    for (ClassInfoBean ci: classInfoBeen) {
                         ci.setSelected(false);
                     }
-                    classInfos.get(position).setSelected(true);
-                    cdla.reflreshList(classInfos);
+                    classInfoBeen.get(position).setSelected(true);
+                    cdla.reflreshList(classInfoBeen);
                     dlDrawer.closeDrawer(Gravity.LEFT);
                 }
 
@@ -151,7 +151,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
             rvDrawerList.setAdapter(cdla);
             rvDrawerList.setLayoutManager(layoutManager);
         } else {
-            cdla.reflreshList(classInfos);
+            cdla.reflreshList(classInfoBeen);
         }
         dlDrawer.openDrawer(Gravity.LEFT);
     }

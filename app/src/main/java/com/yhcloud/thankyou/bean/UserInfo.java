@@ -16,7 +16,9 @@ public class UserInfo implements Serializable, Parcelable {
     private int uid;
     private String username;
     private String password;
-    private ArrayList<ClassInfo> classInfos;
+    private String key;
+    private UserInfoBean userInfoBean;
+    private ArrayList<ClassInfoBean> mClassInfoBeen;
 
     @Override
     public int describeContents() {
@@ -72,11 +74,27 @@ public class UserInfo implements Serializable, Parcelable {
         this.password = password;
     }
 
-    public ArrayList<ClassInfo> getClassInfos() {
-        return classInfos;
+    public String getKey() {
+        return key;
     }
 
-    public void setClassInfos(ArrayList<ClassInfo> classInfos) {
-        this.classInfos = classInfos;
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public UserInfoBean getUserInfoBean() {
+        return userInfoBean;
+    }
+
+    public void setUserInfoBean(UserInfoBean userInfoBean) {
+        this.userInfoBean = userInfoBean;
+    }
+
+    public ArrayList<ClassInfoBean> getClassInfoBeen() {
+        return mClassInfoBeen;
+    }
+
+    public void setClassInfoBeen(ArrayList<ClassInfoBean> classInfoBeen) {
+        this.mClassInfoBeen = classInfoBeen;
     }
 }

@@ -2,8 +2,8 @@ package com.yhcloud.thankyou.logic;
 
 import android.util.Log;
 
-import com.yhcloud.thankyou.bean.ClassInfo;
-import com.yhcloud.thankyou.mInterface.MyCallListener;
+import com.yhcloud.thankyou.bean.ClassInfoBean;
+import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -20,7 +20,7 @@ public class MainLogic implements IMainLogic {
     private String TAG = getClass().getSimpleName();
 
     @Override
-    public void getClassInfoList(String userId, final MyCallListener myCallListener) {
+    public void getClassInfoList(String userId, final ICallListener iCallListener) {
         OkHttpUtils.post()
                 .url("")
                 .addParams("userId", userId)
@@ -29,16 +29,16 @@ public class MainLogic implements IMainLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.e(TAG, "请求失败:" + e);
-                        myCallListener.callFailed();
+                        iCallListener.callFailed();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e(TAG, "请求成功:" + response);
-                        ArrayList<ClassInfo> classInfos = new ArrayList<>();
-                        ClassInfo classInfo = new ClassInfo();
-                        classInfos.add(classInfo);
-                        myCallListener.callSuccess(classInfos);
+                        ArrayList<ClassInfoBean> classInfoBeen = new ArrayList<>();
+                        ClassInfoBean classInfoBean = new ClassInfoBean();
+                        classInfoBeen.add(classInfoBean);
+                        iCallListener.callSuccess(classInfoBeen);
                     }
                 });
     }

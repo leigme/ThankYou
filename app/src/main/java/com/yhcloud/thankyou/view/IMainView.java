@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.view;
 
-import com.yhcloud.thankyou.bean.ClassInfo;
+import com.yhcloud.thankyou.bean.ClassInfoBean;
 
 import java.util.ArrayList;
 
@@ -11,6 +11,6 @@ import java.util.ArrayList;
 public interface IMainView {
     public void setTitle(String str);
     public void setDrawer();
-    public void showDrawer(ArrayList<ClassInfo> classInfos);
+    public void showDrawer(ArrayList<ClassInfoBean> classInfoBeen);
     public void showFragment(int i);
 }

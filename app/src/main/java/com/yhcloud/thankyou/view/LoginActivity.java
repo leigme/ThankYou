@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.bean.ClassInfo;
+import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.manage.LoginManage;
 
 import java.util.ArrayList;
@@ -108,10 +108,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
-    public void pushMainActivity(ArrayList<ClassInfo> classInfos) {
+    public void pushMainActivity(ArrayList<ClassInfoBean> classInfoBeen) {
         Intent intent = new Intent(this, MainActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable("ClassInfos", classInfos);
+        bundle.putSerializable("ClassInfos", classInfoBeen);
         intent.putExtras(bundle);
         startActivity(intent);
     }

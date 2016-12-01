@@ -5,7 +5,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.mInterface.MyCallListener;
+import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -27,7 +27,7 @@ public class HomeLogic implements IHomeLogic {
     private ArrayList<SpreadBean> mLists;
 
     @Override
-    public void getImageUrls(String updateTime, final MyCallListener myCallListener) {
+    public void getImageUrls(String updateTime, final ICallListener iCallListener) {
         OkHttpUtils.post()
                 .url("http://www.k12chn.com/m01/M0108I/M0108I07")
                 .addParams("promotionType", "16")
@@ -38,7 +38,7 @@ public class HomeLogic implements IHomeLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.e(TAG, "请求失败:" + e);
-                        myCallListener.callFailed();
+                        iCallListener.callFailed();
                     }
 
                     @Override
@@ -51,12 +51,12 @@ public class HomeLogic implements IHomeLogic {
                                 if (null != jsonResult && !"".equals(jsonResult)) {
                                     Gson gson = new Gson();
                                     mLists = gson.fromJson(jsonResult, new TypeToken<ArrayList<SpreadBean>>(){}.getType());
-                                    myCallListener.callSuccess(mLists);
+                                    iCallListener.callSuccess(mLists);
                                 } else {
-                                    myCallListener.callFailed();
+                                    iCallListener.callFailed();
                                 }
                             } else {
-                                myCallListener.callFailed();
+                                iCallListener.callFailed();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

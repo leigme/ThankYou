@@ -5,12 +5,19 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 
+import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.logic.HomeLogic;
-import com.yhcloud.thankyou.mInterface.MyCallListener;
+import com.yhcloud.thankyou.logic.IHomeLogic;
+import com.yhcloud.thankyou.logic.ILoginLogic;
+import com.yhcloud.thankyou.logic.LoginLogic;
+import com.yhcloud.thankyou.mInterface.ICallListener;
 
 public class LogicService extends Service {
 
     private MyBinder mBinder = new MyBinder();
+
+    private UserInfo mUserInfo;
+
 
     public LogicService() {
     }
@@ -36,8 +43,23 @@ public class LogicService extends Service {
         }
     }
 
-    public void getImageUrls(String updateTime, MyCallListener myCallListener) {
-        HomeLogic homeLogic = new HomeLogic();
-        homeLogic.getImageUrls(updateTime, myCallListener);
+    public UserInfo getUserInfo() {
+        return mUserInfo;
+    }
+
+    public void setUserInfo(UserInfo userInfo) {
+        mUserInfo = userInfo;
+    }
+
+    //登录
+    public void login(String username, String password, ICallListener iCallListener) {
+        ILoginLogic loginLogic = new LoginLogic();
+        loginLogic.login(username, password, iCallListener);
+    }
+
+    //获取轮播图
+    public void getImageUrls(String updateTime, ICallListener iCallListener) {
+        IHomeLogic homeLogic = new HomeLogic();
+        homeLogic.getImageUrls(updateTime, iCallListener);
     }
 }

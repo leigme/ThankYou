@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by leig on 2016/11/19.
  */
 
-public class ClassInfo implements Serializable {
+public class ClassInfoBean implements Serializable {
 
 
     /**

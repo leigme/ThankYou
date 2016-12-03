@@ -1,15 +1,14 @@
 package com.yhcloud.thankyou;
 
+import android.app.Activity;
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.WindowManager;
 
 import com.google.gson.Gson;
@@ -36,12 +35,14 @@ public class LoadingActivity extends AppCompatActivity {
 
     private LogicService mService;
     private UserInfo mUserInfo;
+    private Activity mActivity;
     private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loading);
+        mActivity = this;
         //隐藏系统状态栏
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         //自动升级判断
@@ -52,16 +53,15 @@ public class LoadingActivity extends AppCompatActivity {
             @Override
             public void onServiceConnected(ComponentName name, IBinder binder) {
                 mService = ((LogicService.MyBinder)binder).getService();
-                SharedPreferences preferences = LoadingActivity.this.getSharedPreferences(Constant.USER_INFO, MODE_PRIVATE);
+                SharedPreferences preferences = mActivity.getSharedPreferences(Constant.USER_INFO, MODE_PRIVATE);
                 String username = preferences.getString(Constant.USER_NAME, "");
                 String password = preferences.getString(Constant.USER_PWD, "");
                 if (null != username && !"".equals(username) && null != password && !"".equals(password)) {
-                    mService.login(username, password, new ICallListener() {
+                    mService.login(username, password, new ICallListener<String>() {
                         @Override
-                        public void callSuccess(Object o) {
-                            Log.e(TAG, "回调成功:" + o);
+                        public void callSuccess(String s) {
                             try {
-                                JSONObject jsonObject = new JSONObject((String) o);
+                                JSONObject jsonObject = new JSONObject(s);
                                 if (!jsonObject.getBoolean("errorFlag")) {
                                     String key = jsonObject.getString("key");
                                     if (null != key && !"".equals(key)) {
@@ -79,24 +79,25 @@ public class LoadingActivity extends AppCompatActivity {
                                         if (null != classInfoBeen) {
                                             mUserInfo.setClassInfoBeen(classInfoBeen);
                                         }
-                                        saveUserInfo(mUserInfo);
+                                        mService.saveUserInfo(mUserInfo);
                                         mService.setUserInfo(mUserInfo);
                                         Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
                                         Bundle bundle = new Bundle();
                                         bundle.putSerializable("ClassInfos", classInfoBeen);
                                         intent.putExtras(bundle);
                                         startActivity(intent);
+                                        finish();
                                     }
                                     return;
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
+                                goLoginActivity();
                             }
-                            goLoginActivity();
                         }
+
                         @Override
                         public void callFailed() {
-                            Log.e(TAG, "回调失败");
                             goLoginActivity();
                         }
                     });
@@ -127,13 +128,14 @@ public class LoadingActivity extends AppCompatActivity {
         timer.schedule(task, 3000);
     }
 
-    public void saveUserInfo(UserInfo userInfo) {
-        mPreferences = this.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);
-        mPreferences.edit().putString(Constant.USER_NAME, userInfo.getUsername());
-        mPreferences.edit().putString(Constant.USER_PWD, userInfo.getPassword());
-        mPreferences.edit().putInt(Constant.USER_FLAG, userInfo.getUserInfoBean().getUserRoleId());
-        mPreferences.edit().putString(Constant.USER_HXNAME, userInfo.getUserInfoBean().getHXUserName());
-        mPreferences.edit().putString(Constant.USER_HXPWD, userInfo.getUserInfoBean().getHXPwd());
-        mPreferences.edit().commit();
-    }
+//    public void saveUserInfo(UserInfo userInfo) {
+//        mPreferences = this.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = mPreferences.edit();
+//        editor.putString(Constant.USER_NAME, userInfo.getUsername());
+//        editor.putString(Constant.USER_PWD, userInfo.getPassword());
+//        editor.putInt(Constant.USER_FLAG, userInfo.getUserInfoBean().getUserRoleId());
+//        editor.putString(Constant.USER_HXNAME, userInfo.getUserInfoBean().getHXUserName());
+//        editor.putString(Constant.USER_HXPWD, userInfo.getUserInfoBean().getHXPwd());
+//        editor.commit();
+//    }
 }

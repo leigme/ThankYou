@@ -25,16 +25,13 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     private EditText et_login_username, et_login_password;
     private TextView btn_login_send;
     private ProgressDialog mProgressDialog;
-    private LoginManage mLoginManage = new LoginManage(this);
+    private LoginManage mLoginManage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        initView();
-        initEvent();
-
-
+        mLoginManage = new LoginManage(this);
 
         final Observer<String> observer = new Observer<String>() {
             @Override
@@ -65,13 +62,15 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         observable.subscribe(observer);
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         et_login_username = (EditText) findViewById(R.id.et_login_username);
         et_login_password = (EditText) findViewById(R.id.et_login_password);
         btn_login_send = (TextView) findViewById(R.id.btn_login_send);
     }
 
-    private void initEvent() {
+    @Override
+    public void initEvent() {
         btn_login_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

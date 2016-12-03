@@ -7,5 +7,5 @@ import com.yhcloud.thankyou.mInterface.ICallListener;
  */
 
 public interface ILoginLogic {
-    public void login(String username, String password, ICallListener iCallListener);
+    public void login(String username, String password, ICallListener<String> iCallListener);
 }

@@ -20,8 +20,6 @@ public class App extends Application {
         Log.e(TAG, "初始化APP开始...");
         Intent intent = new Intent(this, LogicService.class);
         startService(intent);
-
-
         Log.e(TAG, "初始化APP结束...");
     }
 }

@@ -3,18 +3,24 @@ package com.yhcloud.thankyou.manage;
 import android.app.Activity;
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.util.Log;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.UserInfo;
+import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.view.ILoginView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016/11/14.
@@ -28,6 +34,7 @@ public class LoginManage {
     private Activity mActivity;
     private LogicService mService;
     private SharedPreferences mPreferences;
+    private UserInfo userInfo;
 
     public LoginManage(ILoginView loginView) {
         this.mILoginView = loginView;
@@ -37,6 +44,8 @@ public class LoginManage {
             @Override
             public void onServiceConnected(ComponentName name, IBinder binder) {
                 mService = ((LogicService.MyBinder)binder).getService();
+                mILoginView.initView();
+                mILoginView.initEvent();
             }
 
             @Override
@@ -48,34 +57,58 @@ public class LoginManage {
 
     public void login() {
         mILoginView.showDialog();
-        mService.login(mILoginView.getUserName(), mILoginView.getPassWord(), new ICallListener() {
+        mService.login(mILoginView.getUserName(), mILoginView.getPassWord(), new ICallListener<String>() {
             @Override
-            public void callSuccess(Object o) {
-                //实现登录成功的回调,如:传递对象到下一个activity或者存储对象到数据库
-                Log.e(TAG, "登录成功...");
-                UserInfo userInfo = (UserInfo) o;
-                mService.setUserInfo(userInfo);
-                saveUserInfo(userInfo);
-                mILoginView.pushMainActivity(userInfo.getClassInfoBeen());
-                mILoginView.hideDialog();
-                mILoginView.closeActivity();
+            public void callSuccess(String s) {
+                userInfo = new UserInfo();
+                userInfo.setUsername(mILoginView.getUserName());
+                userInfo.setPassword(mILoginView.getPassWord());
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        String key = jsonObject.getString("key");
+                        if (null != key && !"".equals(key)) {
+                            userInfo.setKey(key);
+                        }
+                        String jsonUserInfo = jsonObject.getString("userinfo");
+                        String jsonClassInfos = jsonObject.getString("classlist");
+                        if (null != jsonUserInfo && !"".equals(jsonUserInfo) && null != jsonClassInfos && !"".equals(jsonClassInfos)) {
+                            Gson gson = new Gson();
+                            UserInfoBean userInfoBean = gson.fromJson(jsonUserInfo, UserInfoBean.class);
+                            if (null != userInfoBean) {
+                                userInfo.setUserInfoBean(userInfoBean);
+                            }
+                            ArrayList<ClassInfoBean> classInfoBeen = gson.fromJson(jsonClassInfos, new TypeToken<ArrayList<ClassInfoBean>>(){}.getType());
+                            if (null != classInfoBeen) {
+                                userInfo.setClassInfoBeen(classInfoBeen);
+                            }
+                        }
+                        mService.setUserInfo(userInfo);
+                        mService.saveUserInfo(userInfo);
+                        mILoginView.pushMainActivity(userInfo.getClassInfoBeen());
+                        mILoginView.hideDialog();
+                        mILoginView.closeActivity();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
 
             @Override
             public void callFailed() {
-                Log.e(TAG, "登录失败...");
                 mILoginView.hideDialog();
             }
         });
     }
 
-    public void saveUserInfo(UserInfo userInfo) {
-        mPreferences = mActivity.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);
-        mPreferences.edit().putString(Constant.USER_NAME, userInfo.getUsername());
-        mPreferences.edit().putString(Constant.USER_PWD, userInfo.getPassword());
-        mPreferences.edit().putInt(Constant.USER_FLAG, userInfo.getUserInfoBean().getUserRoleId());
-        mPreferences.edit().putString(Constant.USER_HXNAME, userInfo.getUserInfoBean().getHXUserName());
-        mPreferences.edit().putString(Constant.USER_HXPWD, userInfo.getUserInfoBean().getHXPwd());
-        mPreferences.edit().commit();
-    }
+//    public void saveUserInfo(UserInfo userInfo) {
+//        mPreferences = mActivity.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = mPreferences.edit();
+//        editor.putString(Constant.USER_NAME, userInfo.getUsername());
+//        editor.putString(Constant.USER_PWD, userInfo.getPassword());
+//        editor.putInt(Constant.USER_FLAG, userInfo.getUserInfoBean().getUserRoleId());
+//        editor.putString(Constant.USER_HXNAME, userInfo.getUserInfoBean().getHXUserName());
+//        editor.putString(Constant.USER_HXPWD, userInfo.getUserInfoBean().getHXPwd());
+//        editor.commit();
+//    }
 }

@@ -9,6 +9,8 @@ import java.util.ArrayList;
  */
 
 public interface ILoginView {
+    void initView();
+    void initEvent();
     /**
      * 获取用户名
      *

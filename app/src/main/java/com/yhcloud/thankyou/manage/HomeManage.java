@@ -4,7 +4,6 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -26,7 +25,7 @@ public class HomeManage {
     private IHomeView mIHomeView;
     private LogicService mService;
 
-    public HomeManage(IHomeView homeView, final Handler handler) {
+    public HomeManage(IHomeView homeView) {
         this.mIHomeView = homeView;
         Fragment fragment = (Fragment) homeView;
         Intent intent = new Intent(fragment.getActivity(), LogicService.class);
@@ -35,12 +34,12 @@ public class HomeManage {
             public void onServiceConnected(ComponentName name, IBinder binder) {
                 Log.e(TAG, "服务绑定成功...");
                 mService = ((LogicService.MyBinder)binder).getService();
-                handler.obtainMessage(1).sendToTarget();
+                showBanner("-1");
             }
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                handler.obtainMessage(0).sendToTarget();
+
             }
         }, Context.BIND_AUTO_CREATE);
     }
@@ -56,7 +55,6 @@ public class HomeManage {
             ArrayList<String> arrayList = new ArrayList<>();
             for (SpreadBean sb: been) {
                 arrayList.add("http://www.k12chn.com" + sb.getSummaryPicLink());
-                Log.e(TAG, "http://www.k12chn.com" + sb.getSummaryPicLink());
             }
             mIHomeView.showBanner(arrayList);
         }

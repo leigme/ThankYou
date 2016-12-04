@@ -15,8 +15,8 @@
             android:id="@+id/ll_header_left"
             android:gravity="center">
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:id="@+id/iv_header_left"
                 android:src="@mipmap/icon_go_back"/>
         </LinearLayout>

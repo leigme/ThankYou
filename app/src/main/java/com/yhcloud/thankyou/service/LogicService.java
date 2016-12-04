@@ -20,6 +20,8 @@ import java.util.ArrayList;
 
 public class LogicService extends Service {
 
+    private String TAG = getClass().getSimpleName();
+
     private MyBinder mBinder = new MyBinder();
 
     private UserInfo mUserInfo;

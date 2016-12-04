@@ -9,45 +9,36 @@ import java.util.ArrayList;
  */
 
 public interface ILoginView {
+
     void initView();
     void initEvent();
+    void showLoading();
+    void hiddenLoading();
     /**
      * 获取用户名
      *
      * @return
      */
-    public String getUserName();
-
+    String getUserName();
     /**
      * 获取密码
      *
      * @return
      */
-    public String getPassWord();
-
-    /**
-     * 显示dialog
-     */
-    public void showDialog();
-
-    /**
-     * 隐藏dialog
-     */
-    public void hideDialog();
-
+    String getPassWord();
     /**
      * 显示信息
      */
-    public void showMsg(String msg);
+    void showMsg(int msg);
 
     /**
      * 跳入MainActivity
      */
-    public void pushMainActivity(ArrayList<ClassInfoBean> classInfoBeen);
+    void pushMainActivity(ArrayList<ClassInfoBean> classInfoBeen);
 
-    public void clearUsername();
+    void clearUsername();
 
-    public void clearPassword();
+    void clearPassword();
 
-    public void closeActivity();
+    void closeActivity();
 }

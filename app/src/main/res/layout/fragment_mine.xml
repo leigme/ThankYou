@@ -9,13 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/hello_blank_fragment"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="第三个界面"/>
+            android:id="@+id/rv_mine_function"></android.support.v7.widget.RecyclerView>
     </LinearLayout>
 </FrameLayout>

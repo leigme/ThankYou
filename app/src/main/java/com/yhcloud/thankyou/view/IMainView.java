@@ -9,8 +9,13 @@ import java.util.ArrayList;
  */
 
 public interface IMainView {
-    public void setTitle(String str);
-    public void setDrawer();
-    public void showDrawer(ArrayList<ClassInfoBean> classInfoBeen);
-    public void showFragment(int i);
+    void initView();
+    void initData();
+    void initEvent();
+    void setTitle(String str);
+    void setDrawer();
+    void showDrawer(ArrayList<ClassInfoBean> classInfoBeen);
+    void showFragment(int i);
+    void setHeaderLeftImage(String url);
+    void setHeaderRightImage(int resId);
 }

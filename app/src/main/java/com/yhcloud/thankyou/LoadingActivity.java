@@ -36,7 +36,6 @@ public class LoadingActivity extends AppCompatActivity {
     private LogicService mService;
     private UserInfo mUserInfo;
     private Activity mActivity;
-    private SharedPreferences mPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +56,8 @@ public class LoadingActivity extends AppCompatActivity {
                 String username = preferences.getString(Constant.USER_NAME, "");
                 String password = preferences.getString(Constant.USER_PWD, "");
                 if (null != username && !"".equals(username) && null != password && !"".equals(password)) {
+                    mUserInfo.setUsername(username);
+                    mUserInfo.setPassword(password);
                     mService.login(username, password, new ICallListener<String>() {
                         @Override
                         public void callSuccess(String s) {
@@ -127,15 +128,4 @@ public class LoadingActivity extends AppCompatActivity {
         Timer timer = new Timer();
         timer.schedule(task, 3000);
     }
-
-//    public void saveUserInfo(UserInfo userInfo) {
-//        mPreferences = this.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = mPreferences.edit();
-//        editor.putString(Constant.USER_NAME, userInfo.getUsername());
-//        editor.putString(Constant.USER_PWD, userInfo.getPassword());
-//        editor.putInt(Constant.USER_FLAG, userInfo.getUserInfoBean().getUserRoleId());
-//        editor.putString(Constant.USER_HXNAME, userInfo.getUserInfoBean().getHXUserName());
-//        editor.putString(Constant.USER_HXPWD, userInfo.getUserInfoBean().getHXPwd());
-//        editor.commit();
-//    }
 }

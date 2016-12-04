@@ -1,14 +1,23 @@
 package com.yhcloud.thankyou.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.adapter.MineFunctionAdapter;
+import com.yhcloud.thankyou.bean.MineFunctionBean;
+import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.manage.MineManage;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +27,7 @@ import com.yhcloud.thankyou.R;
  * Use the {@link MineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MineFragment extends Fragment {
+public class MineFragment extends Fragment implements IMineView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -29,6 +38,12 @@ public class MineFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private RecyclerView rvMineFunction;
+    private MineFunctionAdapter mfa;
+    private ProgressDialog mProgressDialog;
+
+    private MineManage mManage;
 
     public MineFragment() {
         // Required empty public constructor
@@ -65,7 +80,9 @@ public class MineFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mine, container, false);
+        View view = inflater.inflate(R.layout.fragment_mine, container, false);
+        mManage = new MineManage(this);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -90,6 +107,53 @@ public class MineFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void initView() {
+        rvMineFunction = (RecyclerView) getActivity().findViewById(R.id.rv_mine_function);
+    }
+
+    @Override
+    public void initEvent() {
+
+    }
+
+    @Override
+    public void showList(ArrayList<MineFunctionBean> list) {
+        if (null == mfa) {
+            mfa = new MineFunctionAdapter(getActivity(), list);
+            rvMineFunction.setLayoutManager(new LinearLayoutManager(getActivity()));
+            mfa.setIOnClickListener(new IOnClickListener() {
+                @Override
+                public void OnItemClickListener(View view, int position) {
+
+                }
+
+                @Override
+                public void OnItemLongClickListener(View view, int position) {
+
+                }
+            });
+            rvMineFunction.setAdapter(mfa);
+        } else {
+            mfa.refreshData(list);
+        }
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hiddenLoading() {
+
+    }
+
+    @Override
+    public void showMsg(int msgId) {
+
     }
 
     /**

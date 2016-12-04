@@ -5,11 +5,11 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.IBinder;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
@@ -33,7 +33,6 @@ public class LoginManage {
     private ILoginView mILoginView;
     private Activity mActivity;
     private LogicService mService;
-    private SharedPreferences mPreferences;
     private UserInfo userInfo;
 
     public LoginManage(ILoginView loginView) {
@@ -56,7 +55,7 @@ public class LoginManage {
     }
 
     public void login() {
-        mILoginView.showDialog();
+        mILoginView.showLoading();
         mService.login(mILoginView.getUserName(), mILoginView.getPassWord(), new ICallListener<String>() {
             @Override
             public void callSuccess(String s) {
@@ -86,29 +85,20 @@ public class LoginManage {
                         mService.setUserInfo(userInfo);
                         mService.saveUserInfo(userInfo);
                         mILoginView.pushMainActivity(userInfo.getClassInfoBeen());
-                        mILoginView.hideDialog();
                         mILoginView.closeActivity();
+                    } else {
+                        mILoginView.showMsg(R.string.error_login);
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    mILoginView.showMsg(R.string.error_connection);
                 }
+                mILoginView.hiddenLoading();
             }
-
             @Override
             public void callFailed() {
-                mILoginView.hideDialog();
+                mILoginView.hiddenLoading();
             }
         });
     }
-
-//    public void saveUserInfo(UserInfo userInfo) {
-//        mPreferences = mActivity.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);
-//        SharedPreferences.Editor editor = mPreferences.edit();
-//        editor.putString(Constant.USER_NAME, userInfo.getUsername());
-//        editor.putString(Constant.USER_PWD, userInfo.getPassword());
-//        editor.putInt(Constant.USER_FLAG, userInfo.getUserInfoBean().getUserRoleId());
-//        editor.putString(Constant.USER_HXNAME, userInfo.getUserInfoBean().getHXUserName());
-//        editor.putString(Constant.USER_HXPWD, userInfo.getUserInfoBean().getHXPwd());
-//        editor.commit();
-//    }
 }

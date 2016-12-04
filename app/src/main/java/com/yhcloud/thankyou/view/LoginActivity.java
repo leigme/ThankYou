@@ -5,13 +5,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.manage.LoginManage;
+import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
@@ -77,6 +80,40 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
                 mLoginManage.login();
             }
         });
+        et_login_username.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEND || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    //让mPasswordEdit获取输入焦点
+                    et_login_password.requestFocus();
+                    return true;
+                }
+                return false;
+            }
+        });
+        et_login_password.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // 这两个条件必须同时成立，如果仅仅用了enter判断，就会执行两次
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
+                    // 执行发送消息等操作
+                    mLoginManage.login();
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
+    public void showLoading() {
+        mProgressDialog = ProgressDialog.show(this, null, getString(R.string.logging));
+    }
+
+    @Override
+    public void hiddenLoading() {
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override
@@ -90,20 +127,8 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
-    public void showDialog() {
-        mProgressDialog = ProgressDialog.show(this, null, "登录中,请稍候...");
-    }
-
-    @Override
-    public void hideDialog() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
-    public void showMsg(String msg) {
-
+    public void showMsg(int msg) {
+        MyToast.showToast(this, msg);
     }
 
     @Override

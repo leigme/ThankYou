@@ -17,15 +17,19 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.ClassDrawerListAdapter;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
-import com.yhcloud.thankyou.mInterface.MyOnClickListener;
+import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MainManage;
+import com.yhcloud.thankyou.utils.ServiceAPI;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 import com.yhcloud.thankyou.utils.myview.NoScrollViewPager;
 
 import java.util.ArrayList;
+
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static com.yhcloud.thankyou.R.id.iv_header_left;
 
@@ -35,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
 
     private String TAG = getClass().getSimpleName();
 
-    private MainManage mManage = new MainManage(this);
+    private MainManage mManage;
     private ImageView ivHeaderLeft, ivHeaderRight, ivFooterHome, ivFooterClass, ivFooterMine;
     private TextView tvHeaderTitle, tvFooterHome, tvFooterClass, tvFooterMine;
     private DrawerLayout dlDrawer;
@@ -54,13 +58,11 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initView();
-        initData();
-        initEvent();
-        showFragment(0);
+        mManage = new MainManage(this);
     }
 
-    private void initView() {
+    @Override
+    public void initView() {
         llHeaderLeft = (LinearLayout) findViewById(R.id.ll_header_left);
         ivHeaderLeft = (ImageView) findViewById(iv_header_left);
         tvHeaderTitle = (TextView) findViewById(R.id.tv_header_title);
@@ -79,7 +81,8 @@ public class MainActivity extends AppCompatActivity implements IMainView,
         nsvpList = (NoScrollViewPager) findViewById(R.id.nsvp_main);
     }
 
-    private void initData(){
+    @Override
+    public void initData(){
         ivHeaderLeft.setImageResource(R.mipmap.icon_default_avatar);
         mFragments = new ArrayList<>();
         if (null != getIntent()) {
@@ -88,7 +91,8 @@ public class MainActivity extends AppCompatActivity implements IMainView,
         }
     }
 
-    private void initEvent() {
+    @Override
+    public void initEvent() {
         View.OnClickListener myOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,7 +133,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     public void showDrawer(final ArrayList<ClassInfoBean> classInfoBeen) {
         if (null == cdla) {
             cdla = new ClassDrawerListAdapter(this, classInfoBeen);
-            cdla.setMyOnClickListener(new MyOnClickListener() {
+            cdla.setMyOnClickListener(new IOnClickListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     Log.e(TAG, "设置默认班级:" + position);
@@ -185,6 +189,19 @@ public class MainActivity extends AppCompatActivity implements IMainView,
         }
         nsvpList.setCurrentItem(i);
 
+    }
+
+    @Override
+    public void setHeaderLeftImage(String url) {
+        Glide.with(this)
+                .load(ServiceAPI.SERVICEADDRESS + url)
+                .bitmapTransform(new CropCircleTransformation(this))
+                .into(ivHeaderLeft);
+    }
+
+    @Override
+    public void setHeaderRightImage(int resId) {
+        Glide.with(this).load(resId).into(ivHeaderRight);
     }
 
     private void resetFooterBtn() {

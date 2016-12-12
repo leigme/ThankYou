@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.bean.MineFunctionBean;
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 
 import java.util.ArrayList;
@@ -20,12 +20,12 @@ public class MineFunctionAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<MineFunctionBean> mBeen;
+    private ArrayList<FunctionBean> mBeen;
     private IOnClickListener mIOnClickListener;
     private static final int TYPE_DATA = 1;
     private static final int TYPE_LINE = 0;
 
-    public MineFunctionAdapter(Context context, ArrayList<MineFunctionBean> list) {
+    public MineFunctionAdapter(Context context, ArrayList<FunctionBean> list) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
         this.mBeen = list;
@@ -81,7 +81,7 @@ public class MineFunctionAdapter extends RecyclerView.Adapter {
         this.mIOnClickListener = iOnClickListener;
     }
 
-    public void refreshData(ArrayList<MineFunctionBean> list) {
+    public void refreshData(ArrayList<FunctionBean> list) {
         this.mBeen = list;
         this.notifyDataSetChanged();
     }

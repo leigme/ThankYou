@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
+import android.util.SparseArray;
 
-import com.yhcloud.thankyou.bean.MineFunctionBean;
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.view.IMineView;
 
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class MineManage {
     private IMineView mIMineView;
     private LogicService mService;
     private Fragment mFragment;
-    private ArrayList<MineFunctionBean> mBeen;
+    private ArrayList<FunctionBean> mBeen;
 
     public MineManage(IMineView mineView) {
         this.mIMineView = mineView;
@@ -33,8 +35,9 @@ public class MineManage {
             @Override
             public void onServiceConnected(ComponentName name, IBinder binder) {
                 mService = ((LogicService.MyBinder)binder).getService();
+                mBeen = new ArrayList<>();
                 mIMineView.initView();
-                initFunction();
+                initMineFunction();
                 mIMineView.hiddenLoading();
             }
 
@@ -45,11 +48,23 @@ public class MineManage {
         }, Service.BIND_AUTO_CREATE);
     }
 
-    public void initFunction() {
-        mBeen = new ArrayList<>();
-        for (int i = 0; i < 17; i++) {
-            MineFunctionBean mineFunctionBean = new MineFunctionBean();
-            mBeen.add(mineFunctionBean);
+    public void initMineFunction() {
+        SparseArray<FunctionBean> sparseArray = Tools.initFunction();
+        for (int i = 0; i < sparseArray.size(); i++) {
+            FunctionBean functionBean = new FunctionBean();
+            switch (i) {
+                case 0:
+                    mBeen.add(0, new FunctionBean());
+                    break;
+                case 2:
+                    mBeen.add(new FunctionBean());
+                    break;
+                case 4:
+                    mBeen.add(new FunctionBean());
+                    break;
+
+            }
+            mBeen.add(sparseArray.get(i));
         }
         mIMineView.showList(mBeen);
     }

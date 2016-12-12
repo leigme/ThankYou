@@ -142,6 +142,56 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     }
 
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initEvent() {
+
+    }
+
+    @Override
+    public void showDefault(boolean showed) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hiddenLoading() {
+
+    }
+
+    @Override
+    public void setTitle(String title) {
+
+    }
+
+    @Override
+    public void setRightTitle(String title) {
+
+    }
+
+    @Override
+    public void showToastMsg(int msgId) {
+
+    }
+
+    @Override
+    public void showToastMsg(String msg) {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated

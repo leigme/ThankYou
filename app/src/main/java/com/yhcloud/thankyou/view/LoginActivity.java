@@ -73,6 +73,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
+    public void initData() {
+
+    }
+
+    @Override
     public void initEvent() {
         btn_login_send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,6 +110,11 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
+    public void showDefault(boolean showed) {
+
+    }
+
+    @Override
     public void showLoading() {
         mProgressDialog = ProgressDialog.show(this, null, getString(R.string.logging));
     }
@@ -114,6 +124,26 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
         if (null != mProgressDialog) {
             mProgressDialog.dismiss();
         }
+    }
+
+    @Override
+    public void setTitle(String title) {
+
+    }
+
+    @Override
+    public void setRightTitle(String title) {
+
+    }
+
+    @Override
+    public void showToastMsg(int msgId) {
+
+    }
+
+    @Override
+    public void showToastMsg(String msg) {
+
     }
 
     @Override

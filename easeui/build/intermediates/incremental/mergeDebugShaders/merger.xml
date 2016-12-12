@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/leig/Program/AndroidStudioProjects/Thankyou/easeui/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/leig/Program/AndroidStudioProjects/Thankyou/easeui/build-types/debug/shaders"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/leig/Desktop/ThankYou/easeui/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/leig/Desktop/ThankYou/easeui/build-types/debug/shaders"/></dataSet></merger>

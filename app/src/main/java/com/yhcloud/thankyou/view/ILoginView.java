@@ -1,6 +1,7 @@
 package com.yhcloud.thankyou.view;
 
 import com.yhcloud.thankyou.bean.ClassInfoBean;
+import com.yhcloud.thankyou.mInterface.IBaseView;
 
 import java.util.ArrayList;
 
@@ -8,12 +9,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/11/10.
  */
 
-public interface ILoginView {
-
-    void initView();
-    void initEvent();
-    void showLoading();
-    void hiddenLoading();
+public interface ILoginView extends IBaseView {
     /**
      * 获取用户名
      *

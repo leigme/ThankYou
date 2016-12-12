@@ -120,8 +120,38 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     }
 
     @Override
+    public void showDefault(boolean showed) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hiddenLoading() {
+
+    }
+
+    @Override
     public void setTitle(String str) {
         tvHeaderTitle.setText(str);
+    }
+
+    @Override
+    public void setRightTitle(String title) {
+
+    }
+
+    @Override
+    public void showToastMsg(int msgId) {
+
+    }
+
+    @Override
+    public void showToastMsg(String msg) {
+
     }
 
     @Override

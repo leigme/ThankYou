@@ -18,7 +18,7 @@ import com.yhcloud.thankyou.R;
  * Use the {@link ClassFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ClassFragment extends Fragment {
+public class ClassFragment extends Fragment implements IClassView {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -90,6 +90,56 @@ public class ClassFragment extends Fragment {
     public void onDetach() {
         super.onDetach();
         mListener = null;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initEvent() {
+
+    }
+
+    @Override
+    public void showDefault(boolean showed) {
+
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hiddenLoading() {
+
+    }
+
+    @Override
+    public void setTitle(String title) {
+
+    }
+
+    @Override
+    public void setRightTitle(String title) {
+
+    }
+
+    @Override
+    public void showToastMsg(int msgId) {
+
+    }
+
+    @Override
+    public void showToastMsg(String msg) {
+
     }
 
     /**

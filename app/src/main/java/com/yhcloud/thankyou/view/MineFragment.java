@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.MineFunctionAdapter;
-import com.yhcloud.thankyou.bean.MineFunctionBean;
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MineManage;
 
@@ -115,12 +115,22 @@ public class MineFragment extends Fragment implements IMineView {
     }
 
     @Override
+    public void initData() {
+
+    }
+
+    @Override
     public void initEvent() {
 
     }
 
     @Override
-    public void showList(ArrayList<MineFunctionBean> list) {
+    public void showDefault(boolean showed) {
+
+    }
+
+    @Override
+    public void showList(ArrayList<FunctionBean> list) {
         if (null == mfa) {
             mfa = new MineFunctionAdapter(getActivity(), list);
             rvMineFunction.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -152,7 +162,22 @@ public class MineFragment extends Fragment implements IMineView {
     }
 
     @Override
-    public void showMsg(int msgId) {
+    public void setTitle(String title) {
+
+    }
+
+    @Override
+    public void setRightTitle(String title) {
+
+    }
+
+    @Override
+    public void showToastMsg(int msgId) {
+
+    }
+
+    @Override
+    public void showToastMsg(String msg) {
 
     }
 

@@ -9,7 +9,7 @@
     tools:context="com.yhcloud.thankyou.view.LoginActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/header_height"
+        android:layout_height="@dimen/my_header_height"
         android:background="@color/mainBlackground"
         android:orientation="horizontal">
         <TextView

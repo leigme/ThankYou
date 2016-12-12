@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
@@ -46,15 +47,20 @@ public class MineFunctionAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
+        if (TYPE_DATA == getItemViewType(position)) {
+            final MyViewHolder viewHolder = (MyViewHolder) holder;
+            viewHolder.tvTitle.setText(mBeen.get(position).getTitle());
+            if (null != mIOnClickListener) {
+                viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        int pos = viewHolder.getLayoutPosition();
+                        mIOnClickListener.OnItemClickListener(viewHolder.itemView, pos);
+                    }
+                });
+            }
+        } else if (TYPE_LINE == getItemViewType(position)) {
 
-        if (null != mIOnClickListener) {
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
-                }
-            });
         }
     }
 
@@ -66,11 +72,13 @@ public class MineFunctionAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemViewType(int position) {
         switch (position) {
+            case 0:
+                return TYPE_LINE;
             case 2:
                 return TYPE_LINE;
-            case 7:
+            case 4:
                 return TYPE_LINE;
-            case 9:
+            case 10:
                 return TYPE_LINE;
             default:
                 return TYPE_DATA;
@@ -87,8 +95,10 @@ public class MineFunctionAdapter extends RecyclerView.Adapter {
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView tvTitle;
         public MyViewHolder(View itemView) {
             super(itemView);
+            tvTitle = (TextView) itemView.findViewById(R.id.tv_mine_function_title);
         }
     }
 

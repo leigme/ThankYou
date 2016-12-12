@@ -39,10 +39,11 @@ public class MineFragment extends Fragment implements IMineView {
 
     private OnFragmentInteractionListener mListener;
 
+    //视图控件
     private RecyclerView rvMineFunction;
     private MineFunctionAdapter mfa;
     private ProgressDialog mProgressDialog;
-
+    //管理器
     private MineManage mManage;
 
     public MineFragment() {

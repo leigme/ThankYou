@@ -4,9 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.manage.HomeManage;
@@ -37,9 +40,13 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     private OnFragmentInteractionListener mListener;
 
-    private HomeManage mManage;
+    //视图控件
     private Banner mBanner;
-
+    private RecyclerView mFunctionList, mReadList;
+    private ImageView ivReadIcon;
+    private TextView tvReadTitle;
+    //管理器
+    private HomeManage mManage;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -138,13 +145,23 @@ public class HomeFragment extends Fragment implements IHomeView {
     }
 
     @Override
+    public void setReadIcon(int iconId) {
+        ivReadIcon.setImageResource(iconId);
+    }
+
+    @Override
+    public void setReadTitle(String title) {
+        tvReadTitle.setText(title);
+    }
+
+    @Override
     public void showSpread() {
 
     }
 
     @Override
     public void initView() {
-
+        
     }
 
     @Override

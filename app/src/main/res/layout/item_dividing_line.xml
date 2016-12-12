@@ -5,6 +5,6 @@
               android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="@color/black_deep"></LinearLayout>
+        android:layout_height="15dp"
+        android:background="@color/colorGray"></LinearLayout>
 </LinearLayout>

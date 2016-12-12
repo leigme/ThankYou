@@ -26,15 +26,12 @@ public interface ILoginView extends IBaseView {
      * 显示信息
      */
     void showMsg(int msg);
-
     /**
      * 跳入MainActivity
      */
     void pushMainActivity(ArrayList<ClassInfoBean> classInfoBeen);
-
     void clearUsername();
-
     void clearPassword();
-
     void closeActivity();
+    void initData(String username, String password);
 }

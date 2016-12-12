@@ -28,7 +28,7 @@ public class MineManage {
 
     public MineManage(IMineView mineView) {
         this.mIMineView = mineView;
-        this.mFragment = (Fragment) mineView;
+        this.mFragment = (Fragment) mIMineView;
         mIMineView.showLoading();
         Intent intent = new Intent(mFragment.getActivity(), LogicService.class);
         mFragment.getActivity().bindService(intent, new ServiceConnection() {

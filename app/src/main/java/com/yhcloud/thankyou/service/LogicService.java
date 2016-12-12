@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
 
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.logic.HomeLogic;
@@ -23,9 +24,8 @@ public class LogicService extends Service {
     private String TAG = getClass().getSimpleName();
 
     private MyBinder mBinder = new MyBinder();
-
     private UserInfo mUserInfo;
-
+    private ArrayList<FunctionBean> mBeen;
 
     public LogicService() {
     }
@@ -59,6 +59,14 @@ public class LogicService extends Service {
         mUserInfo = userInfo;
     }
 
+    public ArrayList<FunctionBean> getBeen() {
+        return mBeen;
+    }
+
+    public void setBeen(ArrayList<FunctionBean> been) {
+        mBeen = been;
+    }
+
     //登录
     public void login(String username, String password, ICallListener<String> iCallListener) {
         ILoginLogic loginLogic = new LoginLogic();
@@ -74,9 +82,25 @@ public class LogicService extends Service {
         editor.putInt(Constant.USER_FLAG, userInfo.getUserInfoBean().getUserRoleId());
         editor.putString(Constant.USER_HXNAME, userInfo.getUserInfoBean().getHXUserName());
         editor.putString(Constant.USER_HXPWD, userInfo.getUserInfoBean().getHXPwd());
+        editor.putBoolean(Constant.USER_LOGINED, true);
         editor.commit();
     }
+
+    //退出登录
+    public void loginOut() {
+        SharedPreferences mPreferences = this.getSharedPreferences(Constant.USER_INFO, MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putBoolean(Constant.USER_LOGINED, false);
+        editor.commit();
+    }
+
     //清除用户登录信息
+    public void cleanUserInfo() {
+        SharedPreferences mPreferences = this.getSharedPreferences(Constant.USER_INFO, MODE_PRIVATE);
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.clear();
+        editor.commit();
+    }
 
     //获取轮播图
     public void getImageUrls(String updateTime, ICallListener<ArrayList<SpreadBean>> iCallListener) {

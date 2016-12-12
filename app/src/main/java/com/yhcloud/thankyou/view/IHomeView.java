@@ -11,5 +11,7 @@ import java.util.ArrayList;
 public interface IHomeView extends IBaseView {
     void showBanner(ArrayList<String> imageUrls);
     void showFunction();
+    void setReadIcon(int iconId);
+    void setReadTitle(String title);
     void showSpread();
 }

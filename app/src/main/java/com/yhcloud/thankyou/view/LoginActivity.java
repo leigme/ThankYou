@@ -184,4 +184,10 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     public void closeActivity() {
         finish();
     }
+
+    @Override
+    public void initData(String username, String password) {
+        et_login_username.setText(username);
+        et_login_password.setText(password);
+    }
 }

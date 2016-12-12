@@ -53,59 +53,63 @@ public class LoadingActivity extends AppCompatActivity {
             public void onServiceConnected(ComponentName name, IBinder binder) {
                 mService = ((LogicService.MyBinder)binder).getService();
                 SharedPreferences preferences = mActivity.getSharedPreferences(Constant.USER_INFO, MODE_PRIVATE);
-                String username = preferences.getString(Constant.USER_NAME, "");
-                String password = preferences.getString(Constant.USER_PWD, "");
-                if (null != username && !"".equals(username) && null != password && !"".equals(password)) {
-                    mUserInfo.setUsername(username);
-                    mUserInfo.setPassword(password);
-                    mService.login(username, password, new ICallListener<String>() {
-                        @Override
-                        public void callSuccess(String s) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(s);
-                                if (!jsonObject.getBoolean("errorFlag")) {
-                                    String key = jsonObject.getString("key");
-                                    if (null != key && !"".equals(key)) {
-                                        mUserInfo.setKey(key);
-                                    }
-                                    String jsonUserInfo = jsonObject.getString("userinfo");
-                                    String jsonClassInfos = jsonObject.getString("classlist");
-                                    if (null != jsonUserInfo && !"".equals(jsonUserInfo) && null != jsonClassInfos && !"".equals(jsonClassInfos)) {
-                                        Gson gson = new Gson();
-                                        UserInfoBean userInfoBean = gson.fromJson(jsonUserInfo, UserInfoBean.class);
-                                        if (null != userInfoBean) {
-                                            mUserInfo.setUserInfoBean(userInfoBean);
+                boolean logined = preferences.getBoolean(Constant.USER_LOGINED, false);
+                if (logined) {
+                    String username = preferences.getString(Constant.USER_NAME, "");
+                    String password = preferences.getString(Constant.USER_PWD, "");
+                    if (null != username && !"".equals(username) && null != password && !"".equals(password)) {
+                        mUserInfo.setUsername(username);
+                        mUserInfo.setPassword(password);
+                        mService.login(username, password, new ICallListener<String>() {
+                            @Override
+                            public void callSuccess(String s) {
+                                try {
+                                    JSONObject jsonObject = new JSONObject(s);
+                                    if (!jsonObject.getBoolean("errorFlag")) {
+                                        String key = jsonObject.getString("key");
+                                        if (null != key && !"".equals(key)) {
+                                            mUserInfo.setKey(key);
                                         }
-                                        ArrayList<ClassInfoBean> classInfoBeen = gson.fromJson(jsonClassInfos, new TypeToken<ArrayList<ClassInfoBean>>(){}.getType());
-                                        if (null != classInfoBeen) {
-                                            mUserInfo.setClassInfoBeen(classInfoBeen);
+                                        String jsonUserInfo = jsonObject.getString("userinfo");
+                                        String jsonClassInfos = jsonObject.getString("classlist");
+                                        if (null != jsonUserInfo && !"".equals(jsonUserInfo) && null != jsonClassInfos && !"".equals(jsonClassInfos)) {
+                                            Gson gson = new Gson();
+                                            UserInfoBean userInfoBean = gson.fromJson(jsonUserInfo, UserInfoBean.class);
+                                            if (null != userInfoBean) {
+                                                mUserInfo.setUserInfoBean(userInfoBean);
+                                            }
+                                            ArrayList<ClassInfoBean> classInfoBeen = gson.fromJson(jsonClassInfos, new TypeToken<ArrayList<ClassInfoBean>>(){}.getType());
+                                            if (null != classInfoBeen) {
+                                                mUserInfo.setClassInfoBeen(classInfoBeen);
+                                            }
+                                            mService.saveUserInfo(mUserInfo);
+                                            mService.setUserInfo(mUserInfo);
+                                            Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
+                                            Bundle bundle = new Bundle();
+                                            bundle.putSerializable("ClassInfos", classInfoBeen);
+                                            intent.putExtras(bundle);
+                                            startActivity(intent);
+                                            finish();
                                         }
-                                        mService.saveUserInfo(mUserInfo);
-                                        mService.setUserInfo(mUserInfo);
-                                        Intent intent = new Intent(LoadingActivity.this, MainActivity.class);
-                                        Bundle bundle = new Bundle();
-                                        bundle.putSerializable("ClassInfos", classInfoBeen);
-                                        intent.putExtras(bundle);
-                                        startActivity(intent);
-                                        finish();
+                                        return;
                                     }
-                                    return;
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                    goLoginActivity();
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                            }
+
+                            @Override
+                            public void callFailed() {
                                 goLoginActivity();
                             }
-                        }
-
-                        @Override
-                        public void callFailed() {
-                            goLoginActivity();
-                        }
-                    });
+                        });
+                    } else {
+                        goLoginActivity();
+                    }
                 } else {
                     goLoginActivity();
                 }
-
             }
 
             @Override

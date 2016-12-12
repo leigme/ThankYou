@@ -24,6 +24,7 @@ public class Constant {
     public static final String USER_HXNAME = "userHxName";
     public static final String USER_HXPWD = "userHxPwd";
     public static final String USER_KEY = "userKey";
+    public static final String USER_LOGINED = "userLogined";
 
     /**
      * 服务器API

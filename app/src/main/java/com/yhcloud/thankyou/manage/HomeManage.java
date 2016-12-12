@@ -23,13 +23,14 @@ public class HomeManage {
 
     private String TAG = getClass().getSimpleName();
     private IHomeView mIHomeView;
+    private Fragment mFragment;
     private LogicService mService;
 
     public HomeManage(IHomeView homeView) {
         this.mIHomeView = homeView;
-        Fragment fragment = (Fragment) homeView;
-        Intent intent = new Intent(fragment.getActivity(), LogicService.class);
-        fragment.getActivity().bindService(intent, new ServiceConnection() {
+        mFragment = (Fragment) mIHomeView;
+        Intent intent = new Intent(mFragment.getActivity(), LogicService.class);
+        mFragment.getActivity().bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder binder) {
                 Log.e(TAG, "服务绑定成功...");

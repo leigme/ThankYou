@@ -9,15 +9,19 @@ import java.io.Serializable;
  */
 
 public class FunctionBean implements Serializable {
+    //功能编号
     private int mId;
+    //功能小图标
     private int mIcon;
+    //功能大图标
     private int mImage;
+    //功能标题
     private String mTitle;
+    //功能地址
     private Intent mIntent;
 
     public FunctionBean() {}
-    public FunctionBean(int id, int icon, int image, String title, Intent intent) {
-        this.mId = id;
+    public FunctionBean(int icon, int image, String title, Intent intent) {
         this.mIcon = icon;
         this.mImage = image;
         this.mTitle = title;

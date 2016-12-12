@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="50dp">
+              android:layout_height="@dimen/my_header_height">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -10,13 +10,13 @@
         android:background="@color/mainBlackground"
         android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="50dp"
+            android:layout_width="@dimen/my_btn_width"
             android:layout_height="match_parent"
             android:id="@+id/ll_header_left"
             android:gravity="center">
             <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="@dimen/my_icon_size"
+                android:layout_height="@dimen/my_icon_size"
                 android:id="@+id/iv_header_left"
                 android:src="@mipmap/icon_go_back"/>
         </LinearLayout>

@@ -26,15 +26,9 @@ public class Constant {
     public static final String USER_KEY = "userKey";
 
     /**
-     * 数据库常量
-     */
-    public static final String DB_NAME = "thankyou.db";
-    public static final int DB_VERSION = 1;
-
-    /**
      * 服务器API
      */
-    //服务API
+    //服务地址
     public static final String SERVICEADDRESS = "http://www.k12chn.com";
     //    public static final String SERVICEADDRESS = "http://192.168.0.19";
     //登录请求

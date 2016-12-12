@@ -10,6 +10,7 @@ import com.yhcloud.thankyou.bean.FunctionBean;
  */
 
 public class Tools {
+
     public static SparseArray<FunctionBean> initFunction() {
         SparseArray<FunctionBean> sparseArray = new SparseArray();
         sparseArray.append(0, new FunctionBean(0, 0, 0, "我的资料", new Intent()));

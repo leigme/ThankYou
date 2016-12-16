@@ -1,12 +1,6 @@
 package com.yhcloud.thankyou.manage;
 
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
@@ -26,23 +20,11 @@ public class HomeManage {
     private Fragment mFragment;
     private LogicService mService;
 
-    public HomeManage(IHomeView homeView) {
+    public HomeManage(IHomeView homeView, LogicService service) {
         this.mIHomeView = homeView;
         mFragment = (Fragment) mIHomeView;
-        Intent intent = new Intent(mFragment.getActivity(), LogicService.class);
-        mFragment.getActivity().bindService(intent, new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder binder) {
-                Log.e(TAG, "服务绑定成功...");
-                mService = ((LogicService.MyBinder)binder).getService();
-                showBanner("-1");
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-
-            }
-        }, Context.BIND_AUTO_CREATE);
+        this.mService = service;
+        showBanner("-1");
     }
 
     public void showBanner(String updateTime) {

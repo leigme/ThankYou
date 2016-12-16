@@ -1,10 +1,5 @@
 package com.yhcloud.thankyou.manage;
 
-import android.app.Service;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.util.SparseArray;
 
@@ -26,26 +21,15 @@ public class MineManage {
     private Fragment mFragment;
     private ArrayList<FunctionBean> mBeen;
 
-    public MineManage(IMineView mineView) {
+    public MineManage(IMineView mineView, LogicService service) {
         this.mIMineView = mineView;
         this.mFragment = (Fragment) mIMineView;
+        this.mService = service;
         mIMineView.showLoading();
-        Intent intent = new Intent(mFragment.getActivity(), LogicService.class);
-        mFragment.getActivity().bindService(intent, new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder binder) {
-                mService = ((LogicService.MyBinder)binder).getService();
-                mBeen = new ArrayList<>();
-                mIMineView.initView();
-                initMineFunction();
-                mIMineView.hiddenLoading();
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-                mIMineView.hiddenLoading();
-            }
-        }, Service.BIND_AUTO_CREATE);
+        mBeen = new ArrayList<>();
+        mIMineView.initView();
+        initMineFunction();
+        mIMineView.hiddenLoading();
     }
 
     public void initMineFunction() {

@@ -4,8 +4,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.ClassDrawerListAdapter;
+import com.yhcloud.thankyou.adapter.FragmentViewPagerAdapter;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MainManage;
@@ -50,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     private ClassDrawerListAdapter cdla;
     private ArrayList<Fragment> mFragments;
     private NoScrollViewPager nsvpList;
-    private MyFragmentViewPagerAdapter mfvpa;
+    private FragmentViewPagerAdapter fvpa;
 
     private ArrayList<ClassInfoBean> mClassInfoBeen;
 
@@ -191,18 +190,17 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     }
 
     @Override
+    public void initFragments(ArrayList<Fragment> list) {
+        if (null == fvpa) {
+            fvpa = new FragmentViewPagerAdapter(getSupportFragmentManager(), list);
+            nsvpList.setAdapter(fvpa);
+        }
+    }
+
+
+    @Override
     public void showFragment(int i) {
         resetFooterBtn();
-        if (null == mfvpa) {
-            Fragment hFragment = HomeFragment.newInstance("", "");
-            Fragment cFragment = ClassFragment.newInstance("", "");
-            Fragment mFragment = MineFragment.newInstance("", "");
-            mFragments.add(hFragment);
-            mFragments.add(cFragment);
-            mFragments.add(mFragment);
-            mfvpa = new MyFragmentViewPagerAdapter(getSupportFragmentManager());
-            nsvpList.setAdapter(mfvpa);
-        }
         switch (i) {
             case 0:
                 ivFooterHome.setImageResource(R.mipmap.icon_home);
@@ -218,7 +216,6 @@ public class MainActivity extends AppCompatActivity implements IMainView,
                 break;
         }
         nsvpList.setCurrentItem(i);
-
     }
 
     @Override
@@ -247,23 +244,6 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     @Override
     public void onFragmentInteraction(Uri uri) {
 
-    }
-
-    public class MyFragmentViewPagerAdapter extends FragmentPagerAdapter {
-
-        public MyFragmentViewPagerAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragments.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragments.size();
-        }
     }
 
     Long firstClickTime = (long) 0;

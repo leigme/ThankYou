@@ -16,6 +16,7 @@ import com.yhcloud.thankyou.adapter.MineFunctionAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MineManage;
+import com.yhcloud.thankyou.service.LogicService;
 
 import java.util.ArrayList;
 
@@ -45,36 +46,22 @@ public class MineFragment extends Fragment implements IMineView {
     private ProgressDialog mProgressDialog;
     //管理器
     private MineManage mManage;
+    private LogicService mService;
 
     public MineFragment() {
         // Required empty public constructor
+        mManage = new MineManage(this, mService);
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MineFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static MineFragment newInstance(String param1, String param2) {
+    public static MineFragment newInstance(LogicService service) {
         MineFragment fragment = new MineFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.mService = service;
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -82,7 +69,6 @@ public class MineFragment extends Fragment implements IMineView {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
-        mManage = new MineManage(this);
         return view;
     }
 

@@ -8,6 +8,7 @@
         android:layout_height="@dimen/my_btn_width"
         android:layout_marginLeft="@dimen/my_margin"
         android:layout_marginRight="@dimen/my_margin"
+        android:background="@drawable/item_click"
         android:orientation="horizontal"
         android:gravity="center">
         <ImageView
@@ -28,4 +29,8 @@
             android:layout_marginRight="9dp"
             android:src="@mipmap/icon_arrow_right"/>
     </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorGray"/>
 </LinearLayout>

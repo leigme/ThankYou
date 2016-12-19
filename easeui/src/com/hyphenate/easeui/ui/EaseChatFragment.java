@@ -6,6 +6,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -181,6 +182,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     }
 
     protected void setUpView() {
+        titleBar.setBackgroundColor(Color.parseColor("#68c04a"));
+        titleBar.setLeftImageResource(R.drawable.icon_go_back);
         titleBar.setTitle(toChatUsername);
         if (chatType == EaseConstant.CHATTYPE_SINGLE) {
             // set title
@@ -864,7 +867,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             intent.setType("image/*");
 
         } else {
-            intent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         }
         startActivityForResult(intent, REQUEST_CODE_LOCAL);
     }
@@ -956,7 +959,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             break;
         }
         
-        if(forward_msg.getChatType() == EMMessage.ChatType.ChatRoom){
+        if(forward_msg.getChatType() == ChatType.ChatRoom){
             EMClient.getInstance().chatroomManager().leaveChatRoom(forward_msg.getTo());
         }
     }

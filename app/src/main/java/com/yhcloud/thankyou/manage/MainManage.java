@@ -6,13 +6,18 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.support.v4.app.Fragment;
 
 import com.yhcloud.thankyou.bean.ClassInfoBean;
+import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.logic.IMainLogic;
 import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.view.ClassFragment;
+import com.yhcloud.thankyou.view.HomeFragment;
 import com.yhcloud.thankyou.view.IMainView;
+import com.yhcloud.thankyou.view.MineFragment;
 
 import java.util.ArrayList;
 
@@ -28,7 +33,7 @@ public class MainManage {
     private Activity mActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
-
+    private ArrayList<Fragment> mFragments;
 
     public MainManage(IMainView mainView) {
         this.mIMainView = mainView;
@@ -41,6 +46,7 @@ public class MainManage {
                 mIMainView.initView();
                 mIMainView.initData();
                 mIMainView.initEvent();
+                initViewPages();
                 mIMainView.showFragment(0);
                 mUserInfo = mService.getUserInfo();
                 mIMainView.setHeaderLeftImage(mUserInfo.getUserInfoBean().getHeadImageURL());
@@ -53,20 +59,29 @@ public class MainManage {
         }, Service.BIND_AUTO_CREATE);
     }
 
-    public void getClassInfo(String userId) {
-        mIMainLogic.getClassInfoList("3237", new CallListener());
+    public void initViewPages() {
+        mFragments = new ArrayList<>();
+        HomeFragment homeFragment = HomeFragment.newInstance(mService);
+        mFragments.add(homeFragment);
+        ClassFragment classFragment = ClassFragment.newInstance(mService);
+        mFragments.add(classFragment);
+        MineFragment mineFragment = MineFragment.newInstance(mService);
+        mFragments.add(mineFragment);
+        mIMainView.initFragments(mFragments);
     }
 
-    public class CallListener implements ICallListener<ArrayList<ClassInfoBean>> {
+    public void getClassInfo(String userId) {
+        mIMainLogic.getClassInfoList("3237", new ICallListener<ArrayList<ClassInfoBean>>() {
 
-        @Override
-        public void callSuccess(ArrayList<ClassInfoBean> infos) {
-            mIMainView.showDrawer(infos);
-        }
+            @Override
+            public void callSuccess(ArrayList<ClassInfoBean> been) {
+                mIMainView.showDrawer(been);
+            }
 
-        @Override
-        public void callFailed() {
+            @Override
+            public void callFailed() {
 
-        }
+            }
+        });
     }
 }

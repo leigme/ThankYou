@@ -1,8 +1,18 @@
 package com.yhcloud.thankyou.manage;
 
+import android.app.Activity;
+import android.app.Service;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.util.SparseArray;
 
+import com.hyphenate.easeui.EaseConstant;
+import com.hyphenate.easeui.ui.EaseChatFragment;
+import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
@@ -17,39 +27,65 @@ import java.util.ArrayList;
 public class MineManage {
 
     private IMineView mIMineView;
-    private LogicService mService;
     private Fragment mFragment;
+    private Activity mActivity;
+    private LogicService mService;
     private ArrayList<FunctionBean> mBeen;
+    private int RESULT_MESSAGE = 101;
 
     public MineManage(IMineView mineView, LogicService service) {
         this.mIMineView = mineView;
         this.mFragment = (Fragment) mIMineView;
+        this.mActivity = mFragment.getActivity();
         this.mService = service;
-        mIMineView.showLoading();
         mBeen = new ArrayList<>();
         mIMineView.initView();
         initMineFunction();
-        mIMineView.hiddenLoading();
     }
 
     public void initMineFunction() {
-        SparseArray<FunctionBean> sparseArray = Tools.initFunction();
-        for (int i = 0; i < sparseArray.size(); i++) {
-            FunctionBean functionBean = new FunctionBean();
-            switch (i) {
-                case 0:
-                    mBeen.add(0, new FunctionBean());
+        ArrayList<FunctionBean> arrayList = Tools.initFunction(mActivity);
+        for (FunctionBean functionBean: arrayList) {
+            switch (functionBean.getTitle()) {
+                case "我的资料":
+                    mBeen.add(functionBean);
                     break;
-                case 2:
-                    mBeen.add(new FunctionBean());
+                case "我的朋友":
+                    mBeen.add(functionBean);
                     break;
-                case 4:
-                    mBeen.add(new FunctionBean());
+                case "我的鲜花":
+                    mBeen.add(functionBean);
                     break;
-
+                case "我的消息":
+                    mBeen.add(functionBean);
+                    break;
+                case "我的账户":
+                    mBeen.add(functionBean);
+                    break;
+                case "每日签到":
+                    mBeen.add(functionBean);
+                    break;
+                case "我的下载":
+                    mBeen.add(functionBean);
+                    break;
+                case "关于我们":
+                    mBeen.add(functionBean);
+                    break;
+                case "切换账户":
+                    mBeen.add(functionBean);
+                    break;
             }
-            mBeen.add(sparseArray.get(i));
         }
+        mBeen.add(0, new FunctionBean());
+        mBeen.add(2, new FunctionBean());
+        mBeen.add(4, new FunctionBean());
+        mBeen.add(10, new FunctionBean());
         mIMineView.showList(mBeen);
+    }
+
+    public void goFunction(int i) {
+        if ("我的消息".equals(mBeen.get(i).getTitle())) {
+            mActivity.startActivityForResult(mBeen.get(i).getIntent(), RESULT_MESSAGE);
+        }
     }
 }

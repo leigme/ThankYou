@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     private ClassDrawerListAdapter cdla;
     private ArrayList<Fragment> mFragments;
     private NoScrollViewPager nsvpList;
-    private FragmentViewPagerAdapter fvpa;
+    private FragmentViewPagerAdapter mfvpa;
 
     private ArrayList<ClassInfoBean> mClassInfoBeen;
 
@@ -159,6 +159,15 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     }
 
     @Override
+    public void initFragments(ArrayList<Fragment> list) {
+        if (null == mfvpa) {
+            mfvpa = new FragmentViewPagerAdapter(getSupportFragmentManager(), list);
+            nsvpList.setOffscreenPageLimit(list.size());
+            nsvpList.setAdapter(mfvpa);
+        }
+    }
+
+    @Override
     public void showDrawer(final ArrayList<ClassInfoBean> classInfoBeen) {
         if (null == cdla) {
             cdla = new ClassDrawerListAdapter(this, classInfoBeen);
@@ -189,13 +198,6 @@ public class MainActivity extends AppCompatActivity implements IMainView,
         dlDrawer.openDrawer(Gravity.LEFT);
     }
 
-    @Override
-    public void initFragments(ArrayList<Fragment> list) {
-        if (null == fvpa) {
-            fvpa = new FragmentViewPagerAdapter(getSupportFragmentManager(), list);
-            nsvpList.setAdapter(fvpa);
-        }
-    }
 
 
     @Override

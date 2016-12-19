@@ -1,6 +1,5 @@
 package com.yhcloud.thankyou.view;
 
-
 import android.support.v4.app.Fragment;
 
 import com.yhcloud.thankyou.bean.ClassInfoBean;
@@ -14,8 +13,8 @@ import java.util.ArrayList;
 
 public interface IMainView extends IBaseView {
     void setDrawer();
-    void showDrawer(ArrayList<ClassInfoBean> classInfoBeen);
     void initFragments(ArrayList<Fragment> list);
+    void showDrawer(ArrayList<ClassInfoBean> classInfoBeen);
     void showFragment(int i);
     void setHeaderLeftImage(String url);
     void setHeaderRightImage(int resId);

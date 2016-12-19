@@ -20,7 +20,7 @@ public class MainLogic implements IMainLogic {
     private String TAG = getClass().getSimpleName();
 
     @Override
-    public void getClassInfoList(String userId, final ICallListener iCallListener) {
+    public void getClassInfoList(String userId, final ICallListener<ArrayList<ClassInfoBean>> iCallListener) {
         OkHttpUtils.post()
                 .url("")
                 .addParams("userId", userId)

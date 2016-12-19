@@ -16,31 +16,23 @@ import com.yhcloud.thankyou.service.LogicService;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link ClassFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link ClassFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ClassFragment extends Fragment implements IClassView {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
     //视图控件
+    private View mView;
     private RecyclerView mPeopleList;
     //管理器
     private ClassManage mManage;
     private LogicService mService;
 
     public ClassFragment() {
-        mManage = new ClassManage(this, mService);
         // Required empty public constructor
     }
 
@@ -59,8 +51,9 @@ public class ClassFragment extends Fragment implements IClassView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_class, container, false);
-        return view;
+        mView = inflater.inflate(R.layout.fragment_class, container, false);
+        mManage = new ClassManage(this, mService);
+        return mView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

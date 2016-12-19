@@ -23,24 +23,17 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MineFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link MineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class MineFragment extends Fragment implements IMineView {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
     //视图控件
+    private View mView;
     private RecyclerView rvMineFunction;
     private MineFunctionAdapter mfa;
     private ProgressDialog mProgressDialog;
@@ -50,7 +43,6 @@ public class MineFragment extends Fragment implements IMineView {
 
     public MineFragment() {
         // Required empty public constructor
-        mManage = new MineManage(this, mService);
     }
 
     public static MineFragment newInstance(LogicService service) {
@@ -68,8 +60,9 @@ public class MineFragment extends Fragment implements IMineView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_mine, container, false);
-        return view;
+        mView = inflater.inflate(R.layout.fragment_mine, container, false);
+        mManage = new MineManage(this, mService);
+        return mView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -98,7 +91,7 @@ public class MineFragment extends Fragment implements IMineView {
 
     @Override
     public void initView() {
-        rvMineFunction = (RecyclerView) getActivity().findViewById(R.id.rv_mine_function);
+        rvMineFunction = (RecyclerView) mView.findViewById(R.id.rv_mine_function);
     }
 
     @Override
@@ -124,7 +117,7 @@ public class MineFragment extends Fragment implements IMineView {
             mfa.setIOnClickListener(new IOnClickListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
-
+                    mManage.goFunction(position);
                 }
 
                 @Override

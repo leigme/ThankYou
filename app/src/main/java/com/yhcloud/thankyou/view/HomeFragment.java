@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.manage.HomeManage;
+import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.GlideImageLoader;
 import com.youth.banner.Banner;
@@ -24,24 +25,17 @@ import java.util.ArrayList;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link HomeFragment.OnFragmentInteractionListener} interface
+ * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class HomeFragment extends Fragment implements IHomeView {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
     //视图控件
+    private View mView;
     private Banner mBanner;
     private RecyclerView mFunctionList, mReadList;
     private ImageView ivReadIcon;
@@ -51,7 +45,6 @@ public class HomeFragment extends Fragment implements IHomeView {
     private LogicService mService;
 
     public HomeFragment() {
-        mManage = new HomeManage(this, mService);
         // Required empty public constructor
     }
 
@@ -70,13 +63,9 @@ public class HomeFragment extends Fragment implements IHomeView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        initView(view);
-        return view;
-    }
-
-    private void initView(View view) {
-        mBanner = (Banner) view.findViewById(R.id.banner);
+        mView = inflater.inflate(R.layout.fragment_home, container, false);
+        mManage = new HomeManage(this, mService);
+        return mView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -147,7 +136,7 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void initView() {
-        
+        mBanner = (Banner) mView.findViewById(R.id.banner);
     }
 
     @Override

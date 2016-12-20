@@ -1,5 +1,6 @@
 package com.yhcloud.thankyou.view;
 
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mInterface.IBaseView;
 
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.ArrayList;
 
 public interface IHomeView extends IBaseView {
     void showBanner(ArrayList<String> imageUrls);
-    void showFunction();
+    void showFunction(ArrayList<FunctionBean> list);
     void setReadIcon(int iconId);
     void setReadTitle(String title);
     void showSpread();

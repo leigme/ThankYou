@@ -4,7 +4,10 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,15 +15,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.adapter.HomeFunctionListAdapter;
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.manage.HomeManage;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.GlideImageLoader;
+import com.yhcloud.thankyou.utils.myview.drag.DragItemCallBack;
+import com.yhcloud.thankyou.utils.myview.drag.RecycleCallBack;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,14 +40,22 @@ import java.util.ArrayList;
  */
 public class HomeFragment extends Fragment implements IHomeView {
 
+    private String TAG = getClass().getSimpleName();
+
     private OnFragmentInteractionListener mListener;
 
     //视图控件
     private View mView;
     private Banner mBanner;
-    private RecyclerView mFunctionList, mReadList;
+    private RecyclerView rvFunctionList, rvReadList;
     private ImageView ivReadIcon;
     private TextView tvReadTitle;
+
+    //适配器
+    private HomeFunctionListAdapter hfla;
+    private RecycleCallBack rcb;
+    private ItemTouchHelper ith;
+
     //管理器
     private HomeManage mManage;
     private LogicService mService;
@@ -115,8 +131,59 @@ public class HomeFragment extends Fragment implements IHomeView {
     }
 
     @Override
-    public void showFunction() {
+    public void showFunction(final ArrayList<FunctionBean> list) {
+        if (null == hfla) {
+            rcb = new RecycleCallBack() {
+                @Override
+                public void itemOnClick(int position, View view) {
+                    Log.e(TAG, "点击监听事件:" + position);
+                }
 
+                @Override
+                public void itemOnLongClick(int position, View view) {
+                    if (list.size() - 1 == position) {
+                        return;
+                    }
+                    Log.e(TAG, "长按监听事件:" + position);
+                }
+
+                @Override
+                public void onMove(int from, int to) {
+                    if (from == list.size() - 1 || to == list.size() - 1) {
+                        return;
+                    }
+                    Log.e(TAG, "移动监听事件:从" + from + "到" + to);
+                    synchronized (this) {
+                        if (from > to) {
+                            int count = from - to;
+                            for (int i = 0; i < count; i++) {
+                                Collections.swap(list, from - i, from - i - 1);
+                            }
+                        }
+                        if (from < to) {
+                            int count = to - from;
+                            for (int i = 0; i < count; i++) {
+                                Collections.swap(list, from + i, from + i + 1);
+                            }
+                        }
+                    }
+                    hfla.setData(list);
+                    hfla.notifyItemMoved(from, to);
+                    hfla.show.clear();
+                    hfla.show.put(to, to);
+                }
+
+                @Override
+                public void saveFunctionList() {
+
+                }
+            };
+            hfla = new HomeFunctionListAdapter(getActivity(), list, rcb);
+            rvFunctionList.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+            ith = new ItemTouchHelper(new DragItemCallBack(rcb));
+            ith.attachToRecyclerView(rvFunctionList);
+            rvFunctionList.setAdapter(hfla);
+        }
     }
 
     @Override
@@ -137,6 +204,8 @@ public class HomeFragment extends Fragment implements IHomeView {
     @Override
     public void initView() {
         mBanner = (Banner) mView.findViewById(R.id.banner);
+        rvFunctionList = (RecyclerView) mView.findViewById(R.id.rv_home_function_list);
+        rvReadList = (RecyclerView) mView.findViewById(R.id.rv_home_read_list);
     }
 
     @Override

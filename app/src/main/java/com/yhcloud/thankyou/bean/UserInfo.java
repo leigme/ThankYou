@@ -12,11 +12,8 @@ import java.util.ArrayList;
 
 public class UserInfo implements Serializable, Parcelable {
 
-    private int id;
-    private int uid;
-    private String username;
-    private String password;
-    private String key;
+    private int id, uid;
+    private String username, password, key;
     private UserInfoBean userInfoBean;
     private ArrayList<ClassInfoBean> mClassInfoBeen;
 

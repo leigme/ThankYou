@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 
@@ -34,6 +35,7 @@ public class MainManage {
     private LogicService mService;
     private UserInfo mUserInfo;
     private ArrayList<Fragment> mFragments;
+    private ArrayList<ClassInfoBean> mClassInfoBeen;
 
     public MainManage(IMainView mainView) {
         this.mIMainView = mainView;
@@ -43,13 +45,18 @@ public class MainManage {
             @Override
             public void onServiceConnected(ComponentName name, IBinder binder) {
                 mService = ((LogicService.MyBinder)binder).getService();
+                mUserInfo = mService.getUserInfo();
                 mIMainView.initView();
                 mIMainView.initData();
                 mIMainView.initEvent();
                 initViewPages();
                 mIMainView.showFragment(0);
-                mUserInfo = mService.getUserInfo();
                 mIMainView.setHeaderLeftImage(mUserInfo.getUserInfoBean().getHeadImageURL());
+                mIMainView.setTitle(mUserInfo.getUserInfoBean().getSchoolName());
+                if (null != mActivity.getIntent()) {
+                    Bundle bundle = mActivity.getIntent().getExtras();
+                    mClassInfoBeen = (ArrayList<ClassInfoBean>) bundle.getSerializable("ClassInfos");
+                }
             }
 
             @Override
@@ -70,18 +77,33 @@ public class MainManage {
         mIMainView.initFragments(mFragments);
     }
 
-    public void getClassInfo(String userId) {
-        mIMainLogic.getClassInfoList("3237", new ICallListener<ArrayList<ClassInfoBean>>() {
+    public void setTitle(int i) {
+        switch (i) {
+            case 0:
+                mIMainView.setTitle(mUserInfo.getUserInfoBean().getSchoolName());
+                break;
+            case 1:
+                if (null != mClassInfoBeen) {
+                    for (ClassInfoBean classInfoBean: mClassInfoBeen) {
+                        if (classInfoBean.getClassId() == mUserInfo.getUserInfoBean().getDefaultClassId()) {
+                            mIMainView.setTitle(classInfoBean.getClassName());
+                        }
+                    }
+                }
+                break;
+            case 2:
+                mIMainView.setTitle("我的");
+                break;
+        }
+    }
 
-            @Override
-            public void callSuccess(ArrayList<ClassInfoBean> been) {
-                mIMainView.showDrawer(been);
-            }
+    public void showDrawer() {
+        if (null != mClassInfoBeen) {
+            mIMainView.showDrawer(mClassInfoBeen);
+        }
+    }
 
-            @Override
-            public void callFailed() {
-
-            }
-        });
+    public void setDefaultClassId(String classId) {
+        mUserInfo.getUserInfoBean().setDefaultClassId(classId);
     }
 }

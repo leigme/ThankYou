@@ -47,11 +47,8 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     private LinearLayout llHeaderLeft, llHeaderRight, llFooterHome, llFooterClass, llFooterMine;
 
     private ClassDrawerListAdapter cdla;
-    private ArrayList<Fragment> mFragments;
     private NoScrollViewPager nsvpList;
     private FragmentViewPagerAdapter mfvpa;
-
-    private ArrayList<ClassInfoBean> mClassInfoBeen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,11 +80,6 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     @Override
     public void initData(){
         ivHeaderLeft.setImageResource(R.mipmap.icon_default_avatar);
-        mFragments = new ArrayList<>();
-        if (null != getIntent()) {
-            Bundle bundle = getIntent().getExtras();
-            mClassInfoBeen = (ArrayList<ClassInfoBean>) bundle.getSerializable("ClassInfos");
-        }
     }
 
     @Override
@@ -97,8 +89,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
             public void onClick(View view) {
                 switch (view.getId()) {
                     case R.id.ll_header_left:
-//                        mManage.getClassInfo("");
-                        showDrawer(mClassInfoBeen);
+                        mManage.showDrawer();
                         break;
                     case R.id.ll_footer_home:
                         showFragment(0);
@@ -178,6 +169,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
                     for (ClassInfoBean ci: classInfoBeen) {
                         ci.setSelected(false);
                     }
+                    mManage.setDefaultClassId(classInfoBeen.get(position).getClassId() );
                     classInfoBeen.get(position).setSelected(true);
                     cdla.reflreshList(classInfoBeen);
                     dlDrawer.closeDrawer(Gravity.LEFT);
@@ -202,6 +194,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
 
     @Override
     public void showFragment(int i) {
+        mManage.setTitle(i);
         resetFooterBtn();
         switch (i) {
             case 0:

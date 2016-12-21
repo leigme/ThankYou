@@ -104,6 +104,8 @@
         </activity>
         <activity android:name=".view.MessageActivity">
         </activity>
+        <activity android:name=".view.DetailPeopleActivity">
+        </activity>
     </application>
 
 </manifest>

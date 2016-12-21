@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.yhcloud.thankyou.R;
 import com.youth.banner.loader.ImageLoader;
 
 /**
@@ -23,7 +24,10 @@ public class GlideImageLoader extends ImageLoader {
          */
 
 //      Glide 加载图片简单用法
-        Glide.with(context).load(path).into(imageView);
+        Glide.with(context)
+                .load(Constant.SERVICEADDRESS + path)
+                .error(R.mipmap.icon_big_404)
+                .into(imageView);
 //      Picasso 加载图片简单用法
 //      Picasso.with(context).load(path).into(imageView)
 //

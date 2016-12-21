@@ -10,7 +10,9 @@ import android.os.IBinder;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.bean.UserInfo;
+import com.yhcloud.thankyou.logic.ClassLogic;
 import com.yhcloud.thankyou.logic.HomeLogic;
+import com.yhcloud.thankyou.logic.IClassLogic;
 import com.yhcloud.thankyou.logic.IHomeLogic;
 import com.yhcloud.thankyou.logic.ILoginLogic;
 import com.yhcloud.thankyou.logic.LoginLogic;
@@ -108,5 +110,9 @@ public class LogicService extends Service {
         homeLogic.getImageUrls(updateTime, iCallListener);
     }
 
-
+    //获取班级用户列表
+    public void getClassPeopleList(String classId, String updateTime, ICallListener<String> iCallListener) {
+        IClassLogic classLogic = new ClassLogic();
+        classLogic.getClassPeopleListForService(mUserInfo.getUserInfoBean().getUserId(), classId, updateTime, iCallListener);
+    }
 }

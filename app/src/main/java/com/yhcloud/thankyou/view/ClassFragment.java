@@ -1,17 +1,28 @@
 package com.yhcloud.thankyou.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.adapter.ClassPeopleListAdapter;
+import com.yhcloud.thankyou.bean.UserInfoBean;
+import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.ClassManage;
 import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.utils.Constant;
+
+import java.text.MessageFormat;
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,11 +34,17 @@ import com.yhcloud.thankyou.service.LogicService;
  */
 public class ClassFragment extends Fragment implements IClassView {
 
+    private String TAG = getClass().getSimpleName();
+
     private OnFragmentInteractionListener mListener;
 
     //视图控件
     private View mView;
-    private RecyclerView mPeopleList;
+    private LinearLayout llTeachers;
+    private RecyclerView rvPeopleList;
+    private ProgressDialog mProgressDialog;
+    //适配器
+    private ClassPeopleListAdapter cpla;
     //管理器
     private ClassManage mManage;
     private LogicService mService;
@@ -82,7 +99,8 @@ public class ClassFragment extends Fragment implements IClassView {
 
     @Override
     public void initView() {
-
+        llTeachers = (LinearLayout) mView.findViewById(R.id.ll_class_teachers);
+        rvPeopleList = (RecyclerView) mView.findViewById(R.id.rv_class_people_list);
     }
 
     @Override
@@ -101,13 +119,15 @@ public class ClassFragment extends Fragment implements IClassView {
     }
 
     @Override
-    public void showLoading() {
-
+    public void showLoading(int msgId) {
+        mProgressDialog = ProgressDialog.show(getActivity(), null, getString(msgId));
     }
 
     @Override
     public void hiddenLoading() {
-
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override
@@ -128,6 +148,33 @@ public class ClassFragment extends Fragment implements IClassView {
     @Override
     public void showToastMsg(String msg) {
 
+    }
+
+    @Override
+    public void showList(ArrayList<UserInfoBean> list) {
+        if (null == cpla) {
+            cpla = new ClassPeopleListAdapter(getActivity(), list);
+            cpla.setIOnClickListener(new IOnClickListener() {
+                @Override
+                public void OnItemClickListener(View view, int position) {
+                    Log.e(TAG, MessageFormat.format("点击了第{0}个学生", position));
+                }
+
+                @Override
+                public void OnItemLongClickListener(View view, int position) {
+
+                }
+            });
+            rvPeopleList.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+            rvPeopleList.setAdapter(cpla);
+        } else {
+            cpla.refreshData(list);
+        }
+    }
+
+    @Override
+    public ClassManage getClassManage() {
+        return mManage;
     }
 
     /**

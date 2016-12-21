@@ -1,5 +1,6 @@
 package com.yhcloud.thankyou.view;
 
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,11 +21,13 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.ClassDrawerListAdapter;
 import com.yhcloud.thankyou.adapter.FragmentViewPagerAdapter;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
+import com.yhcloud.thankyou.bean.PopupMenuBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.utils.ServiceAPI;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 import com.yhcloud.thankyou.utils.myview.NoScrollViewPager;
+import com.yhcloud.thankyou.utils.myview.PopupMenu;
 
 import java.util.ArrayList;
 
@@ -38,17 +41,20 @@ public class MainActivity extends AppCompatActivity implements IMainView,
 
     private String TAG = getClass().getSimpleName();
 
-    private MainManage mManage;
+    //视图控件
     private ImageView ivHeaderLeft, ivHeaderRight, ivFooterHome, ivFooterClass, ivFooterMine;
     private TextView tvHeaderTitle, tvFooterHome, tvFooterClass, tvFooterMine;
     private DrawerLayout dlDrawer;
+    private PopupMenu mPopupMenu;
     private RecyclerView rvDrawerList;
-
     private LinearLayout llHeaderLeft, llHeaderRight, llFooterHome, llFooterClass, llFooterMine;
-
-    private ClassDrawerListAdapter cdla;
     private NoScrollViewPager nsvpList;
+    private ProgressDialog mProgressDialog;
+    //适配器
+    private ClassDrawerListAdapter cdla;
     private FragmentViewPagerAdapter mfvpa;
+    //管理器
+    private MainManage mManage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +97,9 @@ public class MainActivity extends AppCompatActivity implements IMainView,
                     case R.id.ll_header_left:
                         mManage.showDrawer();
                         break;
+                    case R.id.ll_header_right:
+                        mPopupMenu.showLocation(R.id.ll_header_right);
+                        break;
                     case R.id.ll_footer_home:
                         showFragment(0);
                         break;
@@ -104,6 +113,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
             }
         };
         llHeaderLeft.setOnClickListener(myOnClickListener);
+        llHeaderRight.setOnClickListener(myOnClickListener);
         llFooterHome.setOnClickListener(myOnClickListener);
         llFooterClass.setOnClickListener(myOnClickListener);
         llFooterMine.setOnClickListener(myOnClickListener);
@@ -115,13 +125,15 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     }
 
     @Override
-    public void showLoading() {
-
+    public void showLoading(int msgId) {
+        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 
     @Override
     public void hiddenLoading() {
-
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override
@@ -145,11 +157,6 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     }
 
     @Override
-    public void setDrawer() {
-
-    }
-
-    @Override
     public void initFragments(ArrayList<Fragment> list) {
         if (null == mfvpa) {
             mfvpa = new FragmentViewPagerAdapter(getSupportFragmentManager(), list);
@@ -169,7 +176,9 @@ public class MainActivity extends AppCompatActivity implements IMainView,
                     for (ClassInfoBean ci: classInfoBeen) {
                         ci.setSelected(false);
                     }
-                    mManage.setDefaultClassId(classInfoBeen.get(position).getClassId() );
+                    mManage.setDefaultClassId(classInfoBeen.get(position).getClassId());
+                    mManage.setTitle(1);
+                    mManage.setClassPeopleList(classInfoBeen.get(position).getClassId());
                     classInfoBeen.get(position).setSelected(true);
                     cdla.reflreshList(classInfoBeen);
                     dlDrawer.closeDrawer(Gravity.LEFT);
@@ -200,14 +209,17 @@ public class MainActivity extends AppCompatActivity implements IMainView,
             case 0:
                 ivFooterHome.setImageResource(R.mipmap.icon_home);
                 tvFooterHome.setTextColor(Color.parseColor("#68c04a"));
+                mManage.setRightButton(false);
                 break;
             case 1:
                 ivFooterClass.setImageResource(R.mipmap.icon_class);
                 tvFooterClass.setTextColor(Color.parseColor("#68c04a"));
+                mManage.setRightButton(true);
                 break;
             case 2:
                 ivFooterMine.setImageResource(R.mipmap.icon_mine);
                 tvFooterMine.setTextColor(Color.parseColor("#68c04a"));
+                mManage.setRightButton(false);
                 break;
         }
         nsvpList.setCurrentItem(i);
@@ -226,11 +238,26 @@ public class MainActivity extends AppCompatActivity implements IMainView,
         Glide.with(this).load(resId).into(ivHeaderRight);
     }
 
+    @Override
+    public void showHeaderRightButton(boolean showed) {
+        if (showed) {
+            llHeaderRight.setVisibility(View.VISIBLE);
+//            setHeaderRightImage(R.mipmap.icon_add_menu);
+        } else {
+            llHeaderRight.setVisibility(View.INVISIBLE);
+        }
+        llHeaderRight.setClickable(showed);
+    }
+
+    @Override
+    public void initPopupMenu(ArrayList<PopupMenuBean> list) {
+        mPopupMenu = new PopupMenu(this, list);
+    }
+
     private void resetFooterBtn() {
         ivFooterHome.setImageResource(R.mipmap.icon_home_un);
         ivFooterClass.setImageResource(R.mipmap.icon_class_un);
         ivFooterMine.setImageResource(R.mipmap.icon_mine_un);
-
         tvFooterHome.setTextColor(Color.parseColor("#8E908D"));
         tvFooterClass.setTextColor(Color.parseColor("#8E908D"));
         tvFooterMine.setTextColor(Color.parseColor("#8E908D"));

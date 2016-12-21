@@ -132,7 +132,7 @@ public class MineFragment extends Fragment implements IMineView {
     }
 
     @Override
-    public void showLoading() {
+    public void showLoading(int msgId) {
 
     }
 

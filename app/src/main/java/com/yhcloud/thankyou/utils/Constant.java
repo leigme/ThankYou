@@ -31,7 +31,9 @@ public class Constant {
      */
     //服务地址
     public static final String SERVICEADDRESS = "http://www.k12chn.com";
-    //    public static final String SERVICEADDRESS = "http://192.168.0.19";
-    //登录请求
+    //    public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
+    //登录请求 uid pwd
     public static final String LOGIN = SERVICEADDRESS + "/m17/M1708I/M1708I001";
+    //获取班级学生 userId classId updateTime
+    public static final String GETCLASSPEOPLELIST = SERVICEADDRESS + "/m17/m1718I/m1718I001";
 }

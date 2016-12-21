@@ -65,7 +65,7 @@ public class LoginManage {
     }
 
     public void login() {
-        mILoginView.showLoading();
+        mILoginView.showLoading(R.string.logging);
         mService.login(mILoginView.getUserName(), mILoginView.getPassWord(), new ICallListener<String>() {
             @Override
             public void callSuccess(String s) {
@@ -108,6 +108,7 @@ public class LoginManage {
             @Override
             public void callFailed() {
                 mILoginView.hiddenLoading();
+                mILoginView.showMsg(R.string.error_connection);
             }
         });
     }

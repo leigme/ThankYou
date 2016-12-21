@@ -51,6 +51,7 @@ public class UserInfoBean implements Serializable {
     private String SchoolName;
     private String SchoolId;
     private int FirendCircleId;
+    private String belongUserId;
 
     public String getUserId() {
         return UserId;
@@ -210,5 +211,13 @@ public class UserInfoBean implements Serializable {
 
     public void setFirendCircleId(int FirendCircleId) {
         this.FirendCircleId = FirendCircleId;
+    }
+
+    public String getBelongUserId() {
+        return belongUserId;
+    }
+
+    public void setBelongUserId(String belongUserId) {
+        this.belongUserId = belongUserId;
     }
 }

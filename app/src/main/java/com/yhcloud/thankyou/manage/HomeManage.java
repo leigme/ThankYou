@@ -64,7 +64,7 @@ public class HomeManage {
             public void callSuccess(ArrayList<SpreadBean> been) {
                 ArrayList<String> arrayList = new ArrayList<>();
                 for (SpreadBean sb: been) {
-                    arrayList.add("http://www.k12chn.com" + sb.getSummaryPicLink());
+                    arrayList.add(sb.getSummaryPicLink());
                 }
                 mIHomeView.showBanner(arrayList);
             }

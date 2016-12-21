@@ -8,8 +8,11 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
+import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
+import com.yhcloud.thankyou.bean.PopupMenuBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.mInterface.ICallListener;
@@ -17,6 +20,7 @@ import com.yhcloud.thankyou.logic.IMainLogic;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.view.ClassFragment;
 import com.yhcloud.thankyou.view.HomeFragment;
+import com.yhcloud.thankyou.view.IClassView;
 import com.yhcloud.thankyou.view.IMainView;
 import com.yhcloud.thankyou.view.MineFragment;
 
@@ -36,6 +40,7 @@ public class MainManage {
     private UserInfo mUserInfo;
     private ArrayList<Fragment> mFragments;
     private ArrayList<ClassInfoBean> mClassInfoBeen;
+    private ArrayList<PopupMenuBean> mMenuBeen;
 
     public MainManage(IMainView mainView) {
         this.mIMainView = mainView;
@@ -56,6 +61,11 @@ public class MainManage {
                 if (null != mActivity.getIntent()) {
                     Bundle bundle = mActivity.getIntent().getExtras();
                     mClassInfoBeen = (ArrayList<ClassInfoBean>) bundle.getSerializable("ClassInfos");
+                    for (ClassInfoBean classInfoBean: mClassInfoBeen) {
+                        if (classInfoBean.getClassId().equals(mUserInfo.getUserInfoBean().getDefaultClassId())) {
+                            classInfoBean.setSelected(true);
+                        }
+                    }
                 }
             }
 
@@ -85,7 +95,7 @@ public class MainManage {
             case 1:
                 if (null != mClassInfoBeen) {
                     for (ClassInfoBean classInfoBean: mClassInfoBeen) {
-                        if (classInfoBean.getClassId() == mUserInfo.getUserInfoBean().getDefaultClassId()) {
+                        if (classInfoBean.getClassId().equals(mUserInfo.getUserInfoBean().getDefaultClassId())) {
                             mIMainView.setTitle(classInfoBean.getClassName());
                         }
                     }
@@ -105,5 +115,26 @@ public class MainManage {
 
     public void setDefaultClassId(String classId) {
         mUserInfo.getUserInfoBean().setDefaultClassId(classId);
+    }
+
+    public void setRightButton(boolean showed) {
+        mIMainView.showHeaderRightButton(showed);
+        if (showed) {
+            if (null == mMenuBeen || 0 == mMenuBeen.size()) {
+                mMenuBeen = new ArrayList<>();
+                PopupMenuBean popupMenuBean1 = new PopupMenuBean(R.mipmap.icon_class_cadre, "班干部", new Intent());
+                PopupMenuBean popupMenuBean2 = new PopupMenuBean(R.mipmap.icon_class_duty, "值日生", new Intent());
+                PopupMenuBean popupMenuBean3 = new PopupMenuBean(R.mipmap.icon_class_curriculum, "课表", new Intent());
+                mMenuBeen.add(popupMenuBean1);
+                mMenuBeen.add(popupMenuBean2);
+                mMenuBeen.add(popupMenuBean3);
+                mIMainView.initPopupMenu(mMenuBeen);
+            }
+        }
+    }
+
+    public void setClassPeopleList(String classId) {
+        IClassView iClassView = (IClassView) mFragments.get(1);
+        iClassView.getClassManage().getClassPeopleList(classId);
     }
 }

@@ -224,7 +224,7 @@ public class HomeFragment extends Fragment implements IHomeView {
     }
 
     @Override
-    public void showLoading() {
+    public void showLoading(int msgId) {
 
     }
 

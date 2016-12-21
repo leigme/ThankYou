@@ -3,18 +3,30 @@ package com.yhcloud.thankyou.utils;
 import android.content.Context;
 import android.content.Intent;
 import android.util.SparseArray;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.view.EaseChatActivity;
 
 import java.util.ArrayList;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
 /**
  * Created by Administrator on 2016/11/10.
  */
 
 public class Tools {
+
+    public static void GlideImageUrl(Context context, String path, ImageView imageView) {
+        Glide.with(context)
+                .load(Constant.SERVICEADDRESS + path)
+                .bitmapTransform(new CropCircleTransformation(context))
+                .error(R.mipmap.icon_big_404)
+                .into(imageView);
+    }
 
     public static ArrayList<FunctionBean> initFunction(Context context) {
         ArrayList<FunctionBean> arrayList = new ArrayList<>();

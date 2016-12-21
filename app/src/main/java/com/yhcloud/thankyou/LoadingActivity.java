@@ -19,6 +19,7 @@ import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
+import com.yhcloud.thankyou.utils.myview.MyToast;
 import com.yhcloud.thankyou.view.LoginActivity;
 import com.yhcloud.thankyou.view.MainActivity;
 
@@ -101,13 +102,16 @@ public class LoadingActivity extends AppCompatActivity {
 
                             @Override
                             public void callFailed() {
+                                MyToast.showToast(LoadingActivity.this, R.string.error_connection);
                                 goLoginActivity();
                             }
                         });
                     } else {
+                        MyToast.showToast(LoadingActivity.this, R.string.error_connection);
                         goLoginActivity();
                     }
                 } else {
+                    MyToast.showToast(LoadingActivity.this, R.string.error_connection);
                     goLoginActivity();
                 }
             }

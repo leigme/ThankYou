@@ -11,7 +11,7 @@ public interface IBaseView {
     void initData();
     void initEvent();
     void showDefault(boolean showed);
-    void showLoading();
+    void showLoading(int msgId);
     void hiddenLoading();
     void setTitle(String title);
     void setRightTitle(String title);

@@ -33,7 +33,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_realname"
+            android:id="@+id/tv_detail_realname"
             android:layout_below="@id/iv_detail_people_header_image"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
@@ -47,209 +47,195 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="@color/colorTextGray"
+        android:background="#f7f7f7"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@color/colorWhite"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/ll_l1"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:visibility="gone"
-                android:background="@color/colorWhite"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/tv_relative"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:gravity="center_horizontal"
-                    android:text="家长姓名:"
-                    android:textColor="@color/colorTextGray"
-                    android:textSize="18sp" />
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp">
-                    <android.support.v7.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/rv_detail_parent_list">
-                    </android.support.v7.widget.RecyclerView>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_no_relative"
-                        android:gravity="center_vertical"
-                        android:text="无"
-                        android:textSize="18sp"
-                        android:textColor="@color/colorBlack"/>
-                </RelativeLayout>
-            </LinearLayout>
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="@color/colorTextGray"/>
+                android:background="#dcdcdc"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/ll_l2"
-                android:background="@color/colorWhite"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:visibility="gone">
-                <TextView
-                    android:id="@+id/tv_office"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:gravity="center"
-                    android:text="担任职位:"
-                    android:textColor="@color/text_gray"
-                    android:textSize="18sp" />
-                <TextView
-                    android:id="@+id/tv_office_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:gravity="center"
-                    android:text="学习委员"
-                    android:textColor="@color/black"
-                    android:textSize="18sp" />
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ll_detail_title"
+
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@color/colorWhite"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tv_detail_name_title"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:gravity="center_horizontal"
+                        android:text="家长姓名: "
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="18sp" />
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+                        <android.support.v7.widget.RecyclerView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/rv_detail_people_list"
+                            android:visibility="gone">
+                        </android.support.v7.widget.RecyclerView>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/tv_detail_no_title"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:gravity="center_vertical"
+                            android:text="无"
+                            android:textSize="18sp"
+                            android:textColor="@color/colorBlack"/>
+                    </RelativeLayout>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/ll_detail_office"
+                    android:background="@color/colorWhite"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tv_detail_office"
+                        android:gravity="center"
+                        android:text="担任职位: "
+                        android:textColor="@color/colorTextGray"
+                        android:textSize="18sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:id="@+id/tv_detail_office_name"
+                        android:gravity="center"
+                        android:text="学习委员"
+                        android:textColor="@color/colorBlack"
+                        android:textSize="18sp" />
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#dcdcdc"/>
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:orientation="vertical"
-                android:id="@+id/ll_line3"
-                android:background="@color/click_gray"></LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:id="@+id/ll_piece3"
-                android:orientation="vertical"
-                android:background="@color/light_gray"></LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/click_gray"></LinearLayout>
+            android:layout_weight="1"></LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dcdcdc"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@color/colorWhite">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_detail_edit_title"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:text="备注:"
+                android:textColor="@color/colorTextGray"
+                android:textSize="18sp" />
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="55dp"
-                android:background="@color/white"
-                android:orientation="horizontal">
-
-                <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical">
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/et_detail_remark_name"
+                    android:paddingLeft="5dp"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:enabled="false"
+                    android:gravity="left|center_vertical"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="18sp" />
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_toLeftOf="@+id/tv_edit">
-
-                    <LinearLayout
-                        android:layout_width="10dp"
-                        android:layout_height="match_parent"></LinearLayout>
-
-                    <TextView
-                        android:id="@+id/tv_item4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:text="备注:"
-                        android:textColor="@color/text_gray"
-                        android:textSize="18sp" />
-
-                    <EditText
-                        android:id="@+id/tv_value4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:paddingLeft="5dp"
-                        android:lines="1"
-                        android:maxLength="10"
-                        android:enabled="false"
-                        android:gravity="left|center_vertical"
-                        android:text="无"
-                        android:textColor="@color/black"
-                        android:visibility="gone"
-                        android:textSize="18sp" />
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/tv_remark_name"
-                        android:gravity="left|center_vertical"
-                        android:paddingLeft="5dp"
-                        android:lines="1"
-                        android:maxLength="10"
-                        android:ellipsize="end"
-                        android:hint="最多输入10个字符"
-                        android:textSize="18sp"/>
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_edit"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="编辑"
-                    android:textColor="@color/text_gray"
-                    android:textSize="18sp"
-                    android:gravity="center"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="10dp"/>
-
-            </RelativeLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/click_gray"></LinearLayout>
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.8"
-                android:id="@+id/rl_opearte"
-                android:background="@color/light_gray">
-
-                <TextView
-                    android:id="@+id/tv_sendmessage"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="发消息"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:background="@drawable/btn_oval_click"
-                    android:layout_centerHorizontal="true"
-                    android:layout_above="@+id/tv_give"
-                    android:layout_marginBottom="15dp"/>
-
-                <TextView
-                    android:id="@+id/tv_give"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="送道具"
-                    android:gravity="center"
-                    android:textSize="20sp"
-                    android:textColor="@color/white"
-                    android:background="@drawable/btn_oval_click"
-                    android:layout_centerHorizontal="true"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="25dp"/>
+                    android:id="@+id/tv_detail_remark_name"
+                    android:layout_centerInParent="true"
+                    android:gravity="left|center_vertical"
+                    android:lines="1"
+                    android:maxLength="10"
+                    android:ellipsize="end"
+                    android:textSize="18sp"/>
             </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_detail_edit"
+                android:text="编辑"
+                android:textColor="@color/colorTextGray"
+                android:textSize="18sp"
+                android:gravity="center"
+                android:background="@drawable/item_click"/>
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#dcdcdc"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_detail_send_massage"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_click">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:text="发消息"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/ll_detail_sent_props"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/btn_click">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:textColor="@color/colorWhite"
+                android:text="送道具"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

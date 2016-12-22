@@ -158,6 +158,7 @@ public class ClassFragment extends Fragment implements IClassView {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     Log.e(TAG, MessageFormat.format("点击了第{0}个学生", position));
+                    mManage.goDetailInfo(position);
                 }
 
                 @Override

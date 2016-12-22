@@ -14,6 +14,7 @@ import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.view.DetailPeopleActivity;
 import com.yhcloud.thankyou.view.IClassView;
 
 import org.json.JSONException;
@@ -106,6 +107,12 @@ public class ClassManage {
 
             }
         });
+    }
+
+    public void goDetailInfo(int position) {
+        Intent intent = new Intent(mActivity, DetailPeopleActivity.class);
+        intent.putExtra("UID", mBeen.get(position).getUserId());
+        mActivity.startActivity(intent);
     }
 
 }

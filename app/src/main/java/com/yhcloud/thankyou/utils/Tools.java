@@ -20,10 +20,17 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class Tools {
 
-    public static void GlideImageUrl(Context context, String path, ImageView imageView) {
+    public static void GlideCircleImageUrl(Context context, String path, ImageView imageView) {
         Glide.with(context)
                 .load(Constant.SERVICEADDRESS + path)
                 .bitmapTransform(new CropCircleTransformation(context))
+                .error(R.mipmap.icon_big_404)
+                .into(imageView);
+    }
+
+    public static void GlideImageUrl(Context context, String path, ImageView imageView) {
+        Glide.with(context)
+                .load(Constant.SERVICEADDRESS + path)
                 .error(R.mipmap.icon_big_404)
                 .into(imageView);
     }

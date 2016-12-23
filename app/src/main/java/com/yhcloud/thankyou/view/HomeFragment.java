@@ -16,11 +16,14 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.HomeFunctionListAdapter;
+import com.yhcloud.thankyou.adapter.HomeSpreadAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.manage.HomeManage;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.GlideImageLoader;
+import com.yhcloud.thankyou.utils.myview.LinearLayoutForListView;
 import com.yhcloud.thankyou.utils.myview.drag.DragItemCallBack;
 import com.yhcloud.thankyou.utils.myview.drag.RecycleCallBack;
 import com.youth.banner.Banner;
@@ -47,14 +50,14 @@ public class HomeFragment extends Fragment implements IHomeView {
     //视图控件
     private View mView;
     private Banner mBanner;
-    private RecyclerView rvFunctionList, rvReadList;
-    private ImageView ivReadIcon;
-    private TextView tvReadTitle;
+    private RecyclerView rvFunctionList;
+    private LinearLayoutForListView llflSpreadList;
 
     //适配器
     private HomeFunctionListAdapter hfla;
     private RecycleCallBack rcb;
     private ItemTouchHelper ith;
+    private HomeSpreadAdapter hsa;
 
     //管理器
     private HomeManage mManage;
@@ -187,30 +190,24 @@ public class HomeFragment extends Fragment implements IHomeView {
     }
 
     @Override
-    public void setReadIcon(int iconId) {
-        ivReadIcon.setImageResource(iconId);
-    }
-
-    @Override
-    public void setReadTitle(String title) {
-        tvReadTitle.setText(title);
-    }
-
-    @Override
-    public void showSpread() {
-
+    public void showSpread(ArrayList<SpreadBean> list) {
+        if (null == hsa) {
+            hsa = new HomeSpreadAdapter(getActivity(), list);
+            llflSpreadList.setAdapter(hsa);
+            llflSpreadList.setOnItemClickListener(new LinearLayoutForListView.OnItemClickListener() {
+                @Override
+                public void onItemClicked(View v, Object obj, int position) {
+                    mManage.goSpreadInfo(position);
+                }
+            });
+        }
     }
 
     @Override
     public void initView() {
         mBanner = (Banner) mView.findViewById(R.id.banner);
         rvFunctionList = (RecyclerView) mView.findViewById(R.id.rv_home_function_list);
-        rvReadList = (RecyclerView) mView.findViewById(R.id.rv_home_read_list);
-    }
-
-    @Override
-    public void initData() {
-
+        llflSpreadList = (LinearLayoutForListView) mView.findViewById(R.id.llflv_plv_spread);
     }
 
     @Override

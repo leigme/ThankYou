@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.adapter;
+package com.yhcloud.thankyou.module.classteachers.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -39,8 +39,9 @@ public class TeacherListAdapter extends RecyclerView.Adapter<TeacherListAdapter.
 
     @Override
     public void onBindViewHolder(TeacherViewHolder holder, int position) {
-        Tools.GlideImageUrl(mContext, mBeen.get(position).getHeadImageURL(), holder.ivHeader);
+        Tools.GlideCircleImageUrl(mContext, mBeen.get(position).getHeadImageURL(), holder.ivHeader);
         holder.tvName.setText(mBeen.get(position).getRealName());
+        holder.tvOffice.setText(mBeen.get(position).getRoles());
     }
 
     @Override
@@ -48,13 +49,19 @@ public class TeacherListAdapter extends RecyclerView.Adapter<TeacherListAdapter.
         return mBeen.size();
     }
 
+    public void refreshData(ArrayList<TeacherBean> list) {
+        this.mBeen = list;
+        this.notifyDataSetChanged();
+    }
+
     public static class TeacherViewHolder extends RecyclerView.ViewHolder {
         ImageView ivHeader;
-        TextView tvName;
+        TextView tvName, tvOffice;
         public TeacherViewHolder(View itemView) {
             super(itemView);
             ivHeader = (ImageView) itemView.findViewById(R.id.iv_class_teacher_header_image);
             tvName = (TextView) itemView.findViewById(R.id.tv_class_teacher_name);
+            tvOffice = (TextView) itemView.findViewById(R.id.tv_class_teacher_office);
         }
     }
 }

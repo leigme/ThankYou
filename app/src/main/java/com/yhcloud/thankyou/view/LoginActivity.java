@@ -73,11 +73,6 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
     }
 
     @Override
-    public void initData() {
-
-    }
-
-    @Override
     public void initEvent() {
         btn_login_send.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -35,8 +35,21 @@ public class Constant {
 
     //登录请求 uid pwd
     public static final String LOGIN = SERVICEADDRESS + "/m17/M1708I/M1708I001";
+
+
+    //获取推广列表 promotionType:推广类型[1:精品课程 2:精品阅读 4:直播课堂 8:付费精品 16:首页轮播] scopeCrowd:[1:学生 2:老师 4:家长] updateTime:[-1:获取全部]
+    public static final String GETSPREADLIST = SERVICEADDRESS + "/m01/M0108I/M0108I07";
+    //班干部  classId
+    public static final String GETCLASSCADRE = SERVICEADDRESS + "/m17/m1718I/m1718I003";
+    //值日生 classId
+    public static final String GETDUTYSTUDENT = SERVICEADDRESS + "/m05/M0507I/M0507I05";
+    //获取班级课表 http://www.k12chn.com/m07/M0703I/M0703I01/classid/161226/termid/10/uid/3237
+    public static final String GETCLASSCURRICULUM = SERVICEADDRESS + "/m07/M0703I/M0703I01";
     //获取班级学生 userId classId updateTime
     public static final String GETCLASSPEOPLELIST = SERVICEADDRESS + "/m17/m1718I/m1718I001";
+    //获取本班老师 classId
+    public static final String GETCLASSTEACHERLIST = SERVICEADDRESS + "/m17/m1718I/m1718I002";
     //获取用户详情 uid id
     public static final String GETDETAILINFO = SERVICEADDRESS + "/m00/M0005I/M0005I02";
+
 }

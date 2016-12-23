@@ -8,7 +8,6 @@ import android.view.View;
 
 public interface IBaseView {
     void initView();
-    void initData();
     void initEvent();
     void showDefault(boolean showed);
     void showLoading(int msgId);

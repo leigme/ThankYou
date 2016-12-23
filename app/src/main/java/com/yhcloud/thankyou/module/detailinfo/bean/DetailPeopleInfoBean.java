@@ -1,4 +1,6 @@
-package com.yhcloud.thankyou.bean;
+package com.yhcloud.thankyou.module.detailinfo.bean;
+
+import com.yhcloud.thankyou.bean.UserRoleBean;
 
 import java.util.ArrayList;
 

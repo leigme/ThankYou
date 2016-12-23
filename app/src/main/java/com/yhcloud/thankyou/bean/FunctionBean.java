@@ -12,9 +12,9 @@ public class FunctionBean implements Serializable {
     //功能编号
     private int mId;
     //功能小图标
-    private int mIcon;
+    private int mIcon = 0;
     //功能大图标
-    private int mImage;
+    private int mImage = 0;
     //功能标题
     private String mTitle;
     //功能地址

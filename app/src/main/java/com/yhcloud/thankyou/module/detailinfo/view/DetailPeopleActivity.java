@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.view;
+package com.yhcloud.thankyou.module.detailinfo.view;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,12 +14,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.adapter.DetailPeopleListAdapter;
+import com.yhcloud.thankyou.module.detailinfo.adapter.DetailPeopleListAdapter;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
-import com.yhcloud.thankyou.manage.DetailPeopleManage;
-import com.yhcloud.thankyou.utils.DividerItemDecoration;
-import com.yhcloud.thankyou.utils.GlideImageLoader;
+import com.yhcloud.thankyou.module.detailinfo.manage.DetailPeopleManage;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
@@ -62,11 +60,6 @@ public class DetailPeopleActivity extends AppCompatActivity implements IDetailPe
         tvEdit = (TextView) findViewById(R.id.tv_detail_edit);
         llSendMessage = (LinearLayout) findViewById(R.id.ll_detail_send_massage);
         llSentProps = (LinearLayout) findViewById(R.id.ll_detail_sent_props);
-    }
-
-    @Override
-    public void initData() {
-
     }
 
     @Override
@@ -192,7 +185,7 @@ public class DetailPeopleActivity extends AppCompatActivity implements IDetailPe
 
     @Override
     public void setHeadImage(String url) {
-        Tools.GlideImageUrl(this, url, ivHeader);
+        Tools.GlideCircleImageUrl(this, url, ivHeader);
     }
 
     @Override

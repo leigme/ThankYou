@@ -13,6 +13,7 @@ import java.util.ArrayList;
  */
 
 public interface IMainView extends IBaseView {
+    void initData();
     void initFragments(ArrayList<Fragment> list);
     void showDrawer(ArrayList<ClassInfoBean> classInfoBeen);
     void showFragment(int i);

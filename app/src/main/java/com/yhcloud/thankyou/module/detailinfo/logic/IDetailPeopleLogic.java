@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.logic;
+package com.yhcloud.thankyou.module.detailinfo.logic;
 
 import com.yhcloud.thankyou.mInterface.ICallListener;
 

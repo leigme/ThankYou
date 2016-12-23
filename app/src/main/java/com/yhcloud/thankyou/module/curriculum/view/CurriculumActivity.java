@@ -1,0 +1,117 @@
+package com.yhcloud.thankyou.module.curriculum.view;
+
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.view.ViewStub;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.module.curriculum.adapter.CurriculumAdapter;
+import com.yhcloud.thankyou.module.curriculum.bean.CurriculumBean;
+import com.yhcloud.thankyou.module.curriculum.manage.CurriculumManage;
+import com.yhcloud.thankyou.utils.DividerGridItemDecoration;
+
+import java.util.ArrayList;
+
+public class CurriculumActivity extends AppCompatActivity implements ICurriculumView {
+
+    private LinearLayout llBack;
+    private TextView tvTitle, tvDefault;
+    private ViewStub vsDefault;
+    private RecyclerView rvCurriculumList;
+    private CurriculumAdapter ca;
+    private ProgressDialog mProgressDialog;
+    private CurriculumManage mManage;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_curriculum);
+        mManage = new CurriculumManage(this);
+    }
+
+    @Override
+    public void initView() {
+        llBack = (LinearLayout) findViewById(R.id.ll_header_left);
+        tvTitle = (TextView) findViewById(R.id.tv_header_title);
+        rvCurriculumList = (RecyclerView) findViewById(R.id.rv_curriculum_list);
+    }
+
+    @Override
+    public void initEvent() {
+        View.OnClickListener myOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.ll_header_left:
+                        finish();
+                        break;
+                }
+            }
+        };
+        llBack.setOnClickListener(myOnClickListener);
+    }
+
+    @Override
+    public void showDefault(boolean showed) {
+
+    }
+
+    @Override
+    public void showLoading(int msgId) {
+        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
+    }
+
+    @Override
+    public void hiddenLoading() {
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
+    }
+
+    @Override
+    public void setTitle(String title) {
+        tvTitle.setText(title);
+    }
+
+    @Override
+    public void setRightTitle(String title) {
+
+    }
+
+    @Override
+    public void showToastMsg(int msgId) {
+
+    }
+
+    @Override
+    public void showToastMsg(String msg) {
+
+    }
+
+    @Override
+    public void showList(ArrayList<CurriculumBean> list) {
+        if (null == ca) {
+            ca = new CurriculumAdapter(this, list);
+            rvCurriculumList.setLayoutManager(new GridLayoutManager(this, 6));
+            rvCurriculumList.addItemDecoration(new DividerGridItemDecoration(this));
+            rvCurriculumList.setAdapter(ca);
+        }
+    }
+
+    @Override
+    public void initViewStub(String msg) {
+        vsDefault = (ViewStub) findViewById(R.id.vs_default);
+        vsDefault.inflate();
+        if (!"".equals(msg)) {
+            tvDefault = (TextView) findViewById(R.id.tv_viewstub_default);
+            tvDefault.setText(msg);
+        }
+    }
+}

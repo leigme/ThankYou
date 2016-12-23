@@ -1,11 +1,7 @@
 package com.yhcloud.thankyou.manage;
 
 import android.app.Activity;
-import android.app.Service;
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
 
 import com.google.gson.Gson;
@@ -14,7 +10,8 @@ import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.view.DetailPeopleActivity;
+import com.yhcloud.thankyou.module.classteachers.view.ClassTeacherListActivity;
+import com.yhcloud.thankyou.module.detailinfo.view.DetailPeopleActivity;
 import com.yhcloud.thankyou.view.IClassView;
 
 import org.json.JSONException;
@@ -41,6 +38,7 @@ public class ClassManage {
         this.mActivity = mFragment.getActivity();
         this.mService = service;
         mIClassView.initView();
+        mIClassView.initEvent();
         mUserInfo = mService.getUserInfo();
         getClassPeopleList("");
     }
@@ -107,6 +105,11 @@ public class ClassManage {
 
             }
         });
+    }
+
+    public void goTeacherList() {
+        Intent intent = new Intent(mActivity, ClassTeacherListActivity.class);
+        mActivity.startActivity(intent);
     }
 
     public void goDetailInfo(int position) {

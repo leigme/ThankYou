@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.manage;
+package com.yhcloud.thankyou.module.detailinfo.manage;
 
 import android.app.Activity;
 import android.app.Service;
@@ -9,13 +9,13 @@ import android.os.IBinder;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.yhcloud.thankyou.bean.DetailPeopleInfoBean;
+import com.yhcloud.thankyou.module.detailinfo.bean.DetailPeopleInfoBean;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserRoleBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.view.IDetailPeopleView;
+import com.yhcloud.thankyou.module.detailinfo.view.IDetailPeopleView;
 
 import org.json.JSONException;
 import org.json.JSONObject;

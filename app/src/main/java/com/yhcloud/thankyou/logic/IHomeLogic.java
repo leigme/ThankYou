@@ -7,5 +7,5 @@ import com.yhcloud.thankyou.mInterface.ICallListener;
  */
 
 public interface IHomeLogic {
-    public void getImageUrls(String updateTime, ICallListener iCallListener);
+    public void getSpreadList(String type, String flag, String updateTime, ICallListener<String> iCallListener);
 }

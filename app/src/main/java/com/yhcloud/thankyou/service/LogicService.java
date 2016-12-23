@@ -11,14 +11,19 @@ import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.logic.ClassLogic;
-import com.yhcloud.thankyou.logic.DetailPeopleLogic;
+import com.yhcloud.thankyou.module.classcadre.logic.ClassCadreLogic;
+import com.yhcloud.thankyou.module.classteachers.logic.ClassTeacherListLogic;
+import com.yhcloud.thankyou.module.detailinfo.logic.DetailPeopleLogic;
 import com.yhcloud.thankyou.logic.HomeLogic;
 import com.yhcloud.thankyou.logic.IClassLogic;
-import com.yhcloud.thankyou.logic.IDetailPeopleLogic;
+import com.yhcloud.thankyou.module.classteachers.logic.IClassTeacherListLogic;
+import com.yhcloud.thankyou.module.detailinfo.logic.IDetailPeopleLogic;
 import com.yhcloud.thankyou.logic.IHomeLogic;
 import com.yhcloud.thankyou.logic.ILoginLogic;
 import com.yhcloud.thankyou.logic.LoginLogic;
 import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.module.curriculum.logic.CurriculumLogic;
+import com.yhcloud.thankyou.module.dutystudent.logic.DutyStudentLogic;
 import com.yhcloud.thankyou.utils.Constant;
 
 import java.util.ArrayList;
@@ -107,15 +112,76 @@ public class LogicService extends Service {
     }
 
     //获取轮播图
-    public void getImageUrls(String updateTime, ICallListener<ArrayList<SpreadBean>> iCallListener) {
+    public void getImageUrls(String updateTime, ICallListener<String> iCallListener) {
+        String flag = "";
+        switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
+            case 1004:
+                flag = "2";
+                break;
+            case 1010:
+                flag = "2";
+                break;
+            case 1011:
+                flag = "1";
+                break;
+            case 1012:
+                flag = "4";
+                break;
+        }
         IHomeLogic homeLogic = new HomeLogic();
-        homeLogic.getImageUrls(updateTime, iCallListener);
+        homeLogic.getSpreadList("16", flag, updateTime, iCallListener);
+    }
+
+    //获取推广列表
+    public void getSpreadList(String updateTime, ICallListener<String> iCallListener) {
+        String flag = "";
+        switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
+            case 1004:
+                flag = "2";
+                break;
+            case 1010:
+                flag = "2";
+                break;
+            case 1011:
+                flag = "1";
+                break;
+            case 1012:
+                flag = "4";
+                break;
+        }
+        IHomeLogic homeLogic = new HomeLogic();
+        homeLogic.getSpreadList("2", flag, updateTime, iCallListener);
+    }
+
+
+    //获取班干部
+    public void getClassCadreList(ICallListener<String> iCallListener) {
+        ClassCadreLogic cadreLogic = new ClassCadreLogic();
+        cadreLogic.getClassCadreList(mUserInfo.getUserInfoBean().getDefaultClassId(), iCallListener);
+    }
+
+    //获取值日生
+    public void getDutyStudentList(ICallListener<String> iCallListener) {
+        DutyStudentLogic dutyStudentLogic = new DutyStudentLogic();
+        dutyStudentLogic.getDutyStudentList(mUserInfo.getUserInfoBean().getDefaultClassId(), iCallListener);
+    }
+
+    //获取班级课表
+    public void getClassCurriculum(ICallListener<String> iCallListener) {
+        CurriculumLogic curriculumLogic = new CurriculumLogic();
+        curriculumLogic.getClassCurriculum(mUserInfo.getUserInfoBean().getUserId(), mUserInfo.getUserInfoBean().getDefaultClassId(), iCallListener);
     }
 
     //获取班级用户列表
     public void getClassPeopleList(String classId, String updateTime, ICallListener<String> iCallListener) {
         IClassLogic classLogic = new ClassLogic();
         classLogic.getClassPeopleListForService(mUserInfo.getUserInfoBean().getUserId(), classId, updateTime, iCallListener);
+    }
+
+    //获取本班老师
+    public void getClassTeacherList(ICallListener<String> iCallListener) {
+        IClassTeacherListLogic classTeacherListLogic = new ClassTeacherListLogic();
+        classTeacherListLogic.getClassTeacherList(mUserInfo.getUserInfoBean().getDefaultClassId(), iCallListener);
     }
 
     //获取用户详情

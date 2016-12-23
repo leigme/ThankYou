@@ -95,11 +95,6 @@ public class MineFragment extends Fragment implements IMineView {
     }
 
     @Override
-    public void initData() {
-
-    }
-
-    @Override
     public void initEvent() {
 
     }

@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.view;
+package com.yhcloud.thankyou.module.detailinfo.view;
 
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
 import com.yhcloud.thankyou.mInterface.IBaseView;

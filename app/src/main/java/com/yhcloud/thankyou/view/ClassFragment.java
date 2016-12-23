@@ -104,13 +104,18 @@ public class ClassFragment extends Fragment implements IClassView {
     }
 
     @Override
-    public void initData() {
-
-    }
-
-    @Override
     public void initEvent() {
-
+        View.OnClickListener myOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.ll_class_teachers:
+                        mManage.goTeacherList();
+                        break;
+                }
+            }
+        };
+        llTeachers.setOnClickListener(myOnClickListener);
     }
 
     @Override

@@ -44,7 +44,9 @@
             android:name=".view.LoginActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.MainActivity">
+        <activity
+            android:name=".view.MainActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <service android:name=".service.MyService">
@@ -102,9 +104,31 @@
             android:name=".view.EaseChatActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.MessageActivity">
+        <activity
+            android:name=".view.MessageActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.DetailPeopleActivity">
+        <activity
+            android:name=".module.detailinfo.view.DetailPeopleActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".module.classteachers.view.ClassTeacherListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".module.classcadre.view.ClassCadreActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".module.dutystudent.view.DutyStudentActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".module.curriculum.view.CurriculumActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".view.WebActivity">
         </activity>
     </application>
 

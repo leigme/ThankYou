@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.yhcloud.thankyou.view.DetailPeopleActivity">
+    tools:context="com.yhcloud.thankyou.module.detailinfo.view.DetailPeopleActivity">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="200dp"

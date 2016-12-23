@@ -5,6 +5,7 @@
     <string name="error_login">用户名或者密码错误</string>
     <string name="error_connection">网络故障,请稍候再试...</string>
     <string name="loading_data">数据加载中,请稍候...</string>
+    <string name="no_data">暂无记录</string>
     <string name="no_more_data">没有更多数据了...</string>
 
     <!-- TODO: Remove or change this placeholder text -->

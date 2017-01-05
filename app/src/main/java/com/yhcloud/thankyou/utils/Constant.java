@@ -30,8 +30,8 @@ public class Constant {
      * 服务器API
      */
     //服务地址
-    public static final String SERVICEADDRESS = "http://www.k12chn.com";
-    //    public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
+//    public static final String SERVICEADDRESS = "http://www.k12chn.com";
+        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
 
     //登录请求 uid pwd
     public static final String LOGIN = SERVICEADDRESS + "/m17/M1708I/M1708I001";
@@ -39,6 +39,9 @@ public class Constant {
 
     //获取推广列表 promotionType:推广类型[1:精品课程 2:精品阅读 4:直播课堂 8:付费精品 16:首页轮播] scopeCrowd:[1:学生 2:老师 4:家长] updateTime:[-1:获取全部]
     public static final String GETSPREADLIST = SERVICEADDRESS + "/m01/M0108I/M0108I07";
+    //获取推广详情 Id
+    public static final String GETSPREADDATA = SERVICEADDRESS + "/m01/M0108P04/M0108P04001";
+
     //班干部  classId
     public static final String GETCLASSCADRE = SERVICEADDRESS + "/m17/m1718I/m1718I003";
     //值日生 classId
@@ -52,4 +55,9 @@ public class Constant {
     //获取用户详情 uid id
     public static final String GETDETAILINFO = SERVICEADDRESS + "/m00/M0005I/M0005I02";
 
+    //获取道具流转记录 http://www.k12chn.com/m00/M0009I/M0009I014/userId/3237/page/1/type/2
+    public static final String GETPROPSLIST = SERVICEADDRESS + "/m00/M0009I/M0009I014";
+
+    //获取关于我们的信息
+    public static final String GETABOUTUSINFO = SERVICEADDRESS + "/m17/M1705I/M1705I001";
 }

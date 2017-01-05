@@ -12,6 +12,7 @@ import android.view.View;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.PopupmenuListAdapter;
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.PopupMenuBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
@@ -30,7 +31,7 @@ public class PopupMenu extends PopupWindow {
 
     private PopupmenuListAdapter pla;
 
-    public PopupMenu(Activity activity, final ArrayList<PopupMenuBean> list) {
+    public PopupMenu(Activity activity, final ArrayList<FunctionBean> list) {
         super(activity);
         this.mActivity = activity;
         LayoutInflater inflater = (LayoutInflater) activity

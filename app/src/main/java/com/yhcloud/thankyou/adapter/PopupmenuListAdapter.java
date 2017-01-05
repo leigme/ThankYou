@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.PopupMenuBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 
@@ -23,10 +24,10 @@ public class PopupmenuListAdapter extends RecyclerView.Adapter<PopupmenuListAdap
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<PopupMenuBean> mBeen;
+    private ArrayList<FunctionBean> mBeen;
     private IOnClickListener mIOnClickListener;
 
-    public PopupmenuListAdapter(Context context, ArrayList<PopupMenuBean> list) {
+    public PopupmenuListAdapter(Context context, ArrayList<FunctionBean> list) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
         this.mBeen = list;
@@ -42,7 +43,7 @@ public class PopupmenuListAdapter extends RecyclerView.Adapter<PopupmenuListAdap
     @Override
     public void onBindViewHolder(final PopupmenuViewHolder holder, int position) {
         Glide.with(mContext)
-                .load(mBeen.get(position).getResId())
+                .load(mBeen.get(position).getIcon())
                 .into(holder.ivImage);
         holder.tvTitle.setText(mBeen.get(position).getTitle());
         if (null != mIOnClickListener) {

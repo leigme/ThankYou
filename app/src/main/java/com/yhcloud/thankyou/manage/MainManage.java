@@ -8,17 +8,15 @@ import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
+import android.util.SparseArray;
 
-import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
-import com.yhcloud.thankyou.bean.PopupMenuBean;
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.logic.IMainLogic;
-import com.yhcloud.thankyou.module.curriculum.view.CurriculumActivity;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.module.classcadre.view.ClassCadreActivity;
+import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.view.ClassFragment;
-import com.yhcloud.thankyou.module.dutystudent.view.DutyStudentActivity;
 import com.yhcloud.thankyou.view.HomeFragment;
 import com.yhcloud.thankyou.view.IClassView;
 import com.yhcloud.thankyou.view.IMainView;
@@ -38,9 +36,10 @@ public class MainManage {
     private Activity mActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
+    private SparseArray<FunctionBean> mSparseArray;
     private ArrayList<Fragment> mFragments;
     private ArrayList<ClassInfoBean> mClassInfoBeen;
-    private ArrayList<PopupMenuBean> mMenuBeen;
+    private ArrayList<FunctionBean> mMenuBeen;
 
     public MainManage(IMainView mainView) {
         this.mIMainView = mainView;
@@ -67,6 +66,8 @@ public class MainManage {
                         }
                     }
                 }
+                mSparseArray = Tools.initFunction(mActivity);
+                mService.setBeen(mSparseArray);
             }
 
             @Override
@@ -118,17 +119,13 @@ public class MainManage {
     }
 
     public void setRightButton(boolean showed) {
-        mIMainView.showHeaderRightButton(showed);
+        mIMainView.initHeaderRightButton(showed);
         if (showed) {
             if (null == mMenuBeen || 0 == mMenuBeen.size()) {
                 mMenuBeen = new ArrayList<>();
-                PopupMenuBean popupMenuBean1 = new PopupMenuBean(R.mipmap.icon_class_cadre, "班干部", new Intent(mActivity, ClassCadreActivity.class));
-                PopupMenuBean popupMenuBean2 = new PopupMenuBean(R.mipmap.icon_class_duty, "值日生", new Intent(mActivity, DutyStudentActivity.class));
-                PopupMenuBean popupMenuBean3 = new PopupMenuBean(R.mipmap.icon_class_curriculum, "课表", new Intent(mActivity, CurriculumActivity.class));
-                mMenuBeen.add(popupMenuBean1);
-                mMenuBeen.add(popupMenuBean2);
-                mMenuBeen.add(popupMenuBean3);
-                mIMainView.initPopupMenu(mMenuBeen);
+                mMenuBeen.add(mSparseArray.get(16));
+                mMenuBeen.add(mSparseArray.get(17));
+                mMenuBeen.add(mSparseArray.get(18));
             }
         }
     }
@@ -136,5 +133,9 @@ public class MainManage {
     public void setClassPeopleList(String classId) {
         IClassView iClassView = (IClassView) mFragments.get(1);
         iClassView.getClassManage().getClassPeopleList(classId);
+    }
+
+    public void showTrm() {
+        mIMainView.showTrm(mMenuBeen);
     }
 }

@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 public class FunctionBean implements Serializable {
     //功能编号
-    private int mId;
+    private int mId = -1;
     //功能小图标
     private int mIcon = 0;
     //功能大图标
@@ -21,7 +21,22 @@ public class FunctionBean implements Serializable {
     private Intent mIntent;
 
     public FunctionBean() {}
-    public FunctionBean(int icon, int image, String title, Intent intent) {
+
+    public FunctionBean(int icon, int image, String title) {
+        this.mIcon = icon;
+        this.mImage = image;
+        this.mTitle = title;
+    }
+
+    public FunctionBean(int id, int icon, int image, String title) {
+        this.mId = id;
+        this.mIcon = icon;
+        this.mImage = image;
+        this.mTitle = title;
+    }
+
+    public FunctionBean(int id, int icon, int image, String title, Intent intent) {
+        this.mId = id;
         this.mIcon = icon;
         this.mImage = image;
         this.mTitle = title;

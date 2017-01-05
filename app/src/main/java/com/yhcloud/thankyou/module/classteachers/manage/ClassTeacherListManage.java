@@ -17,6 +17,7 @@ import com.yhcloud.thankyou.module.classteachers.view.IClassTeacherListView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
@@ -38,7 +39,6 @@ public class ClassTeacherListManage {
             public void onServiceConnected(ComponentName name, IBinder service) {
                 mService = ((LogicService.MyBinder)service).getService();
                 mIClassTeacherListView.initView();
-                mIClassTeacherListView.setTitle("本班老师");
                 mIClassTeacherListView.initEvent();
                 getClassTeacherList();
             }
@@ -62,6 +62,7 @@ public class ClassTeacherListManage {
                             Gson gson = new Gson();
                             ArrayList<TeacherBean> list = gson.fromJson(jsonData, new TypeToken<ArrayList<TeacherBean>>(){}.getType());
                             mIClassTeacherListView.showList(list);
+                            mIClassTeacherListView.setTitle(MessageFormat.format("本班老师({0})", list.size()));
                         }
                     }
                 } catch (JSONException e) {

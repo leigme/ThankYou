@@ -19,6 +19,7 @@ public class WebManage {
     private IWebView mIWebView;
     private Activity mActivity;
     private LogicService mService;
+    private String title, url;
 
     public WebManage(IWebView iWebView) {
         this.mIWebView = iWebView;
@@ -30,6 +31,17 @@ public class WebManage {
                 mService = ((LogicService.MyBinder)service).getService();
                 mIWebView.initView();
                 mIWebView.initEvent();
+                Intent comeIntent = mActivity.getIntent();
+                if (null != comeIntent) {
+                    title = comeIntent.getStringExtra("Title");
+                    if (null != title && !"".equals(title)) {
+                        mIWebView.setTitle(title);
+                    }
+                    url = comeIntent.getStringExtra("Url");
+                    if (null != url && !"".equals(url)) {
+                        mIWebView.showWeb(url);
+                    }
+                }
             }
 
             @Override

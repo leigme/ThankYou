@@ -19,6 +19,7 @@ import com.yhcloud.thankyou.adapter.HomeFunctionListAdapter;
 import com.yhcloud.thankyou.adapter.HomeSpreadAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
+import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.HomeManage;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.service.LogicService;
@@ -182,6 +183,17 @@ public class HomeFragment extends Fragment implements IHomeView {
                 }
             };
             hfla = new HomeFunctionListAdapter(getActivity(), list, rcb);
+            hfla.setIOnClickListener(new IOnClickListener() {
+                @Override
+                public void OnItemClickListener(View view, int position) {
+                    mManage.goFunction(position);
+                }
+
+                @Override
+                public void OnItemLongClickListener(View view, int position) {
+
+                }
+            });
             rvFunctionList.setLayoutManager(new GridLayoutManager(getActivity(), 4));
             ith = new ItemTouchHelper(new DragItemCallBack(rcb));
             ith.attachToRecyclerView(rvFunctionList);

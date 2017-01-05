@@ -6,11 +6,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Binder;
 import android.os.IBinder;
+import android.util.SparseArray;
 
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.logic.ClassLogic;
+import com.yhcloud.thankyou.module.aboutus.logic.AboutUsLogic;
 import com.yhcloud.thankyou.module.classcadre.logic.ClassCadreLogic;
 import com.yhcloud.thankyou.module.classteachers.logic.ClassTeacherListLogic;
 import com.yhcloud.thankyou.module.detailinfo.logic.DetailPeopleLogic;
@@ -24,6 +26,7 @@ import com.yhcloud.thankyou.logic.LoginLogic;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.curriculum.logic.CurriculumLogic;
 import com.yhcloud.thankyou.module.dutystudent.logic.DutyStudentLogic;
+import com.yhcloud.thankyou.module.propslist.logic.PropsListLogic;
 import com.yhcloud.thankyou.utils.Constant;
 
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ public class LogicService extends Service {
 
     private MyBinder mBinder = new MyBinder();
     private UserInfo mUserInfo;
-    private ArrayList<FunctionBean> mBeen;
+    private SparseArray<FunctionBean> mBeen;
 
     public LogicService() {
     }
@@ -68,11 +71,11 @@ public class LogicService extends Service {
         mUserInfo = userInfo;
     }
 
-    public ArrayList<FunctionBean> getBeen() {
+    public SparseArray<FunctionBean> getBeen() {
         return mBeen;
     }
 
-    public void setBeen(ArrayList<FunctionBean> been) {
+    public void setBeen(SparseArray<FunctionBean> been) {
         mBeen = been;
     }
 
@@ -185,8 +188,20 @@ public class LogicService extends Service {
     }
 
     //获取用户详情
-    public void getDetailInfo(String userId, String uId, ICallListener<String> iCallListener) {
+    public void getDetailInfo(String uId, ICallListener<String> iCallListener) {
         IDetailPeopleLogic detailPeopleLogic = new DetailPeopleLogic();
-        detailPeopleLogic.getDetailInfo(userId, uId, iCallListener);
+        detailPeopleLogic.getDetailInfo(mUserInfo.getUserInfoBean().getUserId(), uId, iCallListener);
+    }
+
+    //获取关于我们的信息
+    public void getAboutUsInfo(ICallListener<String> iCallListener) {
+        AboutUsLogic aboutUsLogic = new AboutUsLogic();
+        aboutUsLogic.getAboutUsInfo(iCallListener);
+    }
+
+    //获取道具流转列表
+    public void getPropsList(int typeId, int pageNum, ICallListener<String> iCallListener) {
+        PropsListLogic propsListLogic = new PropsListLogic();
+        propsListLogic.getPropsListData(mUserInfo.getUserInfoBean().getUserId(), typeId, pageNum, iCallListener);
     }
 }

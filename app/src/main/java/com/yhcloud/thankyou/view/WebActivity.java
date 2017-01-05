@@ -2,6 +2,7 @@ package com.yhcloud.thankyou.view;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -65,7 +66,7 @@ public class WebActivity extends AppCompatActivity implements IWebView {
 
     @Override
     public void setTitle(String title) {
-
+        tvTitle.setText(title);
     }
 
     @Override

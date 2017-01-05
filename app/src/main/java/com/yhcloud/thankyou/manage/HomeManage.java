@@ -8,6 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.util.SparseArray;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -16,8 +17,10 @@ import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.view.IHomeView;
+import com.yhcloud.thankyou.view.WebActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -47,15 +50,20 @@ public class HomeManage {
         this.mActivity = mFragment.getActivity();
         this.mService = service;
         mIHomeView.initView();
+        mIHomeView.initEvent();
         mBeen = new ArrayList<>();
         switch (mService.getUserInfo().getUserInfoBean().getUserRoleId()) {
             case 1004:
+                initTeacher();
+                showSpreadList("-1");
                 break;
             case 1010:
                 initTeacher();
+                showSpreadList("-1");
                 break;
             case 1011:
                 initStudent();
+                showSpreadList("-1");
                 break;
             case 1012:
                 initParent();
@@ -65,7 +73,6 @@ public class HomeManage {
         }
         showBanner("-1");
         showFunctionList();
-        showSpreadList("-1");
     }
 
     public void showBanner(String updateTime) {
@@ -100,92 +107,39 @@ public class HomeManage {
     }
 
     public void initTeacher() {
-        ArrayList<FunctionBean> list = Tools.initFunction(mActivity);
-        for (FunctionBean functionBean: list) {
-            switch (functionBean.getTitle()) {
-                case "学校公告":
-                    mBeen.add(functionBean);
-                    break;
-                case "班级通知":
-                    mBeen.add(functionBean);
-                    break;
-                case "教学资源":
-                    mBeen.add(functionBean);
-                    break;
-                case "工作日程":
-                    mBeen.add(functionBean);
-                    break;
-                case "我的消息":
-                    mBeen.add(functionBean);
-                    break;
-                case "课后作业":
-                    mBeen.add(functionBean);
-                    break;
-                case "鲜花榜":
-                    mBeen.add(functionBean);
-                    break;
-            }
-        }
+        SparseArray<FunctionBean> list = Tools.initFunction(mActivity);
+        mBeen.add(list.get(10));
+        mBeen.add(list.get(4));
+        mBeen.add(list.get(11));
+        mBeen.add(list.get(12));
+        mBeen.add(list.get(13));
+        mBeen.add(list.get(14));
+        mBeen.add(list.get(3));
         mBeen.add(list.get(0));
     }
 
     public void initStudent() {
-        ArrayList<FunctionBean> list = Tools.initFunction(mActivity);
-        for (FunctionBean functionBean: list) {
-            switch (functionBean.getTitle()) {
-                case "学校公告":
-                    mBeen.add(functionBean);
-                    break;
-                case "班级通知":
-                    mBeen.add(functionBean);
-                    break;
-                case "教学资源":
-                    mBeen.add(functionBean);
-                    break;
-                case "工作日程":
-                    mBeen.add(functionBean);
-                    break;
-                case "我的消息":
-                    mBeen.add(functionBean);
-                    break;
-                case "课后作业":
-                    mBeen.add(functionBean);
-                    break;
-                case "鲜花榜":
-                    mBeen.add(functionBean);
-                    break;
-            }
-        }
+        SparseArray<FunctionBean> list = Tools.initFunction(mActivity);
+        mBeen.add(list.get(10));
+        mBeen.add(list.get(4));
+        mBeen.add(list.get(11));
+        mBeen.add(list.get(12));
+        mBeen.add(list.get(14));
+        mBeen.add(list.get(3));
+        mBeen.add(list.get(18));
         mBeen.add(list.get(0));
     }
 
     public void initParent() {
-        ArrayList<FunctionBean> list = Tools.initFunction(mActivity);
-        for (FunctionBean functionBean: list) {
-            switch (functionBean.getTitle()) {
-                case "学校公告":
-                    mBeen.add(functionBean);
-                    break;
-                case "班级通知":
-                    mBeen.add(functionBean);
-                    break;
-                case "教学资源":
-                    mBeen.add(functionBean);
-                    break;
-                case "工作日程":
-                    mBeen.add(functionBean);
-                    break;
-                case "我的消息":
-                    mBeen.add(functionBean);
-                    break;
-                case "课后作业":
-                    mBeen.add(functionBean);
-                    break;
-                case "鲜花榜":
-                    mBeen.add(functionBean);
-                    break;
-            }
-        }
+        SparseArray<FunctionBean> list = Tools.initFunction(mActivity);
+        mBeen.add(list.get(10));
+        mBeen.add(list.get(4));
+        mBeen.add(list.get(11));
+        mBeen.add(list.get(12));
+        mBeen.add(list.get(15));
+        mBeen.add(list.get(14));
+        mBeen.add(list.get(3));
+        mBeen.add(list.get(18));
         mBeen.add(list.get(0));
     }
 
@@ -222,5 +176,24 @@ public class HomeManage {
 
     public void goSpreadInfo(int position) {
         Log.e(TAG, MessageFormat.format("点击了第{0}个推广链接", mSpreadBeen.get(position).getTitle()));
+        SpreadBean sb = mSpreadBeen.get(position);
+        Intent intent = new Intent(mActivity, WebActivity.class);
+        String url = MessageFormat.format("{0}/Id/{1}", Constant.GETSPREADDATA, sb.getId());
+        intent.putExtra("Title", sb.getTitle());
+        intent.putExtra("Url", url);
+        mActivity.startActivity(intent);
+    }
+
+    public void goFunction(int position) {
+        FunctionBean functionBean = mBeen.get(position);
+        if (0 == functionBean.getId()) {
+            Log.e(TAG, "去全部应用");
+        } else if (4 == functionBean.getId()) {
+
+        } else {
+            if (null != functionBean.getIntent()) {
+                mActivity.startActivity(functionBean.getIntent());
+            }
+        }
     }
 }

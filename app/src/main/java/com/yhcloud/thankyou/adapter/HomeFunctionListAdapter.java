@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.utils.myview.drag.DragHolderCallBack;
 import com.yhcloud.thankyou.utils.myview.drag.RecycleCallBack;
 
@@ -24,11 +25,14 @@ import java.util.ArrayList;
 
 public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionListAdapter.FunctionViewHolder> {
 
+    private String TAG = getClass().getSimpleName();
+
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<FunctionBean> mBeen;
     private RecycleCallBack mCallBack;
     public SparseArray<Integer> show = new SparseArray<>();
+    private IOnClickListener mIOnClickListener;
 
     public HomeFunctionListAdapter(Context context, ArrayList<FunctionBean> list, RecycleCallBack callBack) {
         this.mContext = context;
@@ -49,9 +53,18 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
     }
 
     @Override
-    public void onBindViewHolder(FunctionViewHolder holder, int position) {
+    public void onBindViewHolder(final FunctionViewHolder holder, int position) {
         holder.image.setImageResource(mBeen.get(position).getImage());
         holder.title.setText(mBeen.get(position).getTitle());
+//        if (null != mIOnClickListener) {
+//            holder.itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    int pos = holder.getLayoutPosition();
+//                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+//                }
+//            });
+//        }
     }
 
     @Override
@@ -77,6 +90,7 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
                 show.clear();
                 mCallBack.itemOnClick(getAdapterPosition(), v);
             }
+            mIOnClickListener.OnItemClickListener(v, getAdapterPosition());
         }
 
         @Override
@@ -91,5 +105,9 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
             itemView.setBackgroundColor(Color.WHITE);
             mCallBack.saveFunctionList();
         }
+    }
+
+    public void setIOnClickListener(IOnClickListener iOnClickListener) {
+        this.mIOnClickListener = iOnClickListener;
     }
 }

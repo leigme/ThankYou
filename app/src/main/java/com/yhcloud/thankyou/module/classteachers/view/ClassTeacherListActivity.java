@@ -1,6 +1,7 @@
 package com.yhcloud.thankyou.module.classteachers.view;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -106,5 +107,11 @@ public class ClassTeacherListActivity extends AppCompatActivity implements IClas
         } else {
             tla.refreshData(list);
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mManage.getClassTeacherList();
     }
 }

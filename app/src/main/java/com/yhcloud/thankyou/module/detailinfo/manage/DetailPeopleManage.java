@@ -33,7 +33,6 @@ public class DetailPeopleManage {
     private IDetailPeopleView mIDetailPeopleView;
     private Activity mActivity;
     private LogicService mService;
-    private UserInfo mUserInfo;
     private String uId;
     private int roleId;
     private boolean edited;
@@ -49,7 +48,6 @@ public class DetailPeopleManage {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 mService =((LogicService.MyBinder)service).getService();
-                mUserInfo = mService.getUserInfo();
                 mIDetailPeopleView.initView();
                 mIDetailPeopleView.initEvent();
                 getDetailData();
@@ -63,7 +61,7 @@ public class DetailPeopleManage {
     }
 
     public void getDetailData() {
-        mService.getDetailInfo(mUserInfo.getUserInfoBean().getUserId(), uId, new ICallListener<String>() {
+        mService.getDetailInfo(uId, new ICallListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -108,6 +106,12 @@ public class DetailPeopleManage {
                             }
                             mIDetailPeopleView.setReMark(detailPeopleInfoBean.getFriendRemark());
                         }
+                    } else {
+                        String msg = jsonObject.getString("errorMsg");
+                        if (null != msg && !"".equals(msg)) {
+                            mIDetailPeopleView.showToastMsg(msg);
+                        }
+                        mActivity.finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

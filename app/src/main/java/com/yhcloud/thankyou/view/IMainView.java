@@ -3,7 +3,7 @@ package com.yhcloud.thankyou.view;
 import android.support.v4.app.Fragment;
 
 import com.yhcloud.thankyou.bean.ClassInfoBean;
-import com.yhcloud.thankyou.bean.PopupMenuBean;
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mInterface.IBaseView;
 
 import java.util.ArrayList;
@@ -18,7 +18,6 @@ public interface IMainView extends IBaseView {
     void showDrawer(ArrayList<ClassInfoBean> classInfoBeen);
     void showFragment(int i);
     void setHeaderLeftImage(String url);
-    void setHeaderRightImage(int resId);
-    void showHeaderRightButton(boolean showed);
-    void initPopupMenu(ArrayList<PopupMenuBean> list);
+    void initHeaderRightButton(boolean showed);
+    void showTrm(ArrayList<FunctionBean> list);
 }

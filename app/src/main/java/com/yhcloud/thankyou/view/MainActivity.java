@@ -21,13 +21,14 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.ClassDrawerListAdapter;
 import com.yhcloud.thankyou.adapter.FragmentViewPagerAdapter;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
-import com.yhcloud.thankyou.bean.PopupMenuBean;
+import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.utils.ServiceAPI;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 import com.yhcloud.thankyou.utils.myview.NoScrollViewPager;
 import com.yhcloud.thankyou.utils.myview.PopupMenu;
+import com.yhcloud.thankyou.utils.myview.toprightmenu.TopRightMenu;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     private TextView tvHeaderTitle, tvFooterHome, tvFooterClass, tvFooterMine;
     private DrawerLayout dlDrawer;
     private PopupMenu mPopupMenu;
+    private TopRightMenu mTopRightMenu;
     private RecyclerView rvDrawerList;
     private LinearLayout llHeaderLeft, llHeaderRight, llFooterHome, llFooterClass, llFooterMine;
     private NoScrollViewPager nsvpList;
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
                         mManage.showDrawer();
                         break;
                     case R.id.ll_header_right:
-                        mPopupMenu.showLocation(R.id.ll_header_right);
+                        mManage.showTrm();
                         break;
                     case R.id.ll_footer_home:
                         showFragment(0);
@@ -234,12 +236,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     }
 
     @Override
-    public void setHeaderRightImage(int resId) {
-        Glide.with(this).load(resId).into(ivHeaderRight);
-    }
-
-    @Override
-    public void showHeaderRightButton(boolean showed) {
+    public void initHeaderRightButton(boolean showed) {
         if (showed) {
             llHeaderRight.setVisibility(View.VISIBLE);
 //            setHeaderRightImage(R.mipmap.icon_add_menu);
@@ -249,9 +246,32 @@ public class MainActivity extends AppCompatActivity implements IMainView,
         llHeaderRight.setClickable(showed);
     }
 
+//    @Override
+//    public void setHeaderRightImage(int resId) {
+//        Glide.with(this).load(resId).into(ivHeaderRight);
+//    }
+
     @Override
-    public void initPopupMenu(ArrayList<PopupMenuBean> list) {
-        mPopupMenu = new PopupMenu(this, list);
+    public void showTrm(final ArrayList<FunctionBean> list) {
+        if (null == mTopRightMenu) {
+            mTopRightMenu = new TopRightMenu(this);
+            mTopRightMenu.setHeight(450)
+                    .setWidth(320)
+                    .showIcon(true)     //显示菜单图标，默认为true
+                    .dimBackground(true)           //背景变暗，默认为true
+                    .needAnimationStyle(true)   //显示动画，默认为true
+                    .setAnimationStyle(R.style.TRM_ANIM_STYLE)  //默认为R.style.TRM_ANIM_STYLE
+                    .addMenuList(list)
+                    .setOnMenuItemClickListener(new TopRightMenu.OnMenuItemClickListener() {
+                        @Override
+                        public void onMenuItemClick(int position) {
+                            startActivity(list.get(position).getIntent());
+                        }
+                    })
+                    .showAsDropDown(llHeaderRight, -200, 0);
+        } else {
+            mTopRightMenu.showAsDropDown(llHeaderRight, -200, 0);
+        }
     }
 
     private void resetFooterBtn() {

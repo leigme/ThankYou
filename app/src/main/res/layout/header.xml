@@ -13,6 +13,7 @@
             android:layout_width="@dimen/my_btn_width"
             android:layout_height="match_parent"
             android:id="@+id/ll_header_left"
+            android:background="@drawable/item_click"
             android:gravity="center">
             <ImageView
                 android:layout_width="@dimen/my_icon_size"
@@ -30,6 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_header_title"
+                android:lines="1"
+                android:ellipsize="end"
                 android:textSize="21sp"
                 android:textColor="@color/colorWhite"/>
         </LinearLayout>
@@ -41,11 +44,21 @@
             android:background="@drawable/item_click"
             android:gravity="center"
             android:visibility="invisible">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/iv_header_right"
-                android:src="@mipmap/icon_add_menu"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/iv_header_right"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/icon_add_menu"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/tv_header_right"
+                    android:gravity="center"/>
+            </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

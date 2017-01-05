@@ -2,6 +2,7 @@
              xmlns:tools="http://schemas.android.com/tools"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
+             android:background="@color/colorWhite"
              tools:context="com.yhcloud.thankyou.view.HomeFragment">
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,6 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="5dp"
@@ -47,6 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/llflv_plv_spread"
-            android:orientation="vertical"></com.yhcloud.thankyou.utils.myview.LinearLayoutForListView>
+            android:orientation="vertical"
+            ></com.yhcloud.thankyou.utils.myview.LinearLayoutForListView>
     </LinearLayout>
 </ScrollView>

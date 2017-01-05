@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_my_props"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.yhcloud.thankyou.module.account.view.MyPropsActivity">
+    <include layout="@layout/header"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_myprops_list">
+        </android.support.v7.widget.RecyclerView>
+        <ViewStub
+            android:id="@+id/vs_default"
+            android:layout="@layout/viewstub_my_props"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
+    <ViewStub
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout="@layout/viewstub_my_props_num"
+        android:id="@+id/vs_my_props_num"/>
+</LinearLayout>

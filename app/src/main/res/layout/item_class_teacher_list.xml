@@ -57,5 +57,23 @@
                     android:textColor="#333333"/>
             </LinearLayout>
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_class_teacher_props_icon"
+                android:src="@mipmap/icon_peoplelist_props"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_class_teacher_props_num"
+                android:layout_marginLeft="5dp"
+                android:text="0"/>
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

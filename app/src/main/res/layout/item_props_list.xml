@@ -10,19 +10,29 @@
         android:layout_marginBottom="5dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
+        android:gravity="center"
         android:orientation="horizontal">
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:id="@+id/iv_propslist_headerimg"
+            android:layout_marginRight="5dp"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/icon_account_404"/>
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_weight="1"
             android:layout_height="wrap_content"
             android:id="@+id/tv_propslist_content"
-            android:lines="1"
+            android:layout_marginRight="5dp"
+            android:lines="2"
             android:ellipsize="end"
             android:text="刘伊莎 送给 小伙伴 坦克X5"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tv_propslist_time"
+            android:textSize="11sp"
             android:text="2016-09-11"/>
     </LinearLayout>
 </LinearLayout>

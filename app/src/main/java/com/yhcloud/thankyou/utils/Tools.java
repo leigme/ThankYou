@@ -13,10 +13,12 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.module.aboutus.view.AboutUsActivity;
 import com.yhcloud.thankyou.module.classcadre.view.ClassCadreActivity;
+import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationActivity;
 import com.yhcloud.thankyou.module.classteachers.view.ClassTeacherListActivity;
 import com.yhcloud.thankyou.module.curriculum.view.CurriculumActivity;
 import com.yhcloud.thankyou.module.dutystudent.view.DutyStudentActivity;
 import com.yhcloud.thankyou.module.propslist.view.PropsListActivity;
+import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementActivity;
 import com.yhcloud.thankyou.view.EaseChatActivity;
 
 import java.util.ArrayList;
@@ -60,8 +62,18 @@ public class Tools {
     public static void GlideCircleImageUrl(Context context, String path, ImageView imageView) {
         Glide.with(context)
                 .load(Constant.SERVICEADDRESS + path)
+                .placeholder(R.mipmap.default_photo)
+                .error(R.mipmap.icon_account_404)
                 .bitmapTransform(new CropCircleTransformation(context))
-                .error(R.mipmap.icon_big_404)
+                .into(imageView);
+    }
+
+    public static void GlideCircleImageUrl(Context context, String path, int defaultId, ImageView imageView) {
+        Glide.with(context)
+                .load(Constant.SERVICEADDRESS + path)
+                .placeholder(defaultId)
+                .error(defaultId)
+                .bitmapTransform(new CropCircleTransformation(context))
                 .into(imageView);
     }
 
@@ -115,8 +127,8 @@ public class Tools {
         sparseArray.append(7, new FunctionBean(7, R.mipmap.icon_my_downloads, R.mipmap.icon_function_download, "我的下载"));
         sparseArray.append(8, new FunctionBean(8, R.mipmap.icon_about_me, 0, "关于我们", new Intent(context, AboutUsActivity.class)));
         sparseArray.append(9, new FunctionBean(9, R.mipmap.icon_account_cutover, 0, "切换账户"));
-        sparseArray.append(10, new FunctionBean(10, 0, R.mipmap.icon_function_announcement, "学校公告"));
-        sparseArray.append(11, new FunctionBean(11, 0, R.mipmap.icon_function_notice, "班级通知"));
+        sparseArray.append(10, new FunctionBean(10, 0, R.mipmap.icon_function_announcement, "学校公告", new Intent(context, SchoolAnnouncementActivity.class)));
+        sparseArray.append(11, new FunctionBean(11, 0, R.mipmap.icon_function_notice, "班级通知", new Intent(context, ClassNotificationActivity.class)));
         sparseArray.append(12, new FunctionBean(12, 0, R.mipmap.icon_function_resources, "教学资源"));
         sparseArray.append(13, new FunctionBean(13, 0, R.mipmap.icon_function_schedule, "工作日程"));
         sparseArray.append(14, new FunctionBean(14, 0, R.mipmap.icon_function_homework, "课后作业"));
@@ -125,10 +137,9 @@ public class Tools {
         sparseArray.append(17, new FunctionBean(17, R.mipmap.icon_class_duty, 0, "值日生", new Intent(context, DutyStudentActivity.class)));
         sparseArray.append(18, new FunctionBean(18, R.mipmap.icon_class_curriculum, 0, "班级课表", new Intent(context, CurriculumActivity.class)));
         sparseArray.append(19, new FunctionBean(19, 0, 0, "本班老师", new Intent(context, ClassTeacherListActivity.class)));
+        sparseArray.append(20, new FunctionBean(20, R.mipmap.icon_my_props, 0, "我的道具", new Intent(context, PropsListActivity.class)));
         return sparseArray;
     }
-
-
 
     public static class FileTypeImage {
         private String mFileType;
@@ -153,6 +164,12 @@ public class Tools {
 
         public void setResourceId(int resourceId) {
             mResourceId = resourceId;
+        }
+    }
+
+    public static void print(String tag, String msg) {
+        if (Constant.printLog) {
+            Log.e(tag, msg);
         }
     }
 }

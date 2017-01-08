@@ -47,7 +47,7 @@ public class MineManage {
         SparseArray<FunctionBean> list = Tools.initFunction(mActivity);
         mBeen.add(list.get(1));
         mBeen.add(list.get(2));
-        mBeen.add(list.get(3));
+        mBeen.add(list.get(20));
         mBeen.add(list.get(4));
         mBeen.add(list.get(5));
         mBeen.add(list.get(6));

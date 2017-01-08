@@ -6,6 +6,8 @@ package com.yhcloud.thankyou.utils;
 
 public class Constant {
 
+    public static final boolean printLog = true;
+
     /**
      * 用户角色常量
      */
@@ -30,8 +32,8 @@ public class Constant {
      * 服务器API
      */
     //服务地址
-//    public static final String SERVICEADDRESS = "http://www.k12chn.com";
-        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
+    public static final String SERVICEADDRESS = "http://www.k12chn.com";
+//        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
 
     //登录请求 uid pwd
     public static final String LOGIN = SERVICEADDRESS + "/m17/M1708I/M1708I001";
@@ -41,6 +43,13 @@ public class Constant {
     public static final String GETSPREADLIST = SERVICEADDRESS + "/m01/M0108I/M0108I07";
     //获取推广详情 Id
     public static final String GETSPREADDATA = SERVICEADDRESS + "/m01/M0108P04/M0108P04001";
+
+    //学校公告 http://192.168.0.139/edu/m17/m1717I/m1717I002/schoolId/12
+    public static final String GETSHCHOOLANNOUNCEMENTLIST = SERVICEADDRESS + "/m17/m1717I/m1717I002";
+    //班级通知 http://192.168.0.139/edu/m17/M1711I/M1711I01/userId/3237/classId//pageNum/2/updateTime/-1/
+    public static final String GETCLASSNOTIFICATIONLIST = SERVICEADDRESS + "/m17/M1711I/M1711I01";
+    //更新班级通知阅读状态 http://192.168.0.139/edu/noticeId/49/userId/3237 isRead:0未读;1:已读;2:删除
+    public static final String UPDATEREADSTATE = SERVICEADDRESS + "/m17/M1711I/M1711I02";
 
     //班干部  classId
     public static final String GETCLASSCADRE = SERVICEADDRESS + "/m17/m1718I/m1718I003";

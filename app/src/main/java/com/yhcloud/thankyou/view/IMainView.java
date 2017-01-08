@@ -16,6 +16,9 @@ public interface IMainView extends IBaseView {
     void initData();
     void initFragments(ArrayList<Fragment> list);
     void showDrawer(ArrayList<ClassInfoBean> classInfoBeen);
+    void setDrawerHeadImg(String url);
+    void setDrawerUsername(String username);
+    void setDrawerClassname(String classname);
     void showFragment(int i);
     void setHeaderLeftImage(String url);
     void initHeaderRightButton(boolean showed);

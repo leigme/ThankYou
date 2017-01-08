@@ -57,12 +57,15 @@ public class MainManage {
                 mIMainView.showFragment(0);
                 mIMainView.setHeaderLeftImage(mUserInfo.getUserInfoBean().getHeadImageURL());
                 mIMainView.setTitle(mUserInfo.getUserInfoBean().getSchoolName());
+                mIMainView.setDrawerHeadImg(mUserInfo.getUserInfoBean().getHeadImageURL());
+                mIMainView.setDrawerUsername(mUserInfo.getUserInfoBean().getRealName());
                 if (null != mActivity.getIntent()) {
                     Bundle bundle = mActivity.getIntent().getExtras();
                     mClassInfoBeen = (ArrayList<ClassInfoBean>) bundle.getSerializable("ClassInfos");
                     for (ClassInfoBean classInfoBean: mClassInfoBeen) {
                         if (classInfoBean.getClassId().equals(mUserInfo.getUserInfoBean().getDefaultClassId())) {
                             classInfoBean.setSelected(true);
+                            mIMainView.setDrawerClassname(classInfoBean.getClassName());
                         }
                     }
                 }
@@ -116,6 +119,11 @@ public class MainManage {
 
     public void setDefaultClassId(String classId) {
         mUserInfo.getUserInfoBean().setDefaultClassId(classId);
+        for (ClassInfoBean classInfoBean: mClassInfoBeen) {
+            if (classInfoBean.getClassId().equals(mUserInfo.getUserInfoBean().getDefaultClassId())) {
+                mIMainView.setDrawerClassname(classInfoBean.getClassName());
+            }
+        }
     }
 
     public void setRightButton(boolean showed) {

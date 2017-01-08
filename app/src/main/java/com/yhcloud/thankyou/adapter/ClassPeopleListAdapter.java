@@ -42,7 +42,7 @@ public class ClassPeopleListAdapter extends RecyclerView.Adapter<ClassPeopleList
     @Override
     public void onBindViewHolder(final PeoPleViewHolder holder, int position) {
         UserInfoBean userInfoBean = mBeen.get(position);
-        Tools.GlideCircleImageUrl(mContext, userInfoBean.getHeadImageURL(), holder.ivHeader);
+        Tools.GlideCircleImageUrl(mContext, userInfoBean.getHeadImageURL(), R.mipmap.default_photo, holder.ivHeader);
         holder.tvName.setText(userInfoBean.getRealName());
         if (null != mIOnClickListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {

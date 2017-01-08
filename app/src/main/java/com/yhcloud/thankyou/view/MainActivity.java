@@ -25,6 +25,7 @@ import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.utils.ServiceAPI;
+import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 import com.yhcloud.thankyou.utils.myview.NoScrollViewPager;
 import com.yhcloud.thankyou.utils.myview.PopupMenu;
@@ -43,10 +44,9 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     private String TAG = getClass().getSimpleName();
 
     //视图控件
-    private ImageView ivHeaderLeft, ivHeaderRight, ivFooterHome, ivFooterClass, ivFooterMine;
-    private TextView tvHeaderTitle, tvFooterHome, tvFooterClass, tvFooterMine;
+    private ImageView ivHeaderLeft, ivDrawerHeadimg, ivFooterHome, ivFooterClass, ivFooterMine;
+    private TextView tvDraweUsername, tvDrawerClass, tvHeaderTitle, tvFooterHome, tvFooterClass, tvFooterMine;
     private DrawerLayout dlDrawer;
-    private PopupMenu mPopupMenu;
     private TopRightMenu mTopRightMenu;
     private RecyclerView rvDrawerList;
     private LinearLayout llHeaderLeft, llHeaderRight, llFooterHome, llFooterClass, llFooterMine;
@@ -72,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements IMainView,
         tvHeaderTitle = (TextView) findViewById(R.id.tv_header_title);
         llHeaderRight = (LinearLayout) findViewById(R.id.ll_header_right);
         dlDrawer = (DrawerLayout) findViewById(R.id.dl_main_drawer);
+        ivDrawerHeadimg = (ImageView) findViewById(R.id.iv_drawer_image);
+        tvDraweUsername = (TextView) findViewById(R.id.tv_drawer_username);
+        tvDrawerClass = (TextView) findViewById(R.id.tv_drawer_class);
         rvDrawerList = (RecyclerView) findViewById(R.id.rv_drawer_list);
         llFooterHome = (LinearLayout) findViewById(R.id.ll_footer_home);
         llFooterClass = (LinearLayout) findViewById(R.id.ll_footer_class);
@@ -201,6 +204,20 @@ public class MainActivity extends AppCompatActivity implements IMainView,
         dlDrawer.openDrawer(Gravity.LEFT);
     }
 
+    @Override
+    public void setDrawerHeadImg(String url) {
+        Tools.GlideCircleImageUrl(this, url, ivDrawerHeadimg);
+    }
+
+    @Override
+    public void setDrawerUsername(String username) {
+        tvDraweUsername.setText(username);
+    }
+
+    @Override
+    public void setDrawerClassname(String classname) {
+        tvDrawerClass.setText(classname);
+    }
 
 
     @Override
@@ -229,10 +246,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
 
     @Override
     public void setHeaderLeftImage(String url) {
-        Glide.with(this)
-                .load(ServiceAPI.SERVICEADDRESS + url)
-                .bitmapTransform(new CropCircleTransformation(this))
-                .into(ivHeaderLeft);
+        Tools.GlideCircleImageUrl(this, url, R.mipmap.default_photo, ivHeaderLeft);
     }
 
     @Override

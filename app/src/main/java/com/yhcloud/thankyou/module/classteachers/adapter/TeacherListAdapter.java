@@ -42,6 +42,7 @@ public class TeacherListAdapter extends RecyclerView.Adapter<TeacherListAdapter.
         Tools.GlideCircleImageUrl(mContext, mBeen.get(position).getHeadImageURL(), holder.ivHeader);
         holder.tvName.setText(mBeen.get(position).getRealName());
         holder.tvOffice.setText(mBeen.get(position).getRoles());
+        holder.tvPropsNum.setText(mBeen.get(position).getPropsNum());
     }
 
     @Override
@@ -56,12 +57,13 @@ public class TeacherListAdapter extends RecyclerView.Adapter<TeacherListAdapter.
 
     public static class TeacherViewHolder extends RecyclerView.ViewHolder {
         ImageView ivHeader;
-        TextView tvName, tvOffice;
+        TextView tvName, tvOffice, tvPropsNum;
         public TeacherViewHolder(View itemView) {
             super(itemView);
             ivHeader = (ImageView) itemView.findViewById(R.id.iv_class_teacher_header_image);
             tvName = (TextView) itemView.findViewById(R.id.tv_class_teacher_name);
             tvOffice = (TextView) itemView.findViewById(R.id.tv_class_teacher_office);
+            tvPropsNum = (TextView) itemView.findViewById(R.id.tv_class_teacher_props_num);
         }
     }
 }

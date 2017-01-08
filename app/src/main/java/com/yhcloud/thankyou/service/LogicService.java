@@ -14,6 +14,7 @@ import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.logic.ClassLogic;
 import com.yhcloud.thankyou.module.aboutus.logic.AboutUsLogic;
 import com.yhcloud.thankyou.module.classcadre.logic.ClassCadreLogic;
+import com.yhcloud.thankyou.module.classnotification.logic.ClassNotificationLogic;
 import com.yhcloud.thankyou.module.classteachers.logic.ClassTeacherListLogic;
 import com.yhcloud.thankyou.module.detailinfo.logic.DetailPeopleLogic;
 import com.yhcloud.thankyou.logic.HomeLogic;
@@ -27,6 +28,7 @@ import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.curriculum.logic.CurriculumLogic;
 import com.yhcloud.thankyou.module.dutystudent.logic.DutyStudentLogic;
 import com.yhcloud.thankyou.module.propslist.logic.PropsListLogic;
+import com.yhcloud.thankyou.module.schoolannouncement.logic.SchoolAnnouncementLogic;
 import com.yhcloud.thankyou.utils.Constant;
 
 import java.util.ArrayList;
@@ -155,6 +157,26 @@ public class LogicService extends Service {
         IHomeLogic homeLogic = new HomeLogic();
         homeLogic.getSpreadList("2", flag, updateTime, iCallListener);
     }
+
+    //获取学校公告
+    public void getSchoolAnnouncementData(int pageNum, ICallListener<String> iCallListener) {
+        SchoolAnnouncementLogic schoolAnnouncementLogic = new SchoolAnnouncementLogic();
+        schoolAnnouncementLogic.getSchoolAnnouncementData(mUserInfo.getUserInfoBean().getSchoolId(), pageNum, iCallListener);
+    }
+
+    //获取班级通知
+    public void getClassNotificationData(int pageNum, ICallListener<String> iCallListener) {
+        ClassNotificationLogic classNotificationLogic = new ClassNotificationLogic();
+        classNotificationLogic.getClassNotificationData(mUserInfo.getUserInfoBean().getUserId(),
+                mUserInfo.getUserInfoBean().getDefaultClassId(), pageNum, "-1", iCallListener);
+    }
+
+    //更新班级通知阅读状态
+    public void updateClassNotificationReadState(String noticeId, ICallListener<String> iCallListener) {
+        ClassNotificationLogic classNotificationLogic = new ClassNotificationLogic();
+        classNotificationLogic.updateReadState(noticeId, mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+    }
+
 
 
     //获取班干部

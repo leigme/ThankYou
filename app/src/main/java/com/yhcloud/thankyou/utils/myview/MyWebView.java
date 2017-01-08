@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
@@ -62,10 +63,15 @@ public class MyWebView extends WebView {
     }
 
     public class WebViewClient extends android.webkit.WebViewClient {
-        @Override
+/*        @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
             view.loadUrl(url);
             return true;
+        }*/
+
+        @Override
+        public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+            return super.shouldOverrideUrlLoading(view, request);
         }
 
         @Override
@@ -77,7 +83,9 @@ public class MyWebView extends WebView {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            mProgressDialog.dismiss();
+            if (null != mProgressDialog) {
+                mProgressDialog.dismiss();
+            }
         }
     }
 

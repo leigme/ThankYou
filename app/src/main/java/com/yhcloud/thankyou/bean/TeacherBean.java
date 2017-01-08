@@ -10,6 +10,7 @@ public class TeacherBean {
     private String UserId;
     private String RealName;
     private String Roles;
+    private String PropsNum;
 
     public String getHeadImageURL() {
         return HeadImageURL;
@@ -41,5 +42,13 @@ public class TeacherBean {
 
     public void setRoles(String roles) {
         Roles = roles;
+    }
+
+    public String getPropsNum() {
+        return PropsNum;
+    }
+
+    public void setPropsNum(String propsNum) {
+        PropsNum = propsNum;
     }
 }

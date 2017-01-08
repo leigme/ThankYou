@@ -134,6 +134,14 @@
         </activity>
         <activity android:name=".module.propslist.view.PropsListActivity">
         </activity>
+        <activity android:name=".module.classnotification.view.ClassNotificationActivity">
+        </activity>
+        <activity android:name=".module.classnotification.view.ClassNotificationDetailActivity">
+        </activity>
+        <activity android:name=".module.schoolannouncement.view.SchoolAnnouncementActivity">
+        </activity>
+        <activity android:name=".module.schoolannouncement.view.SchoolAnnouncementDetailActivity">
+        </activity>
     </application>
 
 </manifest>

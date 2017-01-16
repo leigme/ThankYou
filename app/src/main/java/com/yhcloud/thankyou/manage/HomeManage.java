@@ -1,20 +1,15 @@
 package com.yhcloud.thankyou.manage;
 
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.util.SparseArray;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
@@ -28,7 +23,6 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by leig on 2016/11/20.
@@ -41,8 +35,11 @@ public class HomeManage {
     private Activity mActivity;
     private Fragment mFragment;
     private LogicService mService;
+    private ArrayList<SpreadBean> mBannerList, mSpreadBeen;
+    private SparseArray<FunctionBean> mSparseArray;
     private ArrayList<FunctionBean> mBeen;
-    private ArrayList<SpreadBean> mSpreadBeen;
+    private boolean refrshBanner;
+    private int refreshBannerNum, refreshSpreadNum;
 
     public HomeManage(IHomeView homeView, LogicService service) {
         this.mIHomeView = homeView;
@@ -51,22 +48,28 @@ public class HomeManage {
         this.mService = service;
         mIHomeView.initView();
         mIHomeView.initEvent();
+        mSparseArray = mService.getBeanSparseArray();
+        ArrayList<FunctionBean> list = mService.getBeen();
         mBeen = new ArrayList<>();
+        for (int i = 0; i < 6; i++) {
+            if (null != list.get(i)) {
+                mBeen.add(list.get(i));
+            }
+        }
+        mBeen.add(mSparseArray.get(0));
+
         switch (mService.getUserInfo().getUserInfoBean().getUserRoleId()) {
             case 1004:
-                initTeacher();
                 showSpreadList("-1");
                 break;
             case 1010:
-                initTeacher();
                 showSpreadList("-1");
                 break;
             case 1011:
-                initStudent();
                 showSpreadList("-1");
                 break;
             case 1012:
-                initParent();
+                showSpreadList("-1");
                 break;
             default:
                 break;
@@ -81,66 +84,44 @@ public class HomeManage {
             public void callSuccess(String s) {
                 try {
                     JSONObject jsonObject = new JSONObject(s);
+                    String msg = jsonObject.getString("errorMsg");
                     if (!jsonObject.getBoolean("errorFlag")) {
                         String jsonList = jsonObject.getString("dataList");
                         if (null != jsonList && !"".equals(jsonList)) {
                             Gson gson = new Gson();
                             Type jsonType =new TypeToken<ArrayList<SpreadBean>>(){}.getType();
-                            ArrayList<SpreadBean> been = gson.fromJson(jsonList, jsonType);
+                            mBannerList = gson.fromJson(jsonList, jsonType);
                             ArrayList<String> arrayList = new ArrayList<>();
-                            for (SpreadBean sb: been) {
+                            for (SpreadBean sb: mBannerList) {
                                 arrayList.add(sb.getSummaryPicLink());
                             }
                             mIHomeView.showBanner(arrayList);
+                            refrshBanner = false;
                         }
+                    } else {
+                        if (null != msg && !"".equals(msg)) {
+                            mIHomeView.showToastMsg(msg);
+                        } else {
+                            mIHomeView.showToastMsg(R.string.error_connection);
+                        }
+                        refrshBanner = true;
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    refrshBanner = true;
                 }
             }
 
             @Override
             public void callFailed() {
-
+                mIHomeView.showToastMsg(R.string.error_connection);
+                refrshBanner = true;
+                if (3 > refreshBannerNum) {
+                    showBanner("-1");
+                    refreshBannerNum += 1;
+                }
             }
         });
-    }
-
-    public void initTeacher() {
-        SparseArray<FunctionBean> list = Tools.initFunction(mActivity);
-        mBeen.add(list.get(10));
-        mBeen.add(list.get(4));
-        mBeen.add(list.get(11));
-        mBeen.add(list.get(12));
-        mBeen.add(list.get(13));
-        mBeen.add(list.get(14));
-        mBeen.add(list.get(3));
-        mBeen.add(list.get(0));
-    }
-
-    public void initStudent() {
-        SparseArray<FunctionBean> list = Tools.initFunction(mActivity);
-        mBeen.add(list.get(10));
-        mBeen.add(list.get(4));
-        mBeen.add(list.get(11));
-        mBeen.add(list.get(12));
-        mBeen.add(list.get(14));
-        mBeen.add(list.get(3));
-        mBeen.add(list.get(18));
-        mBeen.add(list.get(0));
-    }
-
-    public void initParent() {
-        SparseArray<FunctionBean> list = Tools.initFunction(mActivity);
-        mBeen.add(list.get(10));
-        mBeen.add(list.get(4));
-        mBeen.add(list.get(11));
-        mBeen.add(list.get(12));
-        mBeen.add(list.get(15));
-        mBeen.add(list.get(14));
-        mBeen.add(list.get(3));
-        mBeen.add(list.get(18));
-        mBeen.add(list.get(0));
     }
 
     public void showFunctionList() {
@@ -161,6 +142,13 @@ public class HomeManage {
                             mSpreadBeen = gson.fromJson(jsonList, jsonType);
                             mIHomeView.showSpread(mSpreadBeen);
                         }
+                    } else {
+                        String msg = jsonObject.getString("errorMsg");
+                        if (null != msg && !"".equals(msg)) {
+                            mIHomeView.showToastMsg(msg);
+                        } else {
+                            mIHomeView.showToastMsg(R.string.error_connection);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -169,13 +157,31 @@ public class HomeManage {
 
             @Override
             public void callFailed() {
-
+                mIHomeView.showToastMsg(R.string.error_connection);
+                if (3 > refreshSpreadNum) {
+                    showSpreadList("-1");
+                    refreshSpreadNum += 1;
+                }
             }
         });
     }
 
+    public void goBannerInfo(int position) {
+        if (refrshBanner) {
+            showBanner("-1");
+        } else {
+            SpreadBean spreadBean = mBannerList.get(position - 1);
+            Tools.print(TAG, "点击的是:第" + position + "个图片，标题是:" + spreadBean.getTitle());
+            Intent intent = new Intent(mActivity, WebActivity.class);
+            String url = MessageFormat.format("{0}/Id/{1}", Constant.GETSPREADDATA, spreadBean.getId());
+            intent.putExtra("Title", spreadBean.getTitle());
+            intent.putExtra("Url", url);
+            mActivity.startActivity(intent);
+        }
+    }
+
     public void goSpreadInfo(int position) {
-        Log.e(TAG, MessageFormat.format("点击了第{0}个推广链接", mSpreadBeen.get(position).getTitle()));
+        Tools.print(TAG, MessageFormat.format("点击了第{0}个推广链接", mSpreadBeen.get(position).getTitle()));
         SpreadBean sb = mSpreadBeen.get(position);
         Intent intent = new Intent(mActivity, WebActivity.class);
         String url = MessageFormat.format("{0}/Id/{1}", Constant.GETSPREADDATA, sb.getId());
@@ -186,12 +192,10 @@ public class HomeManage {
 
     public void goFunction(int position) {
         FunctionBean functionBean = mBeen.get(position);
-        if (0 == functionBean.getId()) {
-            Log.e(TAG, "去全部应用");
-        } else if (4 == functionBean.getId()) {
-
-        } else {
-            if (null != functionBean.getIntent()) {
+        if (null != functionBean.getIntent()) {
+            if (0 == functionBean.getId()) {
+                mActivity.startActivityForResult(functionBean.getIntent(), Constant.ALLFUNCATION_REQUEST);
+            } else {
                 mActivity.startActivity(functionBean.getIntent());
             }
         }

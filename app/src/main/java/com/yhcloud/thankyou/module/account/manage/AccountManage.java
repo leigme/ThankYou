@@ -7,19 +7,12 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-
 import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.module.account.bean.AccountFunctionBean;
 import com.yhcloud.thankyou.module.account.view.IAccountView;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.utils.ServiceAPI;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +27,7 @@ public class AccountManage {
     private LogicService mService;
 
     private List<String> imageUrls;
-    private ArrayList<FunctionBean> mBeen;
+    private ArrayList<AccountFunctionBean> mBeen;
 
     public AccountManage(IAccountView accountView) {
         this.mIAccountView = accountView;
@@ -90,17 +83,17 @@ public class AccountManage {
     }
 
     public void showFunction() {
-//        mBeen = new ArrayList<>();
-//        AccountFunctionBean bean1 = new AccountFunctionBean(0, "优点充值", R.mipmap.bg_recharge, new Intent(mActivity, RechargeActivity.class));
-//        AccountFunctionBean bean2 = new AccountFunctionBean(1, "积分兑换", R.mipmap.bg_integral, new Intent(mActivity, IntegralActivity.class));
-//        AccountFunctionBean bean3 = new AccountFunctionBean(2, "道具兑换", R.mipmap.bg_props, new Intent(mActivity, PropsActivity.class));
-//        AccountFunctionBean bean4 = new AccountFunctionBean(2, "我的道具", R.mipmap.icon_myprops, new Intent(mActivity, MyPropsActivity.class));
-//        AccountFunctionBean bean5 = new AccountFunctionBean(4, "账户往来", R.mipmap.bg_recording, new Intent(mActivity, RecordingActivity.class));
-//        mBeen.add(bean1);
-//        mBeen.add(bean2);
-//        mBeen.add(bean3);
-//        mBeen.add(bean4);
-//        mBeen.add(bean5);
-//        mIAccountView.showFunction(mBeen);
+        mBeen = new ArrayList<>();
+        AccountFunctionBean bean1 = new AccountFunctionBean("优点充值", R.mipmap.bg_recharge);
+        AccountFunctionBean bean2 = new AccountFunctionBean("积分兑换", R.mipmap.bg_integral);
+        AccountFunctionBean bean3 = new AccountFunctionBean("道具兑换", R.mipmap.bg_props);
+        AccountFunctionBean bean4 = new AccountFunctionBean("我的道具", R.mipmap.icon_myprops);
+        AccountFunctionBean bean5 = new AccountFunctionBean("账户往来", R.mipmap.bg_integral);
+        mBeen.add(bean1);
+        mBeen.add(bean2);
+        mBeen.add(bean3);
+        mBeen.add(bean4);
+        mBeen.add(bean5);
+        mIAccountView.showFunction(mBeen);
     }
 }

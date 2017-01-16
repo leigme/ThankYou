@@ -11,11 +11,19 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
         }
     }
 }
@@ -54,6 +62,11 @@ dependencies {
     //Glide辅助库
     compile 'jp.wasabeef:glide-transformations:2.0.1'
     //轮播图
-    compile 'com.youth.banner:banner:1.4.2'
+    compile 'com.youth.banner:banner:1.4.8'
     testCompile 'junit:junit:4.12'
+    compile 'com.android.support:design:24.2.1'
+    //    //右上角菜单
+    //    compile 'com.zaaach:toprightmenu:1.0'
+    //支付宝SDK
+    compile files('src/main/jniLibs/alipaySdk-20161009.jar')
 }

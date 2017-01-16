@@ -3,23 +3,16 @@ package com.yhcloud.thankyou.module.account.manage;
 import android.app.Activity;
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.IBinder;
-
-import com.yhcloud.thankyou.R;
 
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.view.IPropsInfoView;
 import com.yhcloud.thankyou.module.account.view.IntegralActivity;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.utils.ServiceAPI;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.yhcloud.thankyou.utils.Constant;
 
 /**
  * Created by Administrator on 2016/12/5.
@@ -51,7 +44,7 @@ public class AccountPropsInfoManage {
                 mIPropsInfoView.setTitle("道具详情");
                 Intent propsInfoIntent = mActivity.getIntent();
                 mAccountPropBean = (AccountPropBean) propsInfoIntent.getSerializableExtra("AccountPropBean");
-                mAccountPropBean.setPropImg(ServiceAPI.SERVICEADDRESS + mAccountPropBean.getPropImg());
+                mAccountPropBean.setPropImg(Constant.SERVICEADDRESS + mAccountPropBean.getPropImg());
                 coin = propsInfoIntent.getIntExtra("coin", 0);
                 sumCoin = Integer.parseInt(mAccountPropBean.getPropPrice());
 //                mIPropsInfoView.initData(mAccountPropBean);

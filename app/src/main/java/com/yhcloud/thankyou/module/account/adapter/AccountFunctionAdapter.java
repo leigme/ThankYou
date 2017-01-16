@@ -23,10 +23,10 @@ public class AccountFunctionAdapter extends RecyclerView.Adapter<AccountFunction
 
     private Context mContext;
     private LayoutInflater mInflater;
-    private ArrayList<FunctionBean> mBeen;
+    private ArrayList<AccountFunctionBean> mBeen;
     private IOnClickListener mIOnClickListener;
 
-    public AccountFunctionAdapter(Context context, ArrayList<FunctionBean> list) {
+    public AccountFunctionAdapter(Context context, ArrayList<AccountFunctionBean> list) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
         this.mBeen = list;
@@ -41,7 +41,7 @@ public class AccountFunctionAdapter extends RecyclerView.Adapter<AccountFunction
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        holder.mLinearLayout.setBackgroundResource(mBeen.get(position).getImage());
+        holder.mLinearLayout.setBackgroundResource(mBeen.get(position).getBgResId());
         holder.mTextView.setText(mBeen.get(position).getTitle());
         if (null != mIOnClickListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -73,7 +73,7 @@ public class AccountFunctionAdapter extends RecyclerView.Adapter<AccountFunction
         this.mIOnClickListener = onClickListener;
     }
 
-    public void refreshData(ArrayList<FunctionBean> list) {
+    public void refreshData(ArrayList<AccountFunctionBean> list) {
         this.mBeen = list;
         this.notifyDataSetChanged();
     }

@@ -8,30 +8,36 @@ import android.os.Binder;
 import android.os.IBinder;
 import android.util.SparseArray;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.logic.ClassLogic;
-import com.yhcloud.thankyou.module.aboutus.logic.AboutUsLogic;
-import com.yhcloud.thankyou.module.classcadre.logic.ClassCadreLogic;
-import com.yhcloud.thankyou.module.classnotification.logic.ClassNotificationLogic;
-import com.yhcloud.thankyou.module.classteachers.logic.ClassTeacherListLogic;
-import com.yhcloud.thankyou.module.detailinfo.logic.DetailPeopleLogic;
 import com.yhcloud.thankyou.logic.HomeLogic;
 import com.yhcloud.thankyou.logic.IClassLogic;
-import com.yhcloud.thankyou.module.classteachers.logic.IClassTeacherListLogic;
-import com.yhcloud.thankyou.module.detailinfo.logic.IDetailPeopleLogic;
 import com.yhcloud.thankyou.logic.IHomeLogic;
 import com.yhcloud.thankyou.logic.ILoginLogic;
 import com.yhcloud.thankyou.logic.LoginLogic;
 import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.module.aboutus.logic.AboutUsLogic;
+import com.yhcloud.thankyou.module.classcadre.logic.ClassCadreLogic;
+import com.yhcloud.thankyou.module.classnotification.logic.ClassNotificationLogic;
+import com.yhcloud.thankyou.module.classteachers.logic.ClassTeacherListLogic;
+import com.yhcloud.thankyou.module.classteachers.logic.IClassTeacherListLogic;
 import com.yhcloud.thankyou.module.curriculum.logic.CurriculumLogic;
+import com.yhcloud.thankyou.module.detailinfo.logic.DetailPeopleLogic;
+import com.yhcloud.thankyou.module.detailinfo.logic.IDetailPeopleLogic;
 import com.yhcloud.thankyou.module.dutystudent.logic.DutyStudentLogic;
+import com.yhcloud.thankyou.module.homework.logic.HomeworkLogic;
 import com.yhcloud.thankyou.module.propslist.logic.PropsListLogic;
 import com.yhcloud.thankyou.module.schoolannouncement.logic.SchoolAnnouncementLogic;
 import com.yhcloud.thankyou.utils.Constant;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class LogicService extends Service {
 
@@ -39,13 +45,16 @@ public class LogicService extends Service {
 
     private MyBinder mBinder = new MyBinder();
     private UserInfo mUserInfo;
-    private SparseArray<FunctionBean> mBeen;
+    private SparseArray<FunctionBean> mBeanSparseArray;
+    private ArrayList<FunctionBean> mBeen;
+    private SharedPreferences mPreferences;
 
     public LogicService() {
     }
 
     @Override
     public IBinder onBind(Intent intent) {
+        mPreferences = this.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);
         return mBinder;
     }
 
@@ -73,12 +82,28 @@ public class LogicService extends Service {
         mUserInfo = userInfo;
     }
 
-    public SparseArray<FunctionBean> getBeen() {
+    public SparseArray<FunctionBean> getBeanSparseArray() {
+        return mBeanSparseArray;
+    }
+
+    public void setBeanSparseArray(SparseArray<FunctionBean> beanSparseArray) {
+        mBeanSparseArray = beanSparseArray;
+    }
+
+    public ArrayList<FunctionBean> getBeen() {
         return mBeen;
     }
 
-    public void setBeen(SparseArray<FunctionBean> been) {
+    public void setBeen(ArrayList<FunctionBean> been) {
         mBeen = been;
+    }
+
+    public SharedPreferences getPreferences() {
+        return mPreferences;
+    }
+
+    public void setPreferences(SharedPreferences preferences) {
+        mPreferences = preferences;
     }
 
     //登录
@@ -89,7 +114,6 @@ public class LogicService extends Service {
 
     //存储用户登录信息
     public void saveUserInfo(UserInfo userInfo) {
-        SharedPreferences mPreferences = this.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(Constant.USER_NAME, userInfo.getUsername());
         editor.putString(Constant.USER_PWD, userInfo.getPassword());
@@ -102,7 +126,6 @@ public class LogicService extends Service {
 
     //退出登录
     public void loginOut() {
-        SharedPreferences mPreferences = this.getSharedPreferences(Constant.USER_INFO, MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putBoolean(Constant.USER_LOGINED, false);
         editor.commit();
@@ -110,10 +133,71 @@ public class LogicService extends Service {
 
     //清除用户登录信息
     public void cleanUserInfo() {
-        SharedPreferences mPreferences = this.getSharedPreferences(Constant.USER_INFO, MODE_PRIVATE);
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.clear();
         editor.commit();
+    }
+
+    public void getUserAllFuncation() {
+        String allFuncations = mPreferences.getString(mUserInfo.getUserInfoBean().getUserId(), "");
+        if (null != allFuncations && !"".equals(allFuncations)) {
+            try {
+                JSONObject jsonObject = new JSONObject(allFuncations);
+                String jsonResult = jsonObject.getString("allFuncations");
+                if (null != jsonResult && !"".equals(jsonResult)) {
+                    Gson gson = new Gson();
+                    ArrayList<FunctionBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<FunctionBean>>(){}.getType());
+                    mBeen = list;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            mBeen = new ArrayList<>();
+            switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
+                //初始化校长角色应用
+                case 1004:
+                    mBeen.add(mBeanSparseArray.get(10));
+                    mBeen.add(mBeanSparseArray.get(4));
+                    mBeen.add(mBeanSparseArray.get(11));
+                    mBeen.add(mBeanSparseArray.get(12));
+                    mBeen.add(mBeanSparseArray.get(13));
+                    mBeen.add(mBeanSparseArray.get(14));
+                    mBeen.add(mBeanSparseArray.get(3));
+                    break;
+                //初始化老师角色应用
+                case 1010:
+                    mBeen.add(mBeanSparseArray.get(10));
+                    mBeen.add(mBeanSparseArray.get(4));
+                    mBeen.add(mBeanSparseArray.get(11));
+                    mBeen.add(mBeanSparseArray.get(12));
+                    mBeen.add(mBeanSparseArray.get(13));
+                    mBeen.add(mBeanSparseArray.get(14));
+                    mBeen.add(mBeanSparseArray.get(3));
+                    break;
+                //初始化学生角色应用
+                case 1011:
+                    mBeen.add(mBeanSparseArray.get(10));
+                    mBeen.add(mBeanSparseArray.get(4));
+                    mBeen.add(mBeanSparseArray.get(11));
+                    mBeen.add(mBeanSparseArray.get(12));
+                    mBeen.add(mBeanSparseArray.get(14));
+                    mBeen.add(mBeanSparseArray.get(3));
+                    mBeen.add(mBeanSparseArray.get(18));
+                    break;
+                //初始化家长角色应用
+                case 1012:
+                    mBeen.add(mBeanSparseArray.get(10));
+                    mBeen.add(mBeanSparseArray.get(4));
+                    mBeen.add(mBeanSparseArray.get(11));
+                    mBeen.add(mBeanSparseArray.get(12));
+                    mBeen.add(mBeanSparseArray.get(15));
+                    mBeen.add(mBeanSparseArray.get(14));
+                    mBeen.add(mBeanSparseArray.get(3));
+                    mBeen.add(mBeanSparseArray.get(18));
+                    break;
+            }
+        }
     }
 
     //获取轮播图
@@ -176,6 +260,33 @@ public class LogicService extends Service {
         ClassNotificationLogic classNotificationLogic = new ClassNotificationLogic();
         classNotificationLogic.updateReadState(noticeId, mUserInfo.getUserInfoBean().getUserId(), iCallListener);
     }
+
+    //获取老师端作业列表
+    public void getTeacherHomeworkList(ICallListener<String> iCallListener) {
+        HomeworkLogic homeworkLogic = new HomeworkLogic();
+        homeworkLogic.getTeacherHomeworkData(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+    }
+
+    //获取学生作业列表
+    public void getStudentHomeworkList(ICallListener<String> iCallListener) {
+        HomeworkLogic homeworkLogic = new HomeworkLogic();
+        homeworkLogic.getStudentHomeworkData(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+    }
+
+    //获取学生作业详情
+    public void getStudentHomeworkInfo(String workBookId, ICallListener<String> iCallListener) {
+        HomeworkLogic homeworkLogic = new HomeworkLogic();
+        homeworkLogic.getStudentHomeworkInfo(mUserInfo.getUserInfoBean().getUserId(), workBookId, iCallListener);
+    }
+
+    //发送学生主观作业
+    public void sendStudentSubjectiveHomework(String workId, String questionId, String content,
+                                              String score, String startTime, String endTime,
+                                              List<String> images, final ICallListener<String> iCallListener) {
+        HomeworkLogic homeworkLogic = new HomeworkLogic();
+        homeworkLogic.sendImagesToService(mUserInfo.getUserInfoBean().getUserId(), workId, questionId, content, score, startTime, endTime, images, iCallListener);
+    }
+
 
 
 

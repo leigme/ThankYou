@@ -1,10 +1,7 @@
 package com.yhcloud.thankyou.module.curriculum.logic;
 
-import android.util.Log;
-
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.utils.Constant;
-import com.yhcloud.thankyou.utils.ServiceAPI;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;

@@ -68,6 +68,7 @@ public class TRMenuAdapter extends RecyclerView.Adapter<TRMenuAdapter.TRMViewHol
         }else {
             holder.container.setBackgroundResource(R.drawable.trm_popup_middle_pressed);
         }
+//        holder.container.setAlpha(0.75f);
 
         final int pos = holder.getAdapterPosition();
         holder.container.setOnClickListener(new View.OnClickListener() {

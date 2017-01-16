@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
-import com.yhcloud.thankyou.utils.ServiceAPI;
+import com.yhcloud.thankyou.utils.Constant;
 
 import java.util.ArrayList;
 
@@ -47,7 +47,7 @@ public class AccountMyPropsAdapter extends RecyclerView.Adapter<AccountMyPropsAd
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         Glide.with(mContext)
-                .load(ServiceAPI.SERVICEADDRESS + mBeen.get(position).getPropImg())
+                .load(Constant.SERVICEADDRESS + mBeen.get(position).getPropImg())
                 .placeholder(R.mipmap.icon_myprops)
                 .error(R.mipmap.icon_myprops)
                 .into(holder.propsImage);

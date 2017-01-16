@@ -1,6 +1,7 @@
 package com.yhcloud.thankyou.view;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.ClassDrawerListAdapter;
 import com.yhcloud.thankyou.adapter.FragmentViewPagerAdapter;
@@ -24,16 +24,14 @@ import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MainManage;
-import com.yhcloud.thankyou.utils.ServiceAPI;
+import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 import com.yhcloud.thankyou.utils.myview.NoScrollViewPager;
-import com.yhcloud.thankyou.utils.myview.PopupMenu;
 import com.yhcloud.thankyou.utils.myview.toprightmenu.TopRightMenu;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
-
-import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static com.yhcloud.thankyou.R.id.iv_header_left;
 
@@ -253,24 +251,17 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     public void initHeaderRightButton(boolean showed) {
         if (showed) {
             llHeaderRight.setVisibility(View.VISIBLE);
-//            setHeaderRightImage(R.mipmap.icon_add_menu);
         } else {
             llHeaderRight.setVisibility(View.INVISIBLE);
         }
         llHeaderRight.setClickable(showed);
     }
 
-//    @Override
-//    public void setHeaderRightImage(int resId) {
-//        Glide.with(this).load(resId).into(ivHeaderRight);
-//    }
-
     @Override
     public void showTrm(final ArrayList<FunctionBean> list) {
         if (null == mTopRightMenu) {
             mTopRightMenu = new TopRightMenu(this);
-            mTopRightMenu.setHeight(450)
-                    .setWidth(320)
+            mTopRightMenu
                     .showIcon(true)     //显示菜单图标，默认为true
                     .dimBackground(true)           //背景变暗，默认为true
                     .needAnimationStyle(true)   //显示动画，默认为true
@@ -282,9 +273,9 @@ public class MainActivity extends AppCompatActivity implements IMainView,
                             startActivity(list.get(position).getIntent());
                         }
                     })
-                    .showAsDropDown(llHeaderRight, -200, 0);
+                    .showAsDropDown(llHeaderRight);
         } else {
-            mTopRightMenu.showAsDropDown(llHeaderRight, -200, 0);
+            mTopRightMenu.showAsDropDown(llHeaderRight);
         }
     }
 
@@ -300,6 +291,18 @@ public class MainActivity extends AppCompatActivity implements IMainView,
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Tools.print(TAG, MessageFormat.format("requestCode:{0}, resultCode:{1}", requestCode, resultCode));
+        if (RESULT_OK == resultCode && Constant.ALLFUNCATION_REQUEST == requestCode && null != data) {
+            Tools.print(TAG, "返回调用开始...");
+            Intent intent = data;
+            ArrayList<Integer> list = intent.getIntegerArrayListExtra("homeFuncations");
+            mManage.refreshFuncations(list);
+        }
     }
 
     Long firstClickTime = (long) 0;

@@ -28,10 +28,7 @@ public class PropsListActivity extends AppCompatActivity implements IPropsListVi
     private TextView tvTitle;
     private TabLayout tlTitle;
     private ViewPager vpListPage;
-    private RecyclerView rvReceiveProps, rvSendProps;
     private ProgressDialog mProgressDialog;
-    //适配器
-    private PropsListAdapter plaReceive, plaSend;
     //管理器
     private PropsListManage mManage;
 
@@ -123,15 +120,5 @@ public class PropsListActivity extends AppCompatActivity implements IPropsListVi
 
             }
         });
-    }
-
-    @Override
-    public void showViewPage() {
-        LayoutInflater mInflater = LayoutInflater.from(this);
-        View view1 = mInflater.inflate(R.layout.fragment_propslist_list, null);
-        View view2 = mInflater.inflate(R.layout.fragment_propslist_list, null);
-        rvReceiveProps = (RecyclerView) view2.findViewById(R.id.rv_propslist_list);
-        rvSendProps = (RecyclerView) view1.findViewById(R.id.rv_propslist_list);
-
     }
 }

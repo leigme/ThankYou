@@ -3,10 +3,8 @@ package com.yhcloud.thankyou.module.account.manage;
 import android.app.Activity;
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
@@ -15,12 +13,9 @@ import android.util.Log;
 
 
 import com.alipay.sdk.app.PayTask;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.bean.UserInfoBean;
 
 import com.yhcloud.thankyou.module.account.alipay.AuthResult;
 import com.yhcloud.thankyou.module.account.alipay.PayResult;
@@ -28,10 +23,6 @@ import com.yhcloud.thankyou.module.account.bean.AccountRechargeBean;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargePayBean;
 import com.yhcloud.thankyou.module.account.view.IRechargeView;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.utils.ServiceAPI;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Map;

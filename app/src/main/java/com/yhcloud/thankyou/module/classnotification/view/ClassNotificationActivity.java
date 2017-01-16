@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,11 +17,14 @@ import com.yhcloud.thankyou.module.classnotification.adapter.ClassNotificationLi
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 import com.yhcloud.thankyou.module.classnotification.manage.ClassNotificationManage;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
+import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
 public class ClassNotificationActivity extends AppCompatActivity implements IClassNotificationView {
+
+    private String TAG = getClass().getSimpleName();
 
     //视图控件
     private LinearLayout llBack, llMenu;
@@ -37,6 +41,11 @@ public class ClassNotificationActivity extends AppCompatActivity implements ICla
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_class_notification);
         mManage = new ClassNotificationManage(this);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -113,7 +122,7 @@ public class ClassNotificationActivity extends AppCompatActivity implements ICla
     }
 
     @Override
-    public void showList(ArrayList<ClassNotificationBean> list) {
+    public void showList(final ArrayList<ClassNotificationBean> list) {
         if (null == cnla) {
             cnla = new ClassNotificationListAdapter(this, list);
             final LinearLayoutManager layoutManager = new LinearLayoutManager(this);

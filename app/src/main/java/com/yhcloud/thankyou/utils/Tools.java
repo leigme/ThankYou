@@ -12,11 +12,14 @@ import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.module.aboutus.view.AboutUsActivity;
+import com.yhcloud.thankyou.module.account.view.AccountActivity;
+import com.yhcloud.thankyou.module.allfuncation.view.AllFuncationActivity;
 import com.yhcloud.thankyou.module.classcadre.view.ClassCadreActivity;
 import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationActivity;
 import com.yhcloud.thankyou.module.classteachers.view.ClassTeacherListActivity;
 import com.yhcloud.thankyou.module.curriculum.view.CurriculumActivity;
 import com.yhcloud.thankyou.module.dutystudent.view.DutyStudentActivity;
+import com.yhcloud.thankyou.module.homework.view.HomeworkActivity;
 import com.yhcloud.thankyou.module.propslist.view.PropsListActivity;
 import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementActivity;
 import com.yhcloud.thankyou.view.EaseChatActivity;
@@ -62,7 +65,7 @@ public class Tools {
     public static void GlideCircleImageUrl(Context context, String path, ImageView imageView) {
         Glide.with(context)
                 .load(Constant.SERVICEADDRESS + path)
-                .placeholder(R.mipmap.default_photo)
+                .placeholder(R.mipmap.loading)
                 .error(R.mipmap.icon_account_404)
                 .bitmapTransform(new CropCircleTransformation(context))
                 .into(imageView);
@@ -80,6 +83,7 @@ public class Tools {
     public static void GlideImageUrl(Context context, String path, ImageView imageView) {
         Glide.with(context)
                 .load(Constant.SERVICEADDRESS + path)
+                .placeholder(R.mipmap.loading)
                 .error(R.mipmap.icon_big_404)
                 .into(imageView);
     }
@@ -117,12 +121,12 @@ public class Tools {
 
     public static SparseArray<FunctionBean> initFunction(Context context) {
         SparseArray<FunctionBean> sparseArray = new SparseArray<>();
-        sparseArray.append(0, new FunctionBean(0, 0, R.mipmap.icon_function_all, "全部应用"));
+        sparseArray.append(0, new FunctionBean(0, 0, R.mipmap.icon_function_all, "全部应用", new Intent(context, AllFuncationActivity.class)));
         sparseArray.append(1, new FunctionBean(1, R.mipmap.icon_my_info, 0, "我的资料"));
         sparseArray.append(2, new FunctionBean(2, R.mipmap.icon_my_friends, 0, "我的朋友"));
         sparseArray.append(3, new FunctionBean(3, 0, R.mipmap.icon_function_props, "道具榜", new Intent(context, PropsListActivity.class)));
         sparseArray.append(4, new FunctionBean(4, R.mipmap.icon_my_message, R.mipmap.icon_function_message, "我的消息", new Intent(context, EaseChatActivity.class)));
-        sparseArray.append(5, new FunctionBean(5, R.mipmap.icon_my_account, 0, "我的账户"));
+        sparseArray.append(5, new FunctionBean(5, R.mipmap.icon_my_account, 0, "我的账户", new Intent(context, AccountActivity.class)));
         sparseArray.append(6, new FunctionBean(6, R.mipmap.icon_my_schedule, 0, "每日签到"));
         sparseArray.append(7, new FunctionBean(7, R.mipmap.icon_my_downloads, R.mipmap.icon_function_download, "我的下载"));
         sparseArray.append(8, new FunctionBean(8, R.mipmap.icon_about_me, 0, "关于我们", new Intent(context, AboutUsActivity.class)));
@@ -131,7 +135,7 @@ public class Tools {
         sparseArray.append(11, new FunctionBean(11, 0, R.mipmap.icon_function_notice, "班级通知", new Intent(context, ClassNotificationActivity.class)));
         sparseArray.append(12, new FunctionBean(12, 0, R.mipmap.icon_function_resources, "教学资源"));
         sparseArray.append(13, new FunctionBean(13, 0, R.mipmap.icon_function_schedule, "工作日程"));
-        sparseArray.append(14, new FunctionBean(14, 0, R.mipmap.icon_function_homework, "课后作业"));
+        sparseArray.append(14, new FunctionBean(14, 0, R.mipmap.icon_function_homework, "课后作业", new Intent(context, HomeworkActivity.class)));
         sparseArray.append(15, new FunctionBean(15, 0, R.mipmap.icon_function_exercise, "课堂练习"));
         sparseArray.append(16, new FunctionBean(16, R.mipmap.icon_class_cadre, 0, "班干部", new Intent(context, ClassCadreActivity.class)));
         sparseArray.append(17, new FunctionBean(17, R.mipmap.icon_class_duty, 0, "值日生", new Intent(context, DutyStudentActivity.class)));

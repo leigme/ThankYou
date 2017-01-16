@@ -11,7 +11,4 @@ import java.util.ArrayList;
 
 public interface IPropsListView extends IBaseView {
     void initViewPage(ArrayList<PropsListViewBean> list);
-    void showViewPage();
-//    void showSendPage();
-//    void showReceivePage();
 }

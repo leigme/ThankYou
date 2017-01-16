@@ -8,41 +8,45 @@ import android.content.Intent;
 
 public class AccountFunctionBean {
 
-    private int id;
-    private String title;
-    private int bgResId;
+    private int mId;
+    private String mTitle;
+    private int mBgResId;
     private Intent mIntent;
 
     public AccountFunctionBean() {}
+    public AccountFunctionBean(String title, int bgResId) {
+        this.mTitle = title;
+        this.mBgResId = bgResId;
+    }
     public AccountFunctionBean(int id, String title, int bgResId, Intent intent) {
-        this.id = id;
-        this.title = title;
-        this.bgResId = bgResId;
+        this.mId = id;
+        this.mTitle = title;
+        this.mBgResId = bgResId;
         this.mIntent = intent;
     }
 
     public int getId() {
-        return id;
+        return mId;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.mId = id;
     }
 
     public String getTitle() {
-        return title;
+        return mTitle;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        this.mTitle = title;
     }
 
     public int getBgResId() {
-        return bgResId;
+        return mBgResId;
     }
 
     public void setBgResId(int bgResId) {
-        this.bgResId = bgResId;
+        this.mBgResId = bgResId;
     }
 
     public Intent getIntent() {

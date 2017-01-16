@@ -15,6 +15,7 @@ import com.yhcloud.thankyou.module.schoolannouncement.adapter.SchoolAnnouncement
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
 import com.yhcloud.thankyou.module.schoolannouncement.manage.SchoolAnnouncementManage;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
+import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
@@ -98,7 +99,7 @@ public class SchoolAnnouncementActivity extends AppCompatActivity implements ISc
     }
 
     @Override
-    public void showList(ArrayList<SchoolAnnouncementBean> list) {
+    public void showList(final ArrayList<SchoolAnnouncementBean> list) {
         if (null == sala) {
             sala = new SchoolAnnouncementListAdapter(this, list);
             final LinearLayoutManager layoutManager = new LinearLayoutManager(this);

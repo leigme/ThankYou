@@ -15,6 +15,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountFunctionAdapter;
+import com.yhcloud.thankyou.module.account.bean.AccountFunctionBean;
 import com.yhcloud.thankyou.module.account.manage.AccountManage;
 import com.yhcloud.thankyou.module.account.utils.GlideImageLoader;
 import com.youth.banner.Banner;
@@ -90,7 +91,7 @@ public class AccountActivity extends AppCompatActivity implements IAccountView {
     }
 
     @Override
-    public void showFunction(final ArrayList<FunctionBean> list) {
+    public void showFunction(final ArrayList<AccountFunctionBean> list) {
         if (null == afa) {
             afa = new AccountFunctionAdapter(this, list);
             afa.setIOnClickListener(new IOnClickListener() {

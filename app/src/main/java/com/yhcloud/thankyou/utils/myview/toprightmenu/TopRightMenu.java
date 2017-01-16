@@ -2,12 +2,14 @@ package com.yhcloud.thankyou.utils.myview.toprightmenu;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.yhcloud.thankyou.R;
@@ -30,7 +32,7 @@ public class TopRightMenu {
     private ArrayList<FunctionBean> menuItemList;
 
     private static final int DEFAULT_HEIGHT = 480;
-    private int popHeight = DEFAULT_HEIGHT;
+    private int popHeight = RecyclerView.LayoutParams.WRAP_CONTENT;
     private int popWidth = RecyclerView.LayoutParams.WRAP_CONTENT;
     private boolean showIcon = true;
     private boolean dimBackground = true;
@@ -49,7 +51,8 @@ public class TopRightMenu {
     private void init() {
         content = LayoutInflater.from(mContext).inflate(R.layout.trm_popup_menu, null);
         mRecyclerView = (RecyclerView) content.findViewById(R.id.trm_recyclerview);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setOverScrollMode(View.OVER_SCROLL_NEVER);
 
         menuItemList = new ArrayList<>();

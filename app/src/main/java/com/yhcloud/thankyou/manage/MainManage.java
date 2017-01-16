@@ -50,6 +50,9 @@ public class MainManage {
             public void onServiceConnected(ComponentName name, IBinder binder) {
                 mService = ((LogicService.MyBinder)binder).getService();
                 mUserInfo = mService.getUserInfo();
+                mSparseArray = Tools.initFunction(mActivity);
+                mService.setBeanSparseArray(mSparseArray);
+                mService.getUserAllFuncation();
                 mIMainView.initView();
                 mIMainView.initData();
                 mIMainView.initEvent();
@@ -69,8 +72,6 @@ public class MainManage {
                         }
                     }
                 }
-                mSparseArray = Tools.initFunction(mActivity);
-                mService.setBeen(mSparseArray);
             }
 
             @Override
@@ -145,5 +146,14 @@ public class MainManage {
 
     public void showTrm() {
         mIMainView.showTrm(mMenuBeen);
+    }
+
+    public void refreshFuncations(ArrayList<Integer> list) {
+        HomeFragment homeFragment = (HomeFragment) mFragments.get(0);
+        ArrayList<FunctionBean> arrayList = new ArrayList<>();
+        for (int i: list) {
+            arrayList.add(mSparseArray.get(i));
+        }
+        homeFragment.showFunction(arrayList);
     }
 }

@@ -3,25 +3,17 @@ package com.yhcloud.thankyou.module.account.manage;
 import android.app.Activity;
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.IBinder;
 
-import com.google.gson.Gson;
 import com.yhcloud.thankyou.R;
 
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
 import com.yhcloud.thankyou.module.account.view.IIntegralView;
 import com.yhcloud.thankyou.module.account.view.RechargeActivity;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.utils.ServiceAPI;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 

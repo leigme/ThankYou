@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
@@ -31,6 +32,7 @@ public class ClassManage {
     private LogicService mService;
     private UserInfo mUserInfo;
     private ArrayList<UserInfoBean> mBeen;
+    private int refreshNum;
 
     public ClassManage(IClassView iClassView, LogicService service) {
         this.mIClassView = iClassView;
@@ -94,15 +96,27 @@ public class ClassManage {
                             }
                             mIClassView.showList(mBeen);
                         }
+                    } else {
+                        String msg = jsonObject.getString("errorMsg");
+                        if (null != msg && !"".equals(msg)) {
+                            mIClassView.showToastMsg(msg);
+                        } else {
+                            mIClassView.showToastMsg(R.string.error_connection);
+                        }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    mIClassView.showToastMsg(R.string.error_connection);
                 }
             }
 
             @Override
             public void callFailed() {
-
+                mIClassView.showToastMsg(R.string.error_connection);
+                if (3 > refreshNum) {
+                    getClassPeopleList("");
+                    refreshNum += 1;
+                }
             }
         });
     }
@@ -117,5 +131,6 @@ public class ClassManage {
         intent.putExtra("UID", mBeen.get(position).getUserId());
         mActivity.startActivity(intent);
     }
+
 
 }

@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.account.view;
 
-import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.module.account.bean.AccountFunctionBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,5 +16,5 @@ public interface IAccountView {
     void hiddenLoading();
     void setTitle(String title);
     void showBanner(List<String> list);
-    void showFunction(ArrayList<FunctionBean> list);
+    void showFunction(ArrayList<AccountFunctionBean> list);
 }

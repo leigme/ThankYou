@@ -1,16 +1,5 @@
 package com.yhcloud.thankyou.module.account.logic;
 
-import android.content.Context;
-import android.util.Log;
-
-import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.mInterface.ICallListener;
-import com.yhcloud.thankyou.utils.ServiceAPI;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.StringCallback;
-
-import okhttp3.Call;
-
 /**
  * Created by Administrator on 2016/12/3.
  */

@@ -3,7 +3,6 @@ package com.yhcloud.thankyou.adapter;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,8 +30,8 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
     private LayoutInflater mInflater;
     private ArrayList<FunctionBean> mBeen;
     private RecycleCallBack mCallBack;
-    public SparseArray<Integer> show = new SparseArray<>();
     private IOnClickListener mIOnClickListener;
+    public SparseArray<Integer> show = new SparseArray<>();
 
     public HomeFunctionListAdapter(Context context, ArrayList<FunctionBean> list, RecycleCallBack callBack) {
         this.mContext = context;
@@ -56,15 +55,6 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
     public void onBindViewHolder(final FunctionViewHolder holder, int position) {
         holder.image.setImageResource(mBeen.get(position).getImage());
         holder.title.setText(mBeen.get(position).getTitle());
-//        if (null != mIOnClickListener) {
-//            holder.itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    int pos = holder.getLayoutPosition();
-//                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
-//                }
-//            });
-//        }
     }
 
     @Override
@@ -90,7 +80,9 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
                 show.clear();
                 mCallBack.itemOnClick(getAdapterPosition(), v);
             }
-            mIOnClickListener.OnItemClickListener(v, getAdapterPosition());
+            if (null != mIOnClickListener) {
+                mIOnClickListener.OnItemClickListener(v, getAdapterPosition());
+            }
         }
 
         @Override
@@ -109,5 +101,10 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
 
     public void setIOnClickListener(IOnClickListener iOnClickListener) {
         this.mIOnClickListener = iOnClickListener;
+    }
+
+    public void refreshData(ArrayList<FunctionBean> list) {
+        this.mBeen = list;
+        this.notifyDataSetChanged();
     }
 }

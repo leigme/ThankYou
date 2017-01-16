@@ -28,6 +28,17 @@ public class Constant {
     public static final String USER_KEY = "userKey";
     public static final String USER_LOGINED = "userLogined";
 
+    //图片操作常量
+    public static final String ADDIMAGE = "addImage";
+    public static final String PAGE_NUM = "pageNum";
+    public static final String IMAGEURLS = "imageUrls";
+
+    //回调标志
+    public static final int ALLFUNCATION_REQUEST = 101;
+
+
+
+
     /**
      * 服务器API
      */
@@ -40,7 +51,7 @@ public class Constant {
 
 
     //获取推广列表 promotionType:推广类型[1:精品课程 2:精品阅读 4:直播课堂 8:付费精品 16:首页轮播] scopeCrowd:[1:学生 2:老师 4:家长] updateTime:[-1:获取全部]
-    public static final String GETSPREADLIST = SERVICEADDRESS + "/m01/M0108I/M0108I07";
+    public static final String GETSPREADLIST = SERVICEADDRESS + "/m01/M0109I/M0109I07";
     //获取推广详情 Id
     public static final String GETSPREADDATA = SERVICEADDRESS + "/m01/M0108P04/M0108P04001";
 
@@ -50,6 +61,15 @@ public class Constant {
     public static final String GETCLASSNOTIFICATIONLIST = SERVICEADDRESS + "/m17/M1711I/M1711I01";
     //更新班级通知阅读状态 http://192.168.0.139/edu/noticeId/49/userId/3237 isRead:0未读;1:已读;2:删除
     public static final String UPDATEREADSTATE = SERVICEADDRESS + "/m17/M1711I/M1711I02";
+    //课后作业 http://www.k12chn.com/m17/M1721I/M1721I01/userId/3237
+    public static final String GETTEACHERHOMEWORKLIST = SERVICEADDRESS + "/m17/M1721I/M1721I01";
+    //获取学生作业列表 [1:已提交 2:未提交]
+    public static final String GETSTUDENTHOMEWORKLIST = SERVICEADDRESS + "/m17/M1723I/M1723I01";
+    //获取学生作业详情 http://192.168.0.139/edu/m17/M1722I/M1722I02/workBookId/243/userId/1729470
+    public static final String GETSTUDENTHOMEWORKINFO = SERVICEADDRESS + "/m17/M1722I/M1722I02";
+    //学生提交主观题
+    public static final String SENDHOMEWORKSUBANSWER = SERVICEADDRESS + "/m17/M1722I/M1722I04";
+
 
     //班干部  classId
     public static final String GETCLASSCADRE = SERVICEADDRESS + "/m17/m1718I/m1718I003";
@@ -64,7 +84,7 @@ public class Constant {
     //获取用户详情 uid id
     public static final String GETDETAILINFO = SERVICEADDRESS + "/m00/M0005I/M0005I02";
 
-    //获取道具流转记录 http://www.k12chn.com/m00/M0009I/M0009I014/userId/3237/page/1/type/2
+    //获取道具流转记录 http://www.k12chn.com/m00/M0009I/M0009I014/userId/3237/page/1/type/2 [1:送出;2:收到]
     public static final String GETPROPSLIST = SERVICEADDRESS + "/m00/M0009I/M0009I014";
 
     //获取关于我们的信息

@@ -7,12 +7,9 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.HomeFunctionListAdapter;
@@ -21,15 +18,16 @@ import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.HomeManage;
-import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.GlideImageLoader;
+import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.LinearLayoutForListView;
 import com.yhcloud.thankyou.utils.myview.drag.DragItemCallBack;
 import com.yhcloud.thankyou.utils.myview.drag.RecycleCallBack;
 import com.youth.banner.Banner;
 import com.youth.banner.BannerConfig;
 import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerClickListener;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -115,7 +113,7 @@ public class HomeFragment extends Fragment implements IHomeView {
     @Override
     public void showBanner(ArrayList<String> imageUrls) {
         //设置banner样式
-        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR_TITLE);
+        mBanner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
         //设置图片加载器
         mBanner.setImageLoader(new GlideImageLoader());
         //设置图片集合
@@ -136,11 +134,12 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void showFunction(final ArrayList<FunctionBean> list) {
+        Tools.print(TAG, "设置功能区域...");
         if (null == hfla) {
             rcb = new RecycleCallBack() {
                 @Override
                 public void itemOnClick(int position, View view) {
-                    Log.e(TAG, "点击监听事件:" + position);
+                    Tools.print(TAG, "点击监听事件:" + position);
                 }
 
                 @Override
@@ -148,7 +147,7 @@ public class HomeFragment extends Fragment implements IHomeView {
                     if (list.size() - 1 == position) {
                         return;
                     }
-                    Log.e(TAG, "长按监听事件:" + position);
+                    Tools.print(TAG, "长按监听事件:" + position);
                 }
 
                 @Override
@@ -156,7 +155,7 @@ public class HomeFragment extends Fragment implements IHomeView {
                     if (from == list.size() - 1 || to == list.size() - 1) {
                         return;
                     }
-                    Log.e(TAG, "移动监听事件:从" + from + "到" + to);
+                    Tools.print(TAG, "移动监听事件:从" + from + "到" + to);
                     synchronized (this) {
                         if (from > to) {
                             int count = from - to;
@@ -198,6 +197,8 @@ public class HomeFragment extends Fragment implements IHomeView {
             ith = new ItemTouchHelper(new DragItemCallBack(rcb));
             ith.attachToRecyclerView(rvFunctionList);
             rvFunctionList.setAdapter(hfla);
+        } else {
+            hfla.refreshData(list);
         }
     }
 
@@ -224,7 +225,12 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void initEvent() {
-
+        mBanner.setOnBannerClickListener(new OnBannerClickListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                mManage.goBannerInfo(position);
+            }
+        });
     }
 
     @Override

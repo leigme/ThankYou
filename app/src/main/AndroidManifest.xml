@@ -82,19 +82,19 @@
                 <action android:name="android.intent.action.USER_PRESENT"/>
             </intent-filter>
         </receiver>
-        <!-- 显示下载大图页面 -->
+        <!-- 环信显示下载大图页面 -->
         <activity
             android:name="com.hyphenate.easeui.ui.EaseShowBigImageActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide">
         </activity>
-        <!-- 下载文件 -->
+        <!-- 环信下载文件 -->
         <activity
             android:name="com.hyphenate.easeui.ui.EaseShowNormalFileActivity"
             android:screenOrientation="portrait"
             android:theme="@style/horizontal_slide">
         </activity>
-        <!-- 地图 -->
+        <!-- 环信地图 -->
         <activity
             android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"
             android:screenOrientation="portrait"
@@ -128,19 +128,55 @@
             android:name=".module.curriculum.view.CurriculumActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".view.WebActivity">
+        <activity
+            android:name=".view.WebActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.aboutus.view.AboutUsActivity">
+        <activity
+            android:name=".module.aboutus.view.AboutUsActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.propslist.view.PropsListActivity">
+        <activity
+            android:name=".module.propslist.view.PropsListActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.classnotification.view.ClassNotificationActivity">
+        <activity
+            android:name=".module.classnotification.view.ClassNotificationActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.classnotification.view.ClassNotificationDetailActivity">
+        <activity
+            android:name=".module.classnotification.view.ClassNotificationDetailActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.schoolannouncement.view.SchoolAnnouncementActivity">
+        <activity
+            android:name=".module.schoolannouncement.view.SchoolAnnouncementActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.schoolannouncement.view.SchoolAnnouncementDetailActivity">
+        <activity
+            android:name=".module.schoolannouncement.view.SchoolAnnouncementDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".module.classnotification.view.AddClassNotificationDetailActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".module.account.view.AccountActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".module.account.view.MyPropsActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".module.allfuncation.view.AllFuncationActivity">
+        </activity>
+        <activity android:name=".module.homework.view.HomeworkActivity">
+        </activity>
+        <activity android:name=".module.homework.view.HomeworkInfoActivity">
+        </activity>
+        <activity android:name=".module.homework.view.AddPhotoActivity">
+        </activity>
+        <activity android:name=".module.image.view.BigImageActivity">
         </activity>
     </application>
 

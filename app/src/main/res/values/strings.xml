@@ -9,6 +9,10 @@
     <string name="no_more_data">没有更多数据了...</string>
     <string name="logouting">登出中,请稍候...</string>
 
+    <string name="loadcamera">启动照相机</string>
+    <string name="ok">我知道了</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

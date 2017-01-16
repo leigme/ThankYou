@@ -139,6 +139,7 @@ public class LogicService extends Service {
     }
 
     public void getUserAllFuncation() {
+        mBeen = new ArrayList<>();
         String allFuncations = mPreferences.getString(mUserInfo.getUserInfoBean().getUserId(), "");
         if (null != allFuncations && !"".equals(allFuncations)) {
             try {
@@ -146,14 +147,15 @@ public class LogicService extends Service {
                 String jsonResult = jsonObject.getString("allFuncations");
                 if (null != jsonResult && !"".equals(jsonResult)) {
                     Gson gson = new Gson();
-                    ArrayList<FunctionBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<FunctionBean>>(){}.getType());
-                    mBeen = list;
+                    ArrayList<Integer> list = gson.fromJson(jsonResult, new TypeToken<Integer>(){}.getType());
+                    for (int i: list) {
+                        mBeen.add(mBeanSparseArray.get(i));
+                    }
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         } else {
-            mBeen = new ArrayList<>();
             switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
                 //初始化校长角色应用
                 case 1004:
@@ -183,7 +185,7 @@ public class LogicService extends Service {
                     mBeen.add(mBeanSparseArray.get(12));
                     mBeen.add(mBeanSparseArray.get(14));
                     mBeen.add(mBeanSparseArray.get(3));
-                    mBeen.add(mBeanSparseArray.get(18));
+                    mBeen.add(mBeanSparseArray.get(21));
                     break;
                 //初始化家长角色应用
                 case 1012:
@@ -194,11 +196,18 @@ public class LogicService extends Service {
                     mBeen.add(mBeanSparseArray.get(15));
                     mBeen.add(mBeanSparseArray.get(14));
                     mBeen.add(mBeanSparseArray.get(3));
-                    mBeen.add(mBeanSparseArray.get(18));
                     break;
             }
         }
     }
+
+    //保存用户应用列表
+    public void saveFuncations(String jsonList) {
+        SharedPreferences.Editor editor = mPreferences.edit();
+        editor.putString(mUserInfo.getUserInfoBean().getUserId(), jsonList);
+        editor.commit();
+    }
+
 
     //获取轮播图
     public void getImageUrls(String updateTime, ICallListener<String> iCallListener) {

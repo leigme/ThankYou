@@ -51,7 +51,7 @@ public class HomeManage {
         mSparseArray = mService.getBeanSparseArray();
         ArrayList<FunctionBean> list = mService.getBeen();
         mBeen = new ArrayList<>();
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < 7; i++) {
             if (null != list.get(i)) {
                 mBeen.add(list.get(i));
             }
@@ -199,5 +199,15 @@ public class HomeManage {
                 mActivity.startActivity(functionBean.getIntent());
             }
         }
+    }
+
+    public void saveFunctionList() {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (FunctionBean fb: mBeen) {
+            arrayList.add(fb.getId());
+        }
+        Gson gson = new Gson();
+        String jsonList = gson.toJson(arrayList);
+        mService.saveFuncations(jsonList);
     }
 }

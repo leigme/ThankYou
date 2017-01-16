@@ -178,7 +178,7 @@ public class HomeFragment extends Fragment implements IHomeView {
 
                 @Override
                 public void saveFunctionList() {
-
+                    mManage.saveFunctionList();
                 }
             };
             hfla = new HomeFunctionListAdapter(getActivity(), list, rcb);

@@ -142,6 +142,7 @@ public class Tools {
         sparseArray.append(18, new FunctionBean(18, R.mipmap.icon_class_curriculum, 0, "班级课表", new Intent(context, CurriculumActivity.class)));
         sparseArray.append(19, new FunctionBean(19, 0, 0, "本班老师", new Intent(context, ClassTeacherListActivity.class)));
         sparseArray.append(20, new FunctionBean(20, R.mipmap.icon_my_props, 0, "我的道具", new Intent(context, PropsListActivity.class)));
+        sparseArray.append(21, new FunctionBean(21, 0, R.mipmap.icon_function_schedule, "我的课表", new Intent(context, CurriculumActivity.class)));
         return sparseArray;
     }
 

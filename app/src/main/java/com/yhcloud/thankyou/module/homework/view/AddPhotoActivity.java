@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.homework.adapter.AddPhotoListAdapter;
 import com.yhcloud.thankyou.module.homework.manage.AddPhotoManage;
@@ -28,7 +29,7 @@ import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
-public class AddPhotoActivity extends AppCompatActivity implements IAddPhotoView {
+public class AddPhotoActivity extends ABaseActivity implements IAddPhotoActivityView {
 
     private String TAG = getClass().getSimpleName();
 

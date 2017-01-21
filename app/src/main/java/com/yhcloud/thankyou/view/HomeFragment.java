@@ -41,7 +41,7 @@ import java.util.Collections;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements IHomeView {
+public class HomeFragment extends Fragment implements IHomeActivityView {
 
     private String TAG = getClass().getSimpleName();
 

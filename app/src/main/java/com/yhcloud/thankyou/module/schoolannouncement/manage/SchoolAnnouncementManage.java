@@ -12,9 +12,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.ICallListener;
-import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationDetailActivity;
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
-import com.yhcloud.thankyou.module.schoolannouncement.view.ISchoolAnnouncementView;
+import com.yhcloud.thankyou.module.schoolannouncement.view.ISchoolAnnouncementActivityView;
 import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementDetailActivity;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
@@ -32,14 +31,14 @@ public class SchoolAnnouncementManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private ISchoolAnnouncementView mISchoolAnnouncementView;
+    private ISchoolAnnouncementActivityView mISchoolAnnouncementView;
     private Activity mActivity;
     private LogicService mService;
     private int pageNum = 1, pageCount = -1;
     private ArrayList<SchoolAnnouncementBean> mBeen;
     private boolean refreshing;
 
-    public SchoolAnnouncementManage(ISchoolAnnouncementView iSchoolAnnouncementView) {
+    public SchoolAnnouncementManage(ISchoolAnnouncementActivityView iSchoolAnnouncementView) {
         this.mISchoolAnnouncementView = iSchoolAnnouncementView;
         this.mActivity = (Activity) mISchoolAnnouncementView;
         Intent intent = new Intent(mActivity, LogicService.class);

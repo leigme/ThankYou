@@ -13,7 +13,7 @@ import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.module.classteachers.view.ClassTeacherListActivity;
 import com.yhcloud.thankyou.module.detailinfo.view.DetailPeopleActivity;
-import com.yhcloud.thankyou.view.IClassView;
+import com.yhcloud.thankyou.view.IClassActivityView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class ClassManage {
 
-    private IClassView mIClassView;
+    private IClassActivityView mIClassView;
     private Fragment mFragment;
     private Activity mActivity;
     private LogicService mService;
@@ -34,7 +34,7 @@ public class ClassManage {
     private ArrayList<UserInfoBean> mBeen;
     private int refreshNum;
 
-    public ClassManage(IClassView iClassView, LogicService service) {
+    public ClassManage(IClassActivityView iClassView, LogicService service) {
         this.mIClassView = iClassView;
         this.mFragment = (Fragment) mIClassView;
         this.mActivity = mFragment.getActivity();

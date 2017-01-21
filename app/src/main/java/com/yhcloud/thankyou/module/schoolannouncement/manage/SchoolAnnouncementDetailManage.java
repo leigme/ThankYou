@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
-import com.yhcloud.thankyou.module.schoolannouncement.view.ISchoolAnnouncementDetailView;
+import com.yhcloud.thankyou.module.schoolannouncement.view.ISchoolAnnouncementDetailActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -29,13 +29,13 @@ public class SchoolAnnouncementDetailManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private ISchoolAnnouncementDetailView mISchoolAnnouncementDetailView;
+    private ISchoolAnnouncementDetailActivityView mISchoolAnnouncementDetailView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<SchoolAnnouncementBean> mBeen;
     private int record, pageNum = 1, pageCount = -1;
 
-    public SchoolAnnouncementDetailManage(ISchoolAnnouncementDetailView iSchoolAnnouncementDetailView) {
+    public SchoolAnnouncementDetailManage(ISchoolAnnouncementDetailActivityView iSchoolAnnouncementDetailView) {
         this.mISchoolAnnouncementDetailView = iSchoolAnnouncementDetailView;
         this.mActivity = (Activity) mISchoolAnnouncementDetailView;
         Intent intent = new Intent(mActivity, LogicService.class);

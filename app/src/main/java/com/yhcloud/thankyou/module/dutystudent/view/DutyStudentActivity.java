@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.dutystudent.adapter.DutyStudentListAdapter;
 import com.yhcloud.thankyou.module.dutystudent.manage.DutyStudentManage;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
@@ -18,7 +19,7 @@ import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
-public class DutyStudentActivity extends AppCompatActivity implements IDutyStudentView {
+public class DutyStudentActivity extends ABaseActivity implements IDutyStudentActivityView {
 
     //视图控件
     private LinearLayout llBack;

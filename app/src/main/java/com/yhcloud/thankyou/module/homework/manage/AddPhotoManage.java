@@ -13,7 +13,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.homework.bean.StudentQuestionBean;
 import com.yhcloud.thankyou.module.image.view.BigImageActivity;
-import com.yhcloud.thankyou.module.homework.view.IAddPhotoView;
+import com.yhcloud.thankyou.module.homework.view.IAddPhotoActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
@@ -37,7 +37,7 @@ public class AddPhotoManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IAddPhotoView mIAddPhotoView;
+    private IAddPhotoActivityView mIAddPhotoView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<String> mBeen;
@@ -47,7 +47,7 @@ public class AddPhotoManage {
     private ImgSelConfig config;
     private StudentQuestionBean mStudentQuestionBean;
 
-    public AddPhotoManage(IAddPhotoView iAddPhotoView) {
+    public AddPhotoManage(IAddPhotoActivityView iAddPhotoView) {
         this.mIAddPhotoView = iAddPhotoView;
         this.mActivity = (Activity) mIAddPhotoView;
         Intent intent = new Intent(mActivity, LogicService.class);

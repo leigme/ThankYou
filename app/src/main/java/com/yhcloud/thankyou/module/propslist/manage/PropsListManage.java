@@ -5,18 +5,12 @@ import android.app.Service;
 import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.IBinder;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -26,7 +20,7 @@ import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.propslist.adapter.PropsListAdapter;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListBean;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListViewBean;
-import com.yhcloud.thankyou.module.propslist.view.IPropsListView;
+import com.yhcloud.thankyou.module.propslist.view.IPropsListActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
 
@@ -44,13 +38,13 @@ public class PropsListManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IPropsListView mIPropsListView;
+    private IPropsListActivityView mIPropsListView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<PropsListBean> plbReceiveBeen, plbSendBeen;
     private ArrayList<PropsListViewBean> mViewBeen;
 
-    public PropsListManage(IPropsListView iPropsListView) {
+    public PropsListManage(IPropsListActivityView iPropsListView) {
         this.mIPropsListView = iPropsListView;
         this.mActivity = (Activity) mIPropsListView;
         plbReceiveBeen = new ArrayList<>();

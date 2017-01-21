@@ -12,7 +12,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.view.IMineView;
+import com.yhcloud.thankyou.view.IMineActivityView;
 import com.yhcloud.thankyou.view.LoginActivity;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class MineManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IMineView mIMineView;
+    private IMineActivityView mIMineView;
     private Fragment mFragment;
     private Activity mActivity;
     private LogicService mService;
@@ -33,7 +33,7 @@ public class MineManage {
     private int RESULT_MESSAGE = 101;
     private boolean logouting = false;
 
-    public MineManage(IMineView mineView, LogicService service) {
+    public MineManage(IMineActivityView mineView, LogicService service) {
         this.mIMineView = mineView;
         this.mFragment = (Fragment) mIMineView;
         this.mActivity = mFragment.getActivity();

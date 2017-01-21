@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * Use the {@link MineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MineFragment extends Fragment implements IMineView {
+public class MineFragment extends Fragment implements IMineActivityView {
 
     private OnFragmentInteractionListener mListener;
 

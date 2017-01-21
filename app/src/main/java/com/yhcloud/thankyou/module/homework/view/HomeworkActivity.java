@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkListAdapter;
 import com.yhcloud.thankyou.module.homework.adapter.TeacherHomeworkListAdapter;
@@ -24,7 +25,7 @@ import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
-public class HomeworkActivity extends AppCompatActivity implements IHomeworkView{
+public class HomeworkActivity extends ABaseActivity implements IHomeworkActivityView {
 
     private String TAG = getClass().getSimpleName();
 

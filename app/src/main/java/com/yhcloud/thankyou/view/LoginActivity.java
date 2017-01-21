@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import rx.Observable;
 import rx.Observer;
 
-public class LoginActivity extends AppCompatActivity implements ILoginView {
+public class LoginActivity extends AppCompatActivity implements ILoginActivityView {
 
     private String TAG = getClass().getSimpleName();
 

@@ -1,9 +1,6 @@
 package com.yhcloud.thankyou.module.homework.view;
 
-import android.app.Activity;
-
-import com.yhcloud.thankyou.mInterface.IBaseView;
-import com.yhcloud.thankyou.module.image.bean.PhotoBean;
+import com.yhcloud.thankyou.mInterface.IBaseActivityView;
 
 import java.util.ArrayList;
 
@@ -11,7 +8,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2017/1/13.
  */
 
-public interface IAddPhotoView extends IBaseView {
+public interface IAddPhotoActivityView extends IBaseActivityView {
     void init();
     void showList(ArrayList<String> list);
     String getContent();

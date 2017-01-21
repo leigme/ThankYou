@@ -15,7 +15,7 @@ import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
 import com.yhcloud.thankyou.module.homework.bean.TeacherHomeworkBean;
 import com.yhcloud.thankyou.module.homework.view.HomeworkInfoActivity;
-import com.yhcloud.thankyou.module.homework.view.IHomeworkView;
+import com.yhcloud.thankyou.module.homework.view.IHomeworkActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -32,14 +32,14 @@ public class HomeworkManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IHomeworkView mIHomeworkView;
+    private IHomeworkActivityView mIHomeworkView;
     private Activity mActivity;
     private LogicService mService;
     private int roleId, pageNum = 1;
     private ArrayList<TeacherHomeworkBean> mTeacherHomeworkBeen;
     private ArrayList<StudentHomeworkBean> mStudentHomeworkBeen;
 
-    public HomeworkManage(IHomeworkView iHomeworkView) {
+    public HomeworkManage(IHomeworkActivityView iHomeworkView) {
         this.mIHomeworkView = iHomeworkView;
         this.mActivity = (Activity) mIHomeworkView;
         Intent intent = new Intent(mActivity, LogicService.class);

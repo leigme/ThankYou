@@ -14,7 +14,7 @@ import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.view.IHomeView;
+import com.yhcloud.thankyou.view.IHomeActivityView;
 import com.yhcloud.thankyou.view.WebActivity;
 
 import org.json.JSONException;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class HomeManage {
 
     private String TAG = getClass().getSimpleName();
-    private IHomeView mIHomeView;
+    private IHomeActivityView mIHomeView;
     private Activity mActivity;
     private Fragment mFragment;
     private LogicService mService;
@@ -41,7 +41,7 @@ public class HomeManage {
     private boolean refrshBanner;
     private int refreshBannerNum, refreshSpreadNum;
 
-    public HomeManage(IHomeView homeView, LogicService service) {
+    public HomeManage(IHomeActivityView homeView, LogicService service) {
         this.mIHomeView = homeView;
         this.mFragment = (Fragment) mIHomeView;
         this.mActivity = mFragment.getActivity();

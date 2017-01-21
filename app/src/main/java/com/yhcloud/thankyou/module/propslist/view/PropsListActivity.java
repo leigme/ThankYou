@@ -5,15 +5,12 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.module.propslist.adapter.PropsListAdapter;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.propslist.adapter.PropsListViewAdapter;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListViewBean;
 import com.yhcloud.thankyou.module.propslist.manage.PropsListManage;
@@ -21,7 +18,7 @@ import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
-public class PropsListActivity extends AppCompatActivity implements IPropsListView {
+public class PropsListActivity extends ABaseActivity implements IPropsListActivityView {
 
     //视图控件
     private LinearLayout llBack;

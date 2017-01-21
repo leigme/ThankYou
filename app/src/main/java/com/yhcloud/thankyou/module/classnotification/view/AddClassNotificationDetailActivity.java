@@ -5,8 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 
-public class AddClassNotificationDetailActivity extends AppCompatActivity implements IAddClassNotificationDetailView {
+public class AddClassNotificationDetailActivity extends ABaseActivity implements IAddClassNotificationDetailActivityView {
 
     private ProgressDialog mProgressDialog;
 

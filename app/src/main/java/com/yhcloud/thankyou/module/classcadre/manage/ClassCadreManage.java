@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
-import com.yhcloud.thankyou.module.classcadre.view.IClassCadreView;
+import com.yhcloud.thankyou.module.classcadre.view.IClassCadreActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 
 import org.json.JSONException;
@@ -26,11 +26,11 @@ import java.util.ArrayList;
 
 public class ClassCadreManage {
 
-    private IClassCadreView mIClassCadreView;
+    private IClassCadreActivityView mIClassCadreView;
     private Activity mActivity;
     private LogicService mService;
 
-    public ClassCadreManage(IClassCadreView iClassCadreView) {
+    public ClassCadreManage(IClassCadreActivityView iClassCadreView) {
         this.mIClassCadreView = iClassCadreView;
         this.mActivity = (Activity) mIClassCadreView;
         Intent intent = new Intent(mActivity, LogicService.class);

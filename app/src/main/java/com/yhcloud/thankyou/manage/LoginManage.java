@@ -18,7 +18,7 @@ import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
-import com.yhcloud.thankyou.view.ILoginView;
+import com.yhcloud.thankyou.view.ILoginActivityView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,13 +33,13 @@ public class LoginManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private ILoginView mILoginView;
+    private ILoginActivityView mILoginView;
     private Activity mActivity;
     private LogicService mService;
     private String username, password;
     private UserInfo userInfo;
 
-    public LoginManage(ILoginView loginView) {
+    public LoginManage(ILoginActivityView loginView) {
         this.mILoginView = loginView;
         this.mActivity = (Activity) loginView;
         SharedPreferences mPreferences = mActivity.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);

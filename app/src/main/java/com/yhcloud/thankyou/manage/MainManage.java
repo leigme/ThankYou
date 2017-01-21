@@ -18,8 +18,8 @@ import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.view.ClassFragment;
 import com.yhcloud.thankyou.view.HomeFragment;
-import com.yhcloud.thankyou.view.IClassView;
-import com.yhcloud.thankyou.view.IMainView;
+import com.yhcloud.thankyou.view.IClassActivityView;
+import com.yhcloud.thankyou.view.IMainActivityView;
 import com.yhcloud.thankyou.view.MineFragment;
 
 import java.util.ArrayList;
@@ -32,7 +32,7 @@ public class MainManage {
 
     private String TAG = getClass().getSimpleName();
     private IMainLogic mIMainLogic;
-    private IMainView mIMainView;
+    private IMainActivityView mIMainView;
     private Activity mActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
@@ -41,7 +41,7 @@ public class MainManage {
     private ArrayList<ClassInfoBean> mClassInfoBeen;
     private ArrayList<FunctionBean> mMenuBeen;
 
-    public MainManage(IMainView mainView) {
+    public MainManage(IMainActivityView mainView) {
         this.mIMainView = mainView;
         this.mActivity = (Activity) mainView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -140,7 +140,7 @@ public class MainManage {
     }
 
     public void setClassPeopleList(String classId) {
-        IClassView iClassView = (IClassView) mFragments.get(1);
+        IClassActivityView iClassView = (IClassActivityView) mFragments.get(1);
         iClassView.getClassManage().getClassPeopleList(classId);
     }
 

@@ -13,7 +13,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
-import com.yhcloud.thankyou.module.classnotification.view.IClassNotificationDetailView;
+import com.yhcloud.thankyou.module.classnotification.view.IClassNotificationDetailActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -30,13 +30,13 @@ public class ClassNotificationDetailManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IClassNotificationDetailView mIClassNotificationDetailView;
+    private IClassNotificationDetailActivityView mIClassNotificationDetailView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<ClassNotificationBean> mBeen;
     private int record = 0, pageNum = 1, pageCount = -1;
 
-    public ClassNotificationDetailManage(IClassNotificationDetailView iClassNotificationDetailView) {
+    public ClassNotificationDetailManage(IClassNotificationDetailActivityView iClassNotificationDetailView) {
         this.mIClassNotificationDetailView = iClassNotificationDetailView;
         this.mActivity = (Activity) mIClassNotificationDetailView;
         Intent intent = new Intent(mActivity, LogicService.class);

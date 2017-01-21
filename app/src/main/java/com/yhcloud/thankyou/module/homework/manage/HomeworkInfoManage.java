@@ -23,7 +23,7 @@ import com.yhcloud.thankyou.module.homework.view.AddPhotoActivity;
 import com.yhcloud.thankyou.module.homework.bean.HomeworkInfoViewPagerBean;
 import com.yhcloud.thankyou.module.homework.view.HomeworkStudentViews;
 import com.yhcloud.thankyou.module.homework.view.HomeworkTeacherViews;
-import com.yhcloud.thankyou.module.homework.view.IHomeworkInfoView;
+import com.yhcloud.thankyou.module.homework.view.IHomeworkInfoActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -43,7 +43,7 @@ public class HomeworkInfoManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IHomeworkInfoView mIHomeworkInfoView;
+    private IHomeworkInfoActivityView mIHomeworkInfoView;
     private Activity mActivity;
     private LogicService mService;
     private LayoutInflater mInflater;
@@ -61,7 +61,7 @@ public class HomeworkInfoManage {
     private boolean status;
 
     //初始化管理器并连接服务
-    public HomeworkInfoManage(IHomeworkInfoView iHomeworkInfoView) {
+    public HomeworkInfoManage(IHomeworkInfoActivityView iHomeworkInfoView) {
         this.mIHomeworkInfoView = iHomeworkInfoView;
         this.mActivity = (Activity) mIHomeworkInfoView;
         Intent intent = new Intent(mActivity, LogicService.class);

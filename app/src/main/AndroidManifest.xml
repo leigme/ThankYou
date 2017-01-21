@@ -168,17 +168,33 @@
             android:name=".module.account.view.MyPropsActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.allfuncation.view.AllFuncationActivity">
+        <activity
+            android:name=".module.allfuncation.view.AllFuncationActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.homework.view.HomeworkActivity">
+        <activity
+            android:name=".module.homework.view.HomeworkActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.homework.view.HomeworkInfoActivity">
+        <activity
+            android:name=".module.homework.view.HomeworkInfoActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.homework.view.AddPhotoActivity">
+        <activity
+            android:name=".module.homework.view.AddPhotoActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.image.view.BigImageActivity">
+        <activity
+            android:name=".module.image.view.BigImageActivity"
+            android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".module.homework.view.AddHomeworkActivity">
+        <activity
+            android:name=".module.homework.view.AddHomeworkActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity
+            android:name=".module.image.view.MyImgSelActivity"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

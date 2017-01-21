@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
-import com.yhcloud.thankyou.module.dutystudent.view.IDutyStudentView;
+import com.yhcloud.thankyou.module.dutystudent.view.IDutyStudentActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 
 import org.json.JSONException;
@@ -26,11 +26,11 @@ import java.util.ArrayList;
 
 public class DutyStudentManage {
 
-    private IDutyStudentView mIDutyStudentView;
+    private IDutyStudentActivityView mIDutyStudentView;
     private Activity mActivity;
     private LogicService mService;
 
-    public DutyStudentManage(IDutyStudentView iDutyStudentView) {
+    public DutyStudentManage(IDutyStudentActivityView iDutyStudentView) {
         this.mIDutyStudentView = iDutyStudentView;
         this.mActivity = (Activity) mIDutyStudentView;
         Intent intent = new Intent(mActivity, LogicService.class);

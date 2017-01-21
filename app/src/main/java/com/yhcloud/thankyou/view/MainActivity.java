@@ -35,7 +35,7 @@ import java.util.ArrayList;
 
 import static com.yhcloud.thankyou.R.id.iv_header_left;
 
-public class MainActivity extends AppCompatActivity implements IMainView,
+public class MainActivity extends AppCompatActivity implements IMainActivityView,
         HomeFragment.OnFragmentInteractionListener, ClassFragment.OnFragmentInteractionListener,
         MineFragment.OnFragmentInteractionListener {
 

@@ -3,14 +3,15 @@ package com.yhcloud.thankyou.mAbstract;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.IBaseView;
 import com.yhcloud.thankyou.mInterface.IButtonOnClickListener;
+import com.yhcloud.thankyou.utils.myview.MyToast;
 
 /**
  * Created by Administrator on 2017/1/21.
@@ -35,24 +36,25 @@ public abstract class ABaseActivity extends AppCompatActivity implements IBaseVi
         }
     }
 
+    @Override
     public void showDialog(String title, String msg) {
         if (null != mDialog) {
             mDialog.dismiss();
         }
         mDialog = new Dialog(this, R.style.MyDialog);
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_integral, null);
-        TextView dTitle = (TextView) view.findViewById(R.id.tv_dialog_title);
+        mDialog.setContentView(R.layout.base_dialog);
+        TextView dTitle = (TextView) mDialog.findViewById(R.id.tv_dialog_title);
         dTitle.setText(title);
-        TextView dMsg = (TextView) view.findViewById(R.id.tv_dialog_msg);
+        TextView dMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
         dMsg.setText(msg);
-        Button dCancel = (Button) view.findViewById(R.id.btn_dialog_cancel);
+        Button dCancel = (Button) mDialog.findViewById(R.id.btn_dialog_cancel);
         dCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mDialog.dismiss();
             }
         });
-        Button dSubmit = (Button) view.findViewById(R.id.btn_dialog_submit);
+        Button dSubmit = (Button) mDialog.findViewById(R.id.btn_dialog_submit);
         dSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,12 +63,38 @@ public abstract class ABaseActivity extends AppCompatActivity implements IBaseVi
         });
     }
 
+    @Override
+    public void showDialog(String msg) {
+        if (null != mDialog) {
+            mDialog.dismiss();
+        }
+        mDialog = new Dialog(this, R.style.MyDialog);
+        mDialog.setContentView(R.layout.base_dialog);
+        TextView dMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
+        dMsg.setText(msg);
+        Button dCancel = (Button) mDialog.findViewById(R.id.btn_dialog_cancel);
+        dCancel.setText("我知道了");
+        dCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
+        LinearLayout llSubmit = (LinearLayout) mDialog.findViewById(R.id.ll_dialog_submit);
+        llSubmit.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showToastMsg(int msgId) {
+        MyToast.showToast(this, msgId);
+    }
+
+    @Override
+    public void showToastMsg(String msg) {
+        MyToast.showToast(this, msg);
+    }
+
     public void setIButtonOnClickListener(IButtonOnClickListener IButtonOnClickListener) {
         this.mIButtonOnClickListener = IButtonOnClickListener;
     }
-
-    public void showDialog(String msg) {
-        this.showDialog("", msg);
-    }
-
 }

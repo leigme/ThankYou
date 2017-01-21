@@ -1,19 +1,14 @@
 package com.yhcloud.thankyou.mInterface;
 
-import android.view.View;
-
 /**
- * Created by leig on 2016/12/12.
+ * Created by Administrator on 2017/1/21.
  */
 
 public interface IBaseView {
-    void initView();
-    void initEvent();
-    void showDefault(boolean showed);
     void showLoading(int msgId);
     void hiddenLoading();
-    void setTitle(String title);
-    void setRightTitle(String title);
+    void showDialog(String title, String msg);
+    void showDialog(String msg);
     void showToastMsg(int msgId);
     void showToastMsg(String msg);
 }

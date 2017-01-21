@@ -13,17 +13,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.classnotification.adapter.ClassNotificationListAdapter;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 import com.yhcloud.thankyou.module.classnotification.manage.ClassNotificationManage;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
-import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
-public class ClassNotificationActivity extends AppCompatActivity implements IClassNotificationView {
+public class ClassNotificationActivity extends ABaseActivity implements IClassNotificationActivityView {
 
     private String TAG = getClass().getSimpleName();
 

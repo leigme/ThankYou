@@ -3,21 +3,20 @@ package com.yhcloud.thankyou.module.image.view;
 import android.animation.Animator;
 import android.app.ProgressDialog;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
-import android.widget.LinearLayout;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.image.adapter.BigImageViewPagerAdapter;
 import com.yhcloud.thankyou.module.image.manage.BigImageManage;
 
 import java.util.ArrayList;
 
-public class BigImageActivity extends AppCompatActivity implements IBigImageView{
+public class BigImageActivity extends ABaseActivity implements IBigImageActivityView {
 
     //视图控件
     private ViewPager vpImages;

@@ -19,7 +19,6 @@ import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.ClassManage;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.utils.Constant;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -32,7 +31,7 @@ import java.util.ArrayList;
  * Use the {@link ClassFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ClassFragment extends Fragment implements IClassView {
+public class ClassFragment extends Fragment implements IClassActivityView {
 
     private String TAG = getClass().getSimpleName();
 

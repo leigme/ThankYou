@@ -13,7 +13,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumDataBean;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
-import com.yhcloud.thankyou.module.curriculum.view.ICurriculumView;
+import com.yhcloud.thankyou.module.curriculum.view.ICurriculumActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -31,12 +31,12 @@ public class CurriculumManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private ICurriculumView mICurriculumView;
+    private ICurriculumActivityView mICurriculumView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<CurriculumItemBean> mBeen;
 
-    public CurriculumManage(ICurriculumView iCurriculumView) {
+    public CurriculumManage(ICurriculumActivityView iCurriculumView) {
         this.mICurriculumView = iCurriculumView;
         this.mActivity = (Activity) mICurriculumView;
         mICurriculumView.showLoading(R.string.loading_data);

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.classcadre.adapter.ClassCadreListAdpater;
 import com.yhcloud.thankyou.module.classcadre.manage.ClassCadreManage;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
@@ -18,7 +19,7 @@ import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
-public class ClassCadreActivity extends AppCompatActivity implements IClassCadreView {
+public class ClassCadreActivity extends ABaseActivity implements IClassCadreActivityView {
 
     //视图控件
     private LinearLayout llBack;

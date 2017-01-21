@@ -1,7 +1,7 @@
 package com.yhcloud.thankyou.module.detailinfo.view;
 
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
-import com.yhcloud.thankyou.mInterface.IBaseView;
+import com.yhcloud.thankyou.mInterface.IBaseActivityView;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/12/21.
  */
 
-public interface IDetailPeopleView extends IBaseView {
+public interface IDetailPeopleActivityView extends IBaseActivityView {
     void initView(int flag);
     void setNameTitle(int flag);
     void showList(ArrayList<RelativeInfoBean> list);

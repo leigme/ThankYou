@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import com.yhcloud.thankyou.module.homework.view.IAddHomeworkView;
+import com.yhcloud.thankyou.module.homework.view.IAddHomeworkActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -19,11 +19,11 @@ public class AddHomeworkManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IAddHomeworkView mIAddHomeworkView;
+    private IAddHomeworkActivityView mIAddHomeworkView;
     private Activity mActivity;
     private LogicService mService;
 
-    public AddHomeworkManage(IAddHomeworkView iAddHomeworkView) {
+    public AddHomeworkManage(IAddHomeworkActivityView iAddHomeworkView) {
         this.mIAddHomeworkView = iAddHomeworkView;
         this.mActivity = (Activity) iAddHomeworkView;
         Intent intent = new Intent(mActivity, LogicService.class);

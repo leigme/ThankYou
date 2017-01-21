@@ -10,7 +10,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.aboutus.bean.AboutUsBean;
-import com.yhcloud.thankyou.module.aboutus.view.IAboutUsView;
+import com.yhcloud.thankyou.module.aboutus.view.IAboutUsActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -24,11 +24,11 @@ import java.text.MessageFormat;
  */
 
 public class AboutUsManage {
-    private IAboutUsView mIAboutUsView;
+    private IAboutUsActivityView mIAboutUsView;
     private Activity mActivity;
     private LogicService mService;
 
-    public AboutUsManage(IAboutUsView iAboutUsView) {
+    public AboutUsManage(IAboutUsActivityView iAboutUsView) {
         this.mIAboutUsView = iAboutUsView;
         this.mActivity = (Activity) mIAboutUsView;
 

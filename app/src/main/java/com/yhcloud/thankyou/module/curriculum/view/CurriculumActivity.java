@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.curriculum.adapter.CurriculumAdapter;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
 import com.yhcloud.thankyou.module.curriculum.manage.CurriculumManage;
@@ -18,7 +19,7 @@ import com.yhcloud.thankyou.utils.DividerGridItemDecoration;
 
 import java.util.ArrayList;
 
-public class CurriculumActivity extends AppCompatActivity implements ICurriculumView {
+public class CurriculumActivity extends ABaseActivity implements ICurriculumActivityView {
 
     private LinearLayout llBack;
     private TextView tvTitle, tvDefault;

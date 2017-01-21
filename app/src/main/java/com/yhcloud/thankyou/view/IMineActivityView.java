@@ -1,7 +1,7 @@
 package com.yhcloud.thankyou.view;
 
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.mInterface.IBaseView;
+import com.yhcloud.thankyou.mInterface.IBaseActivityView;
 
 import java.util.ArrayList;
 
@@ -9,6 +9,6 @@ import java.util.ArrayList;
  * Created by leig on 2016/12/4.
  */
 
-public interface IMineView extends IBaseView{
+public interface IMineActivityView extends IBaseActivityView {
     void showList(ArrayList<FunctionBean> list);
 }

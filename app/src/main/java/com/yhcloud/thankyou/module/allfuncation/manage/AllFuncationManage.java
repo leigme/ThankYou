@@ -8,7 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.module.allfuncation.view.IAllFuncationView;
+import com.yhcloud.thankyou.module.allfuncation.view.IAllFuncationActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 
 import java.util.ArrayList;
@@ -19,13 +19,13 @@ import java.util.ArrayList;
 
 public class AllFuncationManage {
 
-    private IAllFuncationView mIAllFuncationView;
+    private IAllFuncationActivityView mIAllFuncationView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<FunctionBean> mBeen;
     private boolean edited;
 
-    public AllFuncationManage(IAllFuncationView iAllFuncationView) {
+    public AllFuncationManage(IAllFuncationActivityView iAllFuncationView) {
         this.mIAllFuncationView = iAllFuncationView;
         this.mActivity = (Activity) mIAllFuncationView;
         Intent intent = new Intent(mActivity, LogicService.class);

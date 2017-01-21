@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.allfuncation.adapter.AllFuncationListAdapter;
 import com.yhcloud.thankyou.module.allfuncation.manage.AllFuncationManage;
 import com.yhcloud.thankyou.utils.Tools;
@@ -25,7 +26,7 @@ import com.yhcloud.thankyou.utils.myview.drag.RecycleCallBack;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class AllFuncationActivity extends AppCompatActivity implements IAllFuncationView {
+public class AllFuncationActivity extends ABaseActivity implements IAllFuncationActivityView {
 
     private String TAG = getClass().getSimpleName();
 

@@ -12,7 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.bean.TeacherBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.module.classteachers.view.IClassTeacherListView;
+import com.yhcloud.thankyou.module.classteachers.view.IClassTeacherListActivityView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,11 +26,11 @@ import java.util.ArrayList;
 
 public class ClassTeacherListManage {
 
-    private IClassTeacherListView mIClassTeacherListView;
+    private IClassTeacherListActivityView mIClassTeacherListView;
     private Activity mActivity;
     private LogicService mService;
 
-    public ClassTeacherListManage(IClassTeacherListView iClassTeacherListView) {
+    public ClassTeacherListManage(IClassTeacherListActivityView iClassTeacherListView) {
         this.mIClassTeacherListView = iClassTeacherListView;
         this.mActivity = (Activity) mIClassTeacherListView;
         Intent intent = new Intent(mActivity, LogicService.class);

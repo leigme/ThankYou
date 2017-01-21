@@ -15,7 +15,7 @@ import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationDetailActivity;
-import com.yhcloud.thankyou.module.classnotification.view.IClassNotificationView;
+import com.yhcloud.thankyou.module.classnotification.view.IClassNotificationActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -32,7 +32,7 @@ public class ClassNotificationManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IClassNotificationView mIClassNotificationView;
+    private IClassNotificationActivityView mIClassNotificationView;
     private Activity mActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
@@ -40,7 +40,7 @@ public class ClassNotificationManage {
     private ArrayList<ClassNotificationBean> mBeen;
     private boolean refreshing;
 
-    public ClassNotificationManage(IClassNotificationView iClassNotificationView) {
+    public ClassNotificationManage(IClassNotificationActivityView iClassNotificationView) {
         this.mIClassNotificationView = iClassNotificationView;
         this.mActivity = (Activity) mIClassNotificationView;
         Intent intent = new Intent(mActivity, LogicService.class);

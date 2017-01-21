@@ -10,10 +10,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.aboutus.manage.AboutUsManage;
 import com.yhcloud.thankyou.utils.Constant;
 
-public class AboutUsActivity extends AppCompatActivity implements IAboutUsView{
+public class AboutUsActivity extends ABaseActivity implements IAboutUsActivityView {
 
     //视图控件
     private LinearLayout llBack;

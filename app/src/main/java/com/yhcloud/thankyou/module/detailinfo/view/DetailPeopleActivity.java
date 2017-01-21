@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.detailinfo.adapter.DetailPeopleListAdapter;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
@@ -23,7 +24,7 @@ import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
-public class DetailPeopleActivity extends AppCompatActivity implements IDetailPeopleView {
+public class DetailPeopleActivity extends ABaseActivity implements IDetailPeopleActivityView {
 
     //视图控件
     private LinearLayout llBack, llNameTitle, llOfficeTitle, llSendMessage, llSentProps;

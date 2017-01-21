@@ -3,7 +3,6 @@ package com.yhcloud.thankyou.view;
 import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -12,7 +11,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.manage.WebManage;
 import com.yhcloud.thankyou.utils.myview.MyWebView;
 
-public class WebActivity extends AppCompatActivity implements IWebView {
+public class WebActivity extends AppCompatActivity implements IWebActivityView {
 
     //视图控件
     private LinearLayout llBack;

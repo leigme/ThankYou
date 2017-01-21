@@ -11,11 +11,10 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.module.detailinfo.bean.DetailPeopleInfoBean;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
-import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserRoleBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.module.detailinfo.view.IDetailPeopleView;
+import com.yhcloud.thankyou.module.detailinfo.view.IDetailPeopleActivityView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,14 +29,14 @@ public class DetailPeopleManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IDetailPeopleView mIDetailPeopleView;
+    private IDetailPeopleActivityView mIDetailPeopleView;
     private Activity mActivity;
     private LogicService mService;
     private String uId;
     private int roleId;
     private boolean edited;
 
-    public DetailPeopleManage(IDetailPeopleView iDetailPeopleView) {
+    public DetailPeopleManage(IDetailPeopleActivityView iDetailPeopleView) {
         this.mIDetailPeopleView = iDetailPeopleView;
         this.mActivity = (Activity) mIDetailPeopleView;
         if (null != mActivity.getIntent()) {

@@ -1,6 +1,7 @@
 package com.yhcloud.thankyou.module.homework.view;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,6 +40,7 @@ public class AddPhotoActivity extends AppCompatActivity implements IAddPhotoView
     private EditText etContent;
     private RecyclerView rvPhotoList;
     private ProgressDialog mProgressDialog;
+    private Dialog mDialog;
     //适配器
     private AddPhotoListAdapter apla;
     //管理器
@@ -67,7 +70,7 @@ public class AddPhotoActivity extends AppCompatActivity implements IAddPhotoView
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.ll_header_left:
-                        finish();
+                        mManage.closePage();
                         break;
                 }
             }
@@ -82,6 +85,7 @@ public class AddPhotoActivity extends AppCompatActivity implements IAddPhotoView
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 
@@ -127,11 +131,7 @@ public class AddPhotoActivity extends AppCompatActivity implements IAddPhotoView
 
     @Override
     public void init() {
-        // BEGIN_INCLUDE(camera_permission_request)
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
-        // Provide an additional rationale to the user if the permission was not granted
-        // and the user would benefit from additional context for the use of the permission.
-        // For example if the user has previously denied the permission.
             Tools.print(TAG, "Displaying camera permission rationale to provide additional context.");
             Snackbar.make(container, R.string.loadcamera, Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.ok, new View.OnClickListener() {
@@ -141,10 +141,8 @@ public class AddPhotoActivity extends AppCompatActivity implements IAddPhotoView
                         }
                     }).show();
         } else {
-        // Camera permission has not been granted yet. Request it directly.
             ActivityCompat.requestPermissions(AddPhotoActivity.this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA);
         }
-        // END_INCLUDE(camera_permission_request)
     }
 
     @Override
@@ -187,11 +185,33 @@ public class AddPhotoActivity extends AppCompatActivity implements IAddPhotoView
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CAMERA) {
-        // BEGIN_INCLUDE(permission_result)
-        // Received permission result for camera permission.
             Tools.print(TAG, "Received response for Camera permission request.");
-        // Check if the only required permission has been granted
         }
+    }
+
+    @Override
+    public void showDialog() {
+        mDialog = new Dialog(this, R.style.MyDialog);
+        mDialog.setContentView(R.layout.dialog_integral);
+        TextView tvTitle = (TextView) mDialog.findViewById(R.id.tv_dialog_title);
+        tvTitle.setText("");
+        TextView tvMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
+        tvMsg.setText("提交之后将无法更改,是否确认提交本次作业？");
+        Button send = (Button) mDialog.findViewById(R.id.btn_dialog_send);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mManage.updateStudentHomework();
+            }
+        });
+        Button cancel = (Button) mDialog.findViewById(R.id.btn_dialog_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
+        mDialog.show();
     }
 
     @Override
@@ -199,5 +219,10 @@ public class AddPhotoActivity extends AppCompatActivity implements IAddPhotoView
         super.onActivityResult(requestCode, resultCode, data);
         // 图片选择结果回调
         mManage.result(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        mManage.closePage();
     }
 }

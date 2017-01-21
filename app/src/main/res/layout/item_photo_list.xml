@@ -15,6 +15,7 @@
             android:layout_height="80dp"
             android:scaleType="fitCenter"
             android:id="@+id/iv_photo_image"
+            android:background="@drawable/round_edittext"
             android:src="@mipmap/add_photo_image"/>
         <ImageView
             android:layout_width="30dp"

@@ -8,14 +8,15 @@
     android:orientation="vertical"
     tools:context="com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementActivity">
     <include layout="@layout/header"/>
-    <RelativeLayout
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/srl_schoolannouncement_list"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp">
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/rv_schoolannouncement_list"></android.support.v7.widget.RecyclerView>
-    </RelativeLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

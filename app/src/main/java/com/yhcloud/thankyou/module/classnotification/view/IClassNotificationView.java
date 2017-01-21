@@ -12,4 +12,5 @@ import java.util.ArrayList;
 public interface IClassNotificationView extends IBaseView {
     void showRightMenu();
     void showList(ArrayList<ClassNotificationBean> list);
+    void completeRefreshList();
 }

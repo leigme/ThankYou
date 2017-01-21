@@ -3,26 +3,26 @@ package com.yhcloud.thankyou.module.homework.bean;
 import java.io.Serializable;
 
 /**
- * Created by Administrator on 2017/1/11.
+ * Created by Administrator on 2017/1/19.
  */
 
 public class TeacherHomeworkBean implements Serializable {
 
     /**
-     * HomeworkId : 469
-     * ChapterId : 1001
+     * HomeworkId : 510
+     * ChapterId : 1416
      * CourseId : 1001
-     * PrepBookId : 4616
+     * PrepBookId : 4796
      * VersionId : 1001
-     * Title : 入学教育
+     * Title : 第一组
      * Status : 2
-     * ReceiveNum : 1
-     * url : http://www.k12chn.com/m07/m0750P07/m0750P07001/homeworkId/469/UserId/3237
+     * ReceiveNum  : 1
+     * url : http://www.k12chn.com/m07/m0750P07/m0750P07001/homeworkId/510/UserId/3237
      * Subject : 语文
      * UserId : 3237
-     * SetDevice : 0 [2:移动端]
-     * CreateTime : 2017-01-06 11:59:43
-     * ClassName : 三年级2班
+     * SetDevice : 0
+     * CreateTime : 2017-01-18 16:14:59
+     * ClassName :
      */
 
     private String HomeworkId;
@@ -152,4 +152,3 @@ public class TeacherHomeworkBean implements Serializable {
         this.ClassName = ClassName;
     }
 }
-

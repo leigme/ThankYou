@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.util.Log;
 import android.util.SparseArray;
 import android.widget.ImageView;
@@ -23,8 +24,12 @@ import com.yhcloud.thankyou.module.homework.view.HomeworkActivity;
 import com.yhcloud.thankyou.module.propslist.view.PropsListActivity;
 import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementActivity;
 import com.yhcloud.thankyou.view.EaseChatActivity;
+import com.yuyh.library.imgsel.ImageLoader;
+import com.yuyh.library.imgsel.ImgSelConfig;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +41,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class Tools {
 
+    //获取版本名字
     public static String getAppVersionName(Context context) {
         String versionName = "";
         try {
@@ -49,6 +55,7 @@ public class Tools {
         return versionName;
     }
 
+    //获取版本号
     public static int getAppVersionCode(Context context) {
         int versioncode = 0;
         try {
@@ -62,6 +69,7 @@ public class Tools {
         return versioncode;
     }
 
+    //圆形图片加载
     public static void GlideCircleImageUrl(Context context, String path, ImageView imageView) {
         Glide.with(context)
                 .load(Constant.SERVICEADDRESS + path)
@@ -71,6 +79,7 @@ public class Tools {
                 .into(imageView);
     }
 
+    //圆形图片加载,传入自定义占位图片
     public static void GlideCircleImageUrl(Context context, String path, int defaultId, ImageView imageView) {
         Glide.with(context)
                 .load(Constant.SERVICEADDRESS + path)
@@ -80,6 +89,7 @@ public class Tools {
                 .into(imageView);
     }
 
+    //图片加载
     public static void GlideImageUrl(Context context, String path, ImageView imageView) {
         Glide.with(context)
                 .load(Constant.SERVICEADDRESS + path)
@@ -97,6 +107,7 @@ public class Tools {
         return m.matches();
     }
 
+    //类型图标
     public static int getFileTypeImage(String str) {
         int resourceTypeId = R.mipmap.icon_account_all;
         str = str.trim();
@@ -119,6 +130,7 @@ public class Tools {
         return resourceTypeId;
     }
 
+    //初始化功能列表
     public static SparseArray<FunctionBean> initFunction(Context context) {
         SparseArray<FunctionBean> sparseArray = new SparseArray<>();
         sparseArray.append(0, new FunctionBean(0, 0, R.mipmap.icon_function_all, "全部应用", new Intent(context, AllFuncationActivity.class)));
@@ -146,6 +158,7 @@ public class Tools {
         return sparseArray;
     }
 
+    //类型枚举
     public static class FileTypeImage {
         private String mFileType;
         private int mResourceId;
@@ -172,9 +185,115 @@ public class Tools {
         }
     }
 
+    //打印信息方法
     public static void print(String tag, String msg) {
         if (Constant.printLog) {
             Log.e(tag, msg);
         }
+    }
+
+    //数字转换方法
+    //num 表示数字，lower表示小写，upper表示大写
+    private static final String[] numList = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+    private static final String[] lowerList = { "零", "一", "二", "三", "四", "五", "六", "七", "八", "九"};
+    /**
+     * 数字转化为小写的汉字
+     *
+     * @param num 将要转化的数字
+     * @return
+     */
+    public static String toChineseLower(int num){
+        return format(num);
+    }
+
+    public static String format(int num) {
+        String strNum = String.valueOf(num);
+        if (0 < num && num < 10) {
+            for (int i = 0; i < strNum.length(); i++) {
+                for (int j = 0; j < numList.length; j++) {
+                    if (numList[j].equals(String.valueOf(strNum.charAt(i)))) {
+                        strNum = lowerList[j];
+                        return strNum;
+                    }
+                }
+            }
+        }
+        return strNum;
+    }
+
+    //数字转选项字母
+    public static String getSelectLetter(int num) {
+        ArrayList<String> list = new ArrayList<>();
+        for (char x = 'A'; x < 'Z'; x++ ) {
+            list.add(String.valueOf(x));
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (i == num) {
+                return list.get(num);
+            }
+        }
+        return "";
+    }
+
+    //选项字符串转数字
+    public static int getSelectNum(String s) {
+        String ss = s.toUpperCase();
+        ArrayList<String> list = new ArrayList<>();
+        for (char x = 'A'; x < 'Z'; x++ ) {
+            list.add(String.valueOf(x));
+        }
+        for (int i = 0; i < list.size(); i++) {
+            if (ss.equals(list.get(i))) {
+                return i;
+            }
+        }
+        return 0;
+    }
+
+
+
+    public static ImgSelConfig getImgSelConfig(Context context) {
+        // 自定义图片加载器
+        ImageLoader loader = new ImageLoader() {
+            @Override
+            public void displayImage(Context context, String path, ImageView imageView) {
+                // TODO 在这边可以自定义图片加载库来加载ImageView，例如Glide、Picasso、ImageLoader等
+                Glide.with(context).load(path).into(imageView);
+            }
+        };
+
+        ImgSelConfig config = new ImgSelConfig.Builder(context, loader)
+                // 是否多选
+                .multiSelect(true)
+                // “确定”按钮背景色
+                .btnBgColor(Color.parseColor("#00000000"))
+                // “确定”按钮文字颜色
+                .btnTextColor(Color.WHITE)
+                // 使用沉浸式状态栏
+                .statusBarColor(Color.parseColor("#6BBE51"))
+                // 返回图标ResId
+                .backResId(R.mipmap.icon_go_back)
+                // 标题
+                .title("图片")
+                // 标题文字颜色
+                .titleColor(Color.WHITE)
+                // TitleBar背景色
+                .titleBgColor(Color.parseColor("#6BBE51"))
+                // 裁剪大小。needCrop为true的时候配置
+                .cropSize(1, 1, 200, 200)
+                .needCrop(true)
+                // 第一个是否显示相机
+                .needCamera(true)
+                // 最大选择图片数量
+                .maxNum(9)
+                .build();
+        return config;
+    }
+
+    //获取当前时间
+    public static String getNowDateTime() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String nowTime = format.format(new Date());
+        return nowTime;
     }
 }

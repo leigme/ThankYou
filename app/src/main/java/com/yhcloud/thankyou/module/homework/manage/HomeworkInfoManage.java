@@ -7,38 +7,30 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.Bundle;
 import android.os.IBinder;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.ICallListener;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
-import com.yhcloud.thankyou.module.homework.view.AddPhotoActivity;
-import com.yhcloud.thankyou.module.homework.adapter.StudentQuestionListAdpater;
-import com.yhcloud.thankyou.module.homework.adapter.StudentQuestionSubjectiveListAdapter;
-import com.yhcloud.thankyou.module.homework.bean.HomeworkInfoViewPagerBean;
-import com.yhcloud.thankyou.module.homework.bean.QuestionBean;
+import com.yhcloud.thankyou.module.homework.bean.AnswerBean;
 import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
 import com.yhcloud.thankyou.module.homework.bean.StudentQuestionBean;
 import com.yhcloud.thankyou.module.homework.bean.TeacherHomeworkBean;
+import com.yhcloud.thankyou.module.homework.bean.SendAnswerBean;
+import com.yhcloud.thankyou.module.homework.bean.TeacherQuestionBean;
+import com.yhcloud.thankyou.module.homework.view.AddPhotoActivity;
+import com.yhcloud.thankyou.module.homework.bean.HomeworkInfoViewPagerBean;
+import com.yhcloud.thankyou.module.homework.view.HomeworkStudentViews;
+import com.yhcloud.thankyou.module.homework.view.HomeworkTeacherViews;
 import com.yhcloud.thankyou.module.homework.view.IHomeworkInfoView;
-import com.yhcloud.thankyou.module.image.view.BigImageActivity;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.utils.Constant;
-import com.yhcloud.thankyou.utils.DividerItemDecoration;
 import com.yhcloud.thankyou.utils.Tools;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
-import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -59,10 +51,14 @@ public class HomeworkInfoManage {
     private TeacherHomeworkBean mTeacherHomeworkBean;
     private StudentHomeworkBean mStudentHomeworkBean;
     private ArrayList<StudentQuestionBean> mStudentQuestionBeen;
+    private ArrayList<TeacherQuestionBean> mTeacherQuestionBeen;
     private ArrayList<HomeworkInfoViewPagerBean> mViewPagerBeen;
+    private ArrayList<AnswerBean> mBeen;
+    private SendAnswerBean sendAnswerBean;
     private int page;
     private DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private String sTime;
+    private boolean status;
 
     //初始化管理器并连接服务
     public HomeworkInfoManage(IHomeworkInfoView iHomeworkInfoView) {
@@ -73,9 +69,9 @@ public class HomeworkInfoManage {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 mService = ((LogicService.MyBinder)service).getService();
+                mBeen = new ArrayList<>();
                 mInflater = LayoutInflater.from(mActivity);
                 roleId = mService.getUserInfo().getUserInfoBean().getUserRoleId();
-                mViewPagerBeen = new ArrayList<>();
                 init(roleId);
             }
 
@@ -95,19 +91,21 @@ public class HomeworkInfoManage {
         switch (roleId) {
             case 1004:
                 mTeacherHomeworkBean = (TeacherHomeworkBean) intent.getSerializableExtra("teacherHomeworkBean");
+                getTeacherHomeworkInfo(page);
                 break;
             case 1010:
                 mTeacherHomeworkBean = (TeacherHomeworkBean) intent.getSerializableExtra("teacherHomeworkBean");
+                getTeacherHomeworkInfo(page);
                 break;
             case 1011:
                 mStudentHomeworkBean = (StudentHomeworkBean) intent.getSerializableExtra("studentHomeworkBean");
-                mStudentQuestionBeen = new ArrayList<>();
-                if ("1".equals(mStudentHomeworkBean.getStatus())) {
-
+                if ("2".equals(mStudentHomeworkBean.getStatus())) {
+                    status = false;
+                    mIHomeworkInfoView.setRightTitle("交作业");
                 } else {
-                    mIHomeworkInfoView.setRightTitle("提交");
+                    status = true;
                 }
-                getStudentHomeworkInfo();
+                getStudentHomeworkInfo(page);
                 //设置作业本开始时间
                 sTime = format.format(new Date());
                 Tools.print(TAG, "当前时间:" + sTime);
@@ -115,12 +113,13 @@ public class HomeworkInfoManage {
             case 1012:
                 mStudentHomeworkBean = (StudentHomeworkBean) intent.getSerializableExtra("studentHomeworkBean");
                 mStudentQuestionBeen = new ArrayList<>();
-                if ("1".equals(mStudentHomeworkBean.getStatus())) {
-
+                if ("2".equals(mStudentHomeworkBean.getStatus())) {
+                    status = false;
+                    mIHomeworkInfoView.setRightTitle("交作业");
                 } else {
-                    mIHomeworkInfoView.setRightTitle("提交");
+                    status = true;
                 }
-                getStudentHomeworkInfo();
+                getStudentHomeworkInfo(page);
                 //设置作业本开始时间
                 sTime = format.format(new Date());
                 Tools.print(TAG, "当前时间:" + sTime);
@@ -129,10 +128,48 @@ public class HomeworkInfoManage {
     }
 
     //拿去老师作业详细信息
-    public void getTeacherHomeworkInfo() {}
+    public void getTeacherHomeworkInfo(final int pageNum) {
+        mIHomeworkInfoView.showLoading(R.string.loading_data);
+        mService.getTeacherHomeworkInfo(mTeacherHomeworkBean.getHomeworkId(), new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        String jsonResult = jsonObject.getString("QuestionList");
+                        if (null != jsonResult && !"".equals(jsonResult) && !"[]".equals(jsonResult)) {
+                            mTeacherQuestionBeen = new ArrayList<>();
+                            Gson gson = new Gson();
+                            ArrayList<TeacherQuestionBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<TeacherQuestionBean>>(){}.getType());
+                            mTeacherQuestionBeen.addAll(list);
+                            initTeacherViewPager(mTeacherQuestionBeen);
+                            mIHomeworkInfoView.selectViewPager(pageNum);
+                        }
+                    } else {
+                        String msg = jsonObject.getString("errorMsg");
+                        if (null != msg && !"".equals(msg)) {
+                            mIHomeworkInfoView.showToastMsg(msg);
+                        } else {
+                            mIHomeworkInfoView.showToastMsg(R.string.error_connection);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    mIHomeworkInfoView.showToastMsg(R.string.error_connection);
+                    mIHomeworkInfoView.hiddenLoading();
+                }
+                mIHomeworkInfoView.hiddenLoading();
+            }
+
+            @Override
+            public void callFailed() {
+
+            }
+        });
+    }
 
     //拿去学生作业详细信息
-    public void getStudentHomeworkInfo() {
+    public void getStudentHomeworkInfo(final int pageNum) {
         mIHomeworkInfoView.showLoading(R.string.loading_data);
         mService.getStudentHomeworkInfo(mStudentHomeworkBean.getWorkId(), new ICallListener<String>() {
             @Override
@@ -143,9 +180,11 @@ public class HomeworkInfoManage {
                         String jsonResult = jsonObject.getString("QuestionList");
                         if (null != jsonResult && !"".equals(jsonResult) && !"[]".equals(jsonResult)) {
                             Gson gson = new Gson();
+                            mStudentQuestionBeen = new ArrayList<>();
                             ArrayList<StudentQuestionBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<StudentQuestionBean>>(){}.getType());
                             mStudentQuestionBeen.addAll(list);
                             initStudentViewPager(mStudentQuestionBeen);
+                            mIHomeworkInfoView.selectViewPager(pageNum);
                         }
                     } else {
                         String msg = jsonObject.getString("errorMsg");
@@ -171,220 +210,80 @@ public class HomeworkInfoManage {
     }
 
     public void initStudentViewPager(final ArrayList<StudentQuestionBean> list) {
+        mViewPagerBeen = new ArrayList<>();
+        HomeworkStudentViews homeworkStudentViews = new HomeworkStudentViews(mActivity);
         for (int i = 0, n = list.size(); i < n; i++) {
-            StudentQuestionBean questionBean = list.get(i);
+            StudentQuestionBean studentQuestionBean = list.get(i);
             HomeworkInfoViewPagerBean hivpb = null;
-            switch (questionBean.getResourceType()) {
+            if (null != studentQuestionBean.getResourceType()) {
+                switch (studentQuestionBean.getResourceType()) {
+                    case "0":
+                        //单选题
+                        hivpb = new HomeworkInfoViewPagerBean();
+                        hivpb.setView(homeworkStudentViews.getRadioView(studentQuestionBean, i, list.size(), status));
+                        break;
+                    case "2":
+                        //判断题
+                        hivpb = new HomeworkInfoViewPagerBean();
+                        hivpb.setView(homeworkStudentViews.getRadioView(studentQuestionBean, i, list.size(), status));
+                        break;
+                    case "3":
+                        //多选题
+                        hivpb = new HomeworkInfoViewPagerBean();
+                        hivpb.setView(homeworkStudentViews.getChoiceView(studentQuestionBean, i, list.size(), status));
+                        break;
+                    case "4":
+                        //填空题
+                        hivpb = new HomeworkInfoViewPagerBean();
+                        hivpb.setView(homeworkStudentViews.getBlankView(studentQuestionBean, i, list.size(), status));
+                        break;
+                    default:
+                        //主观题
+                        hivpb = new HomeworkInfoViewPagerBean();
+                        hivpb.setView(homeworkStudentViews.getSubjectiveView(studentQuestionBean, i, list.size()));
+                        break;
+                }
+            } else {
+                mIHomeworkInfoView.showToastMsg("作业记录不全");
+                mActivity.finish();
+                return;
+            }
+            mViewPagerBeen.add(hivpb);
+        }
+        mIHomeworkInfoView.showViewPager(mViewPagerBeen);
+    }
+
+    public void initTeacherViewPager(ArrayList<TeacherQuestionBean> list) {
+        mViewPagerBeen = new ArrayList<>();
+        HomeworkTeacherViews homeworkTeacherViews = new HomeworkTeacherViews(mActivity);
+        HomeworkInfoViewPagerBean hivpb;
+        for (int i = 0; i < list.size(); i++) {
+            TeacherQuestionBean teacherQuestionBean = list.get(i);
+            switch (list.get(i).getQuestionType()) {
+                //单选题
                 case "0":
-                    //单选题
                     hivpb = new HomeworkInfoViewPagerBean();
-                    View radioView = mInflater.inflate(R.layout.fragment_homeworkinfo_radio, null);
-                    TextView radioTitle = (TextView) radioView.findViewById(R.id.tv_homework_title);
-                    TextView radioTitleName = (TextView) radioView.findViewById(R.id.tv_homework_title_name);
-                    TextView radioQuestionNumber = (TextView) radioView.findViewById(R.id.question_number);
-                    radioQuestionNumber.setText(MessageFormat.format("{0}/{1}", i + 1, n));
-                    RecyclerView radioQuestionList = (RecyclerView) radioView.findViewById(R.id.rv_homework_list);
-                    radioTitle.setText(questionBean.getQuestionTitle());
-                    radioTitleName.setText(questionBean.getQuestionTitleName());
-                    final ArrayList<QuestionBean> radioQuestionBeanArrayList = new ArrayList<>();
-                    for (String s: questionBean.getQuestionContent()) {
-                        QuestionBean qb = new QuestionBean(s);
-                        radioQuestionBeanArrayList.add(qb);
-                    }
-                    for (String s: questionBean.getAnswerContent()) {
-                        radioQuestionBeanArrayList.get(getRadio(s)).setStatus(true);
-                    }
-                    hivpb.setBeen(radioQuestionBeanArrayList);
-                    final StudentQuestionListAdpater radioStudentQuestionListAdpater = new StudentQuestionListAdpater(mActivity, radioQuestionBeanArrayList);
-                    radioQuestionList.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL_LIST));
-                    radioQuestionList.setLayoutManager(new LinearLayoutManager(mActivity));
-                    if (!"1".equals(mStudentHomeworkBean.getStatus())) {
-                        radioStudentQuestionListAdpater.setIOnClickListener(new IOnClickListener() {
-                            @Override
-                            public void OnItemClickListener(View view, int position) {
-                                for (QuestionBean qb: radioQuestionBeanArrayList) {
-                                    qb.setStatus(false);
-                                }
-                                radioQuestionBeanArrayList.get(position).setStatus(true);
-                                radioStudentQuestionListAdpater.refreshData(radioQuestionBeanArrayList);
-                            }
-
-                            @Override
-                            public void OnItemLongClickListener(View view, int position) {
-
-                            }
-                        });
-                    }
-                    radioQuestionList.setAdapter(radioStudentQuestionListAdpater);
-                    hivpb.setAdpater(radioStudentQuestionListAdpater);
-                    hivpb.setView(radioView);
+                    hivpb.setView(homeworkTeacherViews.getObjectiveView(teacherQuestionBean, i, list.size()));
                     break;
+                //判断题
                 case "2":
-                    //判断题
                     hivpb = new HomeworkInfoViewPagerBean();
-                    View judgmentView = mInflater.inflate(R.layout.fragment_homeworkinfo_radio, null);
-                    TextView judgmentTitle = (TextView) judgmentView.findViewById(R.id.tv_homework_title);
-                    TextView judgmentTitleName = (TextView) judgmentView.findViewById(R.id.tv_homework_title_name);
-                    TextView judgmentQuestionNumber = (TextView) judgmentView.findViewById(R.id.question_number);
-                    judgmentQuestionNumber.setText(MessageFormat.format("{0}/{1}", i + 1, n));
-                    RecyclerView judgmentQuestionList = (RecyclerView) judgmentView.findViewById(R.id.rv_homework_list);
-                    judgmentTitle.setText(questionBean.getQuestionTitle());
-                    judgmentTitleName.setText(questionBean.getQuestionTitleName());
-                    final ArrayList<QuestionBean> judgmentQuestionBeanArrayList = new ArrayList<>();
-                    for (String s: questionBean.getQuestionContent()) {
-                        QuestionBean qb = new QuestionBean(s);
-                        judgmentQuestionBeanArrayList.add(qb);
-                    }
-                    for (String s: questionBean.getAnswerContent()) {
-                        judgmentQuestionBeanArrayList.get(getRadio(s)).setStatus(true);
-                    }
-                    hivpb.setBeen(judgmentQuestionBeanArrayList);
-                    final StudentQuestionListAdpater judgmentStudentQuestionListAdpater = new StudentQuestionListAdpater(mActivity, judgmentQuestionBeanArrayList);
-                    judgmentQuestionList.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL_LIST));
-                    judgmentQuestionList.setLayoutManager(new LinearLayoutManager(mActivity));
-                    if (!"1".equals(mStudentHomeworkBean.getStatus())) {
-                        judgmentStudentQuestionListAdpater.setIOnClickListener(new IOnClickListener() {
-                            @Override
-                            public void OnItemClickListener(View view, int position) {
-                                for (QuestionBean qb: judgmentQuestionBeanArrayList) {
-                                    qb.setStatus(false);
-                                }
-                                judgmentQuestionBeanArrayList.get(position).setStatus(true);
-                                judgmentStudentQuestionListAdpater.refreshData(judgmentQuestionBeanArrayList);
-                            }
-
-                            @Override
-                            public void OnItemLongClickListener(View view, int position) {
-
-                            }
-                        });
-                    }
-                    judgmentQuestionList.setAdapter(judgmentStudentQuestionListAdpater);
-                    hivpb.setAdpater(judgmentStudentQuestionListAdpater);
-                    hivpb.setView(judgmentView);
+                    hivpb.setView(homeworkTeacherViews.getObjectiveView(teacherQuestionBean, i, list.size()));
                     break;
+                //多选题
                 case "3":
-                    //多选题
                     hivpb = new HomeworkInfoViewPagerBean();
-                    View choiceView = mInflater.inflate(R.layout.fragment_homeworkinfo_radio, null);
-                    TextView choiceTitle = (TextView) choiceView.findViewById(R.id.tv_homework_title);
-                    TextView choiceTitleName = (TextView) choiceView.findViewById(R.id.tv_homework_title_name);
-                    TextView choiceQuestionNumber = (TextView) choiceView.findViewById(R.id.question_number);
-                    choiceQuestionNumber.setText(MessageFormat.format("{0}/{1}", i + 1, n));
-                    RecyclerView choiceQuestionList = (RecyclerView) choiceView.findViewById(R.id.rv_homework_list);
-                    choiceTitle.setText(questionBean.getQuestionTitle());
-                    choiceTitleName.setText(questionBean.getQuestionTitleName());
-                    final ArrayList<QuestionBean> choiceQuestionBeanArrayList = new ArrayList<>();
-                    for (String s: questionBean.getQuestionContent()) {
-                        QuestionBean qb = new QuestionBean(s);
-                        choiceQuestionBeanArrayList.add(qb);
-                    }
-                    for (String s: questionBean.getAnswerContent()) {
-                        choiceQuestionBeanArrayList.get(getRadio(s)).setStatus(true);
-                    }
-                    hivpb.setBeen(choiceQuestionBeanArrayList);
-                    final StudentQuestionListAdpater choiceStudentQuestionListAdpater = new StudentQuestionListAdpater(mActivity, choiceQuestionBeanArrayList);
-                    choiceQuestionList.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL_LIST));
-                    choiceQuestionList.setLayoutManager(new LinearLayoutManager(mActivity));
-                    if (!"1".equals(mStudentHomeworkBean.getStatus())) {
-                        choiceStudentQuestionListAdpater.setIOnClickListener(new IOnClickListener() {
-                            @Override
-                            public void OnItemClickListener(View view, int position) {
-                                if (choiceQuestionBeanArrayList.get(position).isStatus()) {
-                                    choiceQuestionBeanArrayList.get(position).setStatus(false);
-                                } else {
-                                    choiceQuestionBeanArrayList.get(position).setStatus(true);
-                                }
-                                choiceStudentQuestionListAdpater.refreshData(choiceQuestionBeanArrayList);
-                            }
-
-                            @Override
-                            public void OnItemLongClickListener(View view, int position) {
-
-                            }
-                        });
-                    }
-                    choiceQuestionList.setAdapter(choiceStudentQuestionListAdpater);
-                    hivpb.setAdpater(choiceStudentQuestionListAdpater);
-                    hivpb.setView(choiceView);
+                    hivpb.setView(homeworkTeacherViews.getObjectiveView(teacherQuestionBean, i, list.size()));
                     break;
+                //填空题
                 case "4":
-                    //填空题
                     hivpb = new HomeworkInfoViewPagerBean();
-                    View blankView = mInflater.inflate(R.layout.fragment_homeworkinfo_radio, null);
-                    TextView blankTitle = (TextView) blankView.findViewById(R.id.tv_homework_title);
-                    TextView blankTitleName = (TextView) blankView.findViewById(R.id.tv_homework_title_name);
-                    TextView blankQuestionNumber = (TextView) blankView.findViewById(R.id.question_number);
-                    blankQuestionNumber.setText(MessageFormat.format("{0}/{1}", i + 1, n));
-                    RecyclerView blankQuestionList = (RecyclerView) blankView.findViewById(R.id.rv_homework_list);
-                    blankTitle.setText(questionBean.getQuestionTitle());
-                    blankTitleName.setText(questionBean.getQuestionTitleName());
-                    final ArrayList<QuestionBean> blankQuestionBeanArrayList = new ArrayList<>();
-                    for (String s: questionBean.getQuestionContent()) {
-                        QuestionBean qb = new QuestionBean(s);
-                        blankQuestionBeanArrayList.add(qb);
-                    }
-//                    for (String s: questionBean.getAnswerContent()) {
-//                        blankQuestionBeanArrayList.get(getRadio(s)).setStatus(true);
-//                    }
-                    hivpb.setBeen(blankQuestionBeanArrayList);
-                    final StudentQuestionListAdpater blankStudentQuestionListAdpater = new StudentQuestionListAdpater(mActivity, blankQuestionBeanArrayList);
-                    blankQuestionList.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL_LIST));
-                    blankQuestionList.setLayoutManager(new LinearLayoutManager(mActivity));
-                    if (!"1".equals(mStudentHomeworkBean.getStatus())) {
-                        blankStudentQuestionListAdpater.setIOnClickListener(new IOnClickListener() {
-                            @Override
-                            public void OnItemClickListener(View view, int position) {
-                                for (QuestionBean qb: blankQuestionBeanArrayList) {
-                                    qb.setStatus(false);
-                                }
-                                blankQuestionBeanArrayList.get(position).setStatus(true);
-                                blankStudentQuestionListAdpater.refreshData(blankQuestionBeanArrayList);
-                            }
-
-                            @Override
-                            public void OnItemLongClickListener(View view, int position) {
-
-                            }
-                        });
-                    }
-                    blankQuestionList.setAdapter(blankStudentQuestionListAdpater);
-                    hivpb.setAdpater(blankStudentQuestionListAdpater);
-                    hivpb.setView(blankView);
+                    hivpb.setView(homeworkTeacherViews.getObjectiveView(teacherQuestionBean, i, list.size()));
                     break;
+                //主观题
                 default:
-                    //主观题
                     hivpb = new HomeworkInfoViewPagerBean();
-                    View subjectiveView = mInflater.inflate(R.layout.fragment_homeworkinfo_radio, null);
-                    TextView subjectiveTitle = (TextView) subjectiveView.findViewById(R.id.tv_homework_title);
-                    TextView subjectiveTitleName = (TextView) subjectiveView.findViewById(R.id.tv_homework_title_name);
-                    TextView subjectiveQuestionNumber = (TextView) subjectiveView.findViewById(R.id.question_number);
-                    subjectiveQuestionNumber.setText(MessageFormat.format("{0}/{1}", i + 1, n));
-                    RecyclerView subjectiveQuestionList = (RecyclerView) subjectiveView.findViewById(R.id.rv_homework_list);
-                    subjectiveTitle.setText(questionBean.getQuestionTitle());
-                    subjectiveTitleName.setText(questionBean.getQuestionTitleName());
-                    final ArrayList<String> subjectiveQuestionBeanArrayList = new ArrayList<>();
-                    for (String s: questionBean.getAnswerPic()) {
-                        subjectiveQuestionBeanArrayList.add("http://192.168.0.139/edu" + s);
-                    }
-                    final StudentQuestionSubjectiveListAdapter subjectiveStudentQuestionListAdpater = new StudentQuestionSubjectiveListAdapter(mActivity, subjectiveQuestionBeanArrayList);
-                    subjectiveQuestionList.setLayoutManager(new GridLayoutManager(mActivity, 4));
-                    subjectiveStudentQuestionListAdpater.setIOnClickListener(new IOnClickListener() {
-                        @Override
-                        public void OnItemClickListener(View view, int position) {
-                            Intent intent = new Intent(mActivity, BigImageActivity.class);
-                            intent.putExtra(Constant.PAGE_NUM, position);
-                            intent.putStringArrayListExtra(Constant.IMAGEURLS, subjectiveQuestionBeanArrayList);
-                            mActivity.startActivity(intent);
-                        }
-
-                        @Override
-                        public void OnItemLongClickListener(View view, int position) {
-
-                        }
-                    });
-                    subjectiveQuestionList.setAdapter(subjectiveStudentQuestionListAdpater);
-                    hivpb.setView(subjectiveView);
+                    hivpb.setView(homeworkTeacherViews.getSubjectiveView(teacherQuestionBean, i, list.size()));
                     break;
             }
             mViewPagerBeen.add(hivpb);
@@ -470,11 +369,41 @@ public class HomeworkInfoManage {
     }
 
     public void submitHomework() {
+        mIHomeworkInfoView.showLoading(R.string.loading_data);
+        sendAnswerBean = new SendAnswerBean();
         Tools.print(TAG, "提交作业~~~");
+        for (StudentQuestionBean studentQuestionBean : mStudentQuestionBeen) {
+            AnswerBean answerBean = new AnswerBean();
+            answerBean.setStartTime(sTime);
+            answerBean.setQuestionId(studentQuestionBean.getQusetionId());
+            answerBean.setScore(studentQuestionBean.getScore());
+            answerBean.setType(studentQuestionBean.getResourceType());
+            answerBean.setAnswerList((ArrayList<String>) studentQuestionBean.getAnswerContent());
+            answerBean.setEndTime(Tools.getNowDateTime());
+            mBeen.add(answerBean);
+        }
+        sendAnswerBean.setHomeworkId(mStudentHomeworkBean.getWorkId());
+        sendAnswerBean.setHomeworkTime(Tools.getNowDateTime());
+        sendAnswerBean.setHomeworkList(mBeen);
+        Gson gson = new Gson();
+        String jsonObject = gson.toJson(sendAnswerBean);
+        Tools.print(TAG, "提交的json为:" + jsonObject);
+        mService.sendStudentObjectiveHomework(jsonObject, new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                mIHomeworkInfoView.hiddenLoading();
+                mIHomeworkInfoView.showDialog();
+            }
 
+            @Override
+            public void callFailed() {
+                mIHomeworkInfoView.hiddenLoading();
+            }
+        });
     }
 
     public void closePage() {
+        mIHomeworkInfoView.hiddenLoading();
         mActivity.finish();
     }
 
@@ -482,23 +411,50 @@ public class HomeworkInfoManage {
     public void goPhoto() {
         Tools.print(TAG, "去拍照");
         Intent intent = new Intent(mActivity, AddPhotoActivity.class);
+        intent.putExtra("page", page);
+        intent.putExtra("workId", mStudentHomeworkBean.getWorkId());
+        Tools.print(TAG, "作业ID:" + mStudentHomeworkBean.getWorkId());
         Bundle bundle = new Bundle();
-        bundle.putSerializable("homeworkBean", mStudentQuestionBeen.get(page));
+        bundle.putSerializable("mStudentQuestionBeen", mStudentQuestionBeen.get(page));
         intent.putExtras(bundle);
         mActivity.startActivityForResult(intent, 101);
     }
 
-    public int getRadio(String s) {
-        String ss = s.toUpperCase();
-        ArrayList<String> list = new ArrayList<>();
-        for (char x = 'A'; x < 'Z'; x++ ) {
-            list.add(String.valueOf(x));
-        }
-        for (int i = 0; i < list.size(); i++) {
-            if (ss.equals(list.get(i))) {
-                return i;
+    public void updateStudentHomework() {
+        mIHomeworkInfoView.showLoading(R.string.loading_data);
+        mService.updateStudentHomework(mStudentHomeworkBean.getWorkId(), new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        closePage();
+                    } else {
+                        String msg = jsonObject.getString("errorMsg");
+                        if (null != msg && !"".equals(msg)) {
+                            mIHomeworkInfoView.showToastMsg(msg);
+                        } else {
+                            mIHomeworkInfoView.showToastMsg(R.string.error_connection);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    mIHomeworkInfoView.showToastMsg(R.string.error_connection);
+                    mIHomeworkInfoView.hiddenLoading();
+                }
+                mIHomeworkInfoView.hiddenLoading();
             }
-        }
-        return 0;
+
+            @Override
+            public void callFailed() {
+                mIHomeworkInfoView.showToastMsg(R.string.error_connection);
+                mIHomeworkInfoView.hiddenLoading();
+            }
+        });
+    }
+
+    public void refreshData(Intent data) {
+        page = data.getIntExtra("page", 0);
+        getStudentHomeworkInfo(page);
     }
 }

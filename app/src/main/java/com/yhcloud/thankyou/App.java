@@ -23,8 +23,15 @@ public class App extends Application {
         //业务逻辑服务
         Intent intent = new Intent(this, LogicService.class);
         startService(intent);
-
         //初始化环信
+        initEaseUI();
+
+
+        Log.e(TAG, "初始化APP结束...");
+    }
+
+    private void initEaseUI() {
+
         EMOptions options = new EMOptions();
         // 默认添加好友时，是不需要验证的，改成需要验证
         options.setAcceptInvitationAlways(false);
@@ -42,7 +49,9 @@ public class App extends Application {
 //        options.setDeleteMessagesAsExitGroup(getModel().isDeleteMessagesAsExitGroup());
 //        options.setAutoAcceptGroupInvitation(getModel().isAutoAcceptGroupInvitation());
         EaseUI.getInstance().init(getApplicationContext(), options);
+    }
 
-        Log.e(TAG, "初始化APP结束...");
+    private void initImgSelConfig() {
+
     }
 }

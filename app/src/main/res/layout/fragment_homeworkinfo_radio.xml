@@ -33,7 +33,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/question_number"
+                    android:id="@+id/tv_homework_page_num"
                     android:text=""/>
             </LinearLayout>
         </LinearLayout>
@@ -49,7 +49,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_homework_title_name"
+                android:id="@+id/tv_homework_title_value"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
                 android:layout_marginLeft="5dp"
@@ -59,7 +59,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/rv_homework_list"
-                android:layout_below="@+id/tv_homework_title_name">
+                android:layout_below="@+id/tv_homework_title_value">
             </android.support.v7.widget.RecyclerView>
             <TextView
                 android:layout_width="wrap_content"

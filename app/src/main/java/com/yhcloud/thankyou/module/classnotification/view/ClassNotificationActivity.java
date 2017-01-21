@@ -2,6 +2,7 @@ package com.yhcloud.thankyou.module.classnotification.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,10 +32,12 @@ public class ClassNotificationActivity extends AppCompatActivity implements ICla
     private TextView tvTitle, tvMenu;
     private RecyclerView rvList;
     private ProgressDialog mProgressDialog;
+    private SwipeRefreshLayout srlList;
     //适配器
     private ClassNotificationListAdapter cnla;
     //管理器
     private ClassNotificationManage mManage;
+    private boolean canGetMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +54,8 @@ public class ClassNotificationActivity extends AppCompatActivity implements ICla
     @Override
     public void initView() {
         llBack = (LinearLayout) findViewById(R.id.ll_header_left);
-//        llMenu = (LinearLayout) findViewById(R.id.ll_header_right);
         tvTitle = (TextView) findViewById(R.id.tv_header_title);
+        srlList = (SwipeRefreshLayout) findViewById(R.id.srl_classnotification_list);
         rvList = (RecyclerView) findViewById(R.id.rv_classnotification_list);
     }
 
@@ -69,6 +72,13 @@ public class ClassNotificationActivity extends AppCompatActivity implements ICla
             }
         };
         llBack.setOnClickListener(myOnClickListener);
+        SwipeRefreshLayout.OnRefreshListener mOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mManage.refreshList();
+            }
+        };
+        srlList.setOnRefreshListener(mOnRefreshListener);
     }
 
     @Override
@@ -78,6 +88,9 @@ public class ClassNotificationActivity extends AppCompatActivity implements ICla
 
     @Override
     public void showLoading(int msgId) {
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 
@@ -135,8 +148,19 @@ public class ClassNotificationActivity extends AppCompatActivity implements ICla
                     if(newState == RecyclerView.SCROLL_STATE_IDLE) {
                         int lastVisiblePosition = layoutManager.findLastVisibleItemPosition();
                         if (lastVisiblePosition >= layoutManager.getItemCount() - 1) {
-                            mManage.getMoreData();
+                            if (canGetMore) {
+                                mManage.getMoreData();
+                            }
                         }
+                    }
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if (0 < dy) {
+                        canGetMore = true;
+                    } else {
+                        canGetMore = false;
                     }
                 }
             });
@@ -154,6 +178,13 @@ public class ClassNotificationActivity extends AppCompatActivity implements ICla
             rvList.setAdapter(cnla);
         } else {
             cnla.refreshData(list);
+        }
+    }
+
+    @Override
+    public void completeRefreshList() {
+        if (null != srlList) {
+            srlList.setRefreshing(false);
         }
     }
 

@@ -1,27 +1,27 @@
 package com.yhcloud.thankyou.module.homework.bean;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by Administrator on 2017/1/12.
+ * Created by Administrator on 2017/1/19.
  */
 
 public class StudentQuestionBean implements Serializable {
 
     /**
-     * QusetionId : 825
+     * QusetionId : 859
      * score : 16
-     * HomeworkId : 439
+     * HomeworkId : 456
      * resultResultStatus :
      * AnswerPic : []
      * QuestionTitle : 题干6
-     * QuestionTitleName : 下面说法没有错的是（ ）
+     * QuestionTitleName : 下面说法没有错的是（      ）
      * ResourceType : 0
-     * AnswerContent : ["B"]
-     * IsRight : 2
-     * url : /edu/m17/M1722P01/M1722P01001/Id/825
-     * QuestionContent : ["A: 《女娲补天》和《夸父追日》都是童话故事。《女娲补天》和《夸父追日》都是童话故事。《女娲补天》和《夸父追日》都是童话故事。","B: \u201c130万个地球才能抵得上一个太阳。\u201d运用了打比方的说明方法。\u201c130万个地球才能抵得上一个太阳。\u201d运用了打比方的说明方法。\u201c130万个地球才能抵得上一个太阳。\u201d运用了打比方的说明方法。","B: \u201c他把零钱用光了。\u201d与\u201c教室光线充足。\u201d中的\u201c光\u201d字意思不一样。\u201c他把零钱用光了。\u201d与\u201c教室光线充足。\u201d中的\u201c光\u201d字意思不一样。\u201c他把零钱用光了。\u201d与\u201c教室光线充足。\u201d中的\u201c光\u201d字意思不一样。","B: 《学会查\u201c无字词典\u201d》中的\u201c无字词典\u201d是指生活里的学问。 《学会查\u201c无字词典\u201d》中的\u201c无字词典\u201d是指生活里的学问。 《学会查\u201c无字词典\u201d》中的\u201c无字词典\u201d是指生活里的学问。 "]
+     * AnswerContent : []
+     * IsRight :
+     * url : /edu/m17/M1722P01/M1722P01001/Id/859
+     * QuestionContent : ["A:  《女娲补天》和《夸父追日》都是童话故事。《女娲补天》和《夸父追日》都是童话故事。《女娲补天》和《夸父追日》都是童话故事。","B:  \u201c130万个地球才能抵得上一个太阳。\u201d运用了打比方的说明方法。\u201c130万个地球才能抵得上一个太阳。\u201d运用了打比方的说明方法。\u201c130万个地球才能抵得上一个太阳。\u201d运用了打比方的说明方法。","C:  \u201c他把零钱用光了。\u201d与\u201c教室光线充足。\u201d中的\u201c光\u201d字意思不一样。\u201c他把零钱用光了。\u201d与\u201c教室光线充足。\u201d中的\u201c光\u201d字意思不一样。\u201c他把零钱用光了。\u201d与\u201c教室光线充足。\u201d中的\u201c光\u201d字意思不一样。","D:  《学会查\u201c无字词典\u201d》中的\u201c无字词典\u201d是指生活里的学问。 《学会查\u201c无字词典\u201d》中的\u201c无字词典\u201d是指生活里的学问。 《学会查\u201c无字词典\u201d》中的\u201c无字词典\u201d是指生活里的学问。 "]
      * correctAnswer : ["A"]
      */
 
@@ -34,14 +34,10 @@ public class StudentQuestionBean implements Serializable {
     private String ResourceType;
     private String IsRight;
     private String url;
-    //主观题图片
-    private ArrayList<String> AnswerPic;
-    //学生答案
-    private ArrayList<String> AnswerContent;
-    //选择及填空题选项
-    private ArrayList<String> QuestionContent;
-    //正确答案
-    private ArrayList<String> correctAnswer;
+    private List<String> AnswerPic;
+    private List<String> AnswerContent;
+    private List<String> QuestionContent;
+    private List<String> correctAnswer;
 
     public String getQusetionId() {
         return QusetionId;
@@ -115,35 +111,35 @@ public class StudentQuestionBean implements Serializable {
         this.url = url;
     }
 
-    public ArrayList<String> getAnswerPic() {
+    public List<String> getAnswerPic() {
         return AnswerPic;
     }
 
-    public void setAnswerPic(ArrayList<String> answerPic) {
+    public void setAnswerPic(List<String> answerPic) {
         AnswerPic = answerPic;
     }
 
-    public ArrayList<String> getAnswerContent() {
+    public List<String> getAnswerContent() {
         return AnswerContent;
     }
 
-    public void setAnswerContent(ArrayList<String> answerContent) {
+    public void setAnswerContent(List<String> answerContent) {
         AnswerContent = answerContent;
     }
 
-    public ArrayList<String> getQuestionContent() {
+    public List<String> getQuestionContent() {
         return QuestionContent;
     }
 
-    public void setQuestionContent(ArrayList<String> questionContent) {
-        QuestionContent = questionContent;
+    public void setQuestionContent(List<String> QuestionContent) {
+        this.QuestionContent = QuestionContent;
     }
 
-    public ArrayList<String> getCorrectAnswer() {
+    public List<String> getCorrectAnswer() {
         return correctAnswer;
     }
 
-    public void setCorrectAnswer(ArrayList<String> correctAnswer) {
+    public void setCorrectAnswer(List<String> correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 }

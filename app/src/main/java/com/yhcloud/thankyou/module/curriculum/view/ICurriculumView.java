@@ -1,7 +1,7 @@
 package com.yhcloud.thankyou.module.curriculum.view;
 
 import com.yhcloud.thankyou.mInterface.IBaseView;
-import com.yhcloud.thankyou.module.curriculum.bean.CurriculumBean;
+import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,6 @@ import java.util.ArrayList;
  */
 
 public interface ICurriculumView extends IBaseView {
-    void showList(ArrayList<CurriculumBean> list);
+    void showList(ArrayList<CurriculumItemBean> list);
     void initViewStub(String msg);
 }

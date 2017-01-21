@@ -13,4 +13,5 @@ public interface IHomeworkInfoView extends IBaseView {
     void showPhoto(boolean showed);
     void showViewPager(ArrayList<HomeworkInfoViewPagerBean> list);
     void selectViewPager(int i);
+    void showDialog();
 }

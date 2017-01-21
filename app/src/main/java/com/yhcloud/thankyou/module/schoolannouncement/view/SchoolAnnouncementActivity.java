@@ -1,6 +1,7 @@
 package com.yhcloud.thankyou.module.schoolannouncement.view;
 
 import android.app.ProgressDialog;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -25,12 +26,14 @@ public class SchoolAnnouncementActivity extends AppCompatActivity implements ISc
     //视图控件
     private LinearLayout llBack;
     private TextView tvTitle;
+    private SwipeRefreshLayout srlSchoolAnnouncementList;
     private RecyclerView rvSchoolAnnouncementList;
     private ProgressDialog mProgressDialog;
     //适配器
     private SchoolAnnouncementListAdapter sala;
     //管理器
     private SchoolAnnouncementManage mManage;
+    private boolean canGetMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class SchoolAnnouncementActivity extends AppCompatActivity implements ISc
     public void initView() {
         llBack = (LinearLayout) findViewById(R.id.ll_header_left);
         tvTitle = (TextView) findViewById(R.id.tv_header_title);
+        srlSchoolAnnouncementList = (SwipeRefreshLayout) findViewById(R.id.srl_schoolannouncement_list);
         rvSchoolAnnouncementList = (RecyclerView) findViewById(R.id.rv_schoolannouncement_list);
     }
 
@@ -59,6 +63,13 @@ public class SchoolAnnouncementActivity extends AppCompatActivity implements ISc
             }
         };
         llBack.setOnClickListener(myOnClickListener);
+        SwipeRefreshLayout.OnRefreshListener myOnRefreshListener = new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mManage.refreshData();
+            }
+        };
+        srlSchoolAnnouncementList.setOnRefreshListener(myOnRefreshListener);
     }
 
     @Override
@@ -68,6 +79,9 @@ public class SchoolAnnouncementActivity extends AppCompatActivity implements ISc
 
     @Override
     public void showLoading(int msgId) {
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 
@@ -99,6 +113,13 @@ public class SchoolAnnouncementActivity extends AppCompatActivity implements ISc
     }
 
     @Override
+    public void completeRefreshList() {
+        if (null != srlSchoolAnnouncementList) {
+            srlSchoolAnnouncementList.setRefreshing(false);
+        }
+    }
+
+    @Override
     public void showList(final ArrayList<SchoolAnnouncementBean> list) {
         if (null == sala) {
             sala = new SchoolAnnouncementListAdapter(this, list);
@@ -111,8 +132,19 @@ public class SchoolAnnouncementActivity extends AppCompatActivity implements ISc
                     if(newState == RecyclerView.SCROLL_STATE_IDLE) {
                         int lastVisiblePosition = layoutManager.findLastVisibleItemPosition();
                         if (lastVisiblePosition >= layoutManager.getItemCount() - 1) {
-                            mManage.getMoreData();
+                            if (canGetMore) {
+                                mManage.getMoreData();
+                            }
                         }
+                    }
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    if (0 < dy) {
+                        canGetMore = true;
+                    } else {
+                        canGetMore = false;
                     }
                 }
             });

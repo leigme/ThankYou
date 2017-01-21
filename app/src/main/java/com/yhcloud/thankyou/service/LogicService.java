@@ -273,13 +273,19 @@ public class LogicService extends Service {
     //获取老师端作业列表
     public void getTeacherHomeworkList(ICallListener<String> iCallListener) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.getTeacherHomeworkData(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+        homeworkLogic.getTeacherHomeworkList(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+    }
+
+    //获取老师端作业详情
+    public void getTeacherHomeworkInfo(String homewrokId, ICallListener<String> iCallListener) {
+        HomeworkLogic homeworkLogic = new HomeworkLogic();
+        homeworkLogic.getTeacherHomeworkInfo(homewrokId, iCallListener);
     }
 
     //获取学生作业列表
     public void getStudentHomeworkList(ICallListener<String> iCallListener) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.getStudentHomeworkData(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+        homeworkLogic.getStudentHomeworkList(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
     }
 
     //获取学生作业详情
@@ -288,14 +294,25 @@ public class LogicService extends Service {
         homeworkLogic.getStudentHomeworkInfo(mUserInfo.getUserInfoBean().getUserId(), workBookId, iCallListener);
     }
 
-    //发送学生主观作业
+    //学生发送客观题作业
+    public void sendStudentObjectiveHomework(String jsonObject, ICallListener<String> iCallListener) {
+        HomeworkLogic homeworkLogic = new HomeworkLogic();
+        homeworkLogic.sendObjectiveHomeworkToService(mUserInfo.getUserInfoBean().getUserId(), jsonObject, iCallListener);
+    }
+
+    //发送学生主观题作业
     public void sendStudentSubjectiveHomework(String workId, String questionId, String content,
                                               String score, String startTime, String endTime,
-                                              List<String> images, final ICallListener<String> iCallListener) {
+                                              List<String> images, ICallListener<String> iCallListener) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
         homeworkLogic.sendImagesToService(mUserInfo.getUserInfoBean().getUserId(), workId, questionId, content, score, startTime, endTime, images, iCallListener);
     }
 
+    //更新提交学生作业状态
+    public void updateStudentHomework(String workId, ICallListener<String> iCallListener) {
+        HomeworkLogic homeworkLogic = new HomeworkLogic();
+        homeworkLogic.updateStudentHomework(workId, iCallListener);
+    }
 
 
 

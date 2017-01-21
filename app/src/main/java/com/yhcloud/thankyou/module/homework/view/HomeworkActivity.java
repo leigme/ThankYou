@@ -2,6 +2,7 @@ package com.yhcloud.thankyou.module.homework.view;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,6 +32,7 @@ public class HomeworkActivity extends AppCompatActivity implements IHomeworkView
     private LinearLayout llBack, llRight;
     private TextView tvTitle;
     private ImageView ivRight;
+    private SwipeRefreshLayout srlHomeworkList;
     private RecyclerView rvHomeworkList;
     private ProgressDialog mProgressDialog;
     //适配器
@@ -38,6 +40,7 @@ public class HomeworkActivity extends AppCompatActivity implements IHomeworkView
     private StudentHomeworkListAdapter shla;
     //管理器
     private HomeworkManage mManage;
+    private boolean canGetMore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,7 @@ public class HomeworkActivity extends AppCompatActivity implements IHomeworkView
     public void initView() {
         llBack = (LinearLayout) findViewById(R.id.ll_header_left);
         tvTitle = (TextView) findViewById(R.id.tv_header_title);
+        srlHomeworkList = (SwipeRefreshLayout) findViewById(R.id.srl_homework_list);
         rvHomeworkList = (RecyclerView) findViewById(R.id.rv_homework_list);
     }
 
@@ -66,6 +70,12 @@ public class HomeworkActivity extends AppCompatActivity implements IHomeworkView
             }
         };
         llBack.setOnClickListener(myOnClickListener);
+        srlHomeworkList.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mManage.refreshData();
+            }
+        });
     }
 
     @Override
@@ -150,12 +160,30 @@ public class HomeworkActivity extends AppCompatActivity implements IHomeworkView
     public void showStudentHomeworkList(ArrayList<StudentHomeworkBean> list) {
         if (null == shla) {
             shla = new StudentHomeworkListAdapter(this, list);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             rvHomeworkList.setLayoutManager(layoutManager);
             rvHomeworkList.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
+                    if(newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        int lastVisiblePosition = layoutManager.findLastVisibleItemPosition();
+                        if (lastVisiblePosition >= layoutManager.getItemCount() - 1) {
+                            if (canGetMore) {
+                                mManage.getMoreData();
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    if (0 < dy) {
+                        canGetMore = true;
+                    } else {
+                        canGetMore = false;
+                    }
                 }
             });
             rvHomeworkList.setAdapter(shla);
@@ -176,8 +204,14 @@ public class HomeworkActivity extends AppCompatActivity implements IHomeworkView
     }
 
     @Override
+    public void completeRefresh() {
+        srlHomeworkList.setRefreshing(false);
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Tools.print(TAG, "返回列表页面了");
+        mManage.refreshData();
     }
 }

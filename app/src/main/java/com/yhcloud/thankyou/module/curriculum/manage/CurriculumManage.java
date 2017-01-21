@@ -3,29 +3,25 @@ package com.yhcloud.thankyou.module.curriculum.manage;
 import android.app.Activity;
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.IBinder;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.ICallListener;
-import com.yhcloud.thankyou.module.curriculum.bean.CouresBean;
-import com.yhcloud.thankyou.module.curriculum.bean.CurriculumBean;
-import com.yhcloud.thankyou.module.curriculum.bean.CurriculumListBean;
-import com.yhcloud.thankyou.module.curriculum.bean.DayIndexBean;
+import com.yhcloud.thankyou.module.curriculum.bean.CurriculumDataBean;
+import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
 import com.yhcloud.thankyou.module.curriculum.view.ICurriculumView;
 import com.yhcloud.thankyou.service.LogicService;
-
+import com.yhcloud.thankyou.utils.Tools;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2016/12/14.
@@ -38,7 +34,7 @@ public class CurriculumManage {
     private ICurriculumView mICurriculumView;
     private Activity mActivity;
     private LogicService mService;
-    private ArrayList<CurriculumBean> mBeen;
+    private ArrayList<CurriculumItemBean> mBeen;
 
     public CurriculumManage(ICurriculumView iCurriculumView) {
         this.mICurriculumView = iCurriculumView;
@@ -72,56 +68,65 @@ public class CurriculumManage {
                     if (!jsonObject.getBoolean("errorFlag")) {
                         String jsonList = jsonObject.getString("list");
                         if (null != jsonList && !"".equals(jsonList)) {
-                            CurriculumBean curriculumBean;
-                            for (int i = 0; i < 6; i++) {
-                                curriculumBean = new CurriculumBean();
-                                curriculumBean.setHeader(true);
-                                switch (i) {
-                                    case 0:
-                                        curriculumBean.setDayTitle("");
-                                        break;
+                            CurriculumItemBean curriculumItemBean;
+                            Gson gson = new Gson();
+                            ArrayList<CurriculumDataBean> list = gson.fromJson(jsonList, new TypeToken<ArrayList<CurriculumDataBean>>(){}.getType());
+                            List<CurriculumDataBean.CouresBean> couresBeanArrayList;
+                            CurriculumDataBean.DayIndexBean dayIndexBean;
+                            //处理表格头部
+                            for (int j = 0; j < 6; j++) {
+                                curriculumItemBean = new CurriculumItemBean();
+                                curriculumItemBean.setType(1);
+                                switch (j) {
                                     case 1:
-                                        curriculumBean.setDayTitle("星期一");
+                                        curriculumItemBean.setTitle("星期一");
                                         break;
                                     case 2:
-                                        curriculumBean.setDayTitle("星期二");
+                                        curriculumItemBean.setTitle("星期二");
                                         break;
                                     case 3:
-                                        curriculumBean.setDayTitle("星期三");
+                                        curriculumItemBean.setTitle("星期三");
                                         break;
                                     case 4:
-                                        curriculumBean.setDayTitle("星期四");
+                                        curriculumItemBean.setTitle("星期四");
                                         break;
                                     case 5:
-                                        curriculumBean.setDayTitle("星期五");
+                                        curriculumItemBean.setTitle("星期五");
+                                        break;
+                                    default:
+                                        curriculumItemBean.setTitle("");
                                         break;
                                 }
-                                mBeen.add(curriculumBean);
+                                mBeen.add(curriculumItemBean);
                             }
-                            Gson gson = new Gson();
-                            Type type = new TypeToken<ArrayList<CurriculumListBean>>() {}.getType();
-                            ArrayList<CurriculumListBean> list = gson.fromJson(jsonList, type);
-                            for (CurriculumListBean curriculumListBean: list) {
-                                DayIndexBean dayIndexBean = curriculumListBean.getDayIndex();
-                                curriculumBean = new CurriculumBean();
-                                curriculumBean.setStartTime(dayIndexBean.getStartTime());
-                                curriculumBean.setTitle(dayIndexBean.getName());
-                                curriculumBean.setEndTime(dayIndexBean.getEndTime());
-                                mBeen.add(curriculumBean);
-                                ArrayList<CouresBean> couresBeen = curriculumListBean.getCoures();
-                                for (int i = 0; i < 5; i++) {
-                                    CouresBean couresBean = couresBeen.get(i);
-                                    curriculumBean = new CurriculumBean();
-                                    curriculumBean.setStartTime("");
-                                    curriculumBean.setTitle(couresBean.getName());
-                                    curriculumBean.setDayTitle(couresBean.getWeekdayname());
-                                    curriculumBean.setEndTime("");
-                                    mBeen.add(curriculumBean);
+                            for (int i = 0; i < list.size(); i++) {
+                                switch (i) {
+                                    //处理午休数据
+                                    case 5:
+                                        curriculumItemBean = new CurriculumItemBean();
+                                        curriculumItemBean.setTitle("午 休");
+                                        curriculumItemBean.setType(2);
+                                        mBeen.add(curriculumItemBean);
+                                        break;
+                                    //处理其他列显示数据
+                                    default:
+                                        dayIndexBean = list.get(i).getDayIndex();
+                                        curriculumItemBean = new CurriculumItemBean();
+                                        curriculumItemBean.setStartTime(dayIndexBean.getStartTime());
+                                        curriculumItemBean.setTitle(dayIndexBean.getName());
+                                        curriculumItemBean.setEndTime(dayIndexBean.getEndTime());
+                                        mBeen.add(curriculumItemBean);
+                                        couresBeanArrayList = list.get(i).getCoures();
+                                        couresBeanArrayList = couresBeanArrayList.subList(0, 5);
+                                        for (CurriculumDataBean.CouresBean couresBean: couresBeanArrayList) {
+                                            curriculumItemBean = new CurriculumItemBean();
+                                            curriculumItemBean.setTitle(couresBean.getName());
+                                            mBeen.add(curriculumItemBean);
+                                        }
+                                        break;
                                 }
                             }
-                            mBeen.get(36).setTitle("");
-                            mBeen.get(38).setTitle("午");
-                            mBeen.get(39).setTitle("休");
+                            Tools.print(TAG, "课程长度是:" + mBeen.size());
                             mICurriculumView.showList(mBeen);
                             mICurriculumView.hiddenLoading();
                             return;

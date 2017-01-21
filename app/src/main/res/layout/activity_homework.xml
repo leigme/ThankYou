@@ -8,8 +8,13 @@
     android:orientation="vertical"
     tools:context="com.yhcloud.thankyou.module.homework.view.HomeworkActivity">
     <include layout="@layout/header"/>
-    <android.support.v7.widget.RecyclerView
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_homework_list"></android.support.v7.widget.RecyclerView>
+        android:id="@+id/srl_homework_list">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/rv_homework_list"></android.support.v7.widget.RecyclerView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

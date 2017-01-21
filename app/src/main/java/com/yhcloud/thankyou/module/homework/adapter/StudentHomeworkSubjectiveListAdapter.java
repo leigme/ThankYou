@@ -18,14 +18,14 @@ import java.util.ArrayList;
  * Created by Administrator on 2017/1/12.
  */
 
-public class StudentQuestionSubjectiveListAdapter extends RecyclerView.Adapter<StudentQuestionSubjectiveListAdapter.SubjectiveViewHolder> {
+public class StudentHomeworkSubjectiveListAdapter extends RecyclerView.Adapter<StudentHomeworkSubjectiveListAdapter.SubjectiveViewHolder> {
 
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<String> urls;
     private IOnClickListener mIOnClickListener;
 
-    public StudentQuestionSubjectiveListAdapter(Context context, ArrayList<String> list) {
+    public StudentHomeworkSubjectiveListAdapter(Context context, ArrayList<String> list) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
         this.urls = list;
@@ -40,10 +40,12 @@ public class StudentQuestionSubjectiveListAdapter extends RecyclerView.Adapter<S
 
     @Override
     public void onBindViewHolder(final SubjectiveViewHolder holder, int position) {
-//        Tools.GlideImageUrl(mContext, urls.get(position), holder.ivImage);
-        Glide.with(mContext)
-                .load(urls.get(position))
-                .into(holder.ivImage);
+        Tools.GlideImageUrl(mContext, urls.get(position), holder.ivImage);
+//        Glide.with(mContext)
+//                .load(urls.get(position))
+//                .placeholder(R.mipmap.loading)
+//                .error(R.mipmap.icon_big_404)
+//                .into(holder.ivImage);
         if (null != mIOnClickListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

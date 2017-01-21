@@ -15,4 +15,5 @@ public interface IAddPhotoView extends IBaseView {
     void init();
     void showList(ArrayList<String> list);
     String getContent();
+    void showDialog();
 }

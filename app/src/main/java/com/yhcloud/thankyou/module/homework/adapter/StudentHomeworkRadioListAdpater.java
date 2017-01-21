@@ -18,14 +18,14 @@ import java.util.ArrayList;
  * Created by Administrator on 2017/1/12.
  */
 
-public class StudentQuestionListAdpater extends RecyclerView.Adapter<StudentQuestionListAdpater.StudentQuestionViewHolder> {
+public class StudentHomeworkRadioListAdpater extends RecyclerView.Adapter<StudentHomeworkRadioListAdpater.StudentQuestionViewHolder> {
 
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<QuestionBean> mBeen;
     private IOnClickListener mIOnClickListener;
 
-    public StudentQuestionListAdpater(Context context, ArrayList<QuestionBean> list) {
+    public StudentHomeworkRadioListAdpater(Context context, ArrayList<QuestionBean> list) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
         this.mBeen = list;

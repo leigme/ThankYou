@@ -178,6 +178,8 @@
         </activity>
         <activity android:name=".module.image.view.BigImageActivity">
         </activity>
+        <activity android:name=".module.homework.view.AddHomeworkActivity">
+        </activity>
     </application>
 
 </manifest>

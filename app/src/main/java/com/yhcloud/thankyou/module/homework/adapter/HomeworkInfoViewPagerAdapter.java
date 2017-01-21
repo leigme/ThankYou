@@ -50,4 +50,9 @@ public class HomeworkInfoViewPagerAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView(mBeen.get(position).getView());
     }
+
+    public void refreshData(ArrayList<HomeworkInfoViewPagerBean> list) {
+        this.mBeen = list;
+        this.notifyDataSetChanged();
+    }
 }

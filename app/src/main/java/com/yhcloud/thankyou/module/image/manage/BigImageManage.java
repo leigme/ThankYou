@@ -71,7 +71,7 @@ public class BigImageManage {
                     }
                 });
                 Glide.with(mActivity)
-                        .load(url)
+                        .load(Constant.SERVICEADDRESS + url)
                         .placeholder(R.mipmap.loading)
                         .error(R.mipmap.icon_big_404)
                         .diskCacheStrategy(DiskCacheStrategy.ALL)

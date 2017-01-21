@@ -43,8 +43,8 @@ public class Constant {
      * 服务器API
      */
     //服务地址
-    public static final String SERVICEADDRESS = "http://www.k12chn.com";
-//        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
+//    public static final String SERVICEADDRESS = "http://www.k12chn.com";
+        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
 
     //登录请求 uid pwd
     public static final String LOGIN = SERVICEADDRESS + "/m17/M1708I/M1708I001";
@@ -61,14 +61,22 @@ public class Constant {
     public static final String GETCLASSNOTIFICATIONLIST = SERVICEADDRESS + "/m17/M1711I/M1711I01";
     //更新班级通知阅读状态 http://192.168.0.139/edu/noticeId/49/userId/3237 isRead:0未读;1:已读;2:删除
     public static final String UPDATEREADSTATE = SERVICEADDRESS + "/m17/M1711I/M1711I02";
-    //课后作业 http://www.k12chn.com/m17/M1721I/M1721I01/userId/3237
+
+    //老师端课后作业列表 http://www.k12chn.com/m17/M1721I/M1721I01/userId/3237 [1:未发布 2:已发布]
     public static final String GETTEACHERHOMEWORKLIST = SERVICEADDRESS + "/m17/M1721I/M1721I01";
-    //获取学生作业列表 [1:已提交 2:未提交]
-    public static final String GETSTUDENTHOMEWORKLIST = SERVICEADDRESS + "/m17/M1723I/M1723I01";
+    //老师端课后作业详情
+    public static final String GETTEACHERHOMEWORKINFO = SERVICEADDRESS + "/m17/M1721I/M1721I03";
+    //学生端课后作业列表 [1:已提交 2:未提交]
+    public static final String GETSTUDENTHOMEWORKLIST = SERVICEADDRESS + "/m17/M1722I/M1722I01";
     //获取学生作业详情 http://192.168.0.139/edu/m17/M1722I/M1722I02/workBookId/243/userId/1729470
     public static final String GETSTUDENTHOMEWORKINFO = SERVICEADDRESS + "/m17/M1722I/M1722I02";
+    //学生提交客观题
+    public static final String SENDHOMEWORKOBANSWER = SERVICEADDRESS + "/m17/M1722I/M1722I03";
     //学生提交主观题
     public static final String SENDHOMEWORKSUBANSWER = SERVICEADDRESS + "/m17/M1722I/M1722I04";
+    //学生提交作业状态
+    public static final String UPDATESTUDENTHOMEWORK = SERVICEADDRESS + "/m17/M1722I/M1722I05";
+
 
 
     //班干部  classId
@@ -89,4 +97,5 @@ public class Constant {
 
     //获取关于我们的信息
     public static final String GETABOUTUSINFO = SERVICEADDRESS + "/m17/M1705I/M1705I001";
+
 }

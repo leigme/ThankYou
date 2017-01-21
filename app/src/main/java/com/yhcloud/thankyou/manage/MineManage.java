@@ -54,10 +54,9 @@ public class MineManage {
         mBeen.add(list.get(7));
         mBeen.add(list.get(8));
         mBeen.add(list.get(9));
-        mBeen.add(0, new FunctionBean());
         mBeen.add(2, new FunctionBean());
         mBeen.add(4, new FunctionBean());
-        mBeen.add(10, new FunctionBean());
+        mBeen.add(9, new FunctionBean());
         mIMineView.showList(mBeen);
     }
 

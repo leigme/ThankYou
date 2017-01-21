@@ -1,10 +1,13 @@
 package com.yhcloud.thankyou.module.homework.view;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -13,6 +16,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.module.homework.adapter.HomeworkInfoViewPagerAdapter;
 import com.yhcloud.thankyou.module.homework.bean.HomeworkInfoViewPagerBean;
 import com.yhcloud.thankyou.module.homework.manage.HomeworkInfoManage;
+import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
@@ -24,8 +28,8 @@ public class HomeworkInfoActivity extends AppCompatActivity implements IHomework
     private TextView tvTitle, tvRight;
     private ImageView ivRight;
     private ViewPager mViewPager;
-    private View vLine;
     private ProgressDialog mProgressDialog;
+    private Dialog mDialog;
     //适配器
     private HomeworkInfoViewPagerAdapter hivpa;
     //管理器
@@ -43,9 +47,9 @@ public class HomeworkInfoActivity extends AppCompatActivity implements IHomework
         llBack = (LinearLayout) findViewById(R.id.ll_header_left);
         tvTitle = (TextView) findViewById(R.id.tv_header_title);
         llLast = (LinearLayout) findViewById(R.id.ll_homeworkinfo_last);
+        llPhoto = (LinearLayout) findViewById(R.id.ll_homeworkinfo_photo);
         llNext = (LinearLayout) findViewById(R.id.ll_homeworkinfo_next);
         mViewPager = (ViewPager) findViewById(R.id.vp_homeworkinfo_page);
-        vLine = findViewById(R.id.v_line);
     }
 
     @Override
@@ -60,6 +64,9 @@ public class HomeworkInfoActivity extends AppCompatActivity implements IHomework
                     case R.id.ll_homeworkinfo_last:
                         mManage.lastHomework();
                         break;
+                    case R.id.ll_homeworkinfo_photo:
+                        mManage.goPhoto();
+                        break;
                     case R.id.ll_homeworkinfo_next:
                         mManage.nextHomework();
                         break;
@@ -68,6 +75,7 @@ public class HomeworkInfoActivity extends AppCompatActivity implements IHomework
         };
         llBack.setOnClickListener(myOnClickListener);
         llLast.setOnClickListener(myOnClickListener);
+        llPhoto.setOnClickListener(myOnClickListener);
         llNext.setOnClickListener(myOnClickListener);
     }
 
@@ -123,29 +131,16 @@ public class HomeworkInfoActivity extends AppCompatActivity implements IHomework
 
     @Override
     public void showPhoto(boolean showed) {
-        if (null == llPhoto) {
-            llPhoto = (LinearLayout) findViewById(R.id.ll_homeworkinfo_photo);
-            llPhoto.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mManage.goPhoto();
-                }
-            });
-        }
         if (showed) {
             llPhoto.setVisibility(View.VISIBLE);
-            vLine.setVisibility(View.VISIBLE);
         } else {
             llPhoto.setVisibility(View.GONE);
-            vLine.setVisibility(View.GONE);
         }
     }
 
     @Override
     public void showViewPager(ArrayList<HomeworkInfoViewPagerBean> list) {
-        if (null == hivpa) {
-            hivpa = new HomeworkInfoViewPagerAdapter(list);
-        }
+        hivpa = new HomeworkInfoViewPagerAdapter(list);
         mViewPager.setAdapter(hivpa);
         mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -169,5 +164,37 @@ public class HomeworkInfoActivity extends AppCompatActivity implements IHomework
     @Override
     public void selectViewPager(int i) {
         mViewPager.setCurrentItem(i);
+    }
+
+    @Override
+    public void showDialog() {
+        mDialog = new Dialog(this, R.style.MyDialog);
+        mDialog.setContentView(R.layout.dialog_integral);
+        TextView tvTitle = (TextView) mDialog.findViewById(R.id.tv_dialog_title);
+        tvTitle.setText("");
+        TextView tvMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
+        tvMsg.setText("提交之后将无法更改,是否确认提交本次作业？");
+        Button send = (Button) mDialog.findViewById(R.id.btn_dialog_send);
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mManage.updateStudentHomework();
+                mDialog.dismiss();
+            }
+        });
+        Button cancel = (Button) mDialog.findViewById(R.id.btn_dialog_cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mDialog.dismiss();
+            }
+        });
+        mDialog.show();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mManage.refreshData(data);
     }
 }

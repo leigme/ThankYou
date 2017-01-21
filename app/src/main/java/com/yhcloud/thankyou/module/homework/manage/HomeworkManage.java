@@ -35,7 +35,7 @@ public class HomeworkManage {
     private IHomeworkView mIHomeworkView;
     private Activity mActivity;
     private LogicService mService;
-    private int roleId;
+    private int roleId, pageNum = 1;
     private ArrayList<TeacherHomeworkBean> mTeacherHomeworkBeen;
     private ArrayList<StudentHomeworkBean> mStudentHomeworkBeen;
 
@@ -164,23 +164,53 @@ public class HomeworkManage {
     }
 
     public void goHomeworkInfo(int position) {
-        Intent intent = new Intent(mActivity, HomeworkInfoActivity.class);
-        Bundle bundle = new Bundle();
+        Intent intent;
+        Bundle bundle;
         switch (roleId) {
             case 1004:
-                bundle.putSerializable("teacherHomeworkBean", mTeacherHomeworkBeen.get(position));
+                if ("2".equals(mTeacherHomeworkBeen.get(position).getStatus())) {
+                    intent = new Intent(mActivity, HomeworkInfoActivity.class);
+                    bundle = new Bundle();
+                    bundle.putSerializable("teacherHomeworkBean", mTeacherHomeworkBeen.get(position));
+                    intent.putExtras(bundle);
+                    mActivity.startActivityForResult(intent, 101);
+                } else {
+
+                }
                 break;
             case 1010:
-                bundle.putSerializable("teacherHomeworkBean", mTeacherHomeworkBeen.get(position));
+                if ("2".equals(mTeacherHomeworkBeen.get(position).getStatus())) {
+                    intent = new Intent(mActivity, HomeworkInfoActivity.class);
+                    bundle = new Bundle();
+                    bundle.putSerializable("teacherHomeworkBean", mTeacherHomeworkBeen.get(position));
+                    intent.putExtras(bundle);
+                    mActivity.startActivityForResult(intent, 101);
+                } else {
+
+                }
                 break;
             case 1011:
+                intent = new Intent(mActivity, HomeworkInfoActivity.class);
+                bundle = new Bundle();
                 bundle.putSerializable("studentHomeworkBean", mStudentHomeworkBeen.get(position));
+                intent.putExtras(bundle);
+                mActivity.startActivityForResult(intent, 101);
                 break;
             case 1012:
+                intent = new Intent(mActivity, HomeworkInfoActivity.class);
+                bundle = new Bundle();
                 bundle.putSerializable("studentHomeworkBean", mStudentHomeworkBeen.get(position));
+                intent.putExtras(bundle);
+                mActivity.startActivityForResult(intent, 101);
                 break;
         }
-        intent.putExtras(bundle);
-        mActivity.startActivityForResult(intent, 101);
+    }
+
+    public void refreshData() {
+
+    }
+
+    public void getMoreData() {
+
     }
 }

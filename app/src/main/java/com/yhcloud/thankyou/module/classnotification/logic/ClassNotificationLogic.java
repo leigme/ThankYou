@@ -20,7 +20,7 @@ public class ClassNotificationLogic {
     private String TAG = getClass().getSimpleName();
 
     public void getClassNotificationData(String userId, String classId, int pageNum, String updateTime, final ICallListener<String> iCallListener) {
-        /*Tools.print(TAG, MessageFormat.format("请求连接:{0}/userId/{1}/classId/{2}/pageNum/{3}/updateTime/{4}", Constant.GETCLASSNOTIFICATIONLIST, userId, classId, String.valueOf(pageNum), updateTime));
+        Tools.print(TAG, MessageFormat.format("请求连接:{0}/userId/{1}/classId/{2}/pageNum/{3}/updateTime/{4}", Constant.GETCLASSNOTIFICATIONLIST, userId, classId, String.valueOf(pageNum), updateTime));
         OkHttpUtils.post()
                 .url(Constant.GETCLASSNOTIFICATIONLIST)
                 .addParams("userId", userId)
@@ -40,8 +40,8 @@ public class ClassNotificationLogic {
                         Tools.print(TAG, "getClassNotificationData-请求成功:" + response);
                         iCallListener.callSuccess(response);
                     }
-                });*/
-        OkHttpUtils.post()
+                });
+        /*OkHttpUtils.post()
                 .url(Constant.SERVICEADDRESS + "/m17/ClassNotice/GetClassNotice")
                 .addParams("uid", userId)
                 .addParams("page", String.valueOf(pageNum))
@@ -58,7 +58,7 @@ public class ClassNotificationLogic {
                         Tools.print(TAG, "getClassNotificationData-请求成功:" + response);
                         iCallListener.callSuccess(response);
                     }
-                });
+                });*/
     }
 
     public void updateReadState(String noticeId, String userId, final ICallListener<String> iCallListener) {

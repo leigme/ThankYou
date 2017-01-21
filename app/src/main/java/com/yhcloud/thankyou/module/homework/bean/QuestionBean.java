@@ -9,6 +9,7 @@ import java.io.Serializable;
 public class QuestionBean implements Serializable {
 
     private String questionTitle;
+    private String answerContent = "";
     private boolean status;
 
     public QuestionBean() {}
@@ -28,6 +29,14 @@ public class QuestionBean implements Serializable {
 
     public void setQuestionTitle(String questionTitle) {
         this.questionTitle = questionTitle;
+    }
+
+    public String getAnswerContent() {
+        return answerContent;
+    }
+
+    public void setAnswerContent(String answerContent) {
+        this.answerContent = answerContent;
     }
 
     public boolean isStatus() {

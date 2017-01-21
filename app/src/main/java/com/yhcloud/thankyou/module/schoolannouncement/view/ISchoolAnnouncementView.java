@@ -10,5 +10,6 @@ import java.util.ArrayList;
  */
 
 public interface ISchoolAnnouncementView extends IBaseView {
+    void completeRefreshList();
     void showList(ArrayList<SchoolAnnouncementBean> list);
 }

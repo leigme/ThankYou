@@ -8,12 +8,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.module.curriculum.adapter.CurriculumAdapter;
-import com.yhcloud.thankyou.module.curriculum.bean.CurriculumBean;
+import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
 import com.yhcloud.thankyou.module.curriculum.manage.CurriculumManage;
 import com.yhcloud.thankyou.utils.DividerGridItemDecoration;
 
@@ -96,10 +95,20 @@ public class CurriculumActivity extends AppCompatActivity implements ICurriculum
     }
 
     @Override
-    public void showList(ArrayList<CurriculumBean> list) {
+    public void showList(final ArrayList<CurriculumItemBean> list) {
         if (null == ca) {
             ca = new CurriculumAdapter(this, list);
-            rvCurriculumList.setLayoutManager(new GridLayoutManager(this, 6));
+            GridLayoutManager layoutManager = new GridLayoutManager(this, 6);
+            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                @Override
+                public int getSpanSize(int position) {
+                    if (2 == list.get(position).getType()) {
+                        return 6;
+                    }
+                    return 1;
+                }
+            });
+            rvCurriculumList.setLayoutManager(layoutManager);
             rvCurriculumList.addItemDecoration(new DividerGridItemDecoration(this));
             rvCurriculumList.setAdapter(ca);
         }

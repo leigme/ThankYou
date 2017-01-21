@@ -2,19 +2,15 @@ package com.yhcloud.thankyou.module.homework.bean;
 
 import android.view.View;
 
-import com.yhcloud.thankyou.module.homework.adapter.StudentQuestionListAdpater;
-
-import java.util.ArrayList;
-
 /**
  * Created by Administrator on 2017/1/12.
  */
 
 public class HomeworkInfoViewPagerBean {
+
     private View mView;
-    private ArrayList<String> mStrings;
-    private StudentQuestionListAdpater mAdpater;
-    private ArrayList<QuestionBean> mBeen;
+    private StudentQuestionBean mStudentBeen;
+    private TeacherQuestionBean mTeacherBeen;
 
     public View getView() {
         return mView;
@@ -24,27 +20,19 @@ public class HomeworkInfoViewPagerBean {
         mView = view;
     }
 
-    public ArrayList<String> getStrings() {
-        return mStrings;
+    public StudentQuestionBean getStudentBeen() {
+        return mStudentBeen;
     }
 
-    public void setStrings(ArrayList<String> strings) {
-        mStrings = strings;
+    public void setStudentBeen(StudentQuestionBean studentBeen) {
+        mStudentBeen = studentBeen;
     }
 
-    public StudentQuestionListAdpater getAdpater() {
-        return mAdpater;
+    public TeacherQuestionBean getTeacherBeen() {
+        return mTeacherBeen;
     }
 
-    public void setAdpater(StudentQuestionListAdpater adpater) {
-        mAdpater = adpater;
-    }
-
-    public ArrayList<QuestionBean> getBeen() {
-        return mBeen;
-    }
-
-    public void setBeen(ArrayList<QuestionBean> been) {
-        mBeen = been;
+    public void setTeacherBeen(TeacherQuestionBean teacherBeen) {
+        mTeacherBeen = teacherBeen;
     }
 }

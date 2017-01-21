@@ -1,18 +1,27 @@
 package com.yhcloud.thankyou.module.homework.logic;
 
 import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.module.homework.bean.AnswerBean;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
+import com.zhy.http.okhttp.request.OkHttpRequest;
+import com.zhy.http.okhttp.request.PostFormRequest;
 
 import java.io.File;
 import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 /**
  * Created by Administrator on 2017/1/11.
@@ -21,8 +30,8 @@ import okhttp3.Call;
 public class HomeworkLogic {
     private String TAG = getClass().getSimpleName();
 
-    public void getTeacherHomeworkData(String userId, final ICallListener<String> iCallListener) {
-        Tools.print(TAG, MessageFormat.format("getTeacherHomeworkData-请求的接口是:{0}/userId/{1}", Constant.GETTEACHERHOMEWORKLIST, userId));
+    public void getTeacherHomeworkList(String userId, final ICallListener<String> iCallListener) {
+        Tools.print(TAG, MessageFormat.format("getTeacherHomeworkList-请求的接口是:{0}/userId/{1}", Constant.GETTEACHERHOMEWORKLIST, userId));
         OkHttpUtils.post()
                 .url(Constant.GETTEACHERHOMEWORKLIST)
                 .addParams("userId", userId)
@@ -30,20 +39,20 @@ public class HomeworkLogic {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Tools.print(TAG, "getTeacherHomeworkData-请求失败:" + e);
+                        Tools.print(TAG, "getTeacherHomeworkList-请求失败:" + e);
                         iCallListener.callFailed();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Tools.print(TAG, "getTeacherHomeworkData-请求成功:" + response);
+                        Tools.print(TAG, "getTeacherHomeworkList-请求成功:" + response);
                         iCallListener.callSuccess(response);
                     }
                 });
     }
 
-    public void getStudentHomeworkData(String userId, final ICallListener<String> iCallListener) {
-        Tools.print(TAG, MessageFormat.format("getTeacherHomeworkData-请求的接口是:{0}/userId{1}", Constant.GETSTUDENTHOMEWORKLIST, userId));
+    public void getStudentHomeworkList(String userId, final ICallListener<String> iCallListener) {
+        Tools.print(TAG, MessageFormat.format("getTeacherHomeworkList-请求的接口是:{0}/userId{1}", Constant.GETSTUDENTHOMEWORKLIST, userId));
         OkHttpUtils.post()
                 .url(Constant.GETSTUDENTHOMEWORKLIST)
                 .addParams("userId", userId)
@@ -51,13 +60,13 @@ public class HomeworkLogic {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Tools.print(TAG, "getStudentHomeworkData-请求失败:" + e);
+                        Tools.print(TAG, "getStudentHomeworkList-请求失败:" + e);
                         iCallListener.callFailed();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Tools.print(TAG, "getStudentHomeworkData-请求成功:" + response);
+                        Tools.print(TAG, "getStudentHomeworkList-请求成功:" + response);
                         iCallListener.callSuccess(response);
                     }
                 });
@@ -66,7 +75,9 @@ public class HomeworkLogic {
     public void getStudentHomeworkInfo(String userId, String workBookId, final ICallListener<String> iCallListener) {
         Tools.print(TAG, MessageFormat.format("getStudentHomeworkInfo-请求的接口是:{0}/workBookId/15513/userId/{1}", Constant.GETSTUDENTHOMEWORKLIST, userId));
         OkHttpUtils.post()
-                .url("http://192.168.0.139/edu/m17/M1722I/M1722I02/workBookId/15513")
+                .url(Constant.GETSTUDENTHOMEWORKINFO)//15513 15982
+                .addParams("userId", userId)
+                .addParams("workBookId", workBookId)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -83,21 +94,22 @@ public class HomeworkLogic {
                 });
     }
 
-    public void sendHomeworkToService(String userId, final ICallListener<String> iCallListener) {
+    public void sendObjectiveHomeworkToService(String userId, String jsonData, final ICallListener<String> iCallListener) {
         OkHttpUtils.post()
-                .url("")
+                .url(Constant.SENDHOMEWORKOBANSWER)
                 .addParams("UserId", userId)
+                .addParams("QuestionAnswer", jsonData)
                 .build()
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Tools.print(TAG, "sendHomeworkToService-请求失败:" + e);
+                        Tools.print(TAG, "sendObjectiveHomeworkToService-请求失败:" + e);
                         iCallListener.callFailed();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Tools.print(TAG, "sendHomeworkToService-请求成功:" + response);
+                        Tools.print(TAG, "sendObjectiveHomeworkToService-请求成功:" + response);
                         iCallListener.callSuccess(response);
                     }
                 });
@@ -106,23 +118,27 @@ public class HomeworkLogic {
     public void sendImagesToService(String userId, String workId, String questionId, String content,
                                     String score, String startTime, String endTime,
                                     List<String> images, final ICallListener<String> iCallListener) {
-        Map<String, File> fileMap = new LinkedHashMap<>();
+        Tools.print(TAG, MessageFormat.format("请求连接是:{0}/userId/{1}/workId/{2}/questionId/{3}/content/{4}/score/{5}/startTime/{6}/endTime/{7}", Constant.SENDHOMEWORKSUBANSWER, userId, workId, questionId, content, score, startTime, endTime));
+
+        PostFormBuilder postFormBuilder = OkHttpUtils.post();
         for (int i = 0; i < images.size(); i++) {
             if (null != images.get(i) && !"".equals(images.get(i))) {
                 File file = new File(images.get(i)); // 如果文件没有扩展名, 最好设置contentType参数.
-                fileMap.put(String.valueOf(i), file);
+                postFormBuilder.addFile(String.valueOf(i), i + ".jpg", file);
             }
         }
-        OkHttpUtils.post()
-                .url(Constant.SENDHOMEWORKSUBANSWER)
-                .addParams("UserId", userId)
-                .addParams("WorkId", workId)
-                .addParams("QuestionId", questionId)
-                .addParams("Content", content)
-                .addParams("score", score)
-                .addParams("StartTime", startTime)
-                .addParams("EndTime", endTime)
-                .files("image", fileMap)
+
+        Map<String, String> params = new HashMap<>();
+        params.put("UserId", userId);
+        params.put("WorkId", workId);
+        params.put("QuestionId", questionId);
+        params.put("Content", content);
+        params.put("score", score);
+        params.put("StartTime", startTime);
+        params.put("EndTime", endTime);
+
+        postFormBuilder.url(Constant.SENDHOMEWORKSUBANSWER)
+                .params(params)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -134,6 +150,46 @@ public class HomeworkLogic {
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "sendImagesToService-请求成功:" + response);
+                        iCallListener.callSuccess(response);
+                    }
+                });
+    }
+
+    public void updateStudentHomework(String workId, final ICallListener<String> iCallListener) {
+        OkHttpUtils.post()
+                .url(Constant.UPDATESTUDENTHOMEWORK)
+                .addParams("WorkId", workId)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Tools.print(TAG, "updateStudentHomework-请求失败:" + e);
+                        iCallListener.callFailed();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Tools.print(TAG, "updateStudentHomework-请求成功:" + response);
+                        iCallListener.callSuccess(response);
+                    }
+                });
+    }
+
+    public void getTeacherHomeworkInfo(String homeworkId, final ICallListener<String> iCallListener) {
+        OkHttpUtils.post()
+                .url(Constant.GETTEACHERHOMEWORKINFO)
+                .addParams("workBookId", homeworkId)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Tools.print(TAG, "getTeacherHomeworkInfo-请求失败:" + e);
+                        iCallListener.callFailed();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Tools.print(TAG, "getTeacherHomeworkInfo-请求成功:" + response);
                         iCallListener.callSuccess(response);
                     }
                 });

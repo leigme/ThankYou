@@ -37,6 +37,7 @@ public class SchoolAnnouncementManage {
     private LogicService mService;
     private int pageNum = 1, pageCount = -1;
     private ArrayList<SchoolAnnouncementBean> mBeen;
+    private boolean refreshing;
 
     public SchoolAnnouncementManage(ISchoolAnnouncementView iSchoolAnnouncementView) {
         this.mISchoolAnnouncementView = iSchoolAnnouncementView;
@@ -61,6 +62,7 @@ public class SchoolAnnouncementManage {
     }
 
     public void getSchoolAnnouncementData(int page) {
+        mISchoolAnnouncementView.showLoading(R.string.loading_data);
         mService.getSchoolAnnouncementData(page, new ICallListener<String>() {
             @Override
             public void callSuccess(String s) {
@@ -68,26 +70,42 @@ public class SchoolAnnouncementManage {
                     JSONObject jsonObject = new JSONObject(s);
                     if (!jsonObject.getBoolean("errorFlag")) {
                         pageCount = jsonObject.getInt("page");
-                        if (-1 != pageCount || 0 != pageCount) {
+                        if (0 < pageCount) {
                             String jsonResult = jsonObject.getString("list");
                             if (null != jsonResult && !"".equals(jsonResult) && !"[]".equals(jsonResult)) {
+                                if (1 == pageNum) {
+                                    mBeen = new ArrayList<>();
+                                }
                                 Gson gson = new Gson();
                                 ArrayList<SchoolAnnouncementBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<SchoolAnnouncementBean>>(){}.getType());
                                 mBeen.addAll(list);
                                 mISchoolAnnouncementView.showList(mBeen);
                                 pageNum += 1;
-                                return;
                             }
+                        } else {
+                            mISchoolAnnouncementView.showToastMsg(R.string.no_more_data);
+                        }
+                    } else {
+                        String msg = jsonObject.getString("errorMsg");
+                        if (null != msg && !"".equals(msg)) {
+                            mISchoolAnnouncementView.showToastMsg(msg);
+                        } else {
+                            mISchoolAnnouncementView.showToastMsg(R.string.error_connection);
                         }
                     }
-                    mISchoolAnnouncementView.showToastMsg(R.string.error_connection);
+                    mISchoolAnnouncementView.completeRefreshList();
+                    mISchoolAnnouncementView.hiddenLoading();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    mISchoolAnnouncementView.completeRefreshList();
+                    mISchoolAnnouncementView.hiddenLoading();
                 }
             }
 
             @Override
             public void callFailed() {
+                mISchoolAnnouncementView.completeRefreshList();
+                mISchoolAnnouncementView.hiddenLoading();
                 mISchoolAnnouncementView.showToastMsg(R.string.error_connection);
             }
         });
@@ -109,9 +127,17 @@ public class SchoolAnnouncementManage {
             if (pageNum > pageCount) {
                 mISchoolAnnouncementView.showToastMsg(R.string.no_more_data);
             } else {
-                Tools.print(TAG, "加载更多。。。");
-                getSchoolAnnouncementData(pageNum);
+                if (!refreshing) {
+                    Tools.print(TAG, "加载更多。。。");
+                    getSchoolAnnouncementData(pageNum);
+                }
             }
         }
+    }
+
+    public void refreshData() {
+        refreshing = true;
+        pageNum = 1;
+        getSchoolAnnouncementData(pageNum);
     }
 }

@@ -14,4 +14,5 @@ public interface IHomeworkView extends IBaseView {
     void showRight();
     void showTeacherHomeworkList(ArrayList<TeacherHomeworkBean> list);
     void showStudentHomeworkList(ArrayList<StudentHomeworkBean> list);
+    void completeRefresh();
 }

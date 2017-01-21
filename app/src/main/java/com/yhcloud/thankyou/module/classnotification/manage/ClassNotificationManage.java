@@ -38,6 +38,7 @@ public class ClassNotificationManage {
     private UserInfo mUserInfo;
     private int pageNum = 1, pageCount = -1;
     private ArrayList<ClassNotificationBean> mBeen;
+    private boolean refreshing;
 
     public ClassNotificationManage(IClassNotificationView iClassNotificationView) {
         this.mIClassNotificationView = iClassNotificationView;
@@ -94,6 +95,7 @@ public class ClassNotificationManage {
         mActivity.startActivityForResult(intent, 101);
     }
 
+    //更新阅读状态
     private void updateClassNotificationReadState(int position) {
         mService.updateClassNotificationReadState(mBeen.get(position).getNoticeId(), new ICallListener<String>() {
             @Override
@@ -108,52 +110,96 @@ public class ClassNotificationManage {
         });
     }
 
+    //获取数据
     public void getClassNotificationData(int page) {
+        mIClassNotificationView.showLoading(R.string.loading_data);
         mService.getClassNotificationData(page, new ICallListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
                     JSONObject jsonObject = new JSONObject(s);
                     if (!jsonObject.getBoolean("errorFlag")) {
-                        pageCount = jsonObject.getInt("PageCount");
-                        String jsonResult = jsonObject.getString("noticeList");
-                        if (null != jsonResult && !"".equals(jsonResult) && !"[]".equals(jsonResult)) {
-                            Gson gson = new Gson();
-                            ArrayList<ClassNotificationBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<ClassNotificationBean>>(){}.getType());
-                            for (ClassNotificationBean cnb: list) {
-                                if (!"2".equals(cnb.getIsRead())) {
-                                    mBeen.add(cnb);
+                        pageCount = jsonObject.getInt("pageCount");
+                        if (0 < pageCount) {
+                            String jsonResult = jsonObject.getString("noticeList");
+                            if (null != jsonResult && !"".equals(jsonResult) && !"[]".equals(jsonResult)) {
+                                if (1 == pageNum) {
+                                    mBeen = new ArrayList<>();
                                 }
+                                Gson gson = new Gson();
+                                ArrayList<ClassNotificationBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<ClassNotificationBean>>(){}.getType());
+                                for (ClassNotificationBean cnb: list) {
+                                    if (!"2".equals(cnb.getIsRead())) {
+                                        mBeen.add(cnb);
+                                    }
+                                }
+                                mIClassNotificationView.showList(mBeen);
+                                pageNum += 1;
                             }
-                            mIClassNotificationView.showList(mBeen);
-                            pageNum += 1;
+                        } else {
+                            mIClassNotificationView.showToastMsg(R.string.no_more_data);
+                        }
+                    } else {
+                        String msg = jsonObject.getString("errorMsg");
+                        if (null != msg && !"".equals(msg)) {
+                            mIClassNotificationView.showToastMsg(msg);
+                        } else {
+                            mIClassNotificationView.showToastMsg(R.string.error_connection);
                         }
                     }
+                    if (refreshing) {
+                        mIClassNotificationView.completeRefreshList();
+                        refreshing = false;
+                    }
+                    mIClassNotificationView.hiddenLoading();
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    if (refreshing) {
+                        mIClassNotificationView.completeRefreshList();
+                        refreshing = false;
+                    }
+                    mIClassNotificationView.hiddenLoading();
                 }
             }
 
             @Override
             public void callFailed() {
-
+                if (refreshing) {
+                    mIClassNotificationView.completeRefreshList();
+                    refreshing = false;
+                }
+                mIClassNotificationView.hiddenLoading();
+                mIClassNotificationView.showToastMsg(R.string.error_connection);
             }
         });
     }
 
+    //自动加载更多数据
     public void getMoreData() {
         if (-1 != pageCount) {
             if (pageNum > pageCount) {
                 mIClassNotificationView.showToastMsg(R.string.no_more_data);
             } else {
-                Tools.print(TAG, "加载更多。。。");
-                getClassNotificationData(pageNum);
+                if (!refreshing) {
+
+                    Tools.print(TAG, "又加载更多。。。");
+                    getClassNotificationData(pageNum);
+                }
             }
         }
     }
 
+    //刷新列表显示
     public void refreshData(ArrayList<ClassNotificationBean> list) {
         this.mBeen = list;
         mIClassNotificationView.showList(mBeen);
+    }
+
+    //下拉刷新
+    public void refreshList() {
+        refreshing = true;
+        Tools.print(TAG, "开始下拉刷新。。。");
+        pageNum = 1;
+        getClassNotificationData(pageNum);
     }
 }

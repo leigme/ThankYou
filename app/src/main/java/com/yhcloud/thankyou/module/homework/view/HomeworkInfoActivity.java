@@ -16,7 +16,6 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.module.homework.adapter.HomeworkInfoViewPagerAdapter;
 import com.yhcloud.thankyou.module.homework.bean.HomeworkInfoViewPagerBean;
 import com.yhcloud.thankyou.module.homework.manage.HomeworkInfoManage;
-import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
@@ -86,6 +85,7 @@ public class HomeworkInfoActivity extends AppCompatActivity implements IHomework
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 
@@ -174,7 +174,7 @@ public class HomeworkInfoActivity extends AppCompatActivity implements IHomework
         tvTitle.setText("");
         TextView tvMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
         tvMsg.setText("提交之后将无法更改,是否确认提交本次作业？");
-        Button send = (Button) mDialog.findViewById(R.id.btn_dialog_send);
+        Button send = (Button) mDialog.findViewById(R.id.btn_dialog_submit);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

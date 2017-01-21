@@ -70,6 +70,7 @@ public class RecordingActivity extends AppCompatActivity implements IRecordingVi
 
     @Override
     public void showLoading() {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading_data));
     }
 

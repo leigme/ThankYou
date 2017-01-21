@@ -197,7 +197,7 @@ public class AddPhotoActivity extends AppCompatActivity implements IAddPhotoView
         tvTitle.setText("");
         TextView tvMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
         tvMsg.setText("提交之后将无法更改,是否确认提交本次作业？");
-        Button send = (Button) mDialog.findViewById(R.id.btn_dialog_send);
+        Button send = (Button) mDialog.findViewById(R.id.btn_dialog_submit);
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

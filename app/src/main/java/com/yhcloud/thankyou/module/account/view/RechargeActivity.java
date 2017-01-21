@@ -90,6 +90,7 @@ public class RechargeActivity extends AppCompatActivity implements IRechargeView
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

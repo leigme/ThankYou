@@ -100,6 +100,7 @@ public class DetailPeopleActivity extends AppCompatActivity implements IDetailPe
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

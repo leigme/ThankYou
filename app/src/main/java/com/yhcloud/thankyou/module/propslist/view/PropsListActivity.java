@@ -69,6 +69,7 @@ public class PropsListActivity extends AppCompatActivity implements IPropsListVi
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

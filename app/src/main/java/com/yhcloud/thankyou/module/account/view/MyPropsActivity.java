@@ -71,6 +71,7 @@ public class MyPropsActivity extends AppCompatActivity implements IMyPropsView {
 
     @Override
     public void showLoading(int resId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(resId));
     }
 

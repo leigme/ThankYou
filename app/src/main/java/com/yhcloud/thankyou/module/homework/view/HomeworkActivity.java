@@ -85,6 +85,7 @@ public class HomeworkActivity extends AppCompatActivity implements IHomeworkView
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

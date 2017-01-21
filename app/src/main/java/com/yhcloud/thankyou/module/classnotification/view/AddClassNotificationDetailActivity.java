@@ -1,11 +1,14 @@
 package com.yhcloud.thankyou.module.classnotification.view;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.yhcloud.thankyou.R;
 
 public class AddClassNotificationDetailActivity extends AppCompatActivity implements IAddClassNotificationDetailView {
+
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,12 +33,15 @@ public class AddClassNotificationDetailActivity extends AppCompatActivity implem
 
     @Override
     public void showLoading(int msgId) {
-
+        hiddenLoading();
+        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 
     @Override
     public void hiddenLoading() {
-
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override

@@ -79,9 +79,7 @@ public class SchoolAnnouncementActivity extends AppCompatActivity implements ISc
 
     @Override
     public void showLoading(int msgId) {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

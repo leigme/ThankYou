@@ -69,6 +69,7 @@ public class PropsActivity extends AppCompatActivity implements IPropsView {
 
     @Override
     public void showLoading() {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading_data));
     }
 

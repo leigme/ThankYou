@@ -88,9 +88,7 @@ public class ClassNotificationActivity extends AppCompatActivity implements ICla
 
     @Override
     public void showLoading(int msgId) {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

@@ -76,6 +76,7 @@ public class AllFuncationActivity extends AppCompatActivity implements IAllFunca
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

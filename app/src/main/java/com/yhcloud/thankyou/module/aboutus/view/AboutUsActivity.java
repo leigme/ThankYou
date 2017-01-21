@@ -1,5 +1,6 @@
 package com.yhcloud.thankyou.module.aboutus.view;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,6 +19,7 @@ public class AboutUsActivity extends AppCompatActivity implements IAboutUsView{
     private LinearLayout llBack;
     private TextView tvTitle, tvInfo;
     private ImageView ivImage;
+    private ProgressDialog mProgressDialog;
     //管理器
     private AboutUsManage mManage;
 
@@ -58,12 +60,15 @@ public class AboutUsActivity extends AppCompatActivity implements IAboutUsView{
 
     @Override
     public void showLoading(int msgId) {
-
+        hiddenLoading();
+        mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading_data));
     }
 
     @Override
     public void hiddenLoading() {
-
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override

@@ -103,6 +103,7 @@ public class PropsInfoActivity extends AppCompatActivity implements IPropsInfoVi
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 
@@ -129,7 +130,7 @@ public class PropsInfoActivity extends AppCompatActivity implements IPropsInfoVi
         mDialog.setContentView(R.layout.dialog_integral);
         TextView dialogTitle = (TextView) mDialog.findViewById(R.id.tv_dialog_title);
         TextView dialogMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
-        Button dialogSubmit = (Button) mDialog.findViewById(R.id.btn_dialog_send);
+        Button dialogSubmit = (Button) mDialog.findViewById(R.id.btn_dialog_submit);
         Button dialogCancel = (Button) mDialog.findViewById(R.id.btn_dialog_cancel);
         String str;
         if (canBuy) {
@@ -186,7 +187,7 @@ public class PropsInfoActivity extends AppCompatActivity implements IPropsInfoVi
         dialogTitle.setText(title);
         dialogMsg.setText(msg);
         LinearLayout llCancel = (LinearLayout) mDialog.findViewById(R.id.ll_integral_cancel);
-        Button dialogSubmit = (Button) mDialog.findViewById(R.id.btn_dialog_send);
+        Button dialogSubmit = (Button) mDialog.findViewById(R.id.btn_dialog_submit);
         switch (title) {
             case "购买成功":
                 llCancel.setVisibility(View.GONE);

@@ -67,6 +67,7 @@ public class ClassTeacherListActivity extends AppCompatActivity implements IClas
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

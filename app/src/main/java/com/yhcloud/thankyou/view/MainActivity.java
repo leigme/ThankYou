@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity implements IMainView,
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

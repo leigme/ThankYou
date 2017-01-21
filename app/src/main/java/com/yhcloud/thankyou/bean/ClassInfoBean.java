@@ -30,48 +30,48 @@ public class ClassInfoBean implements Serializable {
         return ClassId;
     }
 
-    public void setClassId(String ClassId) {
-        this.ClassId = ClassId;
+    public void setClassId(String classId) {
+        ClassId = classId;
     }
 
     public String getClassName() {
         return ClassName;
     }
 
-    public void setClassName(String ClassName) {
-        this.ClassName = ClassName;
+    public void setClassName(String className) {
+        ClassName = className;
     }
 
     public String getClassLogo() {
         return ClassLogo;
     }
 
-    public void setClassLogo(String ClassLogo) {
-        this.ClassLogo = ClassLogo;
+    public void setClassLogo(String classLogo) {
+        ClassLogo = classLogo;
     }
 
     public int getStatus() {
         return Status;
     }
 
-    public void setStatus(int Status) {
-        this.Status = Status;
+    public void setStatus(int status) {
+        Status = status;
     }
 
     public String getSchoolName() {
         return SchoolName;
     }
 
-    public void setSchoolName(String SchoolName) {
-        this.SchoolName = SchoolName;
+    public void setSchoolName(String schoolName) {
+        SchoolName = schoolName;
     }
 
     public String getSchoolId() {
         return SchoolId;
     }
 
-    public void setSchoolId(String SchoolId) {
-        this.SchoolId = SchoolId;
+    public void setSchoolId(String schoolId) {
+        SchoolId = schoolId;
     }
 
     public boolean isSelected() {

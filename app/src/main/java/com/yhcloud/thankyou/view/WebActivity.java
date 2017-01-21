@@ -1,5 +1,6 @@
 package com.yhcloud.thankyou.view;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -17,6 +18,7 @@ public class WebActivity extends AppCompatActivity implements IWebView {
     private LinearLayout llBack;
     private TextView tvTitle;
     private MyWebView mwvSpread;
+    private ProgressDialog mProgressDialog;
     //管理器
     private WebManage mManage;
 
@@ -56,12 +58,15 @@ public class WebActivity extends AppCompatActivity implements IWebView {
 
     @Override
     public void showLoading(int msgId) {
-
+        hiddenLoading();
+        mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading_data));
     }
 
     @Override
     public void hiddenLoading() {
-
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override

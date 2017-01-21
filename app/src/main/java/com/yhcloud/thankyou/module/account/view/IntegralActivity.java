@@ -12,7 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -88,6 +87,7 @@ public class IntegralActivity extends AppCompatActivity implements IIntegralView
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 
@@ -164,7 +164,7 @@ public class IntegralActivity extends AppCompatActivity implements IIntegralView
         mDialog = new Dialog(this, R.style.MyDialog);
         mDialog.setContentView(R.layout.dialog_integral);
         TextView tvMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
-        Button send = (Button) mDialog.findViewById(R.id.btn_dialog_send);
+        Button send = (Button) mDialog.findViewById(R.id.btn_dialog_submit);
         Button cancel = (Button) mDialog.findViewById(R.id.btn_dialog_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,7 +214,7 @@ public class IntegralActivity extends AppCompatActivity implements IIntegralView
         tvMsg.setText("您现在可以去买道具啦!");
         tvMsg.setTextSize(12);
         tvMsg.setTextColor(Color.parseColor("#666666"));
-        Button btnOk = (Button) dialog.findViewById(R.id.btn_dialog_send);
+        Button btnOk = (Button) dialog.findViewById(R.id.btn_dialog_submit);
         btnOk.setText("我知道啦");
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override

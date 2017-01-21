@@ -125,6 +125,7 @@ public class ClassFragment extends Fragment implements IClassView {
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(getActivity(), null, getString(msgId));
     }
 

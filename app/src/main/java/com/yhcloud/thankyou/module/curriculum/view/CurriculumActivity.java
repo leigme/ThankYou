@@ -64,6 +64,7 @@ public class CurriculumActivity extends AppCompatActivity implements ICurriculum
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

@@ -128,12 +128,15 @@ public class MineFragment extends Fragment implements IMineView {
 
     @Override
     public void showLoading(int msgId) {
-
+        hiddenLoading();
+        mProgressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.loading_data));
     }
 
     @Override
     public void hiddenLoading() {
-
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override

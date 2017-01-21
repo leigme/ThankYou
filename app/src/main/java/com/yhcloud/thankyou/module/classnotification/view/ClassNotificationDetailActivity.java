@@ -68,6 +68,7 @@ public class ClassNotificationDetailActivity extends AppCompatActivity implement
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

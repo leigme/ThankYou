@@ -1,5 +1,6 @@
 package com.yhcloud.thankyou.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -51,6 +52,7 @@ public class HomeFragment extends Fragment implements IHomeView {
     private Banner mBanner;
     private RecyclerView rvFunctionList;
     private LinearLayoutForListView llflSpreadList;
+    private ProgressDialog mProgressDialog;
 
     //适配器
     private HomeFunctionListAdapter hfla;
@@ -240,12 +242,15 @@ public class HomeFragment extends Fragment implements IHomeView {
 
     @Override
     public void showLoading(int msgId) {
-
+        hiddenLoading();
+        mProgressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.loading_data));
     }
 
     @Override
     public void hiddenLoading() {
-
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override

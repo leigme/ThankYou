@@ -111,6 +111,7 @@ public class LoginActivity extends AppCompatActivity implements ILoginView {
 
     @Override
     public void showLoading(int msgId) {
+        hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 

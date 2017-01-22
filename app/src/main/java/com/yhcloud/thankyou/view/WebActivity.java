@@ -1,23 +1,21 @@
 package com.yhcloud.thankyou.view;
 
-import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.manage.WebManage;
 import com.yhcloud.thankyou.utils.myview.MyWebView;
 
-public class WebActivity extends AppCompatActivity implements IWebActivityView {
+public class WebActivity extends ABaseActivity implements IWebActivityView {
 
     //视图控件
     private LinearLayout llBack;
     private TextView tvTitle;
     private MyWebView mwvSpread;
-    private ProgressDialog mProgressDialog;
     //管理器
     private WebManage mManage;
 
@@ -56,35 +54,12 @@ public class WebActivity extends AppCompatActivity implements IWebActivityView {
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading_data));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
 
     @Override
     public void setRightTitle(String title) {
-
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
 
     }
 

@@ -84,7 +84,6 @@ public class ClassNotificationManage {
     }
 
     public void goClassNotificationDetail(int position) {
-        updateClassNotificationReadState(position);
         Intent intent = new Intent(mActivity, ClassNotificationDetailActivity.class);
         intent.putExtra("record", position);
         intent.putExtra("pageCount", pageCount);
@@ -93,21 +92,6 @@ public class ClassNotificationManage {
         bundle.putSerializable("list", mBeen);
         intent.putExtras(bundle);
         mActivity.startActivityForResult(intent, 101);
-    }
-
-    //更新阅读状态
-    private void updateClassNotificationReadState(int position) {
-        mService.updateClassNotificationReadState(mBeen.get(position).getNoticeId(), new ICallListener<String>() {
-            @Override
-            public void callSuccess(String s) {
-
-            }
-
-            @Override
-            public void callFailed() {
-
-            }
-        });
     }
 
     //获取数据

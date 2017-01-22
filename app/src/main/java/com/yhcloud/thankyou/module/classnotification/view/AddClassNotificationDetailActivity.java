@@ -9,8 +9,6 @@ import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 
 public class AddClassNotificationDetailActivity extends ABaseActivity implements IAddClassNotificationDetailActivityView {
 
-    private ProgressDialog mProgressDialog;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,35 +31,12 @@ public class AddClassNotificationDetailActivity extends ABaseActivity implements
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
 
     }
 
     @Override
     public void setRightTitle(String title) {
-
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
 
     }
 }

@@ -1,6 +1,5 @@
 package com.yhcloud.thankyou.view;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,6 +13,7 @@ import android.view.ViewGroup;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.MineFunctionAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.mAbstract.ABaseFragment;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MineManage;
 import com.yhcloud.thankyou.service.LogicService;
@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * Use the {@link MineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MineFragment extends Fragment implements IMineActivityView {
+public class MineFragment extends ABaseFragment implements IMineActivityView {
 
     private OnFragmentInteractionListener mListener;
 
@@ -36,7 +36,6 @@ public class MineFragment extends Fragment implements IMineActivityView {
     private View mView;
     private RecyclerView rvMineFunction;
     private MineFunctionAdapter mfa;
-    private ProgressDialog mProgressDialog;
     //管理器
     private MineManage mManage;
     private LogicService mService;
@@ -127,35 +126,12 @@ public class MineFragment extends Fragment implements IMineActivityView {
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.loading_data));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
 
     }
 
     @Override
     public void setRightTitle(String title) {
-
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
 
     }
 

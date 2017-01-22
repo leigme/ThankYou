@@ -77,15 +77,13 @@ public class MyWebView extends WebView {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
-            mProgressDialog = ProgressDialog.show(mContext, null, mContext.getString(R.string.loading_data));
+            showLoading(R.string.loading_data);
         }
 
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
-            if (null != mProgressDialog) {
-                mProgressDialog.dismiss();
-            }
+            hiddenLoading();
         }
     }
 
@@ -101,6 +99,17 @@ public class MyWebView extends WebView {
                 }
                 super.onProgressChanged(view, newProgress);
             }
+        }
+    }
+
+    private void showLoading(int msgId) {
+        hiddenLoading();
+        mProgressDialog = ProgressDialog.show(mContext, null, mContext.getString(msgId));
+    }
+
+    private void hiddenLoading() {
+        if (null != mProgressDialog) {
+            mProgressDialog.dismiss();
         }
     }
 

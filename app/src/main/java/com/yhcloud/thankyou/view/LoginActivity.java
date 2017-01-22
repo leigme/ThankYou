@@ -1,9 +1,7 @@
 package com.yhcloud.thankyou.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -13,6 +11,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.manage.LoginManage;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
@@ -21,13 +20,13 @@ import java.util.ArrayList;
 import rx.Observable;
 import rx.Observer;
 
-public class LoginActivity extends AppCompatActivity implements ILoginActivityView {
+public class LoginActivity extends ABaseActivity implements ILoginActivityView {
 
     private String TAG = getClass().getSimpleName();
-
+    //视图控件
     private EditText et_login_username, et_login_password;
     private TextView btn_login_send;
-    private ProgressDialog mProgressDialog;
+    //管理器
     private LoginManage mLoginManage;
 
     @Override
@@ -110,35 +109,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginActivityVi
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
 
     }
 
     @Override
     public void setRightTitle(String title) {
-
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
 
     }
 

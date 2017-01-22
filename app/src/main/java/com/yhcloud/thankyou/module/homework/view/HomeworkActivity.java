@@ -1,9 +1,7 @@
 package com.yhcloud.thankyou.module.homework.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,7 +19,6 @@ import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
 import com.yhcloud.thankyou.module.homework.bean.TeacherHomeworkBean;
 import com.yhcloud.thankyou.module.homework.manage.HomeworkManage;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
@@ -35,7 +32,6 @@ public class HomeworkActivity extends ABaseActivity implements IHomeworkActivity
     private ImageView ivRight;
     private SwipeRefreshLayout srlHomeworkList;
     private RecyclerView rvHomeworkList;
-    private ProgressDialog mProgressDialog;
     //适配器
     private TeacherHomeworkListAdapter thla;
     private StudentHomeworkListAdapter shla;
@@ -85,19 +81,6 @@ public class HomeworkActivity extends ABaseActivity implements IHomeworkActivity
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
@@ -105,16 +88,6 @@ public class HomeworkActivity extends ABaseActivity implements IHomeworkActivity
     @Override
     public void setRightTitle(String title) {
 
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 
     @Override

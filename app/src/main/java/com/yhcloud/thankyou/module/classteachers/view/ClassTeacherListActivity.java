@@ -25,7 +25,6 @@ public class ClassTeacherListActivity extends ABaseActivity implements IClassTea
     private LinearLayout llBack;
     private TextView tvTitle;
     private RecyclerView rvTeacherList;
-    private ProgressDialog mProgressDialog;
     //适配器
     private TeacherListAdapter tla;
     //管理器
@@ -67,35 +66,12 @@ public class ClassTeacherListActivity extends ABaseActivity implements IClassTea
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
 
     @Override
     public void setRightTitle(String title) {
-
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
 
     }
 

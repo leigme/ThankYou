@@ -63,19 +63,6 @@ public class SchoolAnnouncementDetailActivity extends ABaseActivity implements I
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
@@ -92,16 +79,6 @@ public class SchoolAnnouncementDetailActivity extends ABaseActivity implements I
         tvMenu.setText(title);
         ivMenu = (ImageView) findViewById(R.id.iv_header_right);
         ivMenu.setVisibility(View.INVISIBLE);
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 
     @Override

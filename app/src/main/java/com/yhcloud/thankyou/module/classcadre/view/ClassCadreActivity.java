@@ -25,7 +25,6 @@ public class ClassCadreActivity extends ABaseActivity implements IClassCadreActi
     private LinearLayout llBack;
     private TextView tvTitle, tvDefault;
     private RecyclerView rvClassCadreList;
-    private ProgressDialog mProgressDialog;
     //适配器
     private ClassCadreListAdpater ccla;
     //管理器
@@ -73,19 +72,6 @@ public class ClassCadreActivity extends ABaseActivity implements IClassCadreActi
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
@@ -93,16 +79,6 @@ public class ClassCadreActivity extends ABaseActivity implements IClassCadreActi
     @Override
     public void setRightTitle(String title) {
 
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 
     @Override

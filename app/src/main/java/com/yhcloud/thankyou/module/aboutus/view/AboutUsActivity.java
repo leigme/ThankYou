@@ -13,6 +13,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.aboutus.manage.AboutUsManage;
 import com.yhcloud.thankyou.utils.Constant;
+import com.yhcloud.thankyou.utils.Tools;
 
 public class AboutUsActivity extends ABaseActivity implements IAboutUsActivityView {
 
@@ -20,7 +21,6 @@ public class AboutUsActivity extends ABaseActivity implements IAboutUsActivityVi
     private LinearLayout llBack;
     private TextView tvTitle, tvInfo;
     private ImageView ivImage;
-    private ProgressDialog mProgressDialog;
     //管理器
     private AboutUsManage mManage;
 
@@ -60,19 +60,6 @@ public class AboutUsActivity extends ABaseActivity implements IAboutUsActivityVi
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading_data));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
@@ -83,25 +70,12 @@ public class AboutUsActivity extends ABaseActivity implements IAboutUsActivityVi
     }
 
     @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-
-    }
-
-    @Override
     public void setInfo(String info) {
         tvInfo.setText(info);
     }
 
     @Override
     public void setImageView(String url) {
-        Glide.with(this)
-                .load(Constant.SERVICEADDRESS + url)
-                .error(R.mipmap.icon_big_404)
-                .into(ivImage);
+        Tools.GlideImageUrl(this, url, ivImage);
     }
 }

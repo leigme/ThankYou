@@ -35,7 +35,6 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
     private TextView tvTitle, tvRight;
     private ImageView ivRight;
     private RecyclerView rvAllFuncationList;
-    private ProgressDialog mProgressDialog;
     //适配器
     private AllFuncationListAdapter afla;
     //管理器
@@ -76,19 +75,6 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         this.tvTitle.setText(title);
     }
@@ -109,16 +95,6 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
             tvRight = (TextView) findViewById(R.id.tv_header_right);
         }
         this.tvRight.setText(title);
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 
     @Override

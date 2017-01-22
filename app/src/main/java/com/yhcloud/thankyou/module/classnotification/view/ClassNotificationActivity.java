@@ -31,7 +31,6 @@ public class ClassNotificationActivity extends ABaseActivity implements IClassNo
     private LinearLayout llBack, llMenu;
     private TextView tvTitle, tvMenu;
     private RecyclerView rvList;
-    private ProgressDialog mProgressDialog;
     private SwipeRefreshLayout srlList;
     //适配器
     private ClassNotificationListAdapter cnla;
@@ -87,19 +86,6 @@ public class ClassNotificationActivity extends ABaseActivity implements IClassNo
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
@@ -107,16 +93,6 @@ public class ClassNotificationActivity extends ABaseActivity implements IClassNo
     @Override
     public void setRightTitle(String title) {
         tvMenu.setText(title);
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 
     @Override

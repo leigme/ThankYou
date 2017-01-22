@@ -1,6 +1,5 @@
 package com.yhcloud.thankyou.view;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +16,7 @@ import com.yhcloud.thankyou.adapter.HomeFunctionListAdapter;
 import com.yhcloud.thankyou.adapter.HomeSpreadAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
+import com.yhcloud.thankyou.mAbstract.ABaseFragment;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.HomeManage;
 import com.yhcloud.thankyou.service.LogicService;
@@ -41,7 +41,7 @@ import java.util.Collections;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements IHomeActivityView {
+public class HomeFragment extends ABaseFragment implements IHomeActivityView {
 
     private String TAG = getClass().getSimpleName();
 
@@ -52,14 +52,11 @@ public class HomeFragment extends Fragment implements IHomeActivityView {
     private Banner mBanner;
     private RecyclerView rvFunctionList;
     private LinearLayoutForListView llflSpreadList;
-    private ProgressDialog mProgressDialog;
-
     //适配器
     private HomeFunctionListAdapter hfla;
     private RecycleCallBack rcb;
     private ItemTouchHelper ith;
     private HomeSpreadAdapter hsa;
-
     //管理器
     private HomeManage mManage;
     private LogicService mService;
@@ -241,35 +238,12 @@ public class HomeFragment extends Fragment implements IHomeActivityView {
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(getActivity(), null, getString(R.string.loading_data));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
 
     }
 
     @Override
     public void setRightTitle(String title) {
-
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
 
     }
 

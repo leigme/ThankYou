@@ -1,13 +1,11 @@
 package com.yhcloud.thankyou.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,6 +20,7 @@ import com.yhcloud.thankyou.adapter.ClassDrawerListAdapter;
 import com.yhcloud.thankyou.adapter.FragmentViewPagerAdapter;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.utils.Constant;
@@ -35,7 +34,7 @@ import java.util.ArrayList;
 
 import static com.yhcloud.thankyou.R.id.iv_header_left;
 
-public class MainActivity extends AppCompatActivity implements IMainActivityView,
+public class MainActivity extends ABaseActivity implements IMainActivityView,
         HomeFragment.OnFragmentInteractionListener, ClassFragment.OnFragmentInteractionListener,
         MineFragment.OnFragmentInteractionListener {
 
@@ -49,7 +48,6 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     private RecyclerView rvDrawerList;
     private LinearLayout llHeaderLeft, llHeaderRight, llFooterHome, llFooterClass, llFooterMine;
     private NoScrollViewPager nsvpList;
-    private ProgressDialog mProgressDialog;
     //适配器
     private ClassDrawerListAdapter cdla;
     private FragmentViewPagerAdapter mfvpa;
@@ -128,35 +126,12 @@ public class MainActivity extends AppCompatActivity implements IMainActivityView
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String str) {
         tvHeaderTitle.setText(str);
     }
 
     @Override
     public void setRightTitle(String title) {
-
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
 
     }
 

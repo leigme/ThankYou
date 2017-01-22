@@ -1,8 +1,5 @@
 package com.yhcloud.thankyou.module.homework.view;
 
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,8 +16,6 @@ public class AddHomeworkActivity extends ABaseActivity implements IAddHomeworkAc
     private LinearLayout llBack, llRight;
     private TextView tvTitle, tvRight;
     private ImageView ivRight;
-    private ProgressDialog mProgressDialog;
-    private Dialog mDialog;
     //管理器
     private AddHomeworkManage mManage;
 
@@ -57,19 +52,6 @@ public class AddHomeworkActivity extends ABaseActivity implements IAddHomeworkAc
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading_data));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
@@ -89,15 +71,5 @@ public class AddHomeworkActivity extends ABaseActivity implements IAddHomeworkAc
             tvRight = (TextView) findViewById(R.id.tv_header_right);
         }
         tvRight.setText(title);
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-
     }
 }

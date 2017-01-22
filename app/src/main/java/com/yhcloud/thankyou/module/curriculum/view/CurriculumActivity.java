@@ -1,8 +1,6 @@
 package com.yhcloud.thankyou.module.curriculum.view;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -21,12 +19,13 @@ import java.util.ArrayList;
 
 public class CurriculumActivity extends ABaseActivity implements ICurriculumActivityView {
 
+    //视图控件
     private LinearLayout llBack;
     private TextView tvTitle, tvDefault;
     private ViewStub vsDefault;
     private RecyclerView rvCurriculumList;
     private CurriculumAdapter ca;
-    private ProgressDialog mProgressDialog;
+    //管理器
     private CurriculumManage mManage;
 
     @Override
@@ -64,35 +63,12 @@ public class CurriculumActivity extends ABaseActivity implements ICurriculumActi
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
 
     @Override
     public void setRightTitle(String title) {
-
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
 
     }
 

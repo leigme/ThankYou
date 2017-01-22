@@ -1,19 +1,15 @@
 package com.yhcloud.thankyou.module.homework.view;
 
 import android.Manifest;
-import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -21,11 +17,11 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mInterface.IButtonOnClickListener;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.homework.adapter.AddPhotoListAdapter;
 import com.yhcloud.thankyou.module.homework.manage.AddPhotoManage;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
@@ -40,8 +36,6 @@ public class AddPhotoActivity extends ABaseActivity implements IAddPhotoActivity
     private ImageView ivRight;
     private EditText etContent;
     private RecyclerView rvPhotoList;
-    private ProgressDialog mProgressDialog;
-    private Dialog mDialog;
     //适配器
     private AddPhotoListAdapter apla;
     //管理器
@@ -85,19 +79,6 @@ public class AddPhotoActivity extends ABaseActivity implements IAddPhotoActivity
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
@@ -118,16 +99,6 @@ public class AddPhotoActivity extends ABaseActivity implements IAddPhotoActivity
             tvRight = (TextView) findViewById(R.id.tv_header_right);
         }
         tvRight.setText(title);
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 
     @Override
@@ -192,27 +163,13 @@ public class AddPhotoActivity extends ABaseActivity implements IAddPhotoActivity
 
     @Override
     public void showDialog() {
-        mDialog = new Dialog(this, R.style.MyDialog);
-        mDialog.setContentView(R.layout.dialog_integral);
-        TextView tvTitle = (TextView) mDialog.findViewById(R.id.tv_dialog_title);
-        tvTitle.setText("");
-        TextView tvMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
-        tvMsg.setText("提交之后将无法更改,是否确认提交本次作业？");
-        Button send = (Button) mDialog.findViewById(R.id.btn_dialog_submit);
-        send.setOnClickListener(new View.OnClickListener() {
+        super.showDialog("", "提交之后将无法更改,是否确认提交本次作业？");
+        this.setIButtonOnClickListener(new IButtonOnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void btnOnClick() {
                 mManage.updateStudentHomework();
             }
         });
-        Button cancel = (Button) mDialog.findViewById(R.id.btn_dialog_cancel);
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDialog.dismiss();
-            }
-        });
-        mDialog.show();
     }
 
     @Override

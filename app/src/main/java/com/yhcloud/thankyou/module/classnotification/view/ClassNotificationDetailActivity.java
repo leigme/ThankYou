@@ -21,7 +21,6 @@ public class ClassNotificationDetailActivity extends ABaseActivity implements IC
     private TextView tvTitle, tvMenu;
     private ImageView ivMenu;
     private MyWebView mwvClassnotificationInfo;
-    private ProgressDialog mProgressDialog;
     //管理器
     private ClassNotificationDetailManage mManage;
 
@@ -68,19 +67,6 @@ public class ClassNotificationDetailActivity extends ABaseActivity implements IC
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
@@ -89,16 +75,6 @@ public class ClassNotificationDetailActivity extends ABaseActivity implements IC
     public void setRightTitle(String title) {
         llMenu.setVisibility(View.VISIBLE);
         tvMenu.setText(title);
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 
     @Override

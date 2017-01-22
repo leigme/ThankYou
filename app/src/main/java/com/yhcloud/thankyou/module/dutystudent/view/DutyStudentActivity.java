@@ -1,7 +1,5 @@
 package com.yhcloud.thankyou.module.dutystudent.view;
 
-import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +13,6 @@ import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.dutystudent.adapter.DutyStudentListAdapter;
 import com.yhcloud.thankyou.module.dutystudent.manage.DutyStudentManage;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
-import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
@@ -25,7 +22,6 @@ public class DutyStudentActivity extends ABaseActivity implements IDutyStudentAc
     private LinearLayout llBack;
     private TextView tvTitle, tvDefault;
     private RecyclerView rvDutyStudentList;
-    private ProgressDialog mProgressDialog;
     //适配器
     private DutyStudentListAdapter dsla;
     //管理器
@@ -73,19 +69,6 @@ public class DutyStudentActivity extends ABaseActivity implements IDutyStudentAc
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         tvTitle.setText(title);
     }
@@ -93,16 +76,6 @@ public class DutyStudentActivity extends ABaseActivity implements IDutyStudentAc
     @Override
     public void setRightTitle(String title) {
 
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.yhcloud.thankyou.view;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import android.widget.LinearLayout;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.ClassPeopleListAdapter;
 import com.yhcloud.thankyou.bean.UserInfoBean;
+import com.yhcloud.thankyou.mAbstract.ABaseFragment;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.ClassManage;
 import com.yhcloud.thankyou.service.LogicService;
@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * Use the {@link ClassFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ClassFragment extends Fragment implements IClassActivityView {
+public class ClassFragment extends ABaseFragment implements IClassActivityView {
 
     private String TAG = getClass().getSimpleName();
 
@@ -41,7 +41,6 @@ public class ClassFragment extends Fragment implements IClassActivityView {
     private View mView;
     private LinearLayout llTeachers;
     private RecyclerView rvPeopleList;
-    private ProgressDialog mProgressDialog;
     //适配器
     private ClassPeopleListAdapter cpla;
     //管理器
@@ -123,35 +122,12 @@ public class ClassFragment extends Fragment implements IClassActivityView {
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(getActivity(), null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
 
     }
 
     @Override
     public void setRightTitle(String title) {
-
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
 
     }
 

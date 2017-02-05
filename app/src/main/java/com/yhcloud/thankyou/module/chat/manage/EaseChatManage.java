@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.manage;
+package com.yhcloud.thankyou.module.chat.manage;
 
 import android.app.Activity;
 import android.app.Service;
@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
+import com.hyphenate.easeui.EaseConstant;
 import com.yhcloud.thankyou.bean.UserInfoBean;
+import com.yhcloud.thankyou.module.chat.view.IEaseChatView;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.view.IEaseChatView;
+import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
 
@@ -18,6 +20,8 @@ import java.util.ArrayList;
  */
 
 public class EaseChatManage {
+
+    private String TAG = getClass().getSimpleName();
 
     private IEaseChatView mIEaseChatView;
     private Activity mActivity;
@@ -32,7 +36,15 @@ public class EaseChatManage {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 mService = ((LogicService.MyBinder)service).getService();
-                mIEaseChatView.initEaseChatUserInfo(mBeen);
+                mIEaseChatView.initView();
+                mIEaseChatView.initEvent();
+                mBeen = mService.getUserInfoBeen();
+                if (null != mBeen && 0 != mBeen.size()) {
+
+                } else {
+                    Tools.print(TAG, "请求服务器获取用户集合");
+                }
+//                mIEaseChatView.initEaseChatUserInfo(mBeen);
                 goEaseChat();
             }
 
@@ -45,19 +57,12 @@ public class EaseChatManage {
 
     public void goEaseChat() {
         Intent intent = mActivity.getIntent();
-        String chatType = intent.getStringExtra("chatType");
-        String uId = intent.getStringExtra("uId");
-        switch (chatType) {
-            case "single":
-                mIEaseChatView.showEaseChat(ChatType.SINGLE, uId);
-                break;
-            case "group":
-                mIEaseChatView.showEaseChat(ChatType.GROUP, uId);
-                break;
+        if (null != intent) {
+            mIEaseChatView.showEaseChat(intent.getStringExtra(EaseConstant.EXTRA_USER_ID));
         }
     }
 
-    public enum ChatType {
-        SINGLE, GROUP;
+    public void goDetailInfo() {
+        Tools.print(TAG, "点击了用户头像...");
     }
 }

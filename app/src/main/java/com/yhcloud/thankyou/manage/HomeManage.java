@@ -49,15 +49,7 @@ public class HomeManage {
         mIHomeView.initView();
         mIHomeView.initEvent();
         mSparseArray = mService.getBeanSparseArray();
-        ArrayList<FunctionBean> list = mService.getBeen();
-        mBeen = new ArrayList<>();
-        for (int i = 0; i < 7; i++) {
-            if (null != list.get(i)) {
-                mBeen.add(list.get(i));
-            }
-        }
-        mBeen.add(mSparseArray.get(0));
-
+        mBeen = mService.getBeen();
         switch (mService.getUserInfo().getUserInfoBean().getUserRoleId()) {
             case 1004:
                 showSpreadList("-1");
@@ -125,6 +117,7 @@ public class HomeManage {
     }
 
     public void showFunctionList() {
+        mBeen.add(7, mSparseArray.get(0));
         mIHomeView.showFunction(mBeen);
     }
 
@@ -195,6 +188,10 @@ public class HomeManage {
         if (null != functionBean.getIntent()) {
             if (0 == functionBean.getId()) {
                 mActivity.startActivityForResult(functionBean.getIntent(), Constant.ALLFUNCATION_REQUEST);
+            } else if (4 == functionBean.getId()){
+                if (mService.isCanMessage()) {
+                    mActivity.startActivity(functionBean.getIntent());
+                }
             } else {
                 mActivity.startActivity(functionBean.getIntent());
             }
@@ -202,12 +199,6 @@ public class HomeManage {
     }
 
     public void saveFunctionList() {
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        for (FunctionBean fb: mBeen) {
-            arrayList.add(fb.getId());
-        }
-        Gson gson = new Gson();
-        String jsonList = gson.toJson(arrayList);
-        mService.saveFuncations(jsonList);
+        mService.saveFuncations();
     }
 }

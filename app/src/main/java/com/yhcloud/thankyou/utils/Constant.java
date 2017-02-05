@@ -27,7 +27,11 @@ public class Constant {
     public static final String USER_HXPWD = "userHxPwd";
     public static final String USER_KEY = "userKey";
     public static final String USER_LOGINED = "userLogined";
-
+    //环信操作常量
+    public static final String CHATTYPE = "chatType";
+    public static final String SINGLE = "single";
+    public static final String GROUP = "group";
+    public static final String UID = "uId";
     //图片操作常量
     public static final String ADDIMAGE = "addImage";
     public static final String PAGE_NUM = "pageNum";
@@ -43,8 +47,8 @@ public class Constant {
      * 服务器API
      */
     //服务地址
-//    public static final String SERVICEADDRESS = "http://www.k12chn.com";
-        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
+    public static final String SERVICEADDRESS = "http://www.k12chn.com";
+//        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
 
     //登录请求 uid pwd
     public static final String LOGIN = SERVICEADDRESS + "/m17/M1708I/M1708I001";

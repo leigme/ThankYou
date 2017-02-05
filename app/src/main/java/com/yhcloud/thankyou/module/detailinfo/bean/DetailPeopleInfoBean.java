@@ -2,13 +2,14 @@ package com.yhcloud.thankyou.module.detailinfo.bean;
 
 import com.yhcloud.thankyou.bean.UserRoleBean;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016/12/22.
  */
 
-public class DetailPeopleInfoBean {
+public class DetailPeopleInfoBean implements Serializable {
 
     /**
      * RealName : 杨小箭爸爸~★@「◆」

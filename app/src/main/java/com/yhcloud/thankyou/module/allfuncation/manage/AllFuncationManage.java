@@ -10,8 +10,12 @@ import android.os.IBinder;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.module.allfuncation.view.IAllFuncationActivityView;
 import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.utils.Constant;
+import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
+
+import static com.huawei.android.pushagent.plugin.tools.BLocation.TAG;
 
 /**
  * Created by Administrator on 2017/1/10.
@@ -66,13 +70,6 @@ public class AllFuncationManage {
     }
 
     public void closePage() {
-        Intent intent = mActivity.getIntent();
-        ArrayList<Integer> list = new ArrayList<>();
-        for (FunctionBean functionBean: mBeen) {
-            list.add(functionBean.getId());
-        }
-        intent.putIntegerArrayListExtra("homeFuncations", list);
-        mActivity.setResult(Activity.RESULT_OK, intent);
         mActivity.finish();
     }
 
@@ -80,10 +77,31 @@ public class AllFuncationManage {
         if (null == mBeen) {
             mBeen = mService.getBeen();
         }
+        for (FunctionBean fb: mBeen) {
+            if (0 == fb.getId()) {
+                mBeen.remove(fb);
+            }
+        }
         mIAllFuncationView.showList(mBeen);
     }
 
-    public void getSaveAllFuncation() {
+    public void saveFunctionList() {
+        Tools.print(TAG, "保存程序集合视图");
+        mService.saveFuncations();
+    }
 
+    public void goFunction(int position) {
+        FunctionBean functionBean = mBeen.get(position);
+        if (null != functionBean.getIntent()) {
+            if (0 == functionBean.getId()) {
+                mActivity.startActivityForResult(functionBean.getIntent(), Constant.ALLFUNCATION_REQUEST);
+            } else if (4 == functionBean.getId()){
+                if (mService.isCanMessage()) {
+                    mActivity.startActivity(functionBean.getIntent());
+                }
+            } else {
+                mActivity.startActivity(functionBean.getIntent());
+            }
+        }
     }
 }

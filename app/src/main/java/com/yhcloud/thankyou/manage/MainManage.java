@@ -148,12 +148,11 @@ public class MainManage {
         mIMainView.showTrm(mMenuBeen);
     }
 
-    public void refreshFuncations(ArrayList<Integer> list) {
+    public void refreshFuncations() {
+        Tools.print(TAG, "刷新应用布局");
         HomeFragment homeFragment = (HomeFragment) mFragments.get(0);
-        ArrayList<FunctionBean> arrayList = new ArrayList<>();
-        for (int i: list) {
-            arrayList.add(mSparseArray.get(i));
-        }
-        homeFragment.showFunction(arrayList);
+        ArrayList<FunctionBean> mBeen = mService.getBeen();
+        mBeen.add(7, mSparseArray.get(0));
+        homeFragment.showFunction(mBeen);
     }
 }

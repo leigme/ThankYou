@@ -16,11 +16,11 @@ public class SpreadBean implements Serializable {
     private String Content;
     private String PromotionTag;
     private String PromotionType;
-    private String Statue;
     private String CreateTime;
     private String UpdateTime;
     private String UserName;
     private String UserRealName;
+    private String Statue;
 
     public String getId() {
         return Id;

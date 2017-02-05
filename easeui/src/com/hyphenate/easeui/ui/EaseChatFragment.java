@@ -112,6 +112,8 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
     private boolean isMessageListInited;
     protected MyItemClickListener extendMenuItemClickListener;
 
+    //点击事件扩展
+//    private EaseChatFragmentHelper mEaseChatFragmentHelper;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return inflater.inflate(R.layout.ease_fragment_chat, container, false);
@@ -181,7 +183,12 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
 
+//    public void setEaseChatFragmentHelper(EaseChatFragmentHelper easeChatFragmentHelper) {
+//        this.mEaseChatFragmentHelper = easeChatFragmentHelper;
+//    }
+
     protected void setUpView() {
+        titleBar.setVisibility(View.GONE);
         titleBar.setBackgroundColor(Color.parseColor("#68c04a"));
         titleBar.setLeftImageResource(R.drawable.icon_go_back);
         titleBar.setTitle(toChatUsername);
@@ -240,6 +247,35 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
         if (forward_msg_id != null) {
             forwardMessage(forward_msg_id);
         }
+
+        //头像点击事件
+        messageList.setItemClickListener(new EaseChatMessageList.MessageListItemClickListener() {
+            @Override
+            public void onResendClick(EMMessage message) {
+
+            }
+
+            @Override
+            public boolean onBubbleClick(EMMessage message) {
+                return false;
+            }
+
+            @Override
+            public void onBubbleLongClick(EMMessage message) {
+
+            }
+
+            @Override
+            public void onUserAvatarClick(String username) {
+                //头像点击事件
+                chatFragmentHelper.onEnterToChatDetails();
+            }
+
+            @Override
+            public void onUserAvatarLongClick(String username) {
+
+            }
+        });
     }
     
     /**

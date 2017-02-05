@@ -11,6 +11,8 @@ import android.os.IBinder;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.chat.EMClient;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.UserInfo;
@@ -18,11 +20,13 @@ import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
+import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.view.ILoginActivityView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
@@ -92,6 +96,24 @@ public class LoginManage {
                                 userInfo.setClassInfoBeen(classInfoBeen);
                             }
                         }
+                        EMClient.getInstance().login(userInfo.getUserInfoBean().getHXUserName(), userInfo.getUserInfoBean().getHXPwd(), new EMCallBack() {
+                            @Override
+                            public void onSuccess() {
+                                Tools.print(TAG, "环信登录成功!");
+                                mService.setCanMessage(true);
+                            }
+
+                            @Override
+                            public void onError(int i, String s) {
+                                Tools.print(TAG, MessageFormat.format("环信登录失败... 错误码:{0}, 错误信息:{1}", i, s));
+                                mService.setCanMessage(false);
+                            }
+
+                            @Override
+                            public void onProgress(int i, String s) {
+
+                            }
+                        });
                         mService.setUserInfo(userInfo);
                         mService.saveUserInfo(userInfo);
                         mILoginView.pushMainActivity(userInfo.getClassInfoBeen());

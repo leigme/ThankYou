@@ -1,6 +1,5 @@
 package com.yhcloud.thankyou.utils.myview;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -13,7 +12,6 @@ import android.view.View;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.PopupmenuListAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.bean.PopupMenuBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
 

@@ -1,9 +1,7 @@
 package com.yhcloud.thankyou.module.allfuncation.view;
 
-import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
@@ -19,7 +17,6 @@ import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.allfuncation.adapter.AllFuncationListAdapter;
 import com.yhcloud.thankyou.module.allfuncation.manage.AllFuncationManage;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.utils.myview.MyToast;
 import com.yhcloud.thankyou.utils.myview.drag.DragItemCallBack;
 import com.yhcloud.thankyou.utils.myview.drag.RecycleCallBack;
 
@@ -109,6 +106,7 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
                 @Override
                 public void itemOnClick(int position, View view) {
                     Tools.print(TAG, "点击事件...");
+                    mManage.goFunction(position);
                 }
 
                 @Override
@@ -145,7 +143,7 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
 
                 @Override
                 public void saveFunctionList() {
-
+                    mManage.saveFunctionList();
                 }
             };
 

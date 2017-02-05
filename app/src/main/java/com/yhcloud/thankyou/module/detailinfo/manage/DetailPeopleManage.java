@@ -9,12 +9,15 @@ import android.os.IBinder;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.yhcloud.thankyou.module.detailinfo.bean.DetailPeopleInfoBean;
+import com.hyphenate.easeui.EaseConstant;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
 import com.yhcloud.thankyou.bean.UserRoleBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
-import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.module.chat.view.EaseChatActivity;
+import com.yhcloud.thankyou.module.detailinfo.bean.DetailPeopleInfoBean;
 import com.yhcloud.thankyou.module.detailinfo.view.IDetailPeopleActivityView;
+import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.utils.Constant;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +35,8 @@ public class DetailPeopleManage {
     private IDetailPeopleActivityView mIDetailPeopleView;
     private Activity mActivity;
     private LogicService mService;
-    private String uId;
+    private String uId, userRealName;
+    private ArrayList<RelativeInfoBean> relativeInfoBeen;
     private int roleId;
     private boolean edited;
 
@@ -71,6 +75,7 @@ public class DetailPeopleManage {
                         if (null != jsonData && !"".equals(jsonData)) {
                             Gson gson = new Gson();
                             DetailPeopleInfoBean detailPeopleInfoBean = gson.fromJson(jsonData, DetailPeopleInfoBean.class);
+                            userRealName = detailPeopleInfoBean.getRealName();
                             switch (detailPeopleInfoBean.getRoleName()) {
                                 case "老师":
                                     roleId = 1010;
@@ -78,25 +83,25 @@ public class DetailPeopleManage {
                                 case "学生":
                                     roleId = 1011;
                                     if (null != jsonRelativeInfo && !"".equals(jsonRelativeInfo)) {
-                                        ArrayList<RelativeInfoBean> list = gson.fromJson(jsonRelativeInfo, new TypeToken<ArrayList<RelativeInfoBean>>(){}.getType());
-                                        if (null != list && 0 != list.size()) {
-                                            mIDetailPeopleView.showList(list);
+                                        relativeInfoBeen = gson.fromJson(jsonRelativeInfo, new TypeToken<ArrayList<RelativeInfoBean>>(){}.getType());
+                                        if (null != relativeInfoBeen && 0 != relativeInfoBeen.size()) {
+                                            mIDetailPeopleView.showList(relativeInfoBeen);
                                         }
                                     }
                                     break;
                                 case "家长":
                                     roleId = 1012;
                                     if (null != jsonRelativeInfo && !"".equals(jsonRelativeInfo)) {
-                                        ArrayList<RelativeInfoBean> list = gson.fromJson(jsonRelativeInfo, new TypeToken<ArrayList<RelativeInfoBean>>(){}.getType());
-                                        if (null != list && 0 != list.size()) {
-                                            mIDetailPeopleView.showList(list);
+                                        relativeInfoBeen = gson.fromJson(jsonRelativeInfo, new TypeToken<ArrayList<RelativeInfoBean>>(){}.getType());
+                                        if (null != relativeInfoBeen && 0 != relativeInfoBeen.size()) {
+                                            mIDetailPeopleView.showList(relativeInfoBeen);
                                         }
                                     }
                                     break;
                             }
                             mIDetailPeopleView.initView(roleId);
                             mIDetailPeopleView.setHeadImage(detailPeopleInfoBean.getHeadImage());
-                            mIDetailPeopleView.setName(detailPeopleInfoBean.getRealName());
+                            mIDetailPeopleView.setName(userRealName);
                             ArrayList<UserRoleBean> list = detailPeopleInfoBean.getUserRole();
                             if (null != list && 0 != list.size()) {
                                 mIDetailPeopleView.setOffice(list.get(0).getRoleName());
@@ -137,7 +142,22 @@ public class DetailPeopleManage {
 
     }
 
-    public void sendMessage() {}
+    public void goStudentChat() {
+        sendMessage(uId, userRealName);
+    }
+
+    public void goParentChat(int position) {
+        RelativeInfoBean relativeInfoBean = relativeInfoBeen.get(position);
+        sendMessage(relativeInfoBean.getRelativesHxName(), relativeInfoBean.getRelativesRealName());
+    }
+
+    public void sendMessage(String userId, String userName) {
+        Intent intent = new Intent(mActivity, EaseChatActivity.class);
+        intent.putExtra(Constant.CHATTYPE, Constant.SINGLE);
+        intent.putExtra(EaseConstant.EXTRA_USER_ID, userId);
+        intent.putExtra(Constant.USER_NAME, userName);
+        mActivity.startActivity(intent);
+    }
 
     public void sentProps() {}
 }

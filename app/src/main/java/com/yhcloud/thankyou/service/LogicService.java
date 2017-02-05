@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.UserInfo;
+import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.logic.ClassLogic;
 import com.yhcloud.thankyou.logic.HomeLogic;
 import com.yhcloud.thankyou.logic.IClassLogic;
@@ -32,9 +33,7 @@ import com.yhcloud.thankyou.module.homework.logic.HomeworkLogic;
 import com.yhcloud.thankyou.module.propslist.logic.PropsListLogic;
 import com.yhcloud.thankyou.module.schoolannouncement.logic.SchoolAnnouncementLogic;
 import com.yhcloud.thankyou.utils.Constant;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +44,11 @@ public class LogicService extends Service {
 
     private MyBinder mBinder = new MyBinder();
     private UserInfo mUserInfo;
+    private ArrayList<UserInfoBean> mUserInfoBeen;
     private SparseArray<FunctionBean> mBeanSparseArray;
     private ArrayList<FunctionBean> mBeen;
     private SharedPreferences mPreferences;
+    private boolean canMessage;
 
     public LogicService() {
     }
@@ -66,6 +67,14 @@ public class LogicService extends Service {
     @Override
     public boolean onUnbind(Intent intent) {
         return super.onUnbind(intent);
+    }
+
+    public ArrayList<UserInfoBean> getUserInfoBeen() {
+        return mUserInfoBeen;
+    }
+
+    public void setUserInfoBeen(ArrayList<UserInfoBean> userInfoBeen) {
+        mUserInfoBeen = userInfoBeen;
     }
 
     public class MyBinder extends Binder {
@@ -106,6 +115,14 @@ public class LogicService extends Service {
         mPreferences = preferences;
     }
 
+    public boolean isCanMessage() {
+        return canMessage;
+    }
+
+    public void setCanMessage(boolean canMessage) {
+        this.canMessage = canMessage;
+    }
+
     //登录
     public void login(String username, String password, ICallListener<String> iCallListener) {
         ILoginLogic loginLogic = new LoginLogic();
@@ -142,18 +159,12 @@ public class LogicService extends Service {
         mBeen = new ArrayList<>();
         String allFuncations = mPreferences.getString(mUserInfo.getUserInfoBean().getUserId(), "");
         if (null != allFuncations && !"".equals(allFuncations)) {
-            try {
-                JSONObject jsonObject = new JSONObject(allFuncations);
-                String jsonResult = jsonObject.getString("allFuncations");
-                if (null != jsonResult && !"".equals(jsonResult)) {
-                    Gson gson = new Gson();
-                    ArrayList<Integer> list = gson.fromJson(jsonResult, new TypeToken<Integer>(){}.getType());
-                    for (int i: list) {
-                        mBeen.add(mBeanSparseArray.get(i));
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
+            Tools.print(TAG, "保存的jsonList是:" + allFuncations);
+            Gson gson = new Gson();
+            String[] list = gson.fromJson(allFuncations, new TypeToken<String[]>(){}.getType());
+            Tools.print(TAG, "保存的数组是:" + list);
+            for (String s: list) {
+                mBeen.add(mBeanSparseArray.get(Integer.parseInt(s)));
             }
         } else {
             switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
@@ -202,7 +213,15 @@ public class LogicService extends Service {
     }
 
     //保存用户应用列表
-    public void saveFuncations(String jsonList) {
+    public void saveFuncations() {
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (FunctionBean fb: mBeen) {
+            if (0 != fb.getId()) {
+                arrayList.add(fb.getId());
+            }
+        }
+        Gson gson = new Gson();
+        String jsonList = gson.toJson(arrayList);
         SharedPreferences.Editor editor = mPreferences.edit();
         editor.putString(mUserInfo.getUserInfoBean().getUserId(), jsonList);
         editor.commit();

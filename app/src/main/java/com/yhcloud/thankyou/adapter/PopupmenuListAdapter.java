@@ -11,7 +11,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.bean.PopupMenuBean;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 
 import java.util.ArrayList;

@@ -101,11 +101,11 @@
             android:theme="@style/horizontal_slide">
         </activity>
         <activity
-            android:name=".view.EaseChatActivity"
+            android:name=".module.chat.view.EaseChatActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity
-            android:name=".view.MessageActivity"
+            android:name=".module.chat.view.MessageActivity"
             android:screenOrientation="portrait">
         </activity>
         <activity

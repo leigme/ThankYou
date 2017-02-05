@@ -23,7 +23,6 @@ import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MainManage;
-import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 import com.yhcloud.thankyou.utils.myview.NoScrollViewPager;
@@ -269,16 +268,12 @@ public class MainActivity extends ABaseActivity implements IMainActivityView,
 
     }
 
+    //返回首页
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Tools.print(TAG, MessageFormat.format("requestCode:{0}, resultCode:{1}", requestCode, resultCode));
-        if (RESULT_OK == resultCode && Constant.ALLFUNCATION_REQUEST == requestCode && null != data) {
-            Tools.print(TAG, "返回调用开始...");
-            Intent intent = data;
-            ArrayList<Integer> list = intent.getIntegerArrayListExtra("homeFuncations");
-            mManage.refreshFuncations(list);
-        }
+        mManage.refreshFuncations();
     }
 
     Long firstClickTime = (long) 0;

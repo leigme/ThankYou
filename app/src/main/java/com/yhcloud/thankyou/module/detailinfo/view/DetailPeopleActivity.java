@@ -12,13 +12,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
-import com.yhcloud.thankyou.module.detailinfo.adapter.DetailPeopleListAdapter;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.module.detailinfo.adapter.DetailPeopleListAdapter;
 import com.yhcloud.thankyou.module.detailinfo.manage.DetailPeopleManage;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
@@ -76,7 +75,7 @@ public class DetailPeopleActivity extends ABaseActivity implements IDetailPeople
                         mManage.editReMark();
                         break;
                     case R.id.ll_detail_send_massage:
-                        mManage.sendMessage();
+                        mManage.goStudentChat();
                         break;
                     case R.id.ll_detail_sent_props:
                         mManage.sentProps();
@@ -143,7 +142,7 @@ public class DetailPeopleActivity extends ABaseActivity implements IDetailPeople
             dpla.setIOnClickListener(new IOnClickListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
-
+                    mManage.goParentChat(position);
                 }
 
                 @Override

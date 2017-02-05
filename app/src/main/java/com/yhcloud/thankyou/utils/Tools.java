@@ -23,7 +23,7 @@ import com.yhcloud.thankyou.module.dutystudent.view.DutyStudentActivity;
 import com.yhcloud.thankyou.module.homework.view.HomeworkActivity;
 import com.yhcloud.thankyou.module.propslist.view.PropsListActivity;
 import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementActivity;
-import com.yhcloud.thankyou.view.EaseChatActivity;
+import com.yhcloud.thankyou.module.chat.view.MessageActivity;
 import com.yuyh.library.imgsel.ImageLoader;
 import com.yuyh.library.imgsel.ImgSelConfig;
 
@@ -137,7 +137,7 @@ public class Tools {
         sparseArray.append(1, new FunctionBean(1, R.mipmap.icon_my_info, 0, "我的资料"));
         sparseArray.append(2, new FunctionBean(2, R.mipmap.icon_my_friends, 0, "我的朋友"));
         sparseArray.append(3, new FunctionBean(3, 0, R.mipmap.icon_function_props, "道具榜", new Intent(context, PropsListActivity.class)));
-        sparseArray.append(4, new FunctionBean(4, R.mipmap.icon_my_message, R.mipmap.icon_function_message, "我的消息", new Intent(context, EaseChatActivity.class)));
+        sparseArray.append(4, new FunctionBean(4, R.mipmap.icon_my_message, R.mipmap.icon_function_message, "我的消息", new Intent(context, MessageActivity.class)));
         sparseArray.append(5, new FunctionBean(5, R.mipmap.icon_my_account, 0, "我的账户", new Intent(context, AccountActivity.class)));
         sparseArray.append(6, new FunctionBean(6, R.mipmap.icon_my_schedule, 0, "每日签到"));
         sparseArray.append(7, new FunctionBean(7, R.mipmap.icon_my_downloads, R.mipmap.icon_function_download, "我的下载"));
@@ -295,5 +295,10 @@ public class Tools {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String nowTime = format.format(new Date());
         return nowTime;
+    }
+
+    //环信聊天界面分类
+    public enum ChatType {
+        SINGLE, GROUP;
     }
 }

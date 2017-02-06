@@ -21,6 +21,7 @@ import com.yhcloud.thankyou.logic.ILoginLogic;
 import com.yhcloud.thankyou.logic.LoginLogic;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.aboutus.logic.AboutUsLogic;
+import com.yhcloud.thankyou.module.chat.logic.ChatLogic;
 import com.yhcloud.thankyou.module.classcadre.logic.ClassCadreLogic;
 import com.yhcloud.thankyou.module.classnotification.logic.ClassNotificationLogic;
 import com.yhcloud.thankyou.module.classteachers.logic.ClassTeacherListLogic;
@@ -268,6 +269,12 @@ public class LogicService extends Service {
         }
         IHomeLogic homeLogic = new HomeLogic();
         homeLogic.getSpreadList("2", flag, updateTime, iCallListener);
+    }
+
+    //获取用户好友列表
+    public void getFriendList(String updateTime, ICallListener<String> iCallListener) {
+        ChatLogic chatLogic = new ChatLogic();
+        chatLogic.getFriendList(mUserInfo.getUserInfoBean().getUserId(), updateTime, iCallListener);
     }
 
     //获取学校公告

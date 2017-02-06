@@ -9,6 +9,7 @@ import android.os.IBinder;
 
 import com.hyphenate.easeui.EaseConstant;
 import com.yhcloud.thankyou.bean.UserInfoBean;
+import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.chat.view.IEaseChatView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
@@ -43,6 +44,7 @@ public class EaseChatManage {
 
                 } else {
                     Tools.print(TAG, "请求服务器获取用户集合");
+                    getFriendList();
                 }
 //                mIEaseChatView.initEaseChatUserInfo(mBeen);
                 goEaseChat();
@@ -53,6 +55,20 @@ public class EaseChatManage {
 
             }
         }, Service.BIND_AUTO_CREATE);
+    }
+
+    private void getFriendList() {
+        mService.getFriendList("-1", new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                Tools.print(TAG, "获取用户好友列表信息成功...");
+            }
+
+            @Override
+            public void callFailed() {
+                Tools.print(TAG, "获取用户好友列表信息失败...");
+            }
+        });
     }
 
     public void goEaseChat() {

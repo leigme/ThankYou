@@ -20,6 +20,7 @@ public class UserInfoBean implements Serializable {
      * ClassRoleId :
      * Coin : 97
      * HXUserName : 3237
+     * HxId : 1006
      * HXPwd : 666666
      * UserStatue :
      * Flowers : 26
@@ -42,6 +43,7 @@ public class UserInfoBean implements Serializable {
     private String ClassRoleId;
     private String Coin;
     private String HXUserName;
+    private String HxId;
     private String HXPwd;
     private String UserStatue;
     private String Flowers;
@@ -139,6 +141,14 @@ public class UserInfoBean implements Serializable {
 
     public void setHXUserName(String HXUserName) {
         this.HXUserName = HXUserName;
+    }
+
+    public String getHxId() {
+        return HxId;
+    }
+
+    public void setHxId(String hxId) {
+        HxId = hxId;
     }
 
     public String getHXPwd() {

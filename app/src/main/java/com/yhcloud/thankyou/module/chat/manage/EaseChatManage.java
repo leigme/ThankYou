@@ -8,13 +8,9 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.hyphenate.easeui.EaseConstant;
-import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.chat.view.IEaseChatView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
-
-import java.util.ArrayList;
 
 /**
  * Created by Administrator on 2016/12/20.
@@ -27,7 +23,6 @@ public class EaseChatManage {
     private IEaseChatView mIEaseChatView;
     private Activity mActivity;
     private LogicService mService;
-    private ArrayList<UserInfoBean> mBeen;
 
     public EaseChatManage(IEaseChatView iEaseChatView) {
         this.mIEaseChatView = iEaseChatView;
@@ -39,14 +34,6 @@ public class EaseChatManage {
                 mService = ((LogicService.MyBinder)service).getService();
                 mIEaseChatView.initView();
                 mIEaseChatView.initEvent();
-                mBeen = mService.getUserInfoBeen();
-                if (null != mBeen && 0 != mBeen.size()) {
-
-                } else {
-                    Tools.print(TAG, "请求服务器获取用户集合");
-                    getFriendList();
-                }
-//                mIEaseChatView.initEaseChatUserInfo(mBeen);
                 goEaseChat();
             }
 
@@ -55,20 +42,6 @@ public class EaseChatManage {
 
             }
         }, Service.BIND_AUTO_CREATE);
-    }
-
-    private void getFriendList() {
-        mService.getFriendList("-1", new ICallListener<String>() {
-            @Override
-            public void callSuccess(String s) {
-                Tools.print(TAG, "获取用户好友列表信息成功...");
-            }
-
-            @Override
-            public void callFailed() {
-                Tools.print(TAG, "获取用户好友列表信息失败...");
-            }
-        });
     }
 
     public void goEaseChat() {

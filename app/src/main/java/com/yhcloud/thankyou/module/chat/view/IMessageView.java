@@ -8,4 +8,5 @@ import com.yhcloud.thankyou.mInterface.IBaseActivityView;
 
 public interface IMessageView extends IBaseActivityView {
     void initMessageFragment();
+//    void initEaseChatUserInfo(ArrayList<UserInfoBean> list);
 }

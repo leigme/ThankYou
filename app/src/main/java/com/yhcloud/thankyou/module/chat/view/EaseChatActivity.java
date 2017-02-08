@@ -15,6 +15,8 @@ import com.yhcloud.thankyou.module.chat.manage.EaseChatManage;
 
 public class EaseChatActivity extends ABaseActivity implements IEaseChatView {
 
+    private String TAG = getClass().getSimpleName();
+
     //视图控件
     private LinearLayout llBack;
     private TextView tvTitle;
@@ -27,23 +29,6 @@ public class EaseChatActivity extends ABaseActivity implements IEaseChatView {
         setContentView(R.layout.activity_ease_chat);
         mManage = new EaseChatManage(this);
     }
-
-//    @Override
-//    public void initEaseChatUserInfo(ArrayList<UserInfoBean> list) {
-//        //get easeui instance
-//        EaseUI easeUI = EaseUI.getInstance();
-//        for (final UserInfoBean userInfoBean: list) {
-//            easeUI.setUserProfileProvider(new EaseUI.EaseUserProfileProvider() {
-//                @Override
-//                public EaseUser getUser(String username) {
-//                    EaseUser easeUser = getUserInfo(userInfoBean.getHXUserName());
-//                    easeUser.setAvatar(userInfoBean.getHeadImageURL());
-//                    easeUser.setNickname(userInfoBean.getRealName());
-//                    return easeUser;
-//                }
-//            });
-//        }
-//    }
 
     @Override
     public void showEaseChat(String HXUserName) {

@@ -317,6 +317,9 @@ public class HomeworkInfoManage {
                         mIHomeworkInfoView.showPhoto(true);
                         break;
                 }
+                if ("1".equals(mStudentHomeworkBean.getStatus())) {
+                    mIHomeworkInfoView.showPhoto(false);
+                }
                 break;
             case 1012:
                 type = mStudentQuestionBeen.get(position).getResourceType();
@@ -337,10 +340,12 @@ public class HomeworkInfoManage {
                         mIHomeworkInfoView.showPhoto(true);
                         break;
                 }
+                if ("1".equals(mStudentHomeworkBean.getStatus())) {
+                    mIHomeworkInfoView.showPhoto(false);
+                }
                 break;
-        }
-        if ("1".equals(mStudentHomeworkBean.getStatus())) {
-            mIHomeworkInfoView.showPhoto(false);
+            default:
+                break;
         }
     }
 
@@ -355,12 +360,45 @@ public class HomeworkInfoManage {
     }
 
     public void nextHomework() {
-        if (mStudentQuestionBeen.size() - 1 > page) {
-            page += 1;
-            setViewPager(page);
-            mIHomeworkInfoView.selectViewPager(page);
-        } else {
-            mIHomeworkInfoView.showToastMsg("当前题是最后一题");
+        switch (roleId) {
+            case 1004:
+                if (mTeacherQuestionBeen.size() - 1 > page) {
+                    page += 1;
+                    setViewPager(page);
+                    mIHomeworkInfoView.selectViewPager(page);
+                } else {
+                    mIHomeworkInfoView.showToastMsg("当前题是最后一题");
+                }
+                break;
+            case 1010:
+                if (mTeacherQuestionBeen.size() - 1 > page) {
+                    page += 1;
+                    setViewPager(page);
+                    mIHomeworkInfoView.selectViewPager(page);
+                } else {
+                    mIHomeworkInfoView.showToastMsg("当前题是最后一题");
+                }
+                break;
+            case 1011:
+                if (mStudentQuestionBeen.size() - 1 > page) {
+                    page += 1;
+                    setViewPager(page);
+                    mIHomeworkInfoView.selectViewPager(page);
+                } else {
+                    mIHomeworkInfoView.showToastMsg("当前题是最后一题");
+                }
+                break;
+            case 1012:
+                if (mStudentQuestionBeen.size() - 1 > page) {
+                    page += 1;
+                    setViewPager(page);
+                    mIHomeworkInfoView.selectViewPager(page);
+                } else {
+                    mIHomeworkInfoView.showToastMsg("当前题是最后一题");
+                }
+                break;
+            default:
+                break;
         }
     }
 

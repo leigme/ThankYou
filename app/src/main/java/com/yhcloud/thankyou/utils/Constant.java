@@ -53,7 +53,7 @@ public class Constant {
     //登录请求 uid pwd
     public static final String LOGIN = SERVICEADDRESS + "/m17/M1708I/M1708I001";
     //获取好友列表
-    public static final String GETFRIENDLIST = SERVICEADDRESS + "/m00/M0005I/M005I01";
+    public static final String GETFRIENDLIST = SERVICEADDRESS + "/m00/M0005I/M0005I01";
 
     //获取推广列表 promotionType:推广类型[1:精品课程 2:精品阅读 4:直播课堂 8:付费精品 16:首页轮播] scopeCrowd:[1:学生 2:老师 4:家长] updateTime:[-1:获取全部]
     public static final String GETSPREADLIST = SERVICEADDRESS + "/m01/M0109I/M0109I07";

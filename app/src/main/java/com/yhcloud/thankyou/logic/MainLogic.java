@@ -4,6 +4,8 @@ import android.util.Log;
 
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.utils.Constant;
+import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
@@ -28,17 +30,38 @@ public class MainLogic implements IMainLogic {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.e(TAG, "请求失败:" + e);
+                        Log.e(TAG, "getClassInfoList-请求失败:" + e);
                         iCallListener.callFailed();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e(TAG, "请求成功:" + response);
+                        Log.e(TAG, "getClassInfoList-请求成功:" + response);
                         ArrayList<ClassInfoBean> classInfoBeen = new ArrayList<>();
                         ClassInfoBean classInfoBean = new ClassInfoBean();
                         classInfoBeen.add(classInfoBean);
                         iCallListener.callSuccess(classInfoBeen);
+                    }
+                });
+    }
+
+    public void getFriendList(String userId, String updateTime, final ICallListener<String> iCallListener) {
+        OkHttpUtils.post()
+                .url(Constant.GETFRIENDLIST)
+                .addParams("id", userId)
+                .addParams("updateTime", updateTime)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Tools.print(TAG, "getFriendList-请求失败:" + e);
+                        iCallListener.callFailed();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Tools.print(TAG, "getFriendList-请求成功:" + response);
+                        iCallListener.callSuccess(response);
                     }
                 });
     }

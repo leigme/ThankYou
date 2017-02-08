@@ -12,9 +12,9 @@
 	    android:layout_height="wrap_content"
 	    hyphenate:titleBarTitle="@string/session"
 	    />
-    
+    <!--
     <include layout="@layout/ease_search_bar" />
-    
+    -->
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

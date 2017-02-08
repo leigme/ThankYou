@@ -10,5 +10,6 @@ import java.util.ArrayList;
  */
 
 public interface IMainLogic {
-    public void getClassInfoList(String userId, ICallListener<ArrayList<ClassInfoBean>> iCallListener);
+    void getClassInfoList(String userId, ICallListener<ArrayList<ClassInfoBean>> iCallListener);
+    void getFriendList(String userId, String updateTime, final ICallListener<String> iCallListener);
 }

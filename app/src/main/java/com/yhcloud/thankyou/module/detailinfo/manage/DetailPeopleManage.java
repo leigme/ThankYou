@@ -10,6 +10,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.hyphenate.easeui.EaseConstant;
+import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
 import com.yhcloud.thankyou.bean.UserRoleBean;
 import com.yhcloud.thankyou.mInterface.ICallListener;
@@ -43,6 +44,7 @@ public class DetailPeopleManage {
     public DetailPeopleManage(IDetailPeopleActivityView iDetailPeopleView) {
         this.mIDetailPeopleView = iDetailPeopleView;
         this.mActivity = (Activity) mIDetailPeopleView;
+        mIDetailPeopleView.showLoading(R.string.loading_data);
         if (null != mActivity.getIntent()) {
             uId = mActivity.getIntent().getStringExtra("UID");
         }
@@ -120,11 +122,12 @@ public class DetailPeopleManage {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                mIDetailPeopleView.hiddenLoading();
             }
 
             @Override
             public void callFailed() {
-
+                mIDetailPeopleView.hiddenLoading();
             }
         });
     }

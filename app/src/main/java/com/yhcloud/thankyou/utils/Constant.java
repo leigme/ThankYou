@@ -67,7 +67,7 @@ public class Constant {
     //更新班级通知阅读状态 http://192.168.0.139/edu/noticeId/49/userId/3237 isRead:0未读;1:已读;2:删除
     public static final String UPDATEREADSTATE = SERVICEADDRESS + "/m17/M1711I/M1711I02";
 
-    //老师端课后作业列表 http://www.k12chn.com/m17/M1721I/M1721I01/userId/3237 [1:未发布 2:已发布]
+    //老师端课后作业列表 http://www.k12chn.com/m17/M1721I/M1721I01/userId/3237/page/1/ [1:未发布 2:已发布]
     public static final String GETTEACHERHOMEWORKLIST = SERVICEADDRESS + "/m17/M1721I/M1721I01";
     //老师端课后作业详情
     public static final String GETTEACHERHOMEWORKINFO = SERVICEADDRESS + "/m17/M1721I/M1721I03";

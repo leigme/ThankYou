@@ -22,8 +22,8 @@
                 android:id="@+id/iv_drawer_image"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
-                android:src="@mipmap/ic_launcher"
                 android:layout_gravity="center"
+                android:scaleType="fitCenter"
                 android:layout_marginTop="11dp" />
 
         </LinearLayout>

@@ -73,7 +73,7 @@ public class Tools {
     public static void GlideCircleImageUrl(Context context, String path, ImageView imageView) {
         Glide.with(context)
                 .load(Constant.SERVICEADDRESS + path)
-                .placeholder(R.mipmap.loading)
+                .placeholder(R.mipmap.default_photo)
                 .error(R.mipmap.icon_account_404)
                 .bitmapTransform(new CropCircleTransformation(context))
                 .into(imageView);

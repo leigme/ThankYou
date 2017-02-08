@@ -113,7 +113,10 @@ public class MainManage {
                             ArrayList<UserInfoBean> mBeen = gson.fromJson(jsonResult, new TypeToken<ArrayList<UserInfoBean>>(){}.getType());
                             mUserInfoBeen.addAll(mBeen);
                             mService.setUserInfoBeen(mUserInfoBeen);
-                            setEaseUIProviders(makeMap(mUserInfoBeen));
+                            HashMap<String, String[]> map;
+                            map = makeMap(mUserInfoBeen);
+                            mService.setMap(map);
+                            setEaseUIProviders(map);
                         }
                     }
                 } catch (JSONException e) {
@@ -181,7 +184,9 @@ public class MainManage {
                 mMenuBeen = new ArrayList<>();
                 mMenuBeen.add(mSparseArray.get(16));
                 mMenuBeen.add(mSparseArray.get(17));
-                mMenuBeen.add(mSparseArray.get(18));
+                FunctionBean functionBean = mSparseArray.get(18);
+                functionBean.setTitle("课程表");
+                mMenuBeen.add(functionBean);
             }
         }
     }

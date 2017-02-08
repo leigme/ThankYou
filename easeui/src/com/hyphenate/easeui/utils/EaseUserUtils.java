@@ -51,13 +51,13 @@ public class EaseUserUtils {
                 Glide.with(context)
                         .load(user.getAvatar())
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
-                        .placeholder(R.drawable.ease_default_avatar)
+                        .placeholder(R.drawable.default_photo)
                         .bitmapTransform(new CropCircleTransformation(context))
                         .into(imageView);
             }
-        }else{
+        } else {
             Glide.with(context)
-                    .load(R.drawable.ease_default_avatar)
+                    .load(R.drawable.default_photo)
                     .bitmapTransform(new CropCircleTransformation(context))
                     .into(imageView);
         }

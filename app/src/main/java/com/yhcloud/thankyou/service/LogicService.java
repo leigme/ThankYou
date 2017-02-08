@@ -37,6 +37,7 @@ import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LogicService extends Service {
@@ -46,6 +47,7 @@ public class LogicService extends Service {
     private MyBinder mBinder = new MyBinder();
     private UserInfo mUserInfo;
     private ArrayList<UserInfoBean> mUserInfoBeen;
+    private HashMap<String, String[]> mMap;
     private SparseArray<FunctionBean> mBeanSparseArray;
     private ArrayList<FunctionBean> mBeen;
     private SharedPreferences mPreferences;
@@ -90,6 +92,14 @@ public class LogicService extends Service {
 
     public void setUserInfo(UserInfo userInfo) {
         mUserInfo = userInfo;
+    }
+
+    public HashMap<String, String[]> getMap() {
+        return mMap;
+    }
+
+    public void setMap(HashMap<String, String[]> map) {
+        mMap = map;
     }
 
     public SparseArray<FunctionBean> getBeanSparseArray() {
@@ -297,9 +307,9 @@ public class LogicService extends Service {
     }
 
     //获取老师端作业列表
-    public void getTeacherHomeworkList(ICallListener<String> iCallListener) {
+    public void getTeacherHomeworkList(int page, ICallListener<String> iCallListener) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.getTeacherHomeworkList(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+        homeworkLogic.getTeacherHomeworkList(mUserInfo.getUserInfoBean().getUserId(), String.valueOf(page), iCallListener);
     }
 
     //获取老师端作业详情
@@ -309,9 +319,9 @@ public class LogicService extends Service {
     }
 
     //获取学生作业列表
-    public void getStudentHomeworkList(ICallListener<String> iCallListener) {
+    public void getStudentHomeworkList(int page, ICallListener<String> iCallListener) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.getStudentHomeworkList(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+        homeworkLogic.getStudentHomeworkList(mUserInfo.getUserInfoBean().getUserId(), String.valueOf(page), iCallListener);
     }
 
     //获取学生作业详情

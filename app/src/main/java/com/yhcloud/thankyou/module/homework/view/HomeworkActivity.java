@@ -106,12 +106,30 @@ public class HomeworkActivity extends ABaseActivity implements IHomeworkActivity
     public void showTeacherHomeworkList(ArrayList<TeacherHomeworkBean> list) {
         if (null == thla) {
             thla = new TeacherHomeworkListAdapter(this, list);
-            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             rvHomeworkList.setLayoutManager(layoutManager);
             rvHomeworkList.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                     super.onScrollStateChanged(recyclerView, newState);
+                    if(newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        int lastVisiblePosition = layoutManager.findLastVisibleItemPosition();
+                        if (lastVisiblePosition >= layoutManager.getItemCount() - 1) {
+                            if (canGetMore) {
+                                mManage.getMoreData();
+                            }
+                        }
+                    }
+                }
+
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+                    if (0 < dy) {
+                        canGetMore = true;
+                    } else {
+                        canGetMore = false;
+                    }
                 }
             });
             rvHomeworkList.setAdapter(thla);

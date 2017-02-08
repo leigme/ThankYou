@@ -12,6 +12,8 @@ import com.yhcloud.thankyou.module.chat.view.IEaseChatView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
+import java.util.HashMap;
+
 /**
  * Created by Administrator on 2016/12/20.
  */
@@ -23,6 +25,7 @@ public class EaseChatManage {
     private IEaseChatView mIEaseChatView;
     private Activity mActivity;
     private LogicService mService;
+    private String HxId;
 
     public EaseChatManage(IEaseChatView iEaseChatView) {
         this.mIEaseChatView = iEaseChatView;
@@ -47,7 +50,11 @@ public class EaseChatManage {
     public void goEaseChat() {
         Intent intent = mActivity.getIntent();
         if (null != intent) {
-            mIEaseChatView.showEaseChat(intent.getStringExtra(EaseConstant.EXTRA_USER_ID));
+            HxId = intent.getStringExtra(EaseConstant.EXTRA_USER_ID);
+            HashMap<String, String[]> map = mService.getMap();
+            String[] userInfo = map.get(HxId);
+            mIEaseChatView.setTitle(userInfo[1]);
+            mIEaseChatView.showEaseChat(HxId);
         }
     }
 

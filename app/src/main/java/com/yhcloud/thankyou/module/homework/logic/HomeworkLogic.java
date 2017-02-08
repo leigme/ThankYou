@@ -1,27 +1,19 @@
 package com.yhcloud.thankyou.module.homework.logic;
 
 import com.yhcloud.thankyou.mInterface.ICallListener;
-import com.yhcloud.thankyou.module.homework.bean.AnswerBean;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.builder.PostFormBuilder;
 import com.zhy.http.okhttp.callback.StringCallback;
-import com.zhy.http.okhttp.request.OkHttpRequest;
-import com.zhy.http.okhttp.request.PostFormRequest;
 
 import java.io.File;
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
 
 /**
  * Created by Administrator on 2017/1/11.
@@ -30,11 +22,12 @@ import okhttp3.RequestBody;
 public class HomeworkLogic {
     private String TAG = getClass().getSimpleName();
 
-    public void getTeacherHomeworkList(String userId, final ICallListener<String> iCallListener) {
+    public void getTeacherHomeworkList(String userId, String page, final ICallListener<String> iCallListener) {
         Tools.print(TAG, MessageFormat.format("getTeacherHomeworkList-请求的接口是:{0}/userId/{1}", Constant.GETTEACHERHOMEWORKLIST, userId));
         OkHttpUtils.post()
                 .url(Constant.GETTEACHERHOMEWORKLIST)
                 .addParams("userId", userId)
+                .addParams("page", page)
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -51,11 +44,12 @@ public class HomeworkLogic {
                 });
     }
 
-    public void getStudentHomeworkList(String userId, final ICallListener<String> iCallListener) {
+    public void getStudentHomeworkList(String userId, String page, final ICallListener<String> iCallListener) {
         Tools.print(TAG, MessageFormat.format("getTeacherHomeworkList-请求的接口是:{0}/userId{1}", Constant.GETSTUDENTHOMEWORKLIST, userId));
         OkHttpUtils.post()
                 .url(Constant.GETSTUDENTHOMEWORKLIST)
                 .addParams("userId", userId)
+                .addParams("page", page)
                 .build()
                 .execute(new StringCallback() {
                     @Override

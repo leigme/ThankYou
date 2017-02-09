@@ -143,6 +143,7 @@ public class MainActivity extends ABaseActivity implements IMainActivityView,
         }
     }
 
+    //抽屉弹出框
     @Override
     public void showDrawer(final ArrayList<ClassInfoBean> classInfoBeen) {
         if (null == cdla) {
@@ -192,7 +193,7 @@ public class MainActivity extends ABaseActivity implements IMainActivityView,
         tvDrawerClass.setText(classname);
     }
 
-
+    //底部控制器
     @Override
     public void showFragment(int i) {
         mManage.setTitle(i);
@@ -232,6 +233,7 @@ public class MainActivity extends ABaseActivity implements IMainActivityView,
         llHeaderRight.setClickable(showed);
     }
 
+    //班级界面右上角弹出框
     @Override
     public void showTrm(final ArrayList<FunctionBean> list) {
         if (null == mTopRightMenu) {
@@ -254,6 +256,7 @@ public class MainActivity extends ABaseActivity implements IMainActivityView,
         }
     }
 
+    //初始化底部控制器图标状态
     private void resetFooterBtn() {
         ivFooterHome.setImageResource(R.mipmap.icon_home_un);
         ivFooterClass.setImageResource(R.mipmap.icon_class_un);
@@ -278,6 +281,7 @@ public class MainActivity extends ABaseActivity implements IMainActivityView,
 
     Long firstClickTime = (long) 0;
 
+    //物理返回按钮事件
     @Override
     public void onBackPressed() {
         if (System.currentTimeMillis() - firstClickTime <= 2000) {

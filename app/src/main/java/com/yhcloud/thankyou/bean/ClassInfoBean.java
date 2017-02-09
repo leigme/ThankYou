@@ -13,7 +13,7 @@ public class ClassInfoBean implements Serializable {
      * ClassId : 161234
      * ClassName : 五年级阳环班
      * ClassLogo : RES20161011/RES201610111143425523.jpg
-     * Status : 1
+     * Status : 1 [状态为1是正常可操作的班级]
      * SchoolName : 阳环学校
      * SchoolId : 5068
      */

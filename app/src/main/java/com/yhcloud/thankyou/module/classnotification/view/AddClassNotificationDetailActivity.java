@@ -1,7 +1,5 @@
 package com.yhcloud.thankyou.module.classnotification.view;
 
-import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.yhcloud.thankyou.R;
@@ -12,7 +10,7 @@ public class AddClassNotificationDetailActivity extends ABaseActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_iadd_class_notification_detail);
+        setContentView(R.layout.activity_add_class_notification_detail);
     }
 
     @Override

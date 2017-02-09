@@ -197,6 +197,8 @@
             android:name=".module.image.view.MyImgSelActivity"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".module.chat.view.AddChatActivity">
+        </activity>
     </application>
 
 </manifest>

@@ -186,14 +186,20 @@ public class HomeManage {
     public void goFunction(int position) {
         FunctionBean functionBean = mBeen.get(position);
         if (null != functionBean.getIntent()) {
-            if (0 == functionBean.getId()) {
-                mActivity.startActivityForResult(functionBean.getIntent(), Constant.ALLFUNCATION_REQUEST);
-            } else if (4 == functionBean.getId()){
-                if (mService.isCanMessage()) {
+            switch (functionBean.getId()) {
+                case 0:
+                    mActivity.startActivityForResult(functionBean.getIntent(), Constant.ALLFUNCATION_REQUEST);
+                    break;
+                case 4:
+                    if (mService.isCanMessage()) {
+                        mActivity.startActivity(functionBean.getIntent());
+                    } else {
+                        mIHomeView.showToastMsg("好友数据初始化中,请稍候...");
+                    }
+                    break;
+                default:
                     mActivity.startActivity(functionBean.getIntent());
-                }
-            } else {
-                mActivity.startActivity(functionBean.getIntent());
+                    break;
             }
         }
     }

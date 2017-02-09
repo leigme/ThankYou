@@ -12,12 +12,15 @@ import com.hyphenate.easeui.EaseConstant;
 import com.yhcloud.thankyou.module.chat.view.EaseChatActivity;
 import com.yhcloud.thankyou.module.chat.view.IMessageView;
 import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.utils.Tools;
 
 /**
  * Created by Administrator on 2016/12/20.
  */
 
 public class MessageManage {
+
+    private String TAG = getClass().getSimpleName();
 
     private IMessageView mIMessageView;
     private Activity mActivity;
@@ -48,5 +51,9 @@ public class MessageManage {
         Intent intent = new Intent(mActivity, EaseChatActivity.class);
         intent.putExtra(EaseConstant.EXTRA_USER_ID, conversation.getUserName());
         mActivity.startActivity(intent);
+    }
+
+    public void addChat() {
+        Tools.print(TAG, "发起聊天了...");
     }
 }

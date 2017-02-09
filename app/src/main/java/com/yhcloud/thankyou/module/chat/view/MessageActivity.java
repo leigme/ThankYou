@@ -20,7 +20,7 @@ public class MessageActivity extends ABaseActivity implements IMessageView{
 
     private String TAG = getClass().getSimpleName();
     //视图控件
-    private LinearLayout llBack;
+    private LinearLayout llBack, llRight;
     private TextView tvTitle;
     //管理器
     private MessageManage mManage;
@@ -53,6 +53,8 @@ public class MessageActivity extends ABaseActivity implements IMessageView{
     public void initView() {
         llBack = (LinearLayout) findViewById(R.id.ll_header_left);
         tvTitle = (TextView) findViewById(R.id.tv_header_title);
+        llRight = (LinearLayout) findViewById(R.id.ll_header_right);
+        llRight.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -64,10 +66,14 @@ public class MessageActivity extends ABaseActivity implements IMessageView{
                     case R.id.ll_header_left:
                         finish();
                         break;
+                    case R.id.ll_header_right:
+                        mManage.addChat();
+                        break;
                 }
             }
         };
         llBack.setOnClickListener(myOnClickListener);
+        llRight.setOnClickListener(myOnClickListener);
     }
 
     @Override

@@ -117,16 +117,20 @@ public class MainManage {
                             map = makeMap(mUserInfoBeen);
                             mService.setMap(map);
                             setEaseUIProviders(map);
+                            mService.setCanMessage(true);
+                            return;
                         }
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+                mService.setCanMessage(false);
             }
 
             @Override
             public void callFailed() {
                 Tools.print(TAG, "获取用户好友列表信息失败...");
+                mService.setCanMessage(false);
             }
         });
     }

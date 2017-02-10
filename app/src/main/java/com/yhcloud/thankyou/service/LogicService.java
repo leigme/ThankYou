@@ -188,6 +188,7 @@ public class LogicService extends Service {
                     mBeen.add(mBeanSparseArray.get(13));
                     mBeen.add(mBeanSparseArray.get(14));
                     mBeen.add(mBeanSparseArray.get(3));
+                    mBeen.add(mBeanSparseArray.get(22));
                     break;
                 //初始化老师角色应用
                 case 1010:
@@ -198,6 +199,7 @@ public class LogicService extends Service {
                     mBeen.add(mBeanSparseArray.get(13));
                     mBeen.add(mBeanSparseArray.get(14));
                     mBeen.add(mBeanSparseArray.get(3));
+                    mBeen.add(mBeanSparseArray.get(22));
                     break;
                 //初始化学生角色应用
                 case 1011:
@@ -208,6 +210,7 @@ public class LogicService extends Service {
                     mBeen.add(mBeanSparseArray.get(14));
                     mBeen.add(mBeanSparseArray.get(3));
                     mBeen.add(mBeanSparseArray.get(21));
+                    mBeen.add(mBeanSparseArray.get(22));
                     break;
                 //初始化家长角色应用
                 case 1012:
@@ -218,8 +221,58 @@ public class LogicService extends Service {
                     mBeen.add(mBeanSparseArray.get(15));
                     mBeen.add(mBeanSparseArray.get(14));
                     mBeen.add(mBeanSparseArray.get(3));
+                    mBeen.add(mBeanSparseArray.get(22));
                     break;
             }
+        }
+    }
+
+    public void getRoleAllFuncation() {
+        switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
+            //初始化校长角色应用
+            case 1004:
+                mBeen.add(mBeanSparseArray.get(10));
+                mBeen.add(mBeanSparseArray.get(4));
+                mBeen.add(mBeanSparseArray.get(11));
+                mBeen.add(mBeanSparseArray.get(12));
+                mBeen.add(mBeanSparseArray.get(13));
+                mBeen.add(mBeanSparseArray.get(14));
+                mBeen.add(mBeanSparseArray.get(3));
+                mBeen.add(mBeanSparseArray.get(22));
+                break;
+            //初始化老师角色应用
+            case 1010:
+                mBeen.add(mBeanSparseArray.get(10));
+                mBeen.add(mBeanSparseArray.get(4));
+                mBeen.add(mBeanSparseArray.get(11));
+                mBeen.add(mBeanSparseArray.get(12));
+                mBeen.add(mBeanSparseArray.get(13));
+                mBeen.add(mBeanSparseArray.get(14));
+                mBeen.add(mBeanSparseArray.get(3));
+                mBeen.add(mBeanSparseArray.get(22));
+                break;
+            //初始化学生角色应用
+            case 1011:
+                mBeen.add(mBeanSparseArray.get(10));
+                mBeen.add(mBeanSparseArray.get(4));
+                mBeen.add(mBeanSparseArray.get(11));
+                mBeen.add(mBeanSparseArray.get(12));
+                mBeen.add(mBeanSparseArray.get(14));
+                mBeen.add(mBeanSparseArray.get(3));
+                mBeen.add(mBeanSparseArray.get(21));
+                mBeen.add(mBeanSparseArray.get(22));
+                break;
+            //初始化家长角色应用
+            case 1012:
+                mBeen.add(mBeanSparseArray.get(10));
+                mBeen.add(mBeanSparseArray.get(4));
+                mBeen.add(mBeanSparseArray.get(11));
+                mBeen.add(mBeanSparseArray.get(12));
+                mBeen.add(mBeanSparseArray.get(15));
+                mBeen.add(mBeanSparseArray.get(14));
+                mBeen.add(mBeanSparseArray.get(3));
+                mBeen.add(mBeanSparseArray.get(22));
+                break;
         }
     }
 

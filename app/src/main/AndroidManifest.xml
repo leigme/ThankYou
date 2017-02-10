@@ -199,6 +199,10 @@
         </activity>
         <activity android:name=".module.chat.view.AddChatActivity">
         </activity>
+        <activity android:name=".module.todayrecipes.view.TodayRecipesActivity">
+        </activity>
+        <activity android:name=".module.todayrecipes.view.TodayRecipesInfoActivity">
+        </activity>
     </application>
 
 </manifest>

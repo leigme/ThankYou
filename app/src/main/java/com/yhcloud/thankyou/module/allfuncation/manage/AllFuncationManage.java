@@ -10,7 +10,6 @@ import android.os.IBinder;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.module.allfuncation.view.IAllFuncationActivityView;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
@@ -77,11 +76,6 @@ public class AllFuncationManage {
         if (null == mBeen) {
             mBeen = mService.getBeen();
         }
-        for (FunctionBean fb: mBeen) {
-            if (0 == fb.getId()) {
-                mBeen.remove(fb);
-            }
-        }
         mIAllFuncationView.showList(mBeen);
     }
 
@@ -93,14 +87,22 @@ public class AllFuncationManage {
     public void goFunction(int position) {
         FunctionBean functionBean = mBeen.get(position);
         if (null != functionBean.getIntent()) {
-            if (0 == functionBean.getId()) {
-                mActivity.startActivityForResult(functionBean.getIntent(), Constant.ALLFUNCATION_REQUEST);
-            } else if (4 == functionBean.getId()){
-                if (mService.isCanMessage()) {
-                    mActivity.startActivity(functionBean.getIntent());
+            if (null != functionBean.getIntent()) {
+                switch (functionBean.getId()) {
+                    case 0:
+//                        mActivity.startActivityForResult(functionBean.getIntent(), Constant.ALLFUNCATION_REQUEST);
+                        break;
+                    case 4:
+                        if (mService.isCanMessage()) {
+                            mActivity.startActivity(functionBean.getIntent());
+                        } else {
+                            mIAllFuncationView.showToastMsg("好友数据初始化中,请稍候...");
+                        }
+                        break;
+                    default:
+                        mActivity.startActivity(functionBean.getIntent());
+                        break;
                 }
-            } else {
-                mActivity.startActivity(functionBean.getIntent());
             }
         }
     }

@@ -40,6 +40,7 @@ public class BigImageActivity extends ABaseActivity implements IBigImageActivity
     @Override
     public void initView() {
         vpImages = (ViewPager) findViewById(R.id.vp_image_list);
+        //5.0以上版本才支持
         vpImages.post(new Runnable() {
             @Override
             public void run() {

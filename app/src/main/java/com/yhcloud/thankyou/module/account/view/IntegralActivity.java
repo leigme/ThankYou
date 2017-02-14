@@ -1,10 +1,8 @@
 package com.yhcloud.thankyou.module.account.view;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
@@ -16,26 +14,24 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountIntegralListAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
 import com.yhcloud.thankyou.module.account.manage.AccountIntegralManage;
-import com.yhcloud.thankyou.utils.myview.MyToast;
-
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
-public class IntegralActivity extends AppCompatActivity implements IIntegralView {
+public class IntegralActivity extends ABaseActivity implements IIntegralView {
 
     private LinearLayout llBack;
     private TextView tvTitle, tvRealname, tvUsername, tvCoin, tvRule;
     private ImageView ivHeaderImage;
     private RecyclerView rvList;
     private LinearLayout llSend;
-    private ProgressDialog mProgressDialog;
     private Dialog mDialog;
     private AccountIntegralListAdapter aila;
 
@@ -67,6 +63,11 @@ public class IntegralActivity extends AppCompatActivity implements IIntegralView
     }
 
     @Override
+    public void setRightTitle(String title) {
+
+    }
+
+    @Override
     public void initEvent() {
         View.OnClickListener myOnClickListener = new View.OnClickListener() {
             @Override
@@ -86,21 +87,8 @@ public class IntegralActivity extends AppCompatActivity implements IIntegralView
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
+    public void showDefault(boolean showed) {
 
-    @Override
-    public void showToastMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
     }
 
     @Override

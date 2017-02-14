@@ -74,14 +74,26 @@ public class AllFuncationManage {
 
     public void initAllFuncation() {
         if (null == mBeen) {
-            mBeen = mService.getBeen();
+            ArrayList<FunctionBean> list = mService.getBeen();
+            mBeen = new ArrayList<>();
+            for (FunctionBean fb: list) {
+                if (0 != fb.getId()) {
+                    mBeen.add(fb);
+                }
+            }
         }
         mIAllFuncationView.showList(mBeen);
     }
 
     public void saveFunctionList() {
         Tools.print(TAG, "保存程序集合视图");
-        mService.saveFuncations();
+        ArrayList<Integer> arrayList = new ArrayList<>();
+        for (FunctionBean fb: mBeen) {
+            if (0 != fb.getId()) {
+                arrayList.add(fb.getId());
+            }
+        }
+        mService.saveFuncations(arrayList);
     }
 
     public void goFunction(int position) {

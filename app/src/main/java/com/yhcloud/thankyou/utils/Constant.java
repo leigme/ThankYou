@@ -100,6 +100,29 @@ public class Constant {
     //获取道具流转记录 http://www.k12chn.com/m00/M0009I/M0009I014/userId/3237/page/1/type/2 [1:送出;2:收到]
     public static final String GETPROPSLIST = SERVICEADDRESS + "/m00/M0009I/M0009I014";
 
+    //用户账户
+    //获取用户优点及积分
+    public static final String GETUSERCURRENCY = SERVICEADDRESS + "/m00/M0009I/M0009I006";
+    //获取道具商城商品 userId
+    public static final String GETPROPSSTORELIST = SERVICEADDRESS + "/m00/M0009I/M0009I001";
+    //获取用户道具 userId
+    public static final String GETUSERPROPSLIST = SERVICEADDRESS + "/m00/M0009I/M0009I002";
+    //获取用户兑换记录 userId
+    public static final String GETUSERRECORDINGLIST = SERVICEADDRESS + "/m00/M0009I/M0009I003";
+    //兑换道具 userId
+    public static final String BUYPROPS = SERVICEADDRESS + "/m00/M0009I/M0009I005";
+    //积分兑换 http://192.168.0.139/edu/m00/M0009I/M0009I009/userId/3237/coin/100/uCoin/10
+    public static final String GETUSERCOIN = SERVICEADDRESS + "/m00/M0009I/M0009I009";
+    //获取兑换列表 type 1:积分列表 2:优点列表
+    public static final String GETEXCHANGELIST = SERVICEADDRESS + "/m00/M0009I/M0009I011";
+    //赠送道具 http://192.168.0.139/edu/m00/M0009I/M0009I008/userId/3237/recvUseId/3661/propId/1/propNum/3
+    public static final String GIVEPROPSTOPEOPLE = SERVICEADDRESS + "/m00/M0009I/M0009I007";
+    //获取支付方式列表
+    public static final String GETPAYLIST = SERVICEADDRESS + "/m00/M0009I/M0009I012";
+    //商城支付
+    public static final String PAYMONEY = "http://mall.k12chn.com/index.php?app=epaym&act=czfs";
+
+
     //获取关于我们的信息
     public static final String GETABOUTUSINFO = SERVICEADDRESS + "/m17/M1705I/M1705I001";
 

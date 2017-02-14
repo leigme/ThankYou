@@ -22,6 +22,13 @@ import com.yhcloud.thankyou.logic.LoginLogic;
 import com.yhcloud.thankyou.logic.MainLogic;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.aboutus.logic.AboutUsLogic;
+import com.yhcloud.thankyou.module.account.logic.AccountIntegralLogic;
+import com.yhcloud.thankyou.module.account.logic.AccountLogic;
+import com.yhcloud.thankyou.module.account.logic.AccountMyPropsLogic;
+import com.yhcloud.thankyou.module.account.logic.AccountPropsInfoLogic;
+import com.yhcloud.thankyou.module.account.logic.AccountPropsLogic;
+import com.yhcloud.thankyou.module.account.logic.AccountRechargeLogic;
+import com.yhcloud.thankyou.module.account.logic.AccountRecordingLogic;
 import com.yhcloud.thankyou.module.classcadre.logic.ClassCadreLogic;
 import com.yhcloud.thankyou.module.classnotification.logic.ClassNotificationLogic;
 import com.yhcloud.thankyou.module.classteachers.logic.ClassTeacherListLogic;
@@ -277,13 +284,13 @@ public class LogicService extends Service {
     }
 
     //保存用户应用列表
-    public void saveFuncations() {
-        ArrayList<Integer> arrayList = new ArrayList<>();
-        for (FunctionBean fb: mBeen) {
-            if (0 != fb.getId()) {
-                arrayList.add(fb.getId());
-            }
-        }
+    public void saveFuncations(ArrayList<Integer> arrayList) {
+//        ArrayList<Integer> arrayList = new ArrayList<>();
+//        for (FunctionBean fb: mBeen) {
+//            if (0 != fb.getId()) {
+//                arrayList.add(fb.getId());
+//            }
+//        }
         Gson gson = new Gson();
         String jsonList = gson.toJson(arrayList);
         SharedPreferences.Editor editor = mPreferences.edit();
@@ -293,8 +300,8 @@ public class LogicService extends Service {
 
 
     //获取轮播图
-    public void getImageUrls(String updateTime, ICallListener<String> iCallListener) {
-        String flag = "";
+    public void getBannerImageUrls(String updateTime, ICallListener<String> iCallListener) {
+        String flag;
         switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
             case 1004:
                 flag = "2";
@@ -307,6 +314,9 @@ public class LogicService extends Service {
                 break;
             case 1012:
                 flag = "4";
+                break;
+            default:
+                flag = "";
                 break;
         }
         IHomeLogic homeLogic = new HomeLogic();
@@ -315,7 +325,7 @@ public class LogicService extends Service {
 
     //获取推广列表
     public void getSpreadList(String updateTime, ICallListener<String> iCallListener) {
-        String flag = "";
+        String flag;
         switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
             case 1004:
                 flag = "2";
@@ -328,6 +338,9 @@ public class LogicService extends Service {
                 break;
             case 1012:
                 flag = "4";
+                break;
+            default:
+                flag = "";
                 break;
         }
         IHomeLogic homeLogic = new HomeLogic();
@@ -439,6 +452,99 @@ public class LogicService extends Service {
     public void getDetailInfo(String uId, ICallListener<String> iCallListener) {
         IDetailPeopleLogic detailPeopleLogic = new DetailPeopleLogic();
         detailPeopleLogic.getDetailInfo(mUserInfo.getUserInfoBean().getUserId(), uId, iCallListener);
+    }
+
+    //获取用户账户轮播图
+    public void getBannerImages(String updateTime, ICallListener<String> iCallListener) {
+        String flag;
+        switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
+            case 1004:
+                flag = "2";
+                break;
+            case 1010:
+                flag = "2";
+                break;
+            case 1011:
+                flag = "1";
+                break;
+            case 1012:
+                flag = "4";
+                break;
+            default:
+                flag = "";
+                break;
+        }
+        AccountLogic accountLogic = new AccountLogic();
+        accountLogic.getImageUrlsForService("16", flag, updateTime, iCallListener);
+    }
+
+    //获取用户货币信息
+    public void getUserCurrency(ICallListener<String> iCallListener) {
+        AccountLogic accountLogic = new AccountLogic();
+        accountLogic.getUserCurrency(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+    }
+
+
+    //用户充值
+    //获取充值列表
+    public void getRechargeList(ICallListener<String> iCallListener) {
+        AccountRechargeLogic accountRechargeLogic = new AccountRechargeLogic();
+        accountRechargeLogic.getRechargeList(iCallListener);
+    }
+
+    //获取支付列表
+    public void getPayList(ICallListener<String> iCallListener) {
+        AccountRechargeLogic accountRechargeLogic = new AccountRechargeLogic();
+        accountRechargeLogic.getPayList(iCallListener);
+    }
+
+    //得到支付订单
+    public void getOrderNum(String productId, String payId, ICallListener<String> iCallListener) {
+        AccountRechargeLogic accountRechargeLogic = new AccountRechargeLogic();
+        accountRechargeLogic.getOrderNumForService(mUserInfo.getUserInfoBean().getUserId(), productId, payId, mUserInfo.getUserInfoBean().getRealName(), iCallListener);
+    }
+
+    //获取积分兑换列表
+    public void getIntegralExchangeList(ICallListener<String> iCallListener) {
+        AccountIntegralLogic accountIntegralLogic = new AccountIntegralLogic();
+        accountIntegralLogic.getIntegralList(iCallListener);
+    }
+
+    //兑换积分
+    public void getUserCoin(String uCoin, String coin, ICallListener<String> iCallListener) {
+        AccountIntegralLogic accountIntegralLogic = new AccountIntegralLogic();
+        accountIntegralLogic.getUserCoin(mUserInfo.getUserInfoBean().getUserId(), uCoin, coin, iCallListener);
+    }
+
+    //获取商城道具列表
+    public void getPropsStoreList(ICallListener<String> iCallListener) {
+        AccountPropsLogic accountPropsLogic = new AccountPropsLogic();
+        accountPropsLogic.getPropsListForService(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+    }
+
+    //购买道具
+    public void buyProps(String propId, String propNum, ICallListener<String> iCallListener) {
+        AccountPropsInfoLogic accountPropsInfoLogic = new AccountPropsInfoLogic();
+        accountPropsInfoLogic.buyProps(mUserInfo.getUserInfoBean().getUserId(), propId, propNum, iCallListener);
+    }
+
+    //获取用户道具列表
+    public void getUserPropsList(ICallListener<String> iCallListener) {
+        AccountMyPropsLogic accountMyPropsLogic= new AccountMyPropsLogic();
+        accountMyPropsLogic.getUserPropsForService(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+    }
+
+    //赠送道具
+    public void givePropsToPeople(String recvUserId, String propId, int propNum, ICallListener<String> iCallListener) {
+        AccountMyPropsLogic accountMyPropsLogic = new AccountMyPropsLogic();
+        accountMyPropsLogic.givePropsToPeople(mUserInfo.getUserInfoBean().getUserId(), recvUserId, propId, propNum, iCallListener);
+    }
+
+
+    //获取账户往来列表
+    public void getUserRecordingList(int pageNow, ICallListener<String> iCallListener) {
+        AccountRecordingLogic accountRecordingLogic = new AccountRecordingLogic();
+        accountRecordingLogic.getUserRecordingList(mUserInfo.getUserInfoBean().getUserId(), pageNow, iCallListener);
     }
 
     //获取关于我们的信息

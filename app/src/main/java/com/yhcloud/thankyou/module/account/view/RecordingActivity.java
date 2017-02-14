@@ -1,32 +1,29 @@
 package com.yhcloud.thankyou.module.account.view;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.account.adapter.AccountRecordingListAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountRecordingBean;
 import com.yhcloud.thankyou.module.account.manage.AccountRecordingManage;
-import com.yhcloud.thankyou.utils.myview.MyToast;
-
 
 import java.util.ArrayList;
 
-public class RecordingActivity extends AppCompatActivity implements IRecordingView {
+public class RecordingActivity extends ABaseActivity implements IRecordingView {
 
+    //视图控件
     private LinearLayout llBack;
     private TextView tvTitle, tvDefault;
-    private ProgressDialog mProgressDialog;
     private RecyclerView rvList;
+    //适配器
     private AccountRecordingListAdapter arla;
-
+    //管理器
     private AccountRecordingManage mManage;
 
     @Override
@@ -60,6 +57,11 @@ public class RecordingActivity extends AppCompatActivity implements IRecordingVi
     }
 
     @Override
+    public void showDefault(boolean showed) {
+
+    }
+
+    @Override
     public void defaultText(boolean showed) {
         if (showed) {
             tvDefault.setVisibility(View.VISIBLE);
@@ -69,21 +71,13 @@ public class RecordingActivity extends AppCompatActivity implements IRecordingVi
     }
 
     @Override
-    public void showLoading() {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading_data));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
-    }
-
-    @Override
     public void setTitle(String title) {
         this.tvTitle.setText(title);
+    }
+
+    @Override
+    public void setRightTitle(String title) {
+
     }
 
     @Override
@@ -113,15 +107,5 @@ public class RecordingActivity extends AppCompatActivity implements IRecordingVi
         } else {
             arla.refreshData(list);
         }
-    }
-
-    @Override
-    public void showMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 }

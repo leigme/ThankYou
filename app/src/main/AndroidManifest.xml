@@ -203,6 +203,16 @@
         </activity>
         <activity android:name=".module.todayrecipes.view.TodayRecipesInfoActivity">
         </activity>
+        <activity android:name=".module.account.view.RechargeActivity">
+        </activity>
+        <activity android:name=".module.account.view.IntegralActivity">
+        </activity>
+        <activity android:name=".module.account.view.PropsActivity">
+        </activity>
+        <activity android:name=".module.account.view.PropsInfoActivity">
+        </activity>
+        <activity android:name=".module.account.view.RecordingActivity">
+        </activity>
     </application>
 
 </manifest>

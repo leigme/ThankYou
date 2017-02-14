@@ -1,9 +1,7 @@
 package com.yhcloud.thankyou.module.account.view;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,29 +11,26 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountRechargeListAdapter;
 import com.yhcloud.thankyou.module.account.adapter.AccountRechargePayListAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargeBean;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargePayBean;
 import com.yhcloud.thankyou.module.account.manage.AccountRechargeManage;
-import com.yhcloud.thankyou.utils.myview.MyToast;
-
 
 import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
-public class RechargeActivity extends AppCompatActivity implements IRechargeView {
+public class RechargeActivity extends ABaseActivity implements IRechargeView {
 
     private LinearLayout llBack;
     private TextView tvTitle, tvRealname, tvUsername, tvCoin, tvRule;
-    private ProgressDialog mProgressDialog;
     private Dialog mDialog;
     private ImageView ivHeaderImage;
     private RecyclerView rvList;
@@ -65,12 +60,22 @@ public class RechargeActivity extends AppCompatActivity implements IRechargeView
     }
 
     @Override
+    public void showDefault(boolean showed) {
+
+    }
+
+    @Override
     public void setTitle(String title) {
         this.tvTitle.setText(title);
     }
 
     @Override
-    public void iniEvent() {
+    public void setRightTitle(String title) {
+
+    }
+
+    @Override
+    public void initEvent() {
         View.OnClickListener myOnClickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,19 +91,6 @@ public class RechargeActivity extends AppCompatActivity implements IRechargeView
         };
         llBack.setOnClickListener(myOnClickListener);
         llRechargeSend.setOnClickListener(myOnClickListener);
-    }
-
-    @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
     }
 
     @Override
@@ -214,16 +206,6 @@ public class RechargeActivity extends AppCompatActivity implements IRechargeView
         //将属性设置给窗体
         dialogWindow.setAttributes(lp);
         mDialog.show();
-    }
-
-    @Override
-    public void showToastMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showToastMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 
     @Override

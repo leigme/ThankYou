@@ -2,6 +2,7 @@ package com.yhcloud.thankyou.mAbstract;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,20 @@ public abstract class ABaseActivity extends AppCompatActivity implements IBaseVi
     private ProgressDialog mProgressDialog;
     private Dialog mDialog;
     private IButtonOnClickListener mIButtonOnClickListener;
+
+    @Override
+    protected void onResume() {
+        /**
+         * 设置为竖屏
+         * ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+         * 设置为横屏
+         * ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+         */
+        if (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE != getRequestedOrientation()){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        super.onResume();
+    }
 
     @Override
     public void showLoading(int msgId) {

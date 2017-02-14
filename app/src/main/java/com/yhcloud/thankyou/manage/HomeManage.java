@@ -71,7 +71,7 @@ public class HomeManage {
     }
 
     public void showBanner(String updateTime) {
-        mService.getImageUrls(updateTime, new ICallListener<String>() {
+        mService.getBannerImageUrls(updateTime, new ICallListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -205,6 +205,12 @@ public class HomeManage {
     }
 
     public void saveFunctionList() {
-        mService.saveFuncations();
+        ArrayList<Integer> list = new ArrayList<>();
+        for (FunctionBean fb: mBeen) {
+            if (0 != fb.getId()) {
+                list.add(fb.getId());
+            }
+        }
+        mService.saveFuncations(list);
     }
 }

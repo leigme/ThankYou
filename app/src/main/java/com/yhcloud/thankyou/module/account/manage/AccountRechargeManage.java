@@ -11,18 +11,22 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.util.Log;
 
-
 import com.alipay.sdk.app.PayTask;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-
 import com.yhcloud.thankyou.bean.UserInfo;
-
+import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.account.alipay.AuthResult;
 import com.yhcloud.thankyou.module.account.alipay.PayResult;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargeBean;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargePayBean;
 import com.yhcloud.thankyou.module.account.view.IRechargeView;
 import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.utils.Constant;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -108,13 +112,14 @@ public class AccountRechargeManage {
                 mService = ((LogicService.MyBinder)service).getService();
                 mUserInfo = mService.getUserInfo();
                 mIRechargeView.initView();
+                mIRechargeView.initEvent();
                 mIRechargeView.setTitle("优点充值");
-                mIRechargeView.iniEvent();
+                mIRechargeView.setHeadimg(Constant.SERVICEADDRESS + mUserInfo.getUserInfoBean().getHeadImageURL());
+                mIRechargeView.setRealname(mUserInfo.getUserInfoBean().getRealName());
+                mIRechargeView.setUsername("账号: " + mUserInfo.getUserInfoBean().getUserId());
                 getPayList();
-                getUserInfo();
                 getUserCurrency();
                 getRechargeData();
-                mIRechargeView.hiddenLoading();
             }
 
             @Override
@@ -126,116 +131,109 @@ public class AccountRechargeManage {
     }
 
     public void getRechargeData() {
+        mIRechargeView.showLoading(R.string.loading_data);
         mBeen = new ArrayList<>();
-//        mService.getRechargeExchangeList(new ICallListener<String>() {
-//            @Override
-//            public void callSuccess(String s) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(s);
-//                    if (!jsonObject.getBoolean("errorFlag")) {
-//                        String jsonResult = jsonObject.getString("RulesList");
-//                        if (null != jsonResult && !"".equals(jsonResult)) {
-//                            Gson gson = new Gson();
-//                            ArrayList<AccountRechargeBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<AccountRechargeBean>>(){}.getType());
-//                            mBeen.addAll(list);
-//                            mIRechargeView.showRechargeList(mBeen);
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//                mIRechargeView.showToastMsg(R.string.error_connection);
-//            }
-//        });
+        mService.getRechargeList(new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        String jsonResult = jsonObject.getString("RulesList");
+                        if (null != jsonResult && !"".equals(jsonResult)) {
+                            Gson gson = new Gson();
+                            ArrayList<AccountRechargeBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<AccountRechargeBean>>(){}.getType());
+                            mBeen.addAll(list);
+                            mIRechargeView.showRechargeList(mBeen);
+                        }
+                    } else {
+                        String errorMsg = jsonObject.getString("errorMsg");
+                        if (null != errorMsg && !"".equals(errorMsg)) {
+                            mIRechargeView.showToastMsg(errorMsg);
+                        } else {
+                            mIRechargeView.showToastMsg(R.string.error_connection);
+                        }
+                    }
+                    mIRechargeView.hiddenLoading();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    mIRechargeView.hiddenLoading();
+                }
+            }
+
+            @Override
+            public void callFailed() {
+                mIRechargeView.showToastMsg(R.string.error_connection);
+                mIRechargeView.hiddenLoading();
+            }
+        });
     }
 
     public void getUserCurrency() {
-//        mService.getUserCurrency(userId, new ICallListener<String>() {
-//            @Override
-//            public void callSuccess(String s) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(s);
-//                    if (!jsonObject.getBoolean("errorFlag")) {
-//                        uCoin = jsonObject.getInt("uCoin");
-//                        mIRechargeView.setCoin(String.valueOf(uCoin));
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//
-//            }
-//        });
-    }
+        mService.getUserCurrency(new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        uCoin = jsonObject.getInt("uCoin");
+                        mIRechargeView.setCoin(String.valueOf(uCoin));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
 
-    public void getUserInfo() {
-//        mService.getUserInfoForLocal(mActivity, userId, new ICallListener<UserInfoBean>() {
-//            @Override
-//            public void callSuccess(UserInfoBean bean) {
-//                mIRechargeView.setHeadimg(ServiceAPI.SERVICEADDRESS + bean.getHeadImageURL());
-//                Log.e(TAG, "头像是：" + bean.getHeadImageURL());
-//                realName = bean.getRealName();
-//                userName = bean.getUserName();
-//                mIRechargeView.setRealname(realName);
-//                mIRechargeView.setUsername(userName);
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//
-//            }
-//        });
+            @Override
+            public void callFailed() {
+
+            }
+        });
     }
 
     public void getPayList() {
-//        mService.getPayList(new ICallListener<String>() {
-//            @Override
-//            public void callSuccess(String s) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(s);
-//                    if (!jsonObject.getBoolean("errorFlag")) {
-//                        String jsonResult = jsonObject.getString("pay_list");
-//                        if (null != jsonResult && !"".equals(jsonResult)) {
-//                            Gson gson = new Gson();
-//                            ArrayList<AccountRechargePayBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<AccountRechargePayBean>>(){}.getType());
-//                            if (null != list && 0 != list.size()) {
-//                                list.get(0).setSelected(true);
-//                                for (AccountRechargePayBean bean: list) {
-//                                    if (bean.isPay_statu()) {
-//                                        switch (bean.getPay_id()) {
-//                                            case "0":
-//                                                bean.setIconId(R.mipmap.icon_zfb);
-//                                                break;
-//                                            case "1":
-//                                                break;
-//                                            case "2":
-//                                                break;
-//                                            case "3":
-//                                                break;
-//                                        }
-//                                        mList.add(bean);
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//
-//            }
-//        });
+        mService.getPayList(new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        String jsonResult = jsonObject.getString("pay_list");
+                        if (null != jsonResult && !"".equals(jsonResult)) {
+                            Gson gson = new Gson();
+                            ArrayList<AccountRechargePayBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<AccountRechargePayBean>>(){}.getType());
+                            if (null != list && 0 != list.size()) {
+                                list.get(0).setSelected(true);
+                                for (AccountRechargePayBean bean: list) {
+                                    if (bean.isPay_statu()) {
+                                        switch (bean.getPay_id()) {
+                                            case "0":
+                                                bean.setIconId(R.mipmap.icon_zfb);
+                                                break;
+                                            case "1":
+                                                break;
+                                            case "2":
+                                                break;
+                                            case "3":
+                                                break;
+                                        }
+                                        mList.add(bean);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void callFailed() {
+
+            }
+
+        });
     }
 
     public void showPayList() {
@@ -246,36 +244,38 @@ public class AccountRechargeManage {
                 productId = arb.getId();
             }
         }
-//        mIRechargeView.showDialog(mList, payNum);
+        mIRechargeView.showDialog(mList, payNum);
     }
 
     public void payMoney() {
-//        mIRechargeView.showLoading(R.string.exchangeing);
-//        for (AccountRechargePayBean payBean: mList) {
-//            if (payBean.isSelected()) {
-//                payId = payBean.getPay_id();
-//            }
-//        }
-//        mService.getOrderNum(userId, productId, payId, realName, new ICallListener<String>() {
-//            @Override
-//            public void callSuccess(String s) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(s);
-//                    String orgdata = jsonObject.getString("orgdata");
-//                    String sign = jsonObject.getString("signedStr");
-//                    orderInfo = orgdata + "&sign=" + sign;
-//                    Log.e(TAG, "订单信息:" + orderInfo);
-//                    alipay(orderInfo);
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//                mIRechargeView.hiddenLoading();
-//            }
-//        });
+        mIRechargeView.showLoading(R.string.exchangeing);
+        for (AccountRechargePayBean payBean: mList) {
+            if (payBean.isSelected()) {
+                payId = payBean.getPay_id();
+            }
+        }
+        mService.getOrderNum(productId, payId, new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    String orgdata = jsonObject.getString("orgdata");
+                    String sign = jsonObject.getString("signedStr");
+                    orderInfo = orgdata + "&sign=" + sign;
+                    Log.e(TAG, "订单信息:" + orderInfo);
+                    alipay(orderInfo);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mIRechargeView.hiddenLoading();
+            }
+
+            @Override
+            public void callFailed() {
+                mIRechargeView.hiddenLoading();
+            }
+
+        });
     }
 
     /**

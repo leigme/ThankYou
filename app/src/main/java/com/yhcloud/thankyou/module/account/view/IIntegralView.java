@@ -1,5 +1,6 @@
 package com.yhcloud.thankyou.module.account.view;
 
+import com.yhcloud.thankyou.mInterface.IBaseActivityView;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
 
 import java.util.ArrayList;
@@ -8,13 +9,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/11/25.
  */
 
-public interface IIntegralView {
-    void initView();
-    void setTitle(String title);
-    void initEvent();
-    void showLoading(int msgId);
-    void showToastMsg(int msgId);
-    void hiddenLoading();
+public interface IIntegralView extends IBaseActivityView{
     void showList(ArrayList<AccountIntegralBean> list);
     void setHeadimg(String imageUrl);
     void setRealname(String realname);

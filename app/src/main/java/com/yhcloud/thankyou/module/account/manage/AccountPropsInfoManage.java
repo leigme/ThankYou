@@ -7,12 +7,16 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import com.yhcloud.thankyou.bean.UserInfo;
+import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.view.IPropsInfoView;
 import com.yhcloud.thankyou.module.account.view.IntegralActivity;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Administrator on 2016/12/5.
@@ -25,8 +29,6 @@ public class AccountPropsInfoManage {
     private IPropsInfoView mIPropsInfoView;
     private Activity mActivity;
     private LogicService mService;
-    private UserInfo mUserInfo;
-    private String userId, userFlag;
     private int coin, sumCoin;
     private AccountPropBean mAccountPropBean;
 
@@ -38,7 +40,6 @@ public class AccountPropsInfoManage {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 mService = ((LogicService.MyBinder)service).getService();
-                mUserInfo = mService.getUserInfo();
                 mIPropsInfoView.initView();
                 mIPropsInfoView.initEvent();
                 mIPropsInfoView.setTitle("道具详情");
@@ -47,7 +48,7 @@ public class AccountPropsInfoManage {
                 mAccountPropBean.setPropImg(Constant.SERVICEADDRESS + mAccountPropBean.getPropImg());
                 coin = propsInfoIntent.getIntExtra("coin", 0);
                 sumCoin = Integer.parseInt(mAccountPropBean.getPropPrice());
-//                mIPropsInfoView.initData(mAccountPropBean);
+                mIPropsInfoView.initData(mAccountPropBean);
             }
 
             @Override
@@ -88,29 +89,32 @@ public class AccountPropsInfoManage {
     }
 
     public void buyProps() {
+        mIPropsInfoView.showLoading(R.string.exchangeing);
         int i = mIPropsInfoView.getBuynum();
-//        mService.buyProps(userId, mAccountPropBean.getPropId(), String.valueOf(i), new ICallListener<String>() {
-//            @Override
-//            public void callSuccess(String s) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(s);
-//                    boolean result = jsonObject.getBoolean("errorFlag");
-//                    if (!result) {
-//                        mIPropsInfoView.showResult("购买成功", "欢迎您再次购买");
-//                        return;
-//                    }
-//                    String errorMsg = jsonObject.getString("errorMsg");
-//                    mIPropsInfoView.showResult(errorMsg, "请稍候再试");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//                mIPropsInfoView.showResult("购买失败", "网络故障,请稍后再试");
-//            }
-//        });
+        mService.buyProps(mAccountPropBean.getPropId(), String.valueOf(i), new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    boolean result = jsonObject.getBoolean("errorFlag");
+                    if (!result) {
+                        mIPropsInfoView.showResult("购买成功", "欢迎您再次购买");
+                        return;
+                    }
+                    String errorMsg = jsonObject.getString("errorMsg");
+                    mIPropsInfoView.showResult(errorMsg, "请稍候再试");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mIPropsInfoView.hiddenLoading();
+            }
+
+            @Override
+            public void callFailed() {
+                mIPropsInfoView.showResult("购买失败", "网络故障,请稍后再试");
+                mIPropsInfoView.hiddenLoading();
+            }
+        });
     }
 
     public void goIntegral() {

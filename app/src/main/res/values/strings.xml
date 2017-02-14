@@ -8,8 +8,8 @@
     <string name="no_data">暂无记录</string>
     <string name="no_more_data">没有更多数据了...</string>
     <string name="logouting">登出中,请稍候...</string>
-
-    <string name="loadcamera">启动照相机</string>
+    <string name="exchangeing">兑换中,请稍候...</string>
+    <string name="load_camera">启动照相机</string>
     <string name="ok">我知道了</string>
 
 

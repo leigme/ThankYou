@@ -1,18 +1,15 @@
 package com.yhcloud.thankyou.module.account.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountFunctionAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountFunctionBean;
@@ -21,9 +18,8 @@ import com.yhcloud.thankyou.module.account.utils.GlideImageLoader;
 import com.youth.banner.Banner;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class AccountActivity extends AppCompatActivity implements IAccountView {
+public class AccountActivity extends ABaseActivity implements IAccountView {
 
     private String TAG = getClass().getSimpleName();
 
@@ -32,7 +28,6 @@ public class AccountActivity extends AppCompatActivity implements IAccountView {
     private Banner mBanner;
     private RecyclerView mRecyclerView;
     private AccountFunctionAdapter afa;
-    private ProgressDialog mProgressDialog;
 
     private AccountManage mManage;
 
@@ -67,25 +62,22 @@ public class AccountActivity extends AppCompatActivity implements IAccountView {
     }
 
     @Override
-    public void showLoading() {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading_data));
-    }
+    public void showDefault(boolean showed) {
 
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
     }
 
     @Override
     public void setTitle(String title) {
-        this.tvTitle.setText(title);
+        tvTitle.setText(title);
     }
 
     @Override
-    public void showBanner(List<String> list) {
+    public void setRightTitle(String title) {
+
+    }
+
+    @Override
+    public void showBanner(ArrayList<String> list) {
         mBanner.setImageLoader(new GlideImageLoader());
         mBanner.setImages(list);
         mBanner.start();
@@ -98,7 +90,7 @@ public class AccountActivity extends AppCompatActivity implements IAccountView {
             afa.setIOnClickListener(new IOnClickListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
-                    startActivityForResult(list.get(position).getIntent(), list.get(position).getId());
+                    mManage.goFunction(position);
                 }
 
                 @Override
@@ -119,7 +111,7 @@ public class AccountActivity extends AppCompatActivity implements IAccountView {
         super.onActivityResult(requestCode, resultCode, data);
 //        for (AccountFunctionBean afb: mBeen) {
 //            if (resultCode == afb.getId()) {
-//                Log.e(TAG, "返回界面是:" + afb.getTitle());
+//                Tools.print(TAG, "返回界面是:" + afb.getTitle());
 //            }
 //        }
     }

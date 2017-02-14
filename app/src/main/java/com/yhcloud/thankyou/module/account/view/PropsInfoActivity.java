@@ -1,9 +1,7 @@
 package com.yhcloud.thankyou.module.account.view;
 
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -12,21 +10,19 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.manage.AccountPropsInfoManage;
-import com.yhcloud.thankyou.utils.myview.MyToast;
-
 
 import java.text.MessageFormat;
 
-public class PropsInfoActivity extends AppCompatActivity implements IPropsInfoView {
+public class PropsInfoActivity extends ABaseActivity implements IPropsInfoView {
 
     private LinearLayout llBack;
     private TextView tvTitle, tvPropsName, tvPropsDetails, tvPropsCoin, tvPropsPeopleNum,
             tvPropsBuyNum, tvPropsSumnum;
     private ImageView ivPropsInfoImage;
     private LinearLayout llAddPropsNum, llSubPropsNum, llBuyProps;
-    private ProgressDialog mProgressDialog;
     private Dialog mDialog;
 
     private AccountPropsInfoManage mManage;
@@ -97,26 +93,18 @@ public class PropsInfoActivity extends AppCompatActivity implements IPropsInfoVi
     }
 
     @Override
+    public void showDefault(boolean showed) {
+
+    }
+
+    @Override
     public void setTitle(String title) {
         this.tvTitle.setText(title);
     }
 
     @Override
-    public void showLoading(int msgId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
-    }
+    public void setRightTitle(String title) {
 
-    @Override
-    public void showMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
     }
 
     @Override

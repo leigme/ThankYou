@@ -1,36 +1,34 @@
 package com.yhcloud.thankyou.module.account.view;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewStub;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
+import com.yhcloud.thankyou.mAbstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountMyPropsAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.manage.AccountMyPropsManage;
-import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 
-public class MyPropsActivity extends AppCompatActivity implements IMyPropsView {
+public class MyPropsActivity extends ABaseActivity implements IMyPropsView {
 
+    //视图控件
     private LinearLayout llBack, llRight, llAddPropsNum, llSubPropsNum;
     private TextView tvTitle, tvRight, tvDefault, tvPropsBuyNum;
-    private ProgressDialog mProgressDialog;
     private ViewStub viewStub;
     private RecyclerView rvMyPropsList;
+    //适配器
     private AccountMyPropsAdapter ampa;
-
+    //管理器
     private AccountMyPropsManage mManage;
 
     @Override
@@ -55,6 +53,11 @@ public class MyPropsActivity extends AppCompatActivity implements IMyPropsView {
     }
 
     @Override
+    public void setRightTitle(String title) {
+
+    }
+
+    @Override
     public void initEvent() {
         View.OnClickListener myOnClickListener = new View.OnClickListener() {
             @Override
@@ -67,19 +70,6 @@ public class MyPropsActivity extends AppCompatActivity implements IMyPropsView {
             }
         };
         llBack.setOnClickListener(myOnClickListener);
-    }
-
-    @Override
-    public void showLoading(int resId) {
-        hiddenLoading();
-        mProgressDialog = ProgressDialog.show(this, null, getString(resId));
-    }
-
-    @Override
-    public void hiddenLoading() {
-        if (null != mProgressDialog) {
-            mProgressDialog.dismiss();
-        }
     }
 
     @Override
@@ -127,16 +117,6 @@ public class MyPropsActivity extends AppCompatActivity implements IMyPropsView {
         } else {
             ampa.refreshData(list, canOnClick);
         }
-    }
-
-    @Override
-    public void showMsg(int msgId) {
-        MyToast.showToast(this, msgId);
-    }
-
-    @Override
-    public void showMsg(String msg) {
-        MyToast.showToast(this, msg);
     }
 
     @Override
@@ -194,11 +174,6 @@ public class MyPropsActivity extends AppCompatActivity implements IMyPropsView {
         if (null != tvPropsBuyNum) {
             tvPropsBuyNum.setText(String.valueOf(num));
         }
-    }
-
-    @Override
-    public void setRightText(String text) {
-        tvRight.setText(text);
     }
 
     @Override

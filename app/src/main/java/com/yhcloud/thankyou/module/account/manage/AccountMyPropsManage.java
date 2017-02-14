@@ -3,21 +3,19 @@ package com.yhcloud.thankyou.module.account.manage;
 import android.app.Activity;
 import android.app.Service;
 import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
-import android.content.SharedPreferences;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
+import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.view.IMyPropsView;
 import com.yhcloud.thankyou.service.LogicService;
-
+import com.yhcloud.thankyou.utils.Tools;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,7 +58,7 @@ public class AccountMyPropsManage {
                     if (0 == give) {
                         recvUserId = goIntent.getStringExtra("RecvUserId");
                         canGive = true;
-                        mIMyPropsView.setRightText("赠送");
+//                        mIMyPropsView.setRightText("赠送");
                         mIMyPropsView.initRight(canGive);
                     }
                 }
@@ -78,38 +76,43 @@ public class AccountMyPropsManage {
     }
 
     public void getPropsDataForService() {
-//        mService.getUserPropsList(userId, new ICallListener<String>() {
-//            @Override
-//            public void callSuccess(String s) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(s);
-//                    if (!jsonObject.getBoolean("errorFlag")) {
-//                        String jsonResult = jsonObject.getString("propList");
-//                        if (null != jsonResult && !"".equals(jsonResult)) {
-//                            Gson gson = new Gson();
-//                            ArrayList<AccountPropBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<AccountPropBean>>(){}.getType());
-//                            mBeen.addAll(list);
-//                            mIMyPropsView.initViewStub(canGive);
-//                            mIMyPropsView.showList(mBeen, canGive);
-//                        }
-//                    } else {
-//                        if ("E0009I00102".equals(jsonObject.getString("errorCode"))) {
-//                            mIMyPropsView.initViewStub();
-//                            mIMyPropsView.showDefault(true);
-//                            return;
-//                        }
-//                        mIMyPropsView.showMsg(R.string.error_service);
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//                mIMyPropsView.showMsg(R.string.error_connection);
-//            }
-//        });
+        mIMyPropsView.showLoading(R.string.loading_data);
+        mService.getUserPropsList(new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        String jsonResult = jsonObject.getString("propList");
+                        if (null != jsonResult && !"".equals(jsonResult)) {
+                            Gson gson = new Gson();
+                            ArrayList<AccountPropBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<AccountPropBean>>(){}.getType());
+                            mBeen.addAll(list);
+                            mIMyPropsView.initViewStub(canGive);
+                            mIMyPropsView.showList(mBeen, canGive);
+                        }
+                    } else {
+                        String errorMsg = jsonObject.getString("errorMsg");
+                        if (null != errorMsg && !"".equals(errorMsg)) {
+                            mIMyPropsView.initViewStub();
+                            mIMyPropsView.showDefault(true);
+                            mIMyPropsView.showToastMsg(errorMsg);
+                        } else {
+                            mIMyPropsView.showToastMsg(R.string.error_connection);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mIMyPropsView.hiddenLoading();
+            }
+
+            @Override
+            public void callFailed() {
+                mIMyPropsView.showToastMsg(R.string.error_connection);
+                mIMyPropsView.hiddenLoading();
+            }
+        });
     }
 
     public void addNum() {
@@ -135,37 +138,37 @@ public class AccountMyPropsManage {
     }
 
     public void givePropsToPeople() {
-//        if (null != propId && !"".equals(propId)) {
-//            if (0 < mIMyPropsView.getNum()) {
-//                Log.e(TAG, "开始赠送~~~");
-//                mService.givePropsToPeople(userId, recvUserId, propId, mIMyPropsView.getNum(), new ICallListener<String>() {
-//                    @Override
-//                    public void callSuccess(String s) {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(s);
-//                            if (!jsonObject.getBoolean("errorFlag")) {
-//                                Log.e(TAG, "赠送成功~~");
-//                                mIMyPropsView.showNum(0);
-//                                mBeen = new ArrayList<>();
-//                                getPropsDataForService();
-//                            } else {
-//                                Log.e(TAG, "赠送失败~~");
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void callFailure() {
-//                        Log.e(TAG, "赠送失败~~");
-//                    }
-//                });
-//            } else {
-//                mIMyPropsView.showMsg("请选择赠送数量");
-//            }
-//        } else {
-//            mIMyPropsView.showMsg("请选择道具");
-//        }
+        if (null != propId && !"".equals(propId)) {
+            if (0 < mIMyPropsView.getNum()) {
+                Tools.print(TAG, "开始赠送~~~");
+                mService.givePropsToPeople(recvUserId, propId, mIMyPropsView.getNum(), new ICallListener<String>() {
+                    @Override
+                    public void callSuccess(String s) {
+                        try {
+                            JSONObject jsonObject = new JSONObject(s);
+                            if (!jsonObject.getBoolean("errorFlag")) {
+                                Tools.print(TAG, "赠送成功~~");
+                                mIMyPropsView.showNum(0);
+                                mBeen = new ArrayList<>();
+                                getPropsDataForService();
+                            } else {
+                                Tools.print(TAG, "赠送失败~~");
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void callFailed() {
+                        Tools.print(TAG, "赠送失败~~");
+                    }
+                });
+            } else {
+                mIMyPropsView.showToastMsg("请选择赠送数量");
+            }
+        } else {
+            mIMyPropsView.showToastMsg("请选择道具");
+        }
     }
 }

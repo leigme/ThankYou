@@ -105,7 +105,7 @@ public class AddPhotoActivity extends ABaseActivity implements IAddPhotoActivity
     public void init() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.CAMERA)) {
             Tools.print(TAG, "Displaying camera permission rationale to provide additional context.");
-            Snackbar.make(container, R.string.loadcamera, Snackbar.LENGTH_INDEFINITE)
+            Snackbar.make(container, R.string.load_camera, Snackbar.LENGTH_INDEFINITE)
                     .setAction(R.string.ok, new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {

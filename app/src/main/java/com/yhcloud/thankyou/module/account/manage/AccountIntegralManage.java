@@ -7,13 +7,19 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-
 import com.yhcloud.thankyou.bean.UserInfo;
+import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
 import com.yhcloud.thankyou.module.account.view.IIntegralView;
 import com.yhcloud.thankyou.module.account.view.RechargeActivity;
 import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.utils.Constant;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -29,7 +35,6 @@ public class AccountIntegralManage {
     private Activity mActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
-    private String userId, userFlag;
     private int uCoin, coin;
     private ArrayList<AccountIntegralBean> mBeen;
 
@@ -44,12 +49,13 @@ public class AccountIntegralManage {
                 mService = ((LogicService.MyBinder)service).getService();
                 mUserInfo = mService.getUserInfo();
                 mIIntegralView.initView();
-                mIIntegralView.setTitle("积分兑换");
-                getUserInfoForLocal();
-                getUserCurrency();
                 mIIntegralView.initEvent();
+                mIIntegralView.setTitle("积分兑换");
+                mIIntegralView.setHeadimg(Constant.SERVICEADDRESS + mUserInfo.getUserInfoBean().getHeadImageURL());
+                mIIntegralView.setRealname(mUserInfo.getUserInfoBean().getRealName());
+                mIIntegralView.setUsername("账号: " + mUserInfo.getUserInfoBean().getUserId());
+                getUserCurrency();
                 getIntegralListData();
-                mIIntegralView.hiddenLoading();
             }
 
             @Override
@@ -59,123 +65,117 @@ public class AccountIntegralManage {
         }, Service.BIND_AUTO_CREATE);
     }
 
-    public void getUserInfoForLocal() {
-//        mService.getUserInfoForLocal(mActivity, userId, new ICallListener<UserInfoBean>() {
-//            @Override
-//            public void callSuccess(UserInfoBean bean) {
-//                mIIntegralView.setHeadimg(ServiceAPI.SERVICEADDRESS + bean.getHeadImageURL());
-//                mIIntegralView.setRealname(bean.getRealName());
-//                mIIntegralView.setUsername(bean.getUserName());
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//
-//            }
-//        });
-    }
-
     public void getUserCurrency() {
-//        mService.getUserCurrency(userId, new ICallListener<String>() {
-//            @Override
-//            public void callSuccess(String s) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(s);
-//                    if (!jsonObject.getBoolean("errorFlag")) {
-//                        coin = jsonObject.getInt("coin");
-//                        mIIntegralView.setCoin(String.valueOf(coin));
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//
-//            }
-//        });
+        mIIntegralView.showLoading(R.string.loading_data);
+        mService.getUserCurrency(new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        coin = jsonObject.getInt("coin");
+                        mIIntegralView.setCoin(String.valueOf(coin));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mIIntegralView.hiddenLoading();
+            }
+
+            @Override
+            public void callFailed() {
+                mIIntegralView.hiddenLoading();
+            }
+
+
+        });
     }
 
     public void getIntegralListData() {
+        mIIntegralView.showLoading(R.string.loading_data);
         mBeen = new ArrayList<>();
-//        mService.getIntegralExchangeList(new ICallListener<String>() {
-//            @Override
-//            public void callSuccess(String s) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(s);
-//                    if (!jsonObject.getBoolean("errorFlag")) {
-//                        String jsonResult = jsonObject.getString("RulesList");
-//                        if (null != jsonResult && !"".equals(jsonResult)) {
-//                            Gson gson = new Gson();
-//                            ArrayList<AccountIntegralBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<AccountIntegralBean>>(){}.getType());
-//                            mBeen.addAll(list);
-//                            mIIntegralView.showList(mBeen);
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//                mIIntegralView.showToastMsg(R.string.error_connection);
-//            }
-//        });
+        mService.getIntegralExchangeList(new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        String jsonResult = jsonObject.getString("RulesList");
+                        if (null != jsonResult && !"".equals(jsonResult)) {
+                            Gson gson = new Gson();
+                            ArrayList<AccountIntegralBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<AccountIntegralBean>>(){}.getType());
+                            mBeen.addAll(list);
+                            mIIntegralView.showList(mBeen);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mIIntegralView.hiddenLoading();
+            }
+
+            @Override
+            public void callFailed() {
+                mIIntegralView.showToastMsg(R.string.error_connection);
+                mIIntegralView.hiddenLoading();
+            }
+        });
     }
 
     public void send() {
-//        mService.getUserCurrency(userId, new ICallListener<String>() {
-//            @Override
-//            public void callSuccess(String s) {
-//                try {
-//                    JSONObject jsonObject = new JSONObject(s);
-//                    if (!jsonObject.getBoolean("errorFlag")) {
-//                        uCoin = jsonObject.getInt("uCoin");
-//                        if (0 < uCoin) {
-//                            for (AccountIntegralBean bean: mBeen) {
-//                                if (bean.isSelected()) {
-//                                    if (Integer.parseInt(bean.getMoney()) < uCoin) {
-//                                        mIIntegralView.showDialog(true, bean.getMoney(), bean.getCoin());
-//                                        return;
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    }
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//                mIIntegralView.showDialog(false, "", "");
-//            }
-//
-//            @Override
-//            public void callFailure() {
-//                mIIntegralView.showDialog(false, "", "");
-//            }
-//        });
+        mIIntegralView.showLoading(R.string.loading_data);
+        mService.getUserCurrency(new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        uCoin = jsonObject.getInt("uCoin");
+                        if (0 < uCoin) {
+                            for (AccountIntegralBean bean: mBeen) {
+                                if (bean.isSelected()) {
+                                    if (Integer.parseInt(bean.getMoney()) < uCoin) {
+                                        mIIntegralView.showDialog(true, bean.getMoney(), bean.getCoin());
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mIIntegralView.hiddenLoading();
+                mIIntegralView.showDialog(false, "", "");
+            }
+
+            @Override
+            public void callFailed() {
+                mIIntegralView.hiddenLoading();
+                mIIntegralView.showDialog(false, "", "");
+            }
+        });
     }
 
     public void getUserCoin() {
-//        mIIntegralView.showLoading(R.string.exchangeing);
-//        for (AccountIntegralBean bean: mBeen) {
-//            if (bean.isSelected()) {
-//                mService.getUserCoin(userId, bean.getMoney(), bean.getCoin(), new ICallListener<String>() {
-//                    @Override
-//                    public void callSuccess(String s) {
-//                        mIIntegralView.showDialogMsg();
-//                        getUserCurrency();
-//                        mIIntegralView.hiddenLoading();
-//                    }
-//
-//                    @Override
-//                    public void callFailure() {
-//                        mIIntegralView.hiddenLoading();
-//                    }
-//                });
-//            }
-//        }
+        mIIntegralView.showLoading(R.string.exchangeing);
+        for (AccountIntegralBean bean: mBeen) {
+            if (bean.isSelected()) {
+                mService.getUserCoin(bean.getMoney(), bean.getCoin(), new ICallListener<String>() {
+                    @Override
+                    public void callSuccess(String s) {
+                        mIIntegralView.showDialogMsg();
+                        getUserCurrency();
+                        mIIntegralView.hiddenLoading();
+                    }
+
+                    @Override
+                    public void callFailed() {
+                        mIIntegralView.hiddenLoading();
+                    }
+                });
+            }
+        }
     }
 
     public void goRecharge() {

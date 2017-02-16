@@ -219,6 +219,4 @@ public class WheelOptions<T> {
 			wv_option3.setCurrentItem(opt3Select);
 		}
 	}
-
-
 }

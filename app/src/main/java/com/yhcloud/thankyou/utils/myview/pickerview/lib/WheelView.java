@@ -12,6 +12,7 @@ import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
+
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.utils.myview.pickerview.adapter.WheelAdapter;
 import com.yhcloud.thankyou.utils.myview.pickerview.listener.OnItemSelectedListener;
@@ -60,7 +61,8 @@ public class WheelView extends View {
     int dividerColor;
 
     // 条目间距倍数
-    static final float lineSpacingMultiplier = 1.4F;
+//    static final float lineSpacingMultiplier = 1.4F;
+    static final float lineSpacingMultiplier = 2.0F;
     boolean isLoop;
 
     // 第一条线Y坐标值

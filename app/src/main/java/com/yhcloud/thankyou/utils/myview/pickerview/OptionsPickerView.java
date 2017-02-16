@@ -3,6 +3,7 @@ package com.yhcloud.thankyou.utils.myview.pickerview;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
@@ -18,6 +19,7 @@ import java.util.ArrayList;
 public class OptionsPickerView<T> extends BasePickerView implements View.OnClickListener {
     WheelOptions<T> wheelOptions;
     private View btnSubmit, btnCancel;
+    private LinearLayout llCancel;
     private TextView tvTitle;
     private OnOptionsSelectListener optionsSelectListener;
     private static final String TAG_SUBMIT = "submit";
@@ -32,6 +34,9 @@ public class OptionsPickerView<T> extends BasePickerView implements View.OnClick
         btnCancel.setTag(TAG_CANCEL);
         btnSubmit.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
+        llCancel = (LinearLayout) findViewById(R.id.ll_pickerview_btn_cancel);
+        llCancel.setOnClickListener(this);
+        llCancel.setTag(TAG_CANCEL);
         //顶部标题
         tvTitle = (TextView) findViewById(R.id.tvTitle);
         // ----转轮

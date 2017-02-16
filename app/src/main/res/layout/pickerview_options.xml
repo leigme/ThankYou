@@ -3,38 +3,61 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
-    <include
-        layout="@layout/include_pickerview_topbar"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/pickerview_topbar_height" />
-
     <LinearLayout
-        android:id="@+id/optionspicker"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:orientation="horizontal">
-
-        <com.yhcloud.thankyou.utils.myview.pickerview.lib.WheelView
-            android:id="@+id/options1"
-            android:layout_width="0dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/my_big_rounded"
+        android:orientation="vertical">
+        <include
+            layout="@layout/include_pickerview_topbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/pickerview_topbar_height"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"/>
+        <LinearLayout
+            android:id="@+id/optionspicker"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            />
-
-        <com.yhcloud.thankyou.utils.myview.pickerview.lib.WheelView
-            android:id="@+id/options2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <com.yhcloud.thankyou.utils.myview.pickerview.lib.WheelView
-            android:id="@+id/options3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+            <com.yhcloud.thankyou.utils.myview.pickerview.lib.WheelView
+                android:id="@+id/options1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"/>
+            <com.yhcloud.thankyou.utils.myview.pickerview.lib.WheelView
+                android:id="@+id/options2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+            <com.yhcloud.thankyou.utils.myview.pickerview.lib.WheelView
+                android:id="@+id/options3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+        </LinearLayout>
     </LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/my_btn_size"
+        android:id="@+id/ll_pickerview_btn_cancel"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:background="@drawable/my_big_rounded"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#999999"
+            android:text="取消"/>
+    </LinearLayout>
 
 </LinearLayout>

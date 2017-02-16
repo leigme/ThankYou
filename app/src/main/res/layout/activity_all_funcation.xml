@@ -8,9 +8,36 @@
     android:orientation="vertical"
     tools:context="com.yhcloud.thankyou.module.allfuncation.view.AllFuncationActivity">
     <include layout="@layout/header"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/my_icon_size"
+        android:layout_marginLeft="5dp"
+        android:background="@color/colorWhite"
+        android:gravity="center_vertical"
+        android:textColor="@color/colorBlack"
+        android:text="已添加"/>
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/rv_allfuncation_list"
-        android:background="@color/colorWhite"></android.support.v7.widget.RecyclerView>
+        android:id="@+id/rv_add_funcation_list"
+        android:background="@color/colorWhite">
+    </android.support.v7.widget.RecyclerView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/colorGray"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/my_icon_size"
+        android:layout_marginLeft="5dp"
+        android:gravity="center_vertical"
+        android:background="@color/colorWhite"
+        android:textColor="@color/colorBlack"
+        android:text="未添加"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_none_funcation_list"
+        android:background="@color/colorWhite">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

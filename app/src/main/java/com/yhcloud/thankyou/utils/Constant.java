@@ -41,14 +41,14 @@ public class Constant {
     public static final int ALLFUNCATION_REQUEST = 101;
 
 
-
+//=================//
 
     /**
      * 服务器API
      */
     //服务地址
-    public static final String SERVICEADDRESS = "http://www.k12chn.com";
-//        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
+//    public static final String SERVICEADDRESS = "http://www.k12chn.com";
+        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
 
     //登录请求 uid pwd
     public static final String LOGIN = SERVICEADDRESS + "/m17/M1708I/M1708I001";
@@ -82,6 +82,12 @@ public class Constant {
     //学生提交作业状态
     public static final String UPDATESTUDENTHOMEWORK = SERVICEADDRESS + "/m17/M1722I/M1722I05";
 
+    //获取学期数 userid
+    public static final String GETTERMLIST = SERVICEADDRESS + "/m06/M0624I/M0624I03";
+    //获取周次 termId
+    public static final String GETWEEKLIST = SERVICEADDRESS + "/m04/M0407I/M0407I04";
+    //获取今日菜谱一周数据 http://192.168.0.139/edu/m04/M0407I/M0407I01/userId/3237
+    public static final String GETTODAYRECIPESLIST = SERVICEADDRESS + "/m04/M0407I/M0407I01";
 
 
     //班干部  classId

@@ -24,6 +24,7 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
         }
     }
 }
@@ -59,7 +60,7 @@ dependencies {
     //图片选择器
     compile 'com.yuyh.imgsel:library:1.3.4'
     //仿苹果滚动选择器
-    compile 'com.bigkoo:pickerview:2.0.8'
+//    compile 'com.bigkoo:pickerview:2.1.1'
     //数据库ORM
     compile 'org.greenrobot:greendao:3.2.0'
     //Glide辅助库
@@ -68,4 +69,6 @@ dependencies {
     compile 'com.youth.banner:banner:1.4.8'
     //支付宝SDK
     compile files('src/main/jniLibs/alipaySdk-20161009.jar')
+    //Airbnb开源动画
+    compile 'com.airbnb.android:lottie:1.0.3'
 }

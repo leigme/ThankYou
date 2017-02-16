@@ -28,9 +28,9 @@ public class TodayRecipesInfoActivity extends ABaseActivity implements ITodayRec
 
     @Override
     public void initView() {
-        llBack = (LinearLayout) findViewById(R.id.ll_header_left);
-        tvTitle = (TextView) findViewById(R.id.tv_header_title);
-        ivImage = (ImageView) findViewById(R.id.iv_todayrecipesinfo);
+        llBack = (LinearLayout) findViewById(R.id.ll_todayrecipesinfo_back);
+        ivImage = (ImageView) findViewById(R.id.iv_todayrecipesinfo_image);
+        tvTitle = (TextView) findViewById(R.id.tv_todayrecipesinfo_title);
         tvContent = (TextView) findViewById(R.id.tv_todayrecipesinfo_content);
     }
 
@@ -40,7 +40,7 @@ public class TodayRecipesInfoActivity extends ABaseActivity implements ITodayRec
             @Override
             public void onClick(View view) {
                 switch (view.getId()) {
-                    case R.id.ll_header_left:
+                    case R.id.ll_todayrecipesinfo_back:
                         finish();
                         break;
                 }

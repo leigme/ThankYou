@@ -82,7 +82,7 @@ public class AllFuncationManage {
                 }
             }
         }
-        mIAllFuncationView.showList(mBeen);
+        mIAllFuncationView.showAddList(mBeen);
     }
 
     public void saveFunctionList() {

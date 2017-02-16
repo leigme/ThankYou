@@ -7,18 +7,50 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesInfoActivity">
-    <include layout="@layout/header"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/iv_todayrecipesinfo"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:id="@+id/iv_todayrecipesinfo_image"
+                android:src="@mipmap/icon_big_404"/>
+            <LinearLayout
+                android:layout_width="@dimen/my_btn_size"
+                android:layout_height="@dimen/my_btn_size"
+                android:id="@+id/ll_todayrecipesinfo_back"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="@dimen/my_icon_size"
+                    android:layout_height="@dimen/my_icon_size"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/icon_go_back"/>
+            </LinearLayout>
+        </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tv_todayrecipesinfo_content"/>
+            android:id="@+id/tv_todayrecipesinfo_title"
+            android:layout_marginTop="28dp"
+            android:textSize="22sp"
+            android:textColor="#111111"
+            android:textStyle="bold"
+            android:text=""/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_todayrecipesinfo_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:textSize="15dp"
+            android:textColor="#666666"
+            android:text=""/>
     </LinearLayout>
 </LinearLayout>

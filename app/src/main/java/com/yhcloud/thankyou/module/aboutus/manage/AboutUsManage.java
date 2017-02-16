@@ -8,6 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.google.gson.Gson;
+import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.ICallListener;
 import com.yhcloud.thankyou.module.aboutus.bean.AboutUsBean;
 import com.yhcloud.thankyou.module.aboutus.view.IAboutUsActivityView;
@@ -56,6 +57,7 @@ public class AboutUsManage {
     }
 
     public void getAboutUsInfo() {
+        mIAboutUsView.showLoading(R.string.loading_data);
         mService.getAboutUsInfo(new ICallListener<String>() {
             @Override
             public void callSuccess(String s) {
@@ -73,12 +75,12 @@ public class AboutUsManage {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
+                mIAboutUsView.hiddenLoading();
             }
 
             @Override
             public void callFailed() {
-
+                mIAboutUsView.hiddenLoading();
             }
         });
     }

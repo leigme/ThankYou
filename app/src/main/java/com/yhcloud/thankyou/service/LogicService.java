@@ -40,6 +40,7 @@ import com.yhcloud.thankyou.module.dutystudent.logic.DutyStudentLogic;
 import com.yhcloud.thankyou.module.homework.logic.HomeworkLogic;
 import com.yhcloud.thankyou.module.propslist.logic.PropsListLogic;
 import com.yhcloud.thankyou.module.schoolannouncement.logic.SchoolAnnouncementLogic;
+import com.yhcloud.thankyou.module.todayrecipes.logic.TodayRecipesLogic;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -416,6 +417,28 @@ public class LogicService extends Service {
         homeworkLogic.updateStudentHomework(workId, iCallListener);
     }
 
+    //获取学期数列表
+    public void getTermList(ICallListener<String> iCallListener) {
+        MainLogic mainLogic = new MainLogic();
+        mainLogic.getTermListForService(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+    }
+
+    //获取周次列表
+    public void getWeekList(String termId, ICallListener<String> iCallListener) {
+        MainLogic mainLogic = new MainLogic();
+        mainLogic.getWeekListForService(termId, iCallListener);
+    }
+
+    //获取一周菜谱数据
+    public void getRecipesData(ICallListener<String> iCallListener) {
+        TodayRecipesLogic todayRecipesLogic = new TodayRecipesLogic();
+        todayRecipesLogic.getRecipesDataForService(mUserInfo.getUserInfoBean().getUserId(), iCallListener);
+    }
+
+    public void getRecipesData(String termId, String weekId, ICallListener<String> iCallListener) {
+        TodayRecipesLogic todayRecipesLogic = new TodayRecipesLogic();
+        todayRecipesLogic.getRecipesDataForService(mUserInfo.getUserInfoBean().getUserId(), termId, weekId, iCallListener);
+    }
 
 
     //获取班干部

@@ -22,7 +22,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2017/1/11.
  */
 
-public class AllFuncationListAdapter extends RecyclerView.Adapter {
+public class AddFuncationListAdapter extends RecyclerView.Adapter {
 
     private String TAG = getClass().getSimpleName();
 
@@ -34,7 +34,7 @@ public class AllFuncationListAdapter extends RecyclerView.Adapter {
     private ISelectItem mISelectItem;
     public SparseArray<Integer> show = new SparseArray<>();
 
-    public AllFuncationListAdapter(Context context, ArrayList<FunctionBean> list, RecycleCallBack callBack) {
+    public AddFuncationListAdapter(Context context, ArrayList<FunctionBean> list, RecycleCallBack callBack) {
         this.mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
         this.mBeen = list;

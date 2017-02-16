@@ -7,8 +7,13 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
+import com.yhcloud.thankyou.module.todayrecipes.bean.RecipesBean;
 import com.yhcloud.thankyou.module.todayrecipes.view.ITodayRecipesInfoView;
 import com.yhcloud.thankyou.service.LogicService;
+import com.yhcloud.thankyou.utils.Constant;
+import com.yhcloud.thankyou.utils.Tools;
+
+import java.text.MessageFormat;
 
 /**
  * Created by leig on 2017/2/10.
@@ -54,9 +59,11 @@ public class TodayRecipesInfoManage {
     public void getIntentData() {
         Intent intent = mActivity.getIntent();
         if (null != intent) {
-            dishTitle = intent.getStringExtra(TodayRecipesManage.dishTitle);
-            imageUrl = intent.getStringExtra(TodayRecipesManage.imageUrl);
-            dishInfo = intent.getStringExtra(TodayRecipesManage.dishInfo);
+            RecipesBean recipesBean = (RecipesBean) intent.getSerializableExtra("Recipes");
+            dishTitle = recipesBean.getTitle();
+            dishInfo = recipesBean.getInfo();
+            imageUrl = Constant.SERVICEADDRESS + recipesBean.getImageUrl();
+            Tools.print(TAG, MessageFormat.format("获取到的菜名是:{0},获取到菜信息是:{1},获取到的图片地址是:{2}", dishTitle, dishInfo, imageUrl));
         }
     }
 }

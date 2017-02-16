@@ -10,5 +10,6 @@ import java.util.ArrayList;
  */
 
 public interface IAllFuncationActivityView extends IBaseActivityView {
-    void showList(ArrayList<FunctionBean> list);
+    void showAddList(ArrayList<FunctionBean> list);
+    void showNoneList(ArrayList<FunctionBean> list);
 }

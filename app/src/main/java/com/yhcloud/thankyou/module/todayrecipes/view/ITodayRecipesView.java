@@ -1,7 +1,9 @@
 package com.yhcloud.thankyou.module.todayrecipes.view;
 
+import com.yhcloud.thankyou.bean.TermBean;
 import com.yhcloud.thankyou.mInterface.IBaseActivityView;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesPagerBean;
+import com.yhcloud.thankyou.module.todayrecipes.bean.WeekBean;
 
 import java.util.ArrayList;
 
@@ -11,4 +13,8 @@ import java.util.ArrayList;
 
 public interface ITodayRecipesView extends IBaseActivityView {
     void showPager(ArrayList<TodayRecipesPagerBean> list);
+    void cleanPagerView();
+    void setTime(String time);
+    void initOptionsPickerView(ArrayList<TermBean> termBeen, ArrayList<ArrayList<WeekBean>> weekBeen);
+    void showOptionsPickerView(int x, int y);
 }

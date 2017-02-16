@@ -65,4 +65,44 @@ public class MainLogic implements IMainLogic {
                     }
                 });
     }
+
+    public void getTermListForService(String userId, final ICallListener<String> iCallListener) {
+        OkHttpUtils.post()
+                .url(Constant.GETTERMLIST)
+                .addParams("userid", userId)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Tools.print(TAG, "getTermListForService-请求失败: " + e);
+                        iCallListener.callFailed();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Tools.print(TAG, "getTermListForService-请求成功: " + response);
+                        iCallListener.callSuccess(response);
+                    }
+                });
+    }
+
+    public void getWeekListForService(String termId, final ICallListener<String> iCallListener) {
+        OkHttpUtils.post()
+                .url(Constant.GETWEEKLIST)
+                .addParams("termId", termId)
+                .build()
+                .execute(new StringCallback() {
+                    @Override
+                    public void onError(Call call, Exception e, int id) {
+                        Tools.print(TAG, "getWeekListForService-请求失败: " + e);
+                        iCallListener.callFailed();
+                    }
+
+                    @Override
+                    public void onResponse(String response, int id) {
+                        Tools.print(TAG, "getWeekListForService-请求成功: " + response);
+                        iCallListener.callSuccess(response);
+                    }
+                });
+    }
 }

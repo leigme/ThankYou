@@ -6,18 +6,27 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-import android.view.View;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.bean.TermBean;
+import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.module.todayrecipes.bean.RecipesBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesBean;
+import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesJsonBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesPagerBean;
+import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesTimeBean;
+import com.yhcloud.thankyou.module.todayrecipes.bean.WeekBean;
 import com.yhcloud.thankyou.module.todayrecipes.view.ITodayRecipesView;
 import com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesFragmentViews;
-import com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesInfoActivity;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
@@ -31,7 +40,12 @@ public class TodayRecipesManage {
     private ITodayRecipesView mITodayRecipesView;
     private Activity mActivity;
     private LogicService mService;
-    public final static String dishTitle = "dishTitle", imageUrl = "imageUrl", dishInfo = "dishInfo";
+    private TodayRecipesFragmentViews fragmentViews;
+    private ArrayList<TodayRecipesPagerBean> pagerBeen;
+    private ArrayList<TermBean> list;
+    private ArrayList<ArrayList<WeekBean>> weekLists;
+    private ArrayList<WeekBean> weekList;
+    private int termNum, weekNum;
 
     public TodayRecipesManage(ITodayRecipesView iTodayRecipesView) {
         this.mITodayRecipesView = iTodayRecipesView;
@@ -41,10 +55,12 @@ public class TodayRecipesManage {
             @Override
             public void onServiceConnected(ComponentName name, IBinder binder) {
                 mService = ((LogicService.MyBinder)binder).getService();
+                fragmentViews = new TodayRecipesFragmentViews(mActivity);
                 mITodayRecipesView.initView();
                 mITodayRecipesView.initEvent();
+                getTermData();
                 mITodayRecipesView.setTitle("今日菜谱");
-                testData();
+                getRecipesData();
             }
 
             @Override
@@ -54,101 +70,307 @@ public class TodayRecipesManage {
         }, Service.BIND_AUTO_CREATE);
     }
 
-    public void testData() {
-        TodayRecipesFragmentViews fragmentViews = new TodayRecipesFragmentViews(mActivity);
-        final ArrayList<TodayRecipesBean> recipesBeen = new ArrayList<>();
-        TodayRecipesBean recipesBean;
-        for (int i = 0; i < 7; i++) {
-            switch (i) {
-                case 0:
-                    recipesBean = new TodayRecipesBean();
-                    recipesBean.setType(0);
-                    recipesBean.setTitle("早餐");
+    public void getTermData() {
+        mService.getTermList(new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        String jsonResult = jsonObject.getString("termData");
+                        if (null != jsonResult && !"".equals(jsonResult)) {
+                            Gson gson = new Gson();
+                            list = gson.fromJson(jsonResult, new TypeToken<ArrayList<TermBean>>(){}.getType());
+                            weekLists = new ArrayList<>();
+                            WeekBean wb;
+                            for (int i = 0; i < list.size(); i++) {
+                                weekList = new ArrayList<>();
+                                for (int j = 1; j < 33; j++) {
+                                    wb = new WeekBean();
+                                    wb.setId(String.valueOf(j));
+                                    wb.setTitle("第" + j+ "周");
+                                    weekList.add(wb);
+                                }
+                                weekLists.add(weekList);
+                            }
+                            String jsonTime = jsonObject.getString("times");
+                            if (null != jsonTime && !"".equals(jsonTime)) {
+                                Gson timeGson = new Gson();
+                                TodayRecipesTimeBean trtb = timeGson.fromJson(jsonTime, TodayRecipesTimeBean.class);
+                                mITodayRecipesView.setTime(MessageFormat.format("{0} 第{1}周", trtb.getTitle(), trtb.getWeekNum()));
+                                for (int i = 0; i < list.size(); i++) {
+                                    if (list.get(i).getId().equals(trtb.getId())) {
+                                        termNum = i;
+                                    }
+                                }
+                                weekNum = Integer.parseInt(trtb.getWeekNum()) - 1;
+                            }
+                            mITodayRecipesView.initOptionsPickerView(list, weekLists);
+                        }
+                    } else {
+                        String errorMsg = jsonObject.getString("errorMsg");
+                        if (null != errorMsg && !"".equals(errorMsg)) {
+                            mITodayRecipesView.showToastMsg(errorMsg);
+                        } else {
+                            mITodayRecipesView.showToastMsg(R.string.error_connection);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void callFailed() {
+                mITodayRecipesView.showToastMsg(R.string.error_connection);
+            }
+        });
+    }
+
+    public void getRecipesData() {
+        mITodayRecipesView.showLoading(R.string.loading_data);
+        mService.getRecipesData(new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        String jsonResult = jsonObject.getString("data");
+                        if (null != jsonResult && !"".equals(jsonResult)) {
+                            Gson gson = new Gson();
+                            ArrayList<TodayRecipesJsonBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<TodayRecipesJsonBean>>(){}.getType());
+                            showRecipes(list);
+                        }
+                    } else {
+                        String errorMsg = jsonObject.getString("errorMsg");
+                        if (null != errorMsg && !"".equals(errorMsg)) {
+                            mITodayRecipesView.showToastMsg(errorMsg);
+                        } else {
+                            mITodayRecipesView.showToastMsg(R.string.error_connection);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mITodayRecipesView.hiddenLoading();
+            }
+
+            @Override
+            public void callFailed() {
+                mITodayRecipesView.showToastMsg(R.string.error_connection);
+                mITodayRecipesView.hiddenLoading();
+            }
+        });
+    }
+
+    private void showRecipes(ArrayList<TodayRecipesJsonBean> list) {
+        ArrayList<RecipesBean> mBeen = new ArrayList<>();
+        RecipesBean trb;
+        for (int i = 0 ; i < list.size(); i++) {
+            TodayRecipesJsonBean trjb = list.get(i);
+            trb = new RecipesBean();
+            trb.setTitle(trjb.getTitle());
+            trb.setInfo(trjb.getDescription());
+            trb.setImageUrl(trjb.getPicUrl());
+            trb.setDay(trjb.getDayIndex());
+            switch (trjb.getPhase()) {
+                case "1":
+                    trb.setTag("早餐");
                     break;
-                case 3:
-                    recipesBean = new TodayRecipesBean();
-                    recipesBean.setType(0);
-                    recipesBean.setTitle("中餐");
+                case "2":
+                    trb.setTag("中餐");
                     break;
-                case 5:
-                    recipesBean = new TodayRecipesBean();
-                    recipesBean.setType(0);
-                    recipesBean.setTitle("晚餐");
+                case "3":
+                    trb.setTag("晚餐");
                     break;
                 default:
-                    recipesBean = new TodayRecipesBean();
-                    recipesBean.setType(1);
-                    recipesBean.setTitle("红烧肉");
-                    recipesBean.setImageUrl("http://s2.boohee.cn/house/food_big/big_photo201521116235212760.jpg");
-                    recipesBean.setInfo("热量:431卡;脂肪:42.73克;碳水物:4.3克;蛋白质:7.31克");
                     break;
             }
-            recipesBeen.add(recipesBean);
+            mBeen.add(trb);
         }
 
-        ArrayList<TodayRecipesPagerBean> pagerBeen = new ArrayList<>();
-        TodayRecipesPagerBean pagerBean;
-        View view;
-        IOnClickListener iOnClickListener = new IOnClickListener() {
-            @Override
-            public void OnItemClickListener(View view, int position) {
-                Tools.print(TAG, recipesBeen.get(position).getTitle());
-                Intent intent = new Intent(mActivity, TodayRecipesInfoActivity.class);
-                intent.putExtra(dishTitle, recipesBeen.get(position).getTitle());
-                intent.putExtra(imageUrl, recipesBeen.get(position).getImageUrl());
-                intent.putExtra(dishInfo, recipesBeen.get(position).getInfo());
-                mActivity.startActivity(intent);
+        ArrayList<RecipesBean> mBeen1 = new ArrayList<>();
+        ArrayList<RecipesBean> mBeen2 = new ArrayList<>();
+        ArrayList<RecipesBean> mBeen3 = new ArrayList<>();
+        ArrayList<RecipesBean> mBeen4 = new ArrayList<>();
+        ArrayList<RecipesBean> mBeen5 = new ArrayList<>();
+        for (RecipesBean recipesBean : mBeen) {
+            switch (recipesBean.getDay()) {
+                case "1":
+                    mBeen1.add(recipesBean);
+                    break;
+                case "2":
+                    mBeen2.add(recipesBean);
+                    break;
+                case "3":
+                    mBeen3.add(recipesBean);
+                    break;
+                case "4":
+                    mBeen4.add(recipesBean);
+                    break;
+                case "5":
+                    mBeen5.add(recipesBean);
+                    break;
+                default:
+                    break;
             }
-
-            @Override
-            public void OnItemLongClickListener(View view, int position) {
-
-            }
-        };
-
+        }
+        ArrayList<ArrayList<RecipesBean>> arrayListArrayList = new ArrayList<>();
+        arrayListArrayList.add(mBeen1);
+        arrayListArrayList.add(mBeen2);
+        arrayListArrayList.add(mBeen3);
+        arrayListArrayList.add(mBeen4);
+        arrayListArrayList.add(mBeen5);
+        ArrayList<ArrayList<TodayRecipesBean>> arrayLists = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
+            ArrayList<TodayRecipesBean> todayRecipesBeen = new ArrayList<>();
+            TodayRecipesBean todayRecipesBean1 = new TodayRecipesBean();
+            TodayRecipesBean todayRecipesBean2 = new TodayRecipesBean();
+            TodayRecipesBean todayRecipesBean3 = new TodayRecipesBean();
+            ArrayList<RecipesBean> recipesBeen1 = new ArrayList<>();
+            ArrayList<RecipesBean> recipesBeen2 = new ArrayList<>();
+            ArrayList<RecipesBean> recipesBeen3 = new ArrayList<>();
+
+            for (RecipesBean rb: arrayListArrayList.get(i)) {
+                if ("早餐".equals(rb.getTag())) {
+                    recipesBeen1.add(rb);
+                }
+            }
+            todayRecipesBean1.setTag("早餐");
+            todayRecipesBean1.setInfo("一日之计在于晨");
+            todayRecipesBean1.setColor(0xFFFFEFFA);
+            todayRecipesBean1.setBeen(recipesBeen1);
+
+            for (RecipesBean rb: mBeen1) {
+                if ("中餐".equals(rb.getTag())) {
+                    recipesBeen2.add(rb);
+                }
+            }
+            todayRecipesBean2.setTag("中餐");
+            todayRecipesBean2.setInfo("正午给身体充电");
+            todayRecipesBean2.setColor(0xFFFFFBE4);
+            todayRecipesBean2.setBeen(recipesBeen2);
+
+            for (RecipesBean rb: mBeen1) {
+                if ("晚餐".equals(rb.getTag())) {
+                    recipesBeen3.add(rb);
+                }
+            }
+            todayRecipesBean3.setTag("晚餐");
+            todayRecipesBean3.setInfo("补充能量不掉队");
+            todayRecipesBean3.setColor(0xFFF5F9FF);
+            todayRecipesBean3.setBeen(recipesBeen3);
+
+
+            todayRecipesBeen.add(todayRecipesBean1);
+            todayRecipesBeen.add(todayRecipesBean2);
+            todayRecipesBeen.add(todayRecipesBean3);
+            arrayLists.add(todayRecipesBeen);
+        }
+
+
+        pagerBeen = new ArrayList<>();
+        TodayRecipesPagerBean trpb;
+        ArrayList<TodayRecipesBean> arrayList;
+        for (int i = 0; i < arrayLists.size(); i++) {
+            trpb = new TodayRecipesPagerBean();
+            arrayList = arrayLists.get(i);
             switch (i) {
                 case 0:
-                    pagerBean = new TodayRecipesPagerBean();
-                    pagerBean.setTitle("星期一");
-                    view = fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes,
-                            R.id.rv_todayrecipes_list, recipesBeen, iOnClickListener);
-                    pagerBean.setView(view);
+                    trpb.setTitle("星期一");
+                    if (null != mBeen1 && 0 != mBeen1.size()) {
+                        trpb.setView(fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes, R.id.rv_todayrecipes_list, arrayList));
+                    } else {
+                        trpb.setView(fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes, R.id.rv_todayrecipes_list));
+                    }
                     break;
                 case 1:
-                    pagerBean = new TodayRecipesPagerBean();
-                    pagerBean.setTitle("星期二");
-                    view = fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes,
-                            R.id.rv_todayrecipes_list, recipesBeen, iOnClickListener);
-                    pagerBean.setView(view);
+                    trpb.setTitle("星期二");
+                    if (null != mBeen2 && 0 != mBeen2.size()) {
+                        trpb.setView(fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes, R.id.rv_todayrecipes_list, arrayList));
+                    } else {
+                        trpb.setView(fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes, R.id.rv_todayrecipes_list));
+                    }
                     break;
                 case 2:
-                    pagerBean = new TodayRecipesPagerBean();
-                    pagerBean.setTitle("星期三");
-                    view = fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes,
-                            R.id.rv_todayrecipes_list, recipesBeen, iOnClickListener);
-                    pagerBean.setView(view);
+                    trpb.setTitle("星期三");
+                    if (null != mBeen3 && 0 != mBeen3.size()) {
+                        trpb.setView(fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes, R.id.rv_todayrecipes_list, arrayList));
+                    } else {
+                        trpb.setView(fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes, R.id.rv_todayrecipes_list));
+                    }
                     break;
                 case 3:
-                    pagerBean = new TodayRecipesPagerBean();
-                    pagerBean.setTitle("星期四");
-                    view = fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes,
-                            R.id.rv_todayrecipes_list, recipesBeen, iOnClickListener);
-                    pagerBean.setView(view);
+                    trpb.setTitle("星期四");
+                    if (null != mBeen4 && 0 != mBeen4.size()) {
+                        trpb.setView(fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes, R.id.rv_todayrecipes_list, arrayList));
+                    } else {
+                        trpb.setView(fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes, R.id.rv_todayrecipes_list));
+                    }
                     break;
                 case 4:
-                    pagerBean = new TodayRecipesPagerBean();
-                    pagerBean.setTitle("星期五");
-                    view = fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes,
-                            R.id.rv_todayrecipes_list, recipesBeen, iOnClickListener);
-                    pagerBean.setView(view);
+                    trpb.setTitle("星期五");
+                    if (null != mBeen5 && 0 != mBeen5.size()) {
+                        trpb.setView(fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes, R.id.rv_todayrecipes_list, arrayList));
+                    } else {
+                        trpb.setView(fragmentViews.TodayRecipesFragment(R.layout.fragment_todayrecipes, R.id.rv_todayrecipes_list));
+                    }
                     break;
                 default:
-                    pagerBean = new TodayRecipesPagerBean();
                     break;
             }
-            pagerBeen.add(pagerBean);
+            pagerBeen.add(trpb);
         }
         mITodayRecipesView.showPager(pagerBeen);
+    }
+
+    public void getRecipesData(String termId, String weekId) {
+        mITodayRecipesView.showLoading(R.string.loading_data);
+        mService.getRecipesData(termId, weekId, new ICallListener<String>() {
+            @Override
+            public void callSuccess(String s) {
+                try {
+                    JSONObject jsonObject = new JSONObject(s);
+                    if (!jsonObject.getBoolean("errorFlag")) {
+                        String jsonResult = jsonObject.getString("data");
+                        if (null != jsonResult && !"".equals(jsonResult)) {
+                            Gson gson = new Gson();
+                            ArrayList<TodayRecipesJsonBean> list = gson.fromJson(jsonResult, new TypeToken<ArrayList<TodayRecipesJsonBean>>(){}.getType());
+                            mITodayRecipesView.cleanPagerView();
+                            showRecipes(list);
+                        }
+                    } else {
+                        String errorMsg = jsonObject.getString("errorMsg");
+                        if (null != errorMsg && !"".equals(errorMsg)) {
+                            mITodayRecipesView.showToastMsg(errorMsg);
+                        } else {
+                            mITodayRecipesView.showToastMsg(R.string.error_connection);
+                        }
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                mITodayRecipesView.hiddenLoading();
+            }
+
+            @Override
+            public void callFailed() {
+                mITodayRecipesView.showToastMsg(R.string.error_connection);
+                mITodayRecipesView.hiddenLoading();
+            }
+        });
+    }
+
+    public void setWeekNum(int weekNum) {
+        this.weekNum = weekNum;
+    }
+
+    public void setTermNum(int termNum) {
+        this.termNum = termNum;
+    }
+
+    public void showOptionsPickerView() {
+        Tools.print(TAG, MessageFormat.format("学期位置:{0},周次位置:{1}", termNum, weekNum));
+        mITodayRecipesView.showOptionsPickerView(termNum, weekNum);
     }
 }

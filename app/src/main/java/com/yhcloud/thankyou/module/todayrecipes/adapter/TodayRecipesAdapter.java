@@ -1,17 +1,19 @@
 package com.yhcloud.thankyou.module.todayrecipes.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.module.todayrecipes.bean.RecipesBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesBean;
+import com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesInfoActivity;
 
 import java.util.ArrayList;
 
@@ -19,14 +21,13 @@ import java.util.ArrayList;
  * Created by leig on 2017/2/9.
  */
 
-public class TodayRecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class TodayRecipesAdapter extends RecyclerView.Adapter<TodayRecipesAdapter.RecipesViewHolder> {
 
     private String TAG = getClass().getSimpleName();
 
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<TodayRecipesBean> mBeen;
-    private IOnClickListener mIOnClickListener;
 
     public TodayRecipesAdapter(Context context, ArrayList<TodayRecipesBean> list) {
         this.mContext = context;
@@ -35,46 +36,46 @@ public class TodayRecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view;
-        switch (viewType) {
-            case 1:
-                view = mInflater.inflate(R.layout.item_todayrecipes_list, parent, false);
-                RecipesViewHolder recipesViewHolder = new RecipesViewHolder(view);
-                return recipesViewHolder;
-            default:
-                view = mInflater.inflate(R.layout.item_todayrecipes_list_title, parent, false);
-                TitleViewHolder titleViewHolder = new TitleViewHolder(view);
-                return titleViewHolder;
-        }
+    public RecipesViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = mInflater.inflate(R.layout.item_todayrecipesday_list, parent, false);
+        RecipesViewHolder recipesViewHolder = new RecipesViewHolder(view);
+        return recipesViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        TodayRecipesBean todayRecipesBean = mBeen.get(position);
-        switch (todayRecipesBean.getType()) {
-            case 1:
-                final RecipesViewHolder recipesViewHolder = (RecipesViewHolder) holder;
-                Glide.with(mContext)
-                        .load(todayRecipesBean.getImageUrl())
-                        .into(recipesViewHolder.ivDish);
-                recipesViewHolder.tvTitle.setText(todayRecipesBean.getTitle());
-                recipesViewHolder.tvInfo.setText(todayRecipesBean.getInfo());
-                if (null != mIOnClickListener) {
-                    recipesViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            int pos = recipesViewHolder.getLayoutPosition();
-                            mIOnClickListener.OnItemClickListener(recipesViewHolder.itemView, pos);
-                        }
-                    });
-                }
+    public void onBindViewHolder(RecipesViewHolder holder, int position) {
+        final ArrayList<RecipesBean> list = mBeen.get(position).getBeen();
+        holder.mRecyclerView.setLayoutManager(new GridLayoutManager(mContext, 3));
+        switch (mBeen.get(position).getTag()) {
+            case "早餐":
+                holder.mRecyclerView.setBackgroundColor(0xFFFFEFFA);
+                break;
+            case "中餐":
+                holder.mRecyclerView.setBackgroundColor(0xFFFFFBE4);
+                break;
+            case "晚餐":
+                holder.mRecyclerView.setBackgroundColor(0xFFF5F9FF);
                 break;
             default:
-                TitleViewHolder titleViewHolder = (TitleViewHolder) holder;
-                titleViewHolder.tvTitle.setText(todayRecipesBean.getTitle());
                 break;
         }
+        RecipesListAdapter rla = new RecipesListAdapter(mContext, list);
+        rla.setIOnClickListener(new IOnClickListener() {
+            @Override
+            public void OnItemClickListener(View view, int position) {
+                Intent intent = new Intent(mContext, TodayRecipesInfoActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("Recipes", list.get(position));
+                intent.putExtras(bundle);
+                mContext.startActivity(intent);
+            }
+
+            @Override
+            public void OnItemLongClickListener(View view, int position) {
+
+            }
+        });
+        holder.mRecyclerView.setAdapter(rla);
     }
 
     @Override
@@ -82,36 +83,11 @@ public class TodayRecipesAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         return mBeen.size();
     }
 
-    @Override
-    public int getItemViewType(int position) {
-        switch (mBeen.get(position).getType()) {
-            case 1:
-                return 1;
-            default:
-                return 0;
-        }
-    }
-
-    public void setIOnClickListener(IOnClickListener IOnClickListener) {
-        mIOnClickListener = IOnClickListener;
-    }
-
     public static class RecipesViewHolder extends RecyclerView.ViewHolder {
-        ImageView ivDish;
-        TextView tvTitle, tvInfo;
+        RecyclerView mRecyclerView;
         public RecipesViewHolder(View itemView) {
             super(itemView);
-            ivDish = (ImageView) itemView.findViewById(R.id.iv_todayrecipes);
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_todayrecipes_title);
-            tvInfo = (TextView) itemView.findViewById(R.id.tv_todayrecipes_info);
-        }
-    }
-
-    public static class TitleViewHolder extends RecyclerView.ViewHolder {
-        TextView tvTitle;
-        public TitleViewHolder(View itemView) {
-            super(itemView);
-            tvTitle = (TextView) itemView.findViewById(R.id.tv_todayrecipes_list_title);
+            mRecyclerView = (RecyclerView) itemView.findViewById(R.id.rv_todayrecipesday_list);
         }
     }
 }

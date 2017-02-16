@@ -42,6 +42,12 @@ public class TodayRecipesPagerAdapter extends PagerAdapter {
     }
 
     @Override
+    public int getItemPosition(Object object) {
+        // 最简单解决 notifyDataSetChanged() 页面不刷新问题的方法
+        return POSITION_NONE;
+    }
+
+    @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView(mBeen.get(position).getView());
     }

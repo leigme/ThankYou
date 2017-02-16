@@ -1,32 +1,25 @@
 package com.yhcloud.thankyou.module.todayrecipes.bean;
 
-import java.io.Serializable;
+import com.yhcloud.thankyou.mInterface.Pinnable;
+
+import java.util.ArrayList;
 
 /**
- * Created by leig on 2017/2/9.
+ * Created by leig on 2017/2/14.
  */
 
-public class TodayRecipesBean implements Serializable {
+public class TodayRecipesBean implements Pinnable {
 
-    private String mTitle;
-    private String mImageUrl;
-    private String mInfo;
-    private int mType;
+    private String mTag, mInfo;
+    private int mColor;
+    private ArrayList<RecipesBean> mBeen;
 
-    public String getTitle() {
-        return mTitle;
+    public String getTag() {
+        return mTag;
     }
 
-    public void setTitle(String title) {
-        mTitle = title;
-    }
-
-    public String getImageUrl() {
-        return mImageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        mImageUrl = imageUrl;
+    public void setTag(String tag) {
+        mTag = tag;
     }
 
     public String getInfo() {
@@ -37,11 +30,39 @@ public class TodayRecipesBean implements Serializable {
         mInfo = info;
     }
 
-    public int getType() {
-        return mType;
+    public int getColor() {
+        return mColor;
     }
 
-    public void setType(int type) {
-        mType = type;
+    public void setColor(int color) {
+        mColor = color;
+    }
+
+    public ArrayList<RecipesBean> getBeen() {
+        return mBeen;
+    }
+
+    public void setBeen(ArrayList<RecipesBean> been) {
+        mBeen = been;
+    }
+
+    @Override
+    public boolean isPanned() {
+        return true;
+    }
+
+    @Override
+    public String getPinnedTag() {
+        return mTag;
+    }
+
+    @Override
+    public String getPinnedInfo() {
+        return mInfo;
+    }
+
+    @Override
+    public int getPinnedColor() {
+        return mColor;
     }
 }

@@ -3,38 +3,27 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:layout_centerHorizontal="true"
-            android:id="@+id/iv_todayrecipes"/>
-        <LinearLayout
+            android:layout_height="80dp"
+            android:id="@+id/iv_todayrecipes"
+            android:scaleType="centerInside"/>
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignRight="@+id/iv_todayrecipes"
-            android:layout_alignLeft="@+id/iv_todayrecipes"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_todayrecipes_title"
-                android:text="红烧肉"/>
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"></LinearLayout>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_todayrecipes_info"
-                android:text=""/>
-        </LinearLayout>
-    </RelativeLayout>
+            android:id="@+id/tv_todayrecipes_title"
+            android:layout_marginTop="4dp"
+            android:textSize="14dp"
+            android:textColor="#787878"
+            android:text=""/>
+    </LinearLayout>
 </LinearLayout>

@@ -197,6 +197,7 @@ public class HomeFragment extends ABaseFragment implements IHomeActivityView {
             ith.attachToRecyclerView(rvFunctionList);
             rvFunctionList.setAdapter(hfla);
         } else {
+            hfla.setData(list);
             hfla.refreshData(list);
         }
     }
@@ -245,6 +246,10 @@ public class HomeFragment extends ABaseFragment implements IHomeActivityView {
     @Override
     public void setRightTitle(String title) {
 
+    }
+
+    public void setFunctionList(ArrayList<FunctionBean> list) {
+        mManage.setBeen(list);
     }
 
     /**

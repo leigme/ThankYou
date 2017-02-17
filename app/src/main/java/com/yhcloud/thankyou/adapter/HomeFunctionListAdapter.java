@@ -59,7 +59,7 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
 
     @Override
     public int getItemCount() {
-        return 8;
+        return mBeen.size();
     }
 
     class FunctionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, DragHolderCallBack {

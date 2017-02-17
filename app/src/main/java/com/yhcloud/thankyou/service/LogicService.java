@@ -44,8 +44,10 @@ import com.yhcloud.thankyou.module.todayrecipes.logic.TodayRecipesLogic;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class LogicService extends Service {
@@ -57,9 +59,10 @@ public class LogicService extends Service {
     private ArrayList<UserInfoBean> mUserInfoBeen;
     private HashMap<String, String[]> mMap;
     private SparseArray<FunctionBean> mBeanSparseArray;
-    private ArrayList<FunctionBean> mBeen;
+    private ArrayList<FunctionBean> mAddFunctionBeen, mNoneFunctionBeen;
     private SharedPreferences mPreferences;
     private boolean canMessage;
+    private String shortcut;
 
     public LogicService() {
     }
@@ -100,6 +103,7 @@ public class LogicService extends Service {
 
     public void setUserInfo(UserInfo userInfo) {
         mUserInfo = userInfo;
+        shortcut = mUserInfo.getUserInfoBean().getUserId() + "的快捷方式";
     }
 
     public HashMap<String, String[]> getMap() {
@@ -118,12 +122,20 @@ public class LogicService extends Service {
         mBeanSparseArray = beanSparseArray;
     }
 
-    public ArrayList<FunctionBean> getBeen() {
-        return mBeen;
+    public ArrayList<FunctionBean> getAddFunctionBeen() {
+        return mAddFunctionBeen;
     }
 
-    public void setBeen(ArrayList<FunctionBean> been) {
-        mBeen = been;
+    public void setAddFunctionBeen(ArrayList<FunctionBean> addFunctionBeen) {
+        mAddFunctionBeen = addFunctionBeen;
+    }
+
+    public ArrayList<FunctionBean> getNoneFunctionBeen() {
+        return mNoneFunctionBeen;
+    }
+
+    public void setNoneFunctionBeen(ArrayList<FunctionBean> noneFunctionBeen) {
+        mNoneFunctionBeen = noneFunctionBeen;
     }
 
     public SharedPreferences getPreferences() {
@@ -141,6 +153,9 @@ public class LogicService extends Service {
     public void setCanMessage(boolean canMessage) {
         this.canMessage = canMessage;
     }
+
+
+    //==========================//
 
     //登录
     public void login(String username, String password, ICallListener<String> iCallListener) {
@@ -174,128 +189,147 @@ public class LogicService extends Service {
         editor.commit();
     }
 
-    public void getUserAllFuncation() {
-        mBeen = new ArrayList<>();
-        String allFuncations = mPreferences.getString(mUserInfo.getUserInfoBean().getUserId(), "");
+    public void getUserAddFuncation() {
+        mAddFunctionBeen = new ArrayList<>();
+        String allFuncations = mPreferences.getString(shortcut, "");
         if (null != allFuncations && !"".equals(allFuncations)) {
             Tools.print(TAG, "保存的jsonList是:" + allFuncations);
             Gson gson = new Gson();
             String[] list = gson.fromJson(allFuncations, new TypeToken<String[]>(){}.getType());
             Tools.print(TAG, "保存的数组是:" + list);
             for (String s: list) {
-                mBeen.add(mBeanSparseArray.get(Integer.parseInt(s)));
+                mAddFunctionBeen.add(mBeanSparseArray.get(Integer.parseInt(s)));
             }
         } else {
             switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
                 //初始化校长角色应用
                 case 1004:
-                    mBeen.add(mBeanSparseArray.get(10));
-                    mBeen.add(mBeanSparseArray.get(4));
-                    mBeen.add(mBeanSparseArray.get(11));
-                    mBeen.add(mBeanSparseArray.get(12));
-                    mBeen.add(mBeanSparseArray.get(13));
-                    mBeen.add(mBeanSparseArray.get(14));
-                    mBeen.add(mBeanSparseArray.get(3));
-                    mBeen.add(mBeanSparseArray.get(22));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(10));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(4));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(11));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(12));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(13));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(14));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(3));
                     break;
                 //初始化老师角色应用
                 case 1010:
-                    mBeen.add(mBeanSparseArray.get(10));
-                    mBeen.add(mBeanSparseArray.get(4));
-                    mBeen.add(mBeanSparseArray.get(11));
-                    mBeen.add(mBeanSparseArray.get(12));
-                    mBeen.add(mBeanSparseArray.get(13));
-                    mBeen.add(mBeanSparseArray.get(14));
-                    mBeen.add(mBeanSparseArray.get(3));
-                    mBeen.add(mBeanSparseArray.get(22));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(10));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(4));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(11));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(12));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(13));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(14));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(3));
                     break;
                 //初始化学生角色应用
                 case 1011:
-                    mBeen.add(mBeanSparseArray.get(10));
-                    mBeen.add(mBeanSparseArray.get(4));
-                    mBeen.add(mBeanSparseArray.get(11));
-                    mBeen.add(mBeanSparseArray.get(12));
-                    mBeen.add(mBeanSparseArray.get(14));
-                    mBeen.add(mBeanSparseArray.get(3));
-                    mBeen.add(mBeanSparseArray.get(21));
-                    mBeen.add(mBeanSparseArray.get(22));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(10));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(4));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(11));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(12));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(14));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(3));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(21));
                     break;
                 //初始化家长角色应用
                 case 1012:
-                    mBeen.add(mBeanSparseArray.get(10));
-                    mBeen.add(mBeanSparseArray.get(4));
-                    mBeen.add(mBeanSparseArray.get(11));
-                    mBeen.add(mBeanSparseArray.get(12));
-                    mBeen.add(mBeanSparseArray.get(15));
-                    mBeen.add(mBeanSparseArray.get(14));
-                    mBeen.add(mBeanSparseArray.get(3));
-                    mBeen.add(mBeanSparseArray.get(22));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(10));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(4));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(11));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(12));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(15));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(14));
+                    mAddFunctionBeen.add(mBeanSparseArray.get(3));
                     break;
             }
         }
     }
 
-    public void getRoleAllFuncation() {
+    public void getUserNoneFuncation() {
+        Tools.print(TAG, "进入方法...");
+        mNoneFunctionBeen = new ArrayList<>();
         switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
             //初始化校长角色应用
             case 1004:
-                mBeen.add(mBeanSparseArray.get(10));
-                mBeen.add(mBeanSparseArray.get(4));
-                mBeen.add(mBeanSparseArray.get(11));
-                mBeen.add(mBeanSparseArray.get(12));
-                mBeen.add(mBeanSparseArray.get(13));
-                mBeen.add(mBeanSparseArray.get(14));
-                mBeen.add(mBeanSparseArray.get(3));
-                mBeen.add(mBeanSparseArray.get(22));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(10));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(4));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(11));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(12));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(13));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(14));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(3));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(22));
                 break;
             //初始化老师角色应用
             case 1010:
-                mBeen.add(mBeanSparseArray.get(10));
-                mBeen.add(mBeanSparseArray.get(4));
-                mBeen.add(mBeanSparseArray.get(11));
-                mBeen.add(mBeanSparseArray.get(12));
-                mBeen.add(mBeanSparseArray.get(13));
-                mBeen.add(mBeanSparseArray.get(14));
-                mBeen.add(mBeanSparseArray.get(3));
-                mBeen.add(mBeanSparseArray.get(22));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(10));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(4));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(11));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(12));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(13));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(14));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(3));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(22));
                 break;
             //初始化学生角色应用
             case 1011:
-                mBeen.add(mBeanSparseArray.get(10));
-                mBeen.add(mBeanSparseArray.get(4));
-                mBeen.add(mBeanSparseArray.get(11));
-                mBeen.add(mBeanSparseArray.get(12));
-                mBeen.add(mBeanSparseArray.get(14));
-                mBeen.add(mBeanSparseArray.get(3));
-                mBeen.add(mBeanSparseArray.get(21));
-                mBeen.add(mBeanSparseArray.get(22));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(10));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(4));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(11));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(12));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(14));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(3));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(21));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(22));
                 break;
             //初始化家长角色应用
             case 1012:
-                mBeen.add(mBeanSparseArray.get(10));
-                mBeen.add(mBeanSparseArray.get(4));
-                mBeen.add(mBeanSparseArray.get(11));
-                mBeen.add(mBeanSparseArray.get(12));
-                mBeen.add(mBeanSparseArray.get(15));
-                mBeen.add(mBeanSparseArray.get(14));
-                mBeen.add(mBeanSparseArray.get(3));
-                mBeen.add(mBeanSparseArray.get(22));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(10));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(4));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(11));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(12));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(15));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(14));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(3));
+                mNoneFunctionBeen.add(mBeanSparseArray.get(22));
                 break;
+        }
+        String addFuncations = mPreferences.getString(shortcut, "");
+        if (null != addFuncations && !"".equals(addFuncations)) {
+            Tools.print(TAG, "保存的jsonList是:" + addFuncations);
+            Gson gson = new Gson();
+            String[] list = gson.fromJson(addFuncations, new TypeToken<String[]>(){}.getType());
+            Tools.print(TAG, "保存的数组是:" + list);
+            for (String s: list) {
+                Iterator<FunctionBean> iterator = mNoneFunctionBeen.iterator();
+                while (iterator.hasNext()) {
+                    FunctionBean functionBean = iterator.next();
+                    if (s.equals(String.valueOf(functionBean.getId()))) {
+                        iterator.remove();
+                    }
+                }
+            }
+        } else {
+            for (FunctionBean fb: mAddFunctionBeen) {
+                Iterator<FunctionBean> functionBeanIterator = mNoneFunctionBeen.iterator();
+                while (functionBeanIterator.hasNext()) {
+                    FunctionBean functionBean = functionBeanIterator.next();
+                    if (fb.getId() == functionBean.getId()) {
+                        functionBeanIterator.remove();
+                    }
+                }
+            }
         }
     }
 
     //保存用户应用列表
     public void saveFuncations(ArrayList<Integer> arrayList) {
-//        ArrayList<Integer> arrayList = new ArrayList<>();
-//        for (FunctionBean fb: mBeen) {
-//            if (0 != fb.getId()) {
-//                arrayList.add(fb.getId());
-//            }
-//        }
         Gson gson = new Gson();
         String jsonList = gson.toJson(arrayList);
+        Tools.print(TAG, MessageFormat.format("用户保存的是: {0}", jsonList));
         SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putString(mUserInfo.getUserInfoBean().getUserId(), jsonList);
+        editor.putString(shortcut, jsonList);
         editor.commit();
     }
 

@@ -35,6 +35,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 /**
  * Created by leig on 2016/11/19.
@@ -69,7 +70,9 @@ public class MainManage {
                 mUserInfo = mService.getUserInfo();
                 mSparseArray = Tools.initFunction(mActivity);
                 mService.setBeanSparseArray(mSparseArray);
-                mService.getUserAllFuncation();
+                mService.getUserAddFuncation();
+                Tools.print(TAG, "开始处理未添加应用");
+                mService.getUserNoneFuncation();
                 mIMainView.initView();
                 mIMainView.initData();
                 mIMainView.initEvent();
@@ -207,9 +210,15 @@ public class MainManage {
     public void refreshFuncations() {
         Tools.print(TAG, "刷新应用布局");
         HomeFragment homeFragment = (HomeFragment) mFragments.get(0);
-        ArrayList<FunctionBean> mBeen = mService.getBeen();
-        mBeen.add(7, mSparseArray.get(0));
-        homeFragment.showFunction(mBeen);
+        ArrayList<FunctionBean> mBeen = mService.getAddFunctionBeen();
+        ArrayList<FunctionBean> list = new ArrayList<>();
+        Iterator<FunctionBean> iterator = mBeen.iterator();
+        while (iterator.hasNext()) {
+            list.add(iterator.next());
+        }
+        list.add(mSparseArray.get(0));
+        homeFragment.setFunctionList(list);
+        homeFragment.showFunction(list);
     }
 
     //设置环信消息提供者

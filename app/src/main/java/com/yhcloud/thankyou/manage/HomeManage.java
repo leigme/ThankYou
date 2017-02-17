@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.lang.reflect.Type;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Created by leig on 2016/11/20.
@@ -37,6 +38,7 @@ public class HomeManage {
     private LogicService mService;
     private ArrayList<SpreadBean> mBannerList, mSpreadBeen;
     private SparseArray<FunctionBean> mSparseArray;
+    private ArrayList<FunctionBean> mAddFunction;
     private ArrayList<FunctionBean> mBeen;
     private boolean refrshBanner;
     private int refreshBannerNum, refreshSpreadNum;
@@ -49,7 +51,7 @@ public class HomeManage {
         mIHomeView.initView();
         mIHomeView.initEvent();
         mSparseArray = mService.getBeanSparseArray();
-        mBeen = mService.getBeen();
+        mAddFunction = mService.getAddFunctionBeen();
         switch (mService.getUserInfo().getUserInfoBean().getUserRoleId()) {
             case 1004:
                 showSpreadList("-1");
@@ -67,7 +69,7 @@ public class HomeManage {
                 break;
         }
         showBanner("-1");
-        showFunctionList();
+        showFunctionList(mAddFunction);
     }
 
     public void showBanner(String updateTime) {
@@ -116,8 +118,13 @@ public class HomeManage {
         });
     }
 
-    public void showFunctionList() {
-        mBeen.add(7, mSparseArray.get(0));
+    public void showFunctionList(ArrayList<FunctionBean> list) {
+        mBeen = new ArrayList<>();
+        Iterator<FunctionBean> iterator = list.iterator();
+        while (iterator.hasNext()) {
+            mBeen.add(iterator.next());
+        }
+        mBeen.add(mSparseArray.get(0));
         mIHomeView.showFunction(mBeen);
     }
 
@@ -206,11 +213,23 @@ public class HomeManage {
 
     public void saveFunctionList() {
         ArrayList<Integer> list = new ArrayList<>();
+        ArrayList<FunctionBean> mFunctionBean = new ArrayList<>();
         for (FunctionBean fb: mBeen) {
             if (0 != fb.getId()) {
+                Tools.print(TAG, "ID:" + fb.getId());
                 list.add(fb.getId());
+                mFunctionBean.add(fb);
             }
         }
+        mService.setAddFunctionBeen(mFunctionBean);
         mService.saveFuncations(list);
+    }
+
+    public ArrayList<FunctionBean> getBeen() {
+        return mBeen;
+    }
+
+    public void setBeen(ArrayList<FunctionBean> been) {
+        mBeen = been;
     }
 }

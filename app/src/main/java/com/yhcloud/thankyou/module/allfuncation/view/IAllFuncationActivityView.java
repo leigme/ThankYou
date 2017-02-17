@@ -12,4 +12,5 @@ import java.util.ArrayList;
 public interface IAllFuncationActivityView extends IBaseActivityView {
     void showAddList(ArrayList<FunctionBean> list);
     void showNoneList(ArrayList<FunctionBean> list);
+    void setEditMode(boolean edited);
 }

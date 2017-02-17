@@ -12,6 +12,7 @@ import com.yhcloud.thankyou.module.allfuncation.view.IAllFuncationActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
 import static com.huawei.android.pushagent.plugin.tools.BLocation.TAG;
@@ -25,7 +26,7 @@ public class AllFuncationManage {
     private IAllFuncationActivityView mIAllFuncationView;
     private Activity mActivity;
     private LogicService mService;
-    private ArrayList<FunctionBean> mBeen;
+    private ArrayList<FunctionBean> mAddFunctionBeen, mNoneFunctionBeen;
     private boolean edited;
 
     public AllFuncationManage(IAllFuncationActivityView iAllFuncationView) {
@@ -36,6 +37,8 @@ public class AllFuncationManage {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 mService = ((LogicService.MyBinder)service).getService();
+                mAddFunctionBeen = mService.getAddFunctionBeen();
+                mNoneFunctionBeen = mService.getNoneFunctionBeen();
                 mIAllFuncationView.initView();
                 mIAllFuncationView.initEvent();
                 mIAllFuncationView.setTitle("全部应用");
@@ -54,9 +57,12 @@ public class AllFuncationManage {
         if (!edited) {
             mIAllFuncationView.setRightTitle("保存");
             this.edited = true;
+            mIAllFuncationView.setEditMode(edited);
+            saveFunctionList();
         } else {
             mIAllFuncationView.setRightTitle("编辑");
             this.edited = false;
+            mIAllFuncationView.setEditMode(edited);
         }
     }
 
@@ -73,22 +79,15 @@ public class AllFuncationManage {
     }
 
     public void initAllFuncation() {
-        if (null == mBeen) {
-            ArrayList<FunctionBean> list = mService.getBeen();
-            mBeen = new ArrayList<>();
-            for (FunctionBean fb: list) {
-                if (0 != fb.getId()) {
-                    mBeen.add(fb);
-                }
-            }
-        }
-        mIAllFuncationView.showAddList(mBeen);
+        Tools.print(TAG, MessageFormat.format("保存的数据长度是:{0},未添加的数据长度是:{1}", mAddFunctionBeen.size(), mNoneFunctionBeen.size()));
+        mIAllFuncationView.showAddList(mAddFunctionBeen);
+        mIAllFuncationView.showNoneList(mNoneFunctionBeen);
     }
 
     public void saveFunctionList() {
         Tools.print(TAG, "保存程序集合视图");
         ArrayList<Integer> arrayList = new ArrayList<>();
-        for (FunctionBean fb: mBeen) {
+        for (FunctionBean fb: mAddFunctionBeen) {
             if (0 != fb.getId()) {
                 arrayList.add(fb.getId());
             }
@@ -96,8 +95,8 @@ public class AllFuncationManage {
         mService.saveFuncations(arrayList);
     }
 
-    public void goFunction(int position) {
-        FunctionBean functionBean = mBeen.get(position);
+    public void goAddFunction(int position) {
+        FunctionBean functionBean = mAddFunctionBeen.get(position);
         if (null != functionBean.getIntent()) {
             if (null != functionBean.getIntent()) {
                 switch (functionBean.getId()) {
@@ -116,6 +115,54 @@ public class AllFuncationManage {
                         break;
                 }
             }
+        }
+    }
+
+    public void goNoneFunction(int position) {
+        FunctionBean functionBean = mNoneFunctionBeen.get(position);
+        if (null != functionBean.getIntent()) {
+            if (null != functionBean.getIntent()) {
+                switch (functionBean.getId()) {
+                    case 0:
+//                        mActivity.startActivityForResult(functionBean.getIntent(), Constant.ALLFUNCATION_REQUEST);
+                        break;
+                    case 4:
+                        if (mService.isCanMessage()) {
+                            mActivity.startActivity(functionBean.getIntent());
+                        } else {
+                            mIAllFuncationView.showToastMsg("好友数据初始化中,请稍候...");
+                        }
+                        break;
+                    default:
+                        mActivity.startActivity(functionBean.getIntent());
+                        break;
+                }
+            }
+        }
+    }
+
+    public void editFunctionList(int code, int position) {
+        switch (code) {
+            case 0:
+                if (7 > mAddFunctionBeen.size()) {
+                    FunctionBean noneFB = mNoneFunctionBeen.get(position);
+                    mNoneFunctionBeen.remove(position);
+                    mAddFunctionBeen.add(noneFB);
+                    mIAllFuncationView.showAddList(mAddFunctionBeen);
+                    mIAllFuncationView.showNoneList(mNoneFunctionBeen);
+                } else {
+                    mIAllFuncationView.showToastMsg("已经添加满咯~~");
+                }
+                break;
+            case 1:
+                FunctionBean addNB = mAddFunctionBeen.get(position);
+                mAddFunctionBeen.remove(position);
+                mNoneFunctionBeen.add(addNB);
+                mIAllFuncationView.showAddList(mAddFunctionBeen);
+                mIAllFuncationView.showNoneList(mNoneFunctionBeen);
+                break;
+            default:
+                break;
         }
     }
 }

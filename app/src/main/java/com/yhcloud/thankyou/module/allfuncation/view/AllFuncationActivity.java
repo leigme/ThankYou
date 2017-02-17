@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mAbstract.ABaseActivity;
-import com.yhcloud.thankyou.module.allfuncation.adapter.AddFuncationListAdapter;
+import com.yhcloud.thankyou.module.allfuncation.adapter.AllFuncationListAdapter;
 import com.yhcloud.thankyou.module.allfuncation.manage.AllFuncationManage;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.drag.DragItemCallBack;
@@ -33,7 +33,7 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
     private ImageView ivRight;
     private RecyclerView rvAddFuncationList, rvNoneFuncationList;
     //适配器
-    private AddFuncationListAdapter afla, nfla;
+    private AllFuncationListAdapter afla, nfla;
     //管理器
     private AllFuncationManage mManage;
 
@@ -107,7 +107,11 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
                 @Override
                 public void itemOnClick(int position, View view) {
                     Tools.print(TAG, "点击事件...");
-                    mManage.goFunction(position);
+                    if (mManage.isEdited()) {
+                        mManage.editFunctionList(1, position);
+                    } else {
+                        mManage.goAddFunction(position);
+                    }
                 }
 
                 @Override
@@ -148,8 +152,8 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
                 }
             };
 
-            afla = new AddFuncationListAdapter(this, list, rcb);
-            afla.setISelectItem(new AddFuncationListAdapter.ISelectItem() {
+            afla = new AllFuncationListAdapter(this, list, rcb);
+            afla.setISelectItem(new AllFuncationListAdapter.ISelectItem() {
                 @Override
                 public void setSelectItem(SparseArray<Integer> show, View view, int position) {
                     if (mManage.isEdited()) {
@@ -162,23 +166,13 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
                 }
             });
             GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
-            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    switch (list.get(position).getId()) {
-                        case -1:
-                            return 4;
-                        default:
-                            return 1;
-                    }
-                }
-            });
             rvAddFuncationList.setLayoutManager(layoutManager);
             rvAddFuncationList.setAdapter(afla);
             ItemTouchHelper ith = new ItemTouchHelper(new DragItemCallBack(rcb));
             ith.attachToRecyclerView(rvAddFuncationList);
         } else {
             afla.setData(list);
+            afla.refreshData(list);
         }
     }
 
@@ -189,7 +183,11 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
                 @Override
                 public void itemOnClick(int position, View view) {
                     Tools.print(TAG, "点击事件...");
-                    mManage.goFunction(position);
+                    if (mManage.isEdited()) {
+                        mManage.editFunctionList(0, position);
+                    } else {
+                        mManage.goNoneFunction(position);
+                    }
                 }
 
                 @Override
@@ -230,8 +228,8 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
                 }
             };
 
-            nfla = new AddFuncationListAdapter(this, list, rcb);
-            nfla.setISelectItem(new AddFuncationListAdapter.ISelectItem() {
+            nfla = new AllFuncationListAdapter(this, list, rcb);
+            nfla.setISelectItem(new AllFuncationListAdapter.ISelectItem() {
                 @Override
                 public void setSelectItem(SparseArray<Integer> show, View view, int position) {
                     if (mManage.isEdited()) {
@@ -244,23 +242,19 @@ public class AllFuncationActivity extends ABaseActivity implements IAllFuncation
                 }
             });
             GridLayoutManager layoutManager = new GridLayoutManager(this, 4);
-            layoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-                @Override
-                public int getSpanSize(int position) {
-                    switch (list.get(position).getId()) {
-                        case -1:
-                            return 4;
-                        default:
-                            return 1;
-                    }
-                }
-            });
             rvNoneFuncationList.setLayoutManager(layoutManager);
             rvNoneFuncationList.setAdapter(nfla);
             ItemTouchHelper ith = new ItemTouchHelper(new DragItemCallBack(rcb));
             ith.attachToRecyclerView(rvNoneFuncationList);
         } else {
             nfla.setData(list);
+            nfla.refreshData(list);
         }
+    }
+
+    @Override
+    public void setEditMode(boolean edited) {
+        afla.setEditMode(edited, 1);
+        nfla.setEditMode(edited, 0);
     }
 }

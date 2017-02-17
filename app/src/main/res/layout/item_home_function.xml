@@ -1,26 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:id="@+id/rl_function_home">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:orientation="vertical"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/iv_home_function_image"
+                android:src="@mipmap/icon_function_all"
+                android:layout_marginBottom="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/tv_home_function_title"
+                android:text="全部应用"/>
+        </LinearLayout>
         <ImageView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/iv_home_function_image"
-            android:src="@mipmap/icon_function_all"
-            android:layout_marginBottom="10dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:id="@+id/tv_home_function_title"
-            android:text="全部应用"/>
-    </LinearLayout>
-</LinearLayout>
+            android:id="@+id/iv_function_ope"
+            android:visibility="invisible"
+            android:layout_alignParentRight="true"
+            android:src="@mipmap/icon_function_del"/>
+    </RelativeLayout>
+</RelativeLayout>

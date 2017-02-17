@@ -66,7 +66,7 @@
     <string name="dissolution_group_hint">The group will be dismissed after exiting</string>
     <string name="exit_group">Exit</string>
     <string name="connect_conflict">The same account was loggedin in other device</string>
-    <string name="ease_user_remove">This user has been removed</string>
+    <string name="ease_user_remove">This user has addFunctionBeen removed</string>
     <string name="set">Settings</string>
     <string name="notify">New message notification</string>
     <string name="newnotify">Receiving a new message</string>
@@ -155,8 +155,8 @@
     <string name="send_failure_please">Send failure, please test whether the server connection</string>
     <string name="Move_into_blacklist_success">Move into blacklist success</string>
     <string name="Move_into_blacklist_failure">Move into blacklist failure</string>
-    <string name="you_are_group">You have been kicked off from the group</string>
-    <string name="the_current_group">The current group has been dismissed</string>
+    <string name="you_are_group">You have addFunctionBeen kicked off from the group</string>
+    <string name="the_current_group">The current group has addFunctionBeen dismissed</string>
     <string name="Cant_chat_with_yourself">cannot chat with yourself</string>
     <string name="deleting">Deleting..</string>
     <string name="Delete_failed">Failed to delete</string>

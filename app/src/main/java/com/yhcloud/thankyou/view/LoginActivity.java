@@ -67,6 +67,7 @@ public class LoginActivity extends ABaseActivity implements ILoginActivityView {
     @Override
     public void initView() {
         et_login_username = (EditText) findViewById(R.id.et_login_username);
+        et_login_username.setSingleLine();
         et_login_password = (EditText) findViewById(R.id.et_login_password);
         btn_login_send = (TextView) findViewById(R.id.btn_login_send);
     }

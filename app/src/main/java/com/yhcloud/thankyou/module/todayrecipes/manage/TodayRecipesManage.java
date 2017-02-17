@@ -84,12 +84,23 @@ public class TodayRecipesManage {
                             weekLists = new ArrayList<>();
                             WeekBean wb;
                             for (int i = 0; i < list.size(); i++) {
+                                String weekCount = list.get(i).getWeekCount();
                                 weekList = new ArrayList<>();
-                                for (int j = 1; j < 33; j++) {
-                                    wb = new WeekBean();
-                                    wb.setId(String.valueOf(j));
-                                    wb.setTitle("第" + j+ "周");
-                                    weekList.add(wb);
+                                if (null != weekCount && !"".equals(weekCount)) {
+                                    int wc = Integer.parseInt(weekCount);
+                                    for (int j = 1; j < wc + 1; j++) {
+                                        wb = new WeekBean();
+                                        wb.setId(String.valueOf(j));
+                                        wb.setTitle("第" + j+ "周");
+                                        weekList.add(wb);
+                                    }
+                                } else {
+                                    for (int j = 1; j < 33; j++) {
+                                        wb = new WeekBean();
+                                        wb.setId(String.valueOf(j));
+                                        wb.setTitle("第" + j+ "周");
+                                        weekList.add(wb);
+                                    }
                                 }
                                 weekLists.add(weekList);
                             }

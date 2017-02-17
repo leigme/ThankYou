@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.yhcloud.thankyou.module.homework.view.HomeworkActivity">
-    <include layout="@layout/header"/>
+    <include layout="@layout/include_header"/>
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

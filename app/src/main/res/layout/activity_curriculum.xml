@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.yhcloud.thankyou.module.curriculum.view.CurriculumActivity">
-    <include layout="@layout/header"/>
+    <include layout="@layout/include_header"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">

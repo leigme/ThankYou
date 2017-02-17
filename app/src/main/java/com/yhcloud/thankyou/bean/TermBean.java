@@ -25,6 +25,7 @@ public class TermBean implements IPickerViewData {
     private String EndTime;
     private String TermYear;
     private String SchoolId;
+    private String weekCount;
 
     @Override
     public String getPickerViewText() {
@@ -85,5 +86,13 @@ public class TermBean implements IPickerViewData {
 
     public void setSchoolId(String SchoolId) {
         this.SchoolId = SchoolId;
+    }
+
+    public String getWeekCount() {
+        return weekCount;
+    }
+
+    public void setWeekCount(String weekCount) {
+        this.weekCount = weekCount;
     }
 }

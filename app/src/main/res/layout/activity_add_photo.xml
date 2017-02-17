@@ -8,7 +8,7 @@
     android:orientation="vertical"
     tools:context="com.yhcloud.thankyou.module.homework.view.AddPhotoActivity">
     <!--头部-->
-    <include layout="@layout/header"/>
+    <include layout="@layout/include_header"/>
     <!--内容-->
     <RelativeLayout
         android:layout_width="match_parent"

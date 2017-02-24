@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.homework.view;
 
-import com.yhcloud.thankyou.mInterface.IBaseActivityView;
+import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
 import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
 import com.yhcloud.thankyou.module.homework.bean.TeacherHomeworkBean;
 

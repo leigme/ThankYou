@@ -13,7 +13,7 @@ import com.hyphenate.easeui.EaseConstant;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
 import com.yhcloud.thankyou.bean.UserRoleBean;
-import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.mInterfacea.ICallListener;
 import com.yhcloud.thankyou.module.chat.view.EaseChatActivity;
 import com.yhcloud.thankyou.module.detailinfo.bean.DetailPeopleInfoBean;
 import com.yhcloud.thankyou.module.detailinfo.view.IDetailPeopleActivityView;

@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.mInterfacea.ICallListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.module.classteachers.view.ClassTeacherListActivity;
 import com.yhcloud.thankyou.module.detailinfo.view.DetailPeopleActivity;

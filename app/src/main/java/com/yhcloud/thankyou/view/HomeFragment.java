@@ -17,7 +17,7 @@ import com.yhcloud.thankyou.adapter.HomeSpreadAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.mabstract.ABaseFragment;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.manage.HomeManage;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.GlideImageLoader;

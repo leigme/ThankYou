@@ -16,7 +16,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.ClassPeopleListAdapter;
 import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.mabstract.ABaseFragment;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.manage.ClassManage;
 import com.yhcloud.thankyou.service.LogicService;
 

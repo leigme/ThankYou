@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargeBean;
 
 import java.math.BigDecimal;

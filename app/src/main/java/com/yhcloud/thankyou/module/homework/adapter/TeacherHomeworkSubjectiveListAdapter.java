@@ -6,10 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;

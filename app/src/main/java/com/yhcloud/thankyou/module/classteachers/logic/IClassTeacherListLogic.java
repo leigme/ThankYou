@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.classteachers.logic;
 
-import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.mInterfacea.ICallListener;
 
 /**
  * Created by Administrator on 2016/12/23.

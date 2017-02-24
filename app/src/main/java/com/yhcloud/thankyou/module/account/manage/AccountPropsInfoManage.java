@@ -8,7 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.mInterfacea.ICallListener;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.view.IPropsInfoView;
 import com.yhcloud.thankyou.module.account.view.IntegralActivity;

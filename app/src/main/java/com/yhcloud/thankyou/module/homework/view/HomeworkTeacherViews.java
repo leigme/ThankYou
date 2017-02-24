@@ -11,12 +11,9 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
-import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkRadioListAdpater;
-import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkSubjectiveListAdapter;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.module.homework.adapter.TeacherHomeworkObjectiveListAdapter;
 import com.yhcloud.thankyou.module.homework.adapter.TeacherHomeworkSubjectiveListAdapter;
-import com.yhcloud.thankyou.module.homework.bean.QuestionBean;
 import com.yhcloud.thankyou.module.homework.bean.TeacherQuestionBean;
 import com.yhcloud.thankyou.module.image.view.BigImageActivity;
 import com.yhcloud.thankyou.utils.Constant;

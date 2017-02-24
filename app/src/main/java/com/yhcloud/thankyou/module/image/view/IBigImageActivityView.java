@@ -2,7 +2,7 @@ package com.yhcloud.thankyou.module.image.view;
 
 import android.view.View;
 
-import com.yhcloud.thankyou.mInterface.IBaseActivityView;
+import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
 
 import java.util.ArrayList;
 

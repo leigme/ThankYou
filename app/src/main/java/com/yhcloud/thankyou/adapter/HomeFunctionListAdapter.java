@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.utils.myview.drag.DragHolderCallBack;
 import com.yhcloud.thankyou.utils.myview.drag.RecycleCallBack;
 

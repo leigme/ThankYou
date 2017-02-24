@@ -8,11 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListBean;
-import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 
 import java.text.MessageFormat;

@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.curriculum.view;
 
-import com.yhcloud.thankyou.mInterface.IBaseActivityView;
+import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
 
 import java.util.ArrayList;

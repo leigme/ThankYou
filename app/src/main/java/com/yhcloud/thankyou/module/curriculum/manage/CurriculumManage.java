@@ -10,7 +10,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.mInterfacea.ICallListener;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumDataBean;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
 import com.yhcloud.thankyou.module.curriculum.view.ICurriculumActivityView;

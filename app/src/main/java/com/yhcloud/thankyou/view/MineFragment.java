@@ -14,7 +14,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.MineFunctionAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.mabstract.ABaseFragment;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.manage.MineManage;
 import com.yhcloud.thankyou.service.LogicService;
 

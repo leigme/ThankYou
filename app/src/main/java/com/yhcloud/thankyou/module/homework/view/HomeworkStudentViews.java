@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkBlankListAdapter;
 import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkSubjectiveListAdapter;
 import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkRadioListAdpater;

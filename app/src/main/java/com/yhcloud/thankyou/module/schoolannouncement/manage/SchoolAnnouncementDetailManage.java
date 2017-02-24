@@ -10,7 +10,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.mInterfacea.ICallListener;
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
 import com.yhcloud.thankyou.module.schoolannouncement.view.ISchoolAnnouncementDetailActivityView;
 import com.yhcloud.thankyou.service.LogicService;

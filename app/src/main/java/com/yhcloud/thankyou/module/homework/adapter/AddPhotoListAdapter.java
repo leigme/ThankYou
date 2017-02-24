@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.utils.Constant;
 
 import java.util.ArrayList;

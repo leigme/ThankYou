@@ -1,6 +1,4 @@
-package com.yhcloud.thankyou.mInterface;
-
-import android.view.View;
+package com.yhcloud.thankyou.mInterfacea;
 
 /**
  * Created by leig on 2016/12/12.

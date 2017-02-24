@@ -2,20 +2,13 @@ package com.yhcloud.thankyou.logic;
 
 import android.util.Log;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.mInterfacea.ICallListener;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.text.MessageFormat;
-import java.util.ArrayList;
 
 import okhttp3.Call;
 

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.mInterface.IOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
 import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;

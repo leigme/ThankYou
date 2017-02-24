@@ -1,7 +1,7 @@
 package com.yhcloud.thankyou.logic;
 
 import com.yhcloud.thankyou.bean.ClassInfoBean;
-import com.yhcloud.thankyou.mInterface.ICallListener;
+import com.yhcloud.thankyou.mInterfacea.ICallListener;
 
 import java.util.ArrayList;
 

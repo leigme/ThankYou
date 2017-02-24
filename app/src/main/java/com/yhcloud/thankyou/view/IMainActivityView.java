@@ -4,7 +4,7 @@ import android.support.v4.app.Fragment;
 
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.mInterface.IBaseActivityView;
+import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
 
 import java.util.ArrayList;
 

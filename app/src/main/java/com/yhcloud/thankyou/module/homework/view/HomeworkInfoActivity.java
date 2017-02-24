@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.mInterface.IButtonOnClickListener;
+import com.yhcloud.thankyou.mInterfacea.IButtonOnClickListener;
 import com.yhcloud.thankyou.module.homework.adapter.HomeworkInfoViewPagerAdapter;
 import com.yhcloud.thankyou.module.homework.bean.HomeworkInfoViewPagerBean;
 import com.yhcloud.thankyou.module.homework.manage.HomeworkInfoManage;

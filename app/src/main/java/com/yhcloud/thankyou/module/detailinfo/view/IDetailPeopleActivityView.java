@@ -1,7 +1,7 @@
 package com.yhcloud.thankyou.module.detailinfo.view;
 
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
-import com.yhcloud.thankyou.mInterface.IBaseActivityView;
+import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
 
 import java.util.ArrayList;
 

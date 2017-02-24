@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.account.view;
 
-import com.yhcloud.thankyou.mInterface.IBaseActivityView;
+import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
 
 import java.util.ArrayList;

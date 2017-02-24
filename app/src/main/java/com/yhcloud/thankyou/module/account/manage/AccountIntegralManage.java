@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.mInterfacea.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallListener;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
 import com.yhcloud.thankyou.module.account.view.IIntegralView;
 import com.yhcloud.thankyou.module.account.view.RechargeActivity;

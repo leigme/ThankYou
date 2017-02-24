@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
+import com.yhcloud.thankyou.minterface.IOnClickListener;
 import com.yhcloud.thankyou.module.chat.adapter.AddChatAdapter;
 import com.yhcloud.thankyou.module.chat.bean.ChatContact;
 import com.yhcloud.thankyou.module.chat.manage.AddChatManage;

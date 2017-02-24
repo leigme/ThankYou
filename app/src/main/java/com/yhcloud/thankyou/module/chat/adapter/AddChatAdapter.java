@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
+import com.yhcloud.thankyou.minterface.IOnClickListener;
 import com.yhcloud.thankyou.module.chat.bean.ChatContact;
 
 import java.util.ArrayList;

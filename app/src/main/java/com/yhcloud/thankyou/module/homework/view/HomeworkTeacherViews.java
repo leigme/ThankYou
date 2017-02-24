@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
+import com.yhcloud.thankyou.minterface.IOnClickListener;
 import com.yhcloud.thankyou.module.homework.adapter.TeacherHomeworkObjectiveListAdapter;
 import com.yhcloud.thankyou.module.homework.adapter.TeacherHomeworkSubjectiveListAdapter;
 import com.yhcloud.thankyou.module.homework.bean.TeacherQuestionBean;

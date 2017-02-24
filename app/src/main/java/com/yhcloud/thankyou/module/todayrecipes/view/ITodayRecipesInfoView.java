@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.todayrecipes.view;
 
-import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
+import com.yhcloud.thankyou.minterface.IBaseActivityView;
 
 /**
  * Created by leig on 2017/2/10.

@@ -1,7 +1,7 @@
 package com.yhcloud.thankyou.module.todayrecipes.view;
 
 import com.yhcloud.thankyou.bean.TermBean;
-import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
+import com.yhcloud.thankyou.minterface.IBaseActivityView;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesPagerBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.WeekBean;
 

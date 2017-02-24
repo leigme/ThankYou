@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterfacea.IBaseView;
-import com.yhcloud.thankyou.mInterfacea.IButtonOnClickListener;
+import com.yhcloud.thankyou.minterface.IBaseView;
+import com.yhcloud.thankyou.minterface.IButtonOnClickListener;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
 /**

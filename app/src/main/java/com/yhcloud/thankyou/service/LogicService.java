@@ -20,7 +20,7 @@ import com.yhcloud.thankyou.logic.IHomeLogic;
 import com.yhcloud.thankyou.logic.ILoginLogic;
 import com.yhcloud.thankyou.logic.LoginLogic;
 import com.yhcloud.thankyou.logic.MainLogic;
-import com.yhcloud.thankyou.mInterfacea.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallListener;
 import com.yhcloud.thankyou.module.aboutus.logic.AboutUsLogic;
 import com.yhcloud.thankyou.module.account.logic.AccountIntegralLogic;
 import com.yhcloud.thankyou.module.account.logic.AccountLogic;

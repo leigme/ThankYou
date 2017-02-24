@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.chat.view;
 
-import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
+import com.yhcloud.thankyou.minterface.IBaseActivityView;
 import com.yhcloud.thankyou.module.chat.bean.ChatContact;
 
 import java.util.ArrayList;

@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
+import com.yhcloud.thankyou.minterface.IOnClickListener;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListBean;
 import com.yhcloud.thankyou.utils.Tools;
 

@@ -1,7 +1,7 @@
 package com.yhcloud.thankyou.module.classteachers.view;
 
 import com.yhcloud.thankyou.bean.TeacherBean;
-import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
+import com.yhcloud.thankyou.minterface.IBaseActivityView;
 
 import java.util.ArrayList;
 

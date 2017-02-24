@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.homework.view;
 
-import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
+import com.yhcloud.thankyou.minterface.IBaseActivityView;
 import com.yhcloud.thankyou.module.homework.bean.HomeworkInfoViewPagerBean;
 
 import java.util.ArrayList;

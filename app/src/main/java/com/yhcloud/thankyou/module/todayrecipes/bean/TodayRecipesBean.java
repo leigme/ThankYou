@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.todayrecipes.bean;
 
-import com.yhcloud.thankyou.mInterfacea.Pinnable;
+import com.yhcloud.thankyou.minterface.Pinnable;
 
 import java.util.ArrayList;
 

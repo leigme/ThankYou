@@ -12,7 +12,7 @@ import android.view.View;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.PopupmenuListAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
+import com.yhcloud.thankyou.minterface.IOnClickListener;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
 
 import java.util.ArrayList;

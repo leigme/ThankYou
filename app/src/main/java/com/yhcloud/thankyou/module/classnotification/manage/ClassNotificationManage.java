@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.mInterfacea.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallListener;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationDetailActivity;
 import com.yhcloud.thankyou.module.classnotification.view.IClassNotificationActivityView;

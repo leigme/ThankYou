@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.schoolannouncement.view;
 
-import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
+import com.yhcloud.thankyou.minterface.IBaseActivityView;
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
 
 import java.util.ArrayList;

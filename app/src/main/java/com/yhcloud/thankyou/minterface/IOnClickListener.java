@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.mInterfacea;
+package com.yhcloud.thankyou.minterface;
 
 import android.view.View;
 

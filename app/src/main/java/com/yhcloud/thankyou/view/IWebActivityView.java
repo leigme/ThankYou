@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.view;
 
-import com.yhcloud.thankyou.mInterfacea.IBaseActivityView;
+import com.yhcloud.thankyou.minterface.IBaseActivityView;
 
 /**
  * Created by Administrator on 2016/12/23.

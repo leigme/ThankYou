@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.mInterfacea;
+package com.yhcloud.thankyou.minterface;
 
 /**
  * Created by leig on 2017/2/14.

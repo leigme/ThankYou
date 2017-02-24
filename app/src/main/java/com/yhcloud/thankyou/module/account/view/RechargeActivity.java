@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.mInterfacea.IOnClickListener;
+import com.yhcloud.thankyou.minterface.IOnClickListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountRechargeListAdapter;
 import com.yhcloud.thankyou.module.account.adapter.AccountRechargePayListAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargeBean;

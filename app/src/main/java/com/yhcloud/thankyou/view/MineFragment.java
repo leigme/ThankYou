@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.MineFunctionAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.mAbstract.ABaseFragment;
+import com.yhcloud.thankyou.mabstractd.ABaseFragment;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MineManage;
 import com.yhcloud.thankyou.service.LogicService;

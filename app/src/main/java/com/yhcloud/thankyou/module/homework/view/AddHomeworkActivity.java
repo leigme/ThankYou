@@ -7,7 +7,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mabstractd.ABaseActivity;
 import com.yhcloud.thankyou.module.homework.manage.AddHomeworkManage;
 
 public class AddHomeworkActivity extends ABaseActivity implements IAddHomeworkActivityView {

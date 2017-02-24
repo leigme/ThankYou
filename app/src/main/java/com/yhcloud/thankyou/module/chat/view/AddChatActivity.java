@@ -9,8 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mabstractd.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.chat.adapter.AddChatAdapter;
 import com.yhcloud.thankyou.module.chat.bean.ChatContact;

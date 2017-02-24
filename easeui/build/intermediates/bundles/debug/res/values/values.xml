@@ -253,7 +253,7 @@
     <string name="dl_waiting">waiting...</string>
     <string name="downwaiting">Downloading the file, please wait a moment</string>
     <string name="dynamic_expression">[Dynamic expression]</string>
-    <string name="ease_user_remove">This user has been removed</string>
+    <string name="ease_user_remove">This user has addFunctionBeen removed</string>
     <string name="error_send_invalid_content">The message content is not allowed to be sent!</string>
     <string name="error_send_not_in_the_group">You already were not in the group</string>
     <string name="exit_group">Exit</string>
@@ -347,7 +347,7 @@
     <string name="temporary_does_not">Currently the video size greater than 10M is not supported!</string>
     <string name="text_ack_msg">Read</string>
     <string name="text_delivered_msg">Delivered</string>
-    <string name="the_current_group">The current group has been dismissed</string>
+    <string name="the_current_group">The current group has addFunctionBeen dismissed</string>
     <string name="the_current_network">The current network is not available, please check the network Settings</string>
     <string name="title_user_profile">User Profile</string>
     <string name="toast_nick_not_isnull">nick cannot be empty!</string>
@@ -367,7 +367,7 @@
     <string name="voice_prefix">[Voice]</string>
     <string name="were_mentioned">You were montioned</string>
     <string name="yangshengqi">Use speaker</string>
-    <string name="you_are_group">You have been kicked off from the group</string>
+    <string name="you_are_group">You have addFunctionBeen kicked off from the group</string>
     <style name="AnimBottom" parent="@android:style/Animation">
         <item name="android:windowEnterAnimation">@anim/push_bottom_in</item>
         <item name="android:windowExitAnimation">@anim/push_bottom_out</item>

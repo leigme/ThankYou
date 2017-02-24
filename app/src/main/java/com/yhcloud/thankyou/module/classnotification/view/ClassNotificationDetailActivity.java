@@ -1,7 +1,5 @@
 package com.yhcloud.thankyou.module.classnotification.view;
 
-import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,9 +7,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mabstractd.ABaseActivity;
 import com.yhcloud.thankyou.module.classnotification.manage.ClassNotificationDetailManage;
-import com.yhcloud.thankyou.utils.myview.MyToast;
 import com.yhcloud.thankyou.utils.myview.MyWebView;
 
 public class ClassNotificationDetailActivity extends ABaseActivity implements IClassNotificationDetailActivityView {

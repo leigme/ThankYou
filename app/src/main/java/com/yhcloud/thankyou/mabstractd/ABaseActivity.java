@@ -1,32 +1,47 @@
-package com.yhcloud.thankyou.mAbstract;
+package com.yhcloud.thankyou.mabstractd;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.support.v4.app.Fragment;
+import android.content.pm.ActivityInfo;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mInterface.IBaseFragmentView;
+import com.yhcloud.thankyou.mInterface.IBaseView;
 import com.yhcloud.thankyou.mInterface.IButtonOnClickListener;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
 /**
- * Created by Administrator on 2017/1/22.
+ * Created by Administrator on 2017/1/21.
  */
 
-public abstract class ABaseFragment extends Fragment implements IBaseFragmentView {
+public abstract class ABaseActivity extends AppCompatActivity implements IBaseView {
 
     private ProgressDialog mProgressDialog;
     private Dialog mDialog;
     private IButtonOnClickListener mIButtonOnClickListener;
 
     @Override
+    protected void onResume() {
+        /**
+         * 设置为竖屏
+         * ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+         * 设置为横屏
+         * ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+         */
+        if (ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE != getRequestedOrientation()){
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+        super.onResume();
+    }
+
+    @Override
     public void showLoading(int msgId) {
         hiddenLoading();
-        mProgressDialog = ProgressDialog.show(getActivity(), null, getString(msgId));
+        mProgressDialog = ProgressDialog.show(this, null, getString(msgId));
     }
 
     @Override
@@ -41,7 +56,7 @@ public abstract class ABaseFragment extends Fragment implements IBaseFragmentVie
         if (null != mDialog) {
             mDialog.dismiss();
         }
-        mDialog = new Dialog(getActivity(), R.style.MyDialog);
+        mDialog = new Dialog(this, R.style.MyDialog);
         mDialog.setContentView(R.layout.base_dialog);
         TextView dTitle = (TextView) mDialog.findViewById(R.id.tv_dialog_title);
         dTitle.setText(title);
@@ -68,7 +83,7 @@ public abstract class ABaseFragment extends Fragment implements IBaseFragmentVie
         if (null != mDialog) {
             mDialog.dismiss();
         }
-        mDialog = new Dialog(getActivity(), R.style.MyDialog);
+        mDialog = new Dialog(this, R.style.MyDialog);
         mDialog.setContentView(R.layout.base_dialog);
         TextView dMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
         dMsg.setText(msg);
@@ -86,12 +101,12 @@ public abstract class ABaseFragment extends Fragment implements IBaseFragmentVie
 
     @Override
     public void showToastMsg(int msgId) {
-        MyToast.showToast(getActivity(), msgId);
+        MyToast.showToast(this, msgId);
     }
 
     @Override
     public void showToastMsg(String msg) {
-        MyToast.showToast(getActivity(), msg);
+        MyToast.showToast(this, msg);
     }
 
     public void setIButtonOnClickListener(IButtonOnClickListener IButtonOnClickListener) {

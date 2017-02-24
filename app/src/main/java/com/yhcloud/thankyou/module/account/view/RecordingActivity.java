@@ -8,7 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mabstractd.ABaseActivity;
 import com.yhcloud.thankyou.module.account.adapter.AccountRecordingListAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountRecordingBean;
 import com.yhcloud.thankyou.module.account.manage.AccountRecordingManage;

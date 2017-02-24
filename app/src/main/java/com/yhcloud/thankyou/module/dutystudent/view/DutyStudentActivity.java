@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mabstractd.ABaseActivity;
 import com.yhcloud.thankyou.module.dutystudent.adapter.DutyStudentListAdapter;
 import com.yhcloud.thankyou.module.dutystudent.manage.DutyStudentManage;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;

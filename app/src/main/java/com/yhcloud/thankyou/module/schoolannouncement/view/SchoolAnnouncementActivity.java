@@ -2,7 +2,6 @@ package com.yhcloud.thankyou.module.schoolannouncement.view;
 
 import android.app.ProgressDialog;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,13 +10,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mabstractd.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.schoolannouncement.adapter.SchoolAnnouncementListAdapter;
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
 import com.yhcloud.thankyou.module.schoolannouncement.manage.SchoolAnnouncementManage;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
-import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 

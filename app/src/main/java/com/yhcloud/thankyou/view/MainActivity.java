@@ -20,7 +20,7 @@ import com.yhcloud.thankyou.adapter.ClassDrawerListAdapter;
 import com.yhcloud.thankyou.adapter.FragmentViewPagerAdapter;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mabstractd.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.utils.Tools;

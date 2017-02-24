@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TermBean;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mabstractd.ABaseActivity;
 import com.yhcloud.thankyou.module.todayrecipes.adapter.TodayRecipesPagerAdapter;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesPagerBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.WeekBean;

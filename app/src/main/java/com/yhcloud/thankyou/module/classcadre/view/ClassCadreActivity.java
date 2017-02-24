@@ -1,7 +1,5 @@
 package com.yhcloud.thankyou.module.classcadre.view;
 
-import android.app.ProgressDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,11 +9,10 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mabstractd.ABaseActivity;
 import com.yhcloud.thankyou.module.classcadre.adapter.ClassCadreListAdpater;
 import com.yhcloud.thankyou.module.classcadre.manage.ClassCadreManage;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
-import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 

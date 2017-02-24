@@ -3,18 +3,16 @@ package com.yhcloud.thankyou.module.propslist.view;
 import android.app.ProgressDialog;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mAbstract.ABaseActivity;
+import com.yhcloud.thankyou.mabstractd.ABaseActivity;
 import com.yhcloud.thankyou.module.propslist.adapter.PropsListViewAdapter;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListViewBean;
 import com.yhcloud.thankyou.module.propslist.manage.PropsListManage;
-import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import java.util.ArrayList;
 

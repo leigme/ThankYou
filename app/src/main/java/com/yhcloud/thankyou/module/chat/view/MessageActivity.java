@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstractd.ABaseActivity;
+import com.yhcloud.thankyou.mabstract.ABaseActivity;
 import com.yhcloud.thankyou.module.chat.manage.MessageManage;
 import com.yhcloud.thankyou.utils.Tools;
 

@@ -10,7 +10,7 @@ import com.hyphenate.easeui.EaseConstant;
 import com.hyphenate.easeui.ui.EaseChatFragment;
 import com.hyphenate.easeui.widget.chatrow.EaseCustomChatRowProvider;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstractd.ABaseActivity;
+import com.yhcloud.thankyou.mabstract.ABaseActivity;
 import com.yhcloud.thankyou.module.chat.manage.EaseChatManage;
 
 public class EaseChatActivity extends ABaseActivity implements IEaseChatView {

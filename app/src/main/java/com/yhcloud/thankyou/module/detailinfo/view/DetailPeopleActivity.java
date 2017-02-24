@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
-import com.yhcloud.thankyou.mabstractd.ABaseActivity;
+import com.yhcloud.thankyou.mabstract.ABaseActivity;
 import com.yhcloud.thankyou.mInterface.IOnClickListener;
 import com.yhcloud.thankyou.module.detailinfo.adapter.DetailPeopleListAdapter;
 import com.yhcloud.thankyou.module.detailinfo.manage.DetailPeopleManage;

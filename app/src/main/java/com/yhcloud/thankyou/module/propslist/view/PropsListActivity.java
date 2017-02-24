@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstractd.ABaseActivity;
+import com.yhcloud.thankyou.mabstract.ABaseActivity;
 import com.yhcloud.thankyou.module.propslist.adapter.PropsListViewAdapter;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListViewBean;
 import com.yhcloud.thankyou.module.propslist.manage.PropsListManage;

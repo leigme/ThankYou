@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstractd.ABaseActivity;
+import com.yhcloud.thankyou.mabstract.ABaseActivity;
 import com.yhcloud.thankyou.module.todayrecipes.manage.TodayRecipesInfoManage;
 
 public class TodayRecipesInfoActivity extends ABaseActivity implements ITodayRecipesInfoView {

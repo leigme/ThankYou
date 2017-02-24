@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstractd.ABaseActivity;
+import com.yhcloud.thankyou.mabstract.ABaseActivity;
 import com.yhcloud.thankyou.module.curriculum.adapter.CurriculumAdapter;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
 import com.yhcloud.thankyou.module.curriculum.manage.CurriculumManage;

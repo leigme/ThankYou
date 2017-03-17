@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.view.IMyPropsView;
 import com.yhcloud.thankyou.service.LogicService;
@@ -77,7 +77,7 @@ public class AccountMyPropsManage {
 
     public void getPropsDataForService() {
         mIMyPropsView.showLoading(R.string.loading_data);
-        mService.getUserPropsList(new ICallListener<String>() {
+        mService.getUserPropsList(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -108,7 +108,7 @@ public class AccountMyPropsManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIMyPropsView.showToastMsg(R.string.error_connection);
                 mIMyPropsView.hiddenLoading();
             }
@@ -141,7 +141,7 @@ public class AccountMyPropsManage {
         if (null != propId && !"".equals(propId)) {
             if (0 < mIMyPropsView.getNum()) {
                 Tools.print(TAG, "开始赠送~~~");
-                mService.givePropsToPeople(recvUserId, propId, mIMyPropsView.getNum(), new ICallListener<String>() {
+                mService.givePropsToPeople(recvUserId, propId, mIMyPropsView.getNum(), new ICallBackListener<String>() {
                     @Override
                     public void callSuccess(String s) {
                         try {
@@ -160,7 +160,7 @@ public class AccountMyPropsManage {
                     }
 
                     @Override
-                    public void callFailed() {
+                    public void callFailure() {
                         Tools.print(TAG, "赠送失败~~");
                     }
                 });

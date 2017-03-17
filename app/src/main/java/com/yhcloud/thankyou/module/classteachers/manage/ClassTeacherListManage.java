@@ -10,7 +10,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.bean.TeacherBean;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.module.classteachers.view.IClassTeacherListActivityView;
 
@@ -51,7 +51,7 @@ public class ClassTeacherListManage {
     }
 
     public void getClassTeacherList() {
-        mService.getClassTeacherList(new ICallListener<String>() {
+        mService.getClassTeacherList(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -71,7 +71,7 @@ public class ClassTeacherListManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
 
             }
         });

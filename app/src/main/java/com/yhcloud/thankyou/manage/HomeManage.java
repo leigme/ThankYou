@@ -10,7 +10,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
@@ -73,7 +73,7 @@ public class HomeManage {
     }
 
     public void showBanner(String updateTime) {
-        mService.getBannerImageUrls(updateTime, new ICallListener<String>() {
+        mService.getBannerImageUrls(updateTime, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -107,7 +107,7 @@ public class HomeManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIHomeView.showToastMsg(R.string.error_connection);
                 refrshBanner = true;
                 if (3 > refreshBannerNum) {
@@ -129,7 +129,7 @@ public class HomeManage {
     }
 
     public void showSpreadList(String updateTime) {
-        mService.getSpreadList(updateTime, new ICallListener<String>() {
+        mService.getSpreadList(updateTime, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -156,7 +156,7 @@ public class HomeManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIHomeView.showToastMsg(R.string.error_connection);
                 if (3 > refreshSpreadNum) {
                     showSpreadList("-1");

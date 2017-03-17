@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.classcadre.view.IClassCadreActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 
@@ -52,7 +52,7 @@ public class ClassCadreManage {
     }
 
     public void getClassCadreList() {
-        mService.getClassCadreList(new ICallListener<String>() {
+        mService.getClassCadreList(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -81,7 +81,7 @@ public class ClassCadreManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIClassCadreView.showDefault(true);
             }
         });

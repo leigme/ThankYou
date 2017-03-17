@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.account.alipay.AuthResult;
 import com.yhcloud.thankyou.module.account.alipay.PayResult;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargeBean;
@@ -133,7 +133,7 @@ public class AccountRechargeManage {
     public void getRechargeData() {
         mIRechargeView.showLoading(R.string.loading_data);
         mBeen = new ArrayList<>();
-        mService.getRechargeList(new ICallListener<String>() {
+        mService.getRechargeList(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -162,7 +162,7 @@ public class AccountRechargeManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIRechargeView.showToastMsg(R.string.error_connection);
                 mIRechargeView.hiddenLoading();
             }
@@ -170,7 +170,7 @@ public class AccountRechargeManage {
     }
 
     public void getUserCurrency() {
-        mService.getUserCurrency(new ICallListener<String>() {
+        mService.getUserCurrency(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -185,14 +185,14 @@ public class AccountRechargeManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
 
             }
         });
     }
 
     public void getPayList() {
-        mService.getPayList(new ICallListener<String>() {
+        mService.getPayList(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -229,7 +229,7 @@ public class AccountRechargeManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
 
             }
 
@@ -254,7 +254,7 @@ public class AccountRechargeManage {
                 payId = payBean.getPay_id();
             }
         }
-        mService.getOrderNum(productId, payId, new ICallListener<String>() {
+        mService.getOrderNum(productId, payId, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -271,7 +271,7 @@ public class AccountRechargeManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIRechargeView.hiddenLoading();
             }
 

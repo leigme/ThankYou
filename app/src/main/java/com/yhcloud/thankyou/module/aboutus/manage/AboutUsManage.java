@@ -9,7 +9,7 @@ import android.os.IBinder;
 
 import com.google.gson.Gson;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.aboutus.bean.AboutUsBean;
 import com.yhcloud.thankyou.module.aboutus.view.IAboutUsActivityView;
 import com.yhcloud.thankyou.service.LogicService;
@@ -58,7 +58,7 @@ public class AboutUsManage {
 
     public void getAboutUsInfo() {
         mIAboutUsView.showLoading(R.string.loading_data);
-        mService.getAboutUsInfo(new ICallListener<String>() {
+        mService.getAboutUsInfo(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -79,7 +79,7 @@ public class AboutUsManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIAboutUsView.hiddenLoading();
             }
         });

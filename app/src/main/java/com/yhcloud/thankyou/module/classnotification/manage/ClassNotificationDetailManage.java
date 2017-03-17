@@ -11,7 +11,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 import com.yhcloud.thankyou.module.classnotification.view.IClassNotificationDetailActivityView;
 import com.yhcloud.thankyou.service.LogicService;
@@ -81,7 +81,7 @@ public class ClassNotificationDetailManage {
     }
 
     public void getClassNotificationData(final int record) {
-        mService.getClassNotificationData(pageNum, new ICallListener<String>() {
+        mService.getClassNotificationData(pageNum, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -111,7 +111,7 @@ public class ClassNotificationDetailManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIClassNotificationDetailView.showToastMsg(R.string.error_connection);
             }
         });
@@ -126,14 +126,14 @@ public class ClassNotificationDetailManage {
 
     //更新阅读状态
     private void updateClassNotificationReadState(int position) {
-        mService.updateClassNotificationReadState(mBeen.get(position).getNoticeId(), new ICallListener<String>() {
+        mService.updateClassNotificationReadState(mBeen.get(position).getNoticeId(), new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
 
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
 
             }
         });

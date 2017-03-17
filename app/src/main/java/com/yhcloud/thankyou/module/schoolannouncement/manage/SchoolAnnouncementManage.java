@@ -11,7 +11,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
 import com.yhcloud.thankyou.module.schoolannouncement.view.ISchoolAnnouncementActivityView;
 import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementDetailActivity;
@@ -62,7 +62,7 @@ public class SchoolAnnouncementManage {
 
     public void getSchoolAnnouncementData(int page) {
         mISchoolAnnouncementView.showLoading(R.string.loading_data);
-        mService.getSchoolAnnouncementData(page, new ICallListener<String>() {
+        mService.getSchoolAnnouncementData(page, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -102,7 +102,7 @@ public class SchoolAnnouncementManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mISchoolAnnouncementView.completeRefreshList();
                 mISchoolAnnouncementView.hiddenLoading();
                 mISchoolAnnouncementView.showToastMsg(R.string.error_connection);

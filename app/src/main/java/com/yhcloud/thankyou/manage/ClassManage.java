@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.module.classteachers.view.ClassTeacherListActivity;
 import com.yhcloud.thankyou.module.detailinfo.view.DetailPeopleActivity;
@@ -52,7 +52,7 @@ public class ClassManage {
         } else {
             classId = mUserInfo.getUserInfoBean().getDefaultClassId();
         }
-        mService.getClassPeopleList(classId, "-1", new ICallListener<String>() {
+        mService.getClassPeopleList(classId, "-1", new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -111,7 +111,7 @@ public class ClassManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIClassView.showToastMsg(R.string.error_connection);
                 if (3 > refreshNum) {
                     getClassPeopleList("");

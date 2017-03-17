@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.schoolannouncement.logic;
 
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -15,7 +15,7 @@ import okhttp3.Call;
 public class SchoolAnnouncementLogic {
     private String TAG = getClass().getSimpleName();
 
-    public void getSchoolAnnouncementData(String schoolId, int pageNum, final ICallListener<String> iCallListener) {
+    public void getSchoolAnnouncementData(String schoolId, int pageNum, final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GETSHCHOOLANNOUNCEMENTLIST)
                 .addParams("schoolId", schoolId)
@@ -25,13 +25,13 @@ public class SchoolAnnouncementLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getSchoolAnnouncementData-请求失败:" + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getSchoolAnnouncementData-请求成功:" + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }

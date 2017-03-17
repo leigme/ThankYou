@@ -11,7 +11,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.view.IPropsView;
 import com.yhcloud.thankyou.module.account.view.PropsInfoActivity;
@@ -61,7 +61,7 @@ public class AccountPropsManage {
 
     public void getPropData() {
         mIPropsView.showLoading(R.string.loading_data);
-        mService.getPropsStoreList(new ICallListener<String>() {
+        mService.getPropsStoreList(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -89,7 +89,7 @@ public class AccountPropsManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIPropsView.showToastMsg(R.string.error_connection);
                 mIPropsView.hiddenLoading();
             }
@@ -107,7 +107,7 @@ public class AccountPropsManage {
     }
 
     public void getUserCurrency() {
-        mService.getUserCurrency(new ICallListener<String>() {
+        mService.getUserCurrency(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -129,7 +129,7 @@ public class AccountPropsManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIPropsView.showToastMsg(R.string.error_connection);
             }
         });

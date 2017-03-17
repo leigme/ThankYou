@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.propslist.logic;
 
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -16,7 +16,7 @@ public class PropsListLogic {
 
     private String TAG = getClass().getSimpleName();
 
-    public void getPropsListData(String userId, int typeId, int pageNum, final ICallListener<String> iCallListener) {
+    public void getPropsListData(String userId, int typeId, int pageNum, final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GETPROPSLIST)
                 .addParams("userId", userId)
@@ -27,13 +27,13 @@ public class PropsListLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getPropsListData-请求失败:" + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getPropsListData-请求成功:" + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }

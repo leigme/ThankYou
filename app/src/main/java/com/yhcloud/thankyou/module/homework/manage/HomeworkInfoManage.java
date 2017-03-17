@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.homework.bean.AnswerBean;
 import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
 import com.yhcloud.thankyou.module.homework.bean.StudentQuestionBean;
@@ -130,7 +130,7 @@ public class HomeworkInfoManage {
     //拿去老师作业详细信息
     public void getTeacherHomeworkInfo(final int pageNum) {
         mIHomeworkInfoView.showLoading(R.string.loading_data);
-        mService.getTeacherHomeworkInfo(mTeacherHomeworkBean.getHomeworkId(), new ICallListener<String>() {
+        mService.getTeacherHomeworkInfo(mTeacherHomeworkBean.getHomeworkId(), new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -162,7 +162,7 @@ public class HomeworkInfoManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
 
             }
         });
@@ -171,7 +171,7 @@ public class HomeworkInfoManage {
     //拿去学生作业详细信息
     public void getStudentHomeworkInfo(final int pageNum) {
         mIHomeworkInfoView.showLoading(R.string.loading_data);
-        mService.getStudentHomeworkInfo(mStudentHomeworkBean.getWorkId(), new ICallListener<String>() {
+        mService.getStudentHomeworkInfo(mStudentHomeworkBean.getWorkId(), new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -202,7 +202,7 @@ public class HomeworkInfoManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIHomeworkInfoView.hiddenLoading();
                 mIHomeworkInfoView.showToastMsg(R.string.error_connection);
             }
@@ -426,7 +426,7 @@ public class HomeworkInfoManage {
         Gson gson = new Gson();
         String jsonObject = gson.toJson(sendAnswerBean);
         Tools.print(TAG, "提交的json为:" + jsonObject);
-        mService.sendStudentObjectiveHomework(jsonObject, new ICallListener<String>() {
+        mService.sendStudentObjectiveHomework(jsonObject, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 mIHomeworkInfoView.hiddenLoading();
@@ -434,7 +434,7 @@ public class HomeworkInfoManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIHomeworkInfoView.hiddenLoading();
             }
         });
@@ -460,7 +460,7 @@ public class HomeworkInfoManage {
 
     public void updateStudentHomework() {
         mIHomeworkInfoView.showLoading(R.string.loading_data);
-        mService.updateStudentHomework(mStudentHomeworkBean.getWorkId(), new ICallListener<String>() {
+        mService.updateStudentHomework(mStudentHomeworkBean.getWorkId(), new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -484,7 +484,7 @@ public class HomeworkInfoManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIHomeworkInfoView.showToastMsg(R.string.error_connection);
                 mIHomeworkInfoView.hiddenLoading();
             }

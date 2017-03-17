@@ -1,31 +1,27 @@
 [
     {
         "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_btn_colored_borderless_text_material.xml",
-        "source": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
+        "source": "C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
     },
     {
         "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_switch_track.xml",
-        "source": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_switch_track.xml"
+        "source": "C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\color-v23\\abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_spinner.xml",
+        "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_spinner.xml"
     },
     {
         "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_spinner.xml",
-        "source": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_spinner.xml"
+        "source": "C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\color-v23\\abc_tint_spinner.xml"
     },
     {
         "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_switch_track.xml",
         "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_switch_track.xml"
     },
     {
-        "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_edittext.xml",
-        "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_edittext.xml"
-    },
-    {
         "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_seek_thumb.xml",
-        "source": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_seek_thumb.xml"
-    },
-    {
-        "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_btn_checkable.xml",
-        "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_btn_checkable.xml"
+        "source": "C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\color-v23\\abc_tint_seek_thumb.xml"
     },
     {
         "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
@@ -33,42 +29,46 @@
     },
     {
         "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_edittext.xml",
-        "source": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_edittext.xml"
-    },
-    {
-        "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_switch_thumb.xml",
-        "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_switch_thumb.xml"
-    },
-    {
-        "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_btn_checkable.xml",
-        "source": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_btn_checkable.xml"
-    },
-    {
-        "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_default.xml",
-        "source": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_default.xml"
-    },
-    {
-        "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_seek_thumb.xml",
-        "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_seek_thumb.xml"
+        "source": "C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\color-v23\\abc_tint_edittext.xml"
     },
     {
         "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_btn_colored_borderless_text_material.xml",
         "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_btn_colored_borderless_text_material.xml"
     },
     {
-        "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_spinner.xml",
-        "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_spinner.xml"
+        "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_btn_checkable.xml",
+        "source": "C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\color-v23\\abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_default.xml",
+        "source": "C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\color-v23\\abc_tint_default.xml"
     },
     {
         "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_default.xml",
         "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_default.xml"
     },
     {
+        "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_seek_thumb.xml",
+        "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_edittext.xml",
+        "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_edittext.xml"
+    },
+    {
+        "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_btn_checkable.xml",
+        "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_btn_checkable.xml"
+    },
+    {
         "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_color_highlight_material.xml",
-        "source": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_color_highlight_material.xml"
+        "source": "C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\color-v23\\abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_switch_thumb.xml",
+        "source": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_switch_thumb.xml"
     },
     {
         "merged": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\color-v23\\abc_tint_switch_thumb.xml",
-        "source": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\color-v23\\abc_tint_switch_thumb.xml"
+        "source": "C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\color-v23\\abc_tint_switch_thumb.xml"
     }
 ]

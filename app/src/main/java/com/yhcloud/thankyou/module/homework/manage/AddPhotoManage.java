@@ -10,7 +10,7 @@ import android.os.Environment;
 import android.os.IBinder;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.homework.bean.StudentQuestionBean;
 import com.yhcloud.thankyou.module.image.view.BigImageActivity;
 import com.yhcloud.thankyou.module.homework.view.IAddPhotoActivityView;
@@ -156,7 +156,7 @@ public class AddPhotoManage {
         mService.sendStudentSubjectiveHomework(workId,
                 mStudentQuestionBean.getQusetionId(), content, mStudentQuestionBean.getScore(),
                 startTime, Tools.getNowDateTime(), addImageUrls,
-                new ICallListener<String>() {
+                new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -180,7 +180,7 @@ public class AddPhotoManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIAddPhotoView.showToastMsg(R.string.error_connection);
                 mIAddPhotoView.hiddenLoading();
             }
@@ -189,7 +189,7 @@ public class AddPhotoManage {
 
     public void updateStudentHomework() {
         mIAddPhotoView.showLoading(R.string.loading_data);
-        mService.updateStudentHomework(mStudentQuestionBean.getHomeworkId(), new ICallListener<String>() {
+        mService.updateStudentHomework(mStudentQuestionBean.getHomeworkId(), new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -214,7 +214,7 @@ public class AddPhotoManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIAddPhotoView.showLoading(R.string.error_connection);
                 mIAddPhotoView.hiddenLoading();
             }

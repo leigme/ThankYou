@@ -1,8 +1,9 @@
-package com.yhcloud.thankyou.logic;
+package com.yhcloud.thankyou.service.logic.mimplement;
 
 import android.util.Log;
 
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.service.logic.minterface.IClassLogic;
 import com.yhcloud.thankyou.utils.Constant;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -18,7 +19,7 @@ public class ClassLogic implements IClassLogic {
     private String TAG = getClass().getSimpleName();
 
     @Override
-    public void getClassPeopleListForService(String userId, String classId, String updateTime, final ICallListener<String> iCallListener) {
+    public void getClassPeopleListForService(String userId, String classId, String updateTime, final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GETCLASSPEOPLELIST)
                 .addParams("userId", userId)
@@ -29,13 +30,13 @@ public class ClassLogic implements IClassLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.e(TAG, "getClassPeopleListForService-请求失败:" + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e(TAG, "getClassPeopleListForService-请求成功:" + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }

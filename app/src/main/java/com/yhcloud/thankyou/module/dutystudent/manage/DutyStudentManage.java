@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.dutystudent.view.IDutyStudentActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 
@@ -52,7 +52,7 @@ public class DutyStudentManage {
     }
 
     public void getDutyStudentList() {
-        mService.getDutyStudentList(new ICallListener<String>() {
+        mService.getDutyStudentList(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -81,7 +81,7 @@ public class DutyStudentManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIDutyStudentView.showToastMsg(R.string.error_connection);
                 mIDutyStudentView.showDefault(true);
             }

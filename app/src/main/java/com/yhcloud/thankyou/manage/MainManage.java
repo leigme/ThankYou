@@ -19,8 +19,8 @@ import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.logic.IMainLogic;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.service.logic.minterface.IMainLogic;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
@@ -102,7 +102,7 @@ public class MainManage {
     }
 
     private void getFriendList(String updateTime) {
-        mService.getFriendList(updateTime, new ICallListener<String>() {
+        mService.getFriendList(updateTime, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 Tools.print(TAG, "获取用户好友列表信息成功...");
@@ -131,7 +131,7 @@ public class MainManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 Tools.print(TAG, "获取用户好友列表信息失败...");
                 mService.setCanMessage(false);
             }

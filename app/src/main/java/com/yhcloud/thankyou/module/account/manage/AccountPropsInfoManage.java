@@ -8,7 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.view.IPropsInfoView;
 import com.yhcloud.thankyou.module.account.view.IntegralActivity;
@@ -91,7 +91,7 @@ public class AccountPropsInfoManage {
     public void buyProps() {
         mIPropsInfoView.showLoading(R.string.exchangeing);
         int i = mIPropsInfoView.getBuynum();
-        mService.buyProps(mAccountPropBean.getPropId(), String.valueOf(i), new ICallListener<String>() {
+        mService.buyProps(mAccountPropBean.getPropId(), String.valueOf(i), new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -110,7 +110,7 @@ public class AccountPropsInfoManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIPropsInfoView.showResult("购买失败", "网络故障,请稍后再试");
                 mIPropsInfoView.hiddenLoading();
             }

@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
 import com.yhcloud.thankyou.module.account.view.IIntegralView;
 import com.yhcloud.thankyou.module.account.view.RechargeActivity;
@@ -67,7 +67,7 @@ public class AccountIntegralManage {
 
     public void getUserCurrency() {
         mIIntegralView.showLoading(R.string.loading_data);
-        mService.getUserCurrency(new ICallListener<String>() {
+        mService.getUserCurrency(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -83,7 +83,7 @@ public class AccountIntegralManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIIntegralView.hiddenLoading();
             }
 
@@ -94,7 +94,7 @@ public class AccountIntegralManage {
     public void getIntegralListData() {
         mIIntegralView.showLoading(R.string.loading_data);
         mBeen = new ArrayList<>();
-        mService.getIntegralExchangeList(new ICallListener<String>() {
+        mService.getIntegralExchangeList(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -115,7 +115,7 @@ public class AccountIntegralManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIIntegralView.showToastMsg(R.string.error_connection);
                 mIIntegralView.hiddenLoading();
             }
@@ -124,7 +124,7 @@ public class AccountIntegralManage {
 
     public void send() {
         mIIntegralView.showLoading(R.string.loading_data);
-        mService.getUserCurrency(new ICallListener<String>() {
+        mService.getUserCurrency(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -150,7 +150,7 @@ public class AccountIntegralManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIIntegralView.hiddenLoading();
                 mIIntegralView.showDialog(false, "", "");
             }
@@ -161,7 +161,7 @@ public class AccountIntegralManage {
         mIIntegralView.showLoading(R.string.exchangeing);
         for (AccountIntegralBean bean: mBeen) {
             if (bean.isSelected()) {
-                mService.getUserCoin(bean.getMoney(), bean.getCoin(), new ICallListener<String>() {
+                mService.getUserCoin(bean.getMoney(), bean.getCoin(), new ICallBackListener<String>() {
                     @Override
                     public void callSuccess(String s) {
                         mIIntegralView.showDialogMsg();
@@ -170,7 +170,7 @@ public class AccountIntegralManage {
                     }
 
                     @Override
-                    public void callFailed() {
+                    public void callFailure() {
                         mIIntegralView.hiddenLoading();
                     }
                 });

@@ -1,8 +1,9 @@
-package com.yhcloud.thankyou.logic;
+package com.yhcloud.thankyou.service.logic.mimplement;
 
 import android.util.Log;
 
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.service.logic.minterface.ILoginLogic;
 import com.yhcloud.thankyou.utils.Constant;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -18,7 +19,7 @@ public class LoginLogic implements ILoginLogic {
     private String TAG = getClass().getSimpleName();
 
     @Override
-    public void login(String username, String password, final ICallListener<String> iCallListener) {
+    public void login(String username, String password, final ICallBackListener<String> iCallBackListener) {
 //        登录逻辑
        OkHttpUtils.post()
                 .url(Constant.LOGIN)
@@ -29,13 +30,13 @@ public class LoginLogic implements ILoginLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.e(TAG, "请求失败..." + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e(TAG, "请求成功!!!" + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }

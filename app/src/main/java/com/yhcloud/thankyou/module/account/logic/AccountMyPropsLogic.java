@@ -2,7 +2,7 @@ package com.yhcloud.thankyou.module.account.logic;
 
 import android.util.Log;
 
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.utils.Constant;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -17,7 +17,7 @@ public class AccountMyPropsLogic {
 
     private String TAG = getClass().getSimpleName();
 
-    public void getUserPropsForService(String userId, final ICallListener<String> iCallListener) {
+    public void getUserPropsForService(String userId, final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GETUSERPROPSLIST)
                 .addParams("userId", userId)
@@ -26,18 +26,18 @@ public class AccountMyPropsLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.e(TAG, "getUserPropsForService-请求失败: " + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e(TAG, "getUserPropsForService-请求成功: " + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }
 
-    public void givePropsToPeople(String userId, String recvUserId, String propsId, int propsNum, final ICallListener<String> iCallListener) {
+    public void givePropsToPeople(String userId, String recvUserId, String propsId, int propsNum, final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GIVEPROPSTOPEOPLE)
                 .addParams("userId", userId)
@@ -49,13 +49,13 @@ public class AccountMyPropsLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.e(TAG, "givePropsToPeople-请求失败:" + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e(TAG, "givePropsToPeople-请求成功:" + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }

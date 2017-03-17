@@ -13,7 +13,7 @@ import com.hyphenate.easeui.EaseConstant;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
 import com.yhcloud.thankyou.bean.UserRoleBean;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.chat.view.EaseChatActivity;
 import com.yhcloud.thankyou.module.detailinfo.bean.DetailPeopleInfoBean;
 import com.yhcloud.thankyou.module.detailinfo.view.IDetailPeopleActivityView;
@@ -66,7 +66,7 @@ public class DetailPeopleManage {
     }
 
     public void getDetailData() {
-        mService.getDetailInfo(uId, new ICallListener<String>() {
+        mService.getDetailInfo(uId, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -126,7 +126,7 @@ public class DetailPeopleManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIDetailPeopleView.hiddenLoading();
             }
         });

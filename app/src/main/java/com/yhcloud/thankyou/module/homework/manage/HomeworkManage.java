@@ -11,7 +11,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
 import com.yhcloud.thankyou.module.homework.bean.TeacherHomeworkBean;
 import com.yhcloud.thankyou.module.homework.view.AddHomeworkActivity;
@@ -83,7 +83,7 @@ public class HomeworkManage {
 
     public void getTeacherHomeworkList() {
         mIHomeworkView.showLoading(R.string.loading_data);
-        mService.getTeacherHomeworkList(pageNum, new ICallListener<String>() {
+        mService.getTeacherHomeworkList(pageNum, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -118,7 +118,7 @@ public class HomeworkManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIHomeworkView.hiddenLoading();
                 mIHomeworkView.completeRefresh();
                 mIHomeworkView.showToastMsg(R.string.error_connection);
@@ -134,7 +134,7 @@ public class HomeworkManage {
 
     public void getStudentHomeworkList() {
         mIHomeworkView.showLoading(R.string.loading_data);
-        mService.getStudentHomeworkList(pageNum, new ICallListener<String>() {
+        mService.getStudentHomeworkList(pageNum, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -169,7 +169,7 @@ public class HomeworkManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mIHomeworkView.completeRefresh();
                 mIHomeworkView.hiddenLoading();
                 mIHomeworkView.showToastMsg(R.string.error_connection);

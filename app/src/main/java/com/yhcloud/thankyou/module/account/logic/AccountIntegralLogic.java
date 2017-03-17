@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.account.logic;
 
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -16,7 +16,7 @@ public class AccountIntegralLogic {
 
     private String TAG = getClass().getSimpleName();
 
-    public void getIntegralList(final ICallListener<String> iCallListener) {
+    public void getIntegralList(final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GETEXCHANGELIST)
                 .addParams("type", "1")
@@ -25,18 +25,18 @@ public class AccountIntegralLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getIntegralList-请求失败:" + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getIntegralList-请求成功:" + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }
 
-    public void getUserCoin(final String userId, String uCoin, String coin, final ICallListener<String> iCallListener) {
+    public void getUserCoin(final String userId, String uCoin, String coin, final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GETUSERCOIN)
                 .addParams("userId", userId)
@@ -47,13 +47,13 @@ public class AccountIntegralLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getUserCoin-请求失败:" + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getUserCoin-请求成功:" + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }

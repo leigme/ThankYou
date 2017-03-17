@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.dutystudent.logic;
 
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -16,7 +16,7 @@ public class DutyStudentLogic {
 
     private String TAG = getClass().getSimpleName();
 
-    public void getDutyStudentList(String classId, final ICallListener<String> iCallListener) {
+    public void getDutyStudentList(String classId, final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GETDUTYSTUDENT)
                 .addParams("classId", classId)
@@ -25,13 +25,13 @@ public class DutyStudentLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getDutyStudentList-请求失败:" + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getDutyStudentList-请求成功:" + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }

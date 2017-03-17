@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TermBean;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.todayrecipes.bean.RecipesBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesJsonBean;
@@ -71,7 +71,7 @@ public class TodayRecipesManage {
     }
 
     public void getTermData() {
-        mService.getTermList(new ICallListener<String>() {
+        mService.getTermList(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -132,7 +132,7 @@ public class TodayRecipesManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mITodayRecipesView.showToastMsg(R.string.error_connection);
             }
         });
@@ -140,7 +140,7 @@ public class TodayRecipesManage {
 
     public void getRecipesData() {
         mITodayRecipesView.showLoading(R.string.loading_data);
-        mService.getRecipesData(new ICallListener<String>() {
+        mService.getRecipesData(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -167,7 +167,7 @@ public class TodayRecipesManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mITodayRecipesView.showToastMsg(R.string.error_connection);
                 mITodayRecipesView.hiddenLoading();
             }
@@ -337,7 +337,7 @@ public class TodayRecipesManage {
 
     public void getRecipesData(String termId, String weekId) {
         mITodayRecipesView.showLoading(R.string.loading_data);
-        mService.getRecipesData(termId, weekId, new ICallListener<String>() {
+        mService.getRecipesData(termId, weekId, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -365,7 +365,7 @@ public class TodayRecipesManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mITodayRecipesView.showToastMsg(R.string.error_connection);
                 mITodayRecipesView.hiddenLoading();
             }

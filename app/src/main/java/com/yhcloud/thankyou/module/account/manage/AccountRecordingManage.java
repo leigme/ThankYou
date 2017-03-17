@@ -10,7 +10,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.account.bean.AccountRecordingBean;
 import com.yhcloud.thankyou.module.account.view.IRecordingView;
 import com.yhcloud.thankyou.service.LogicService;
@@ -61,7 +61,7 @@ public class AccountRecordingManage {
         if (pageNow < pageCount || -1 == pageCount) {
             mIRecordingView.showLoading(R.string.loading_data);
             Tools.print(TAG, "下拉刷新");
-            mService.getUserRecordingList(pageNow, new ICallListener<String>() {
+            mService.getUserRecordingList(pageNow, new ICallBackListener<String>() {
                 @Override
                 public void callSuccess(String s) {
                     try {
@@ -92,7 +92,7 @@ public class AccountRecordingManage {
                 }
 
                 @Override
-                public void callFailed() {
+                public void callFailure() {
                     mIRecordingView.showToastMsg(R.string.error_connection);
                     mIRecordingView.hiddenLoading();
                 }

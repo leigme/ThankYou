@@ -1,10 +1,14 @@
 package com.yhcloud.thankyou.utils;
 
+import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.os.IBinder;
 import android.util.Log;
 import android.util.SparseArray;
 import android.widget.ImageView;
@@ -12,9 +16,11 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.minterface.IBindBaseServiceCallBack;
 import com.yhcloud.thankyou.module.aboutus.view.AboutUsActivity;
 import com.yhcloud.thankyou.module.account.view.AccountActivity;
 import com.yhcloud.thankyou.module.allfuncation.view.AllFuncationActivity;
+import com.yhcloud.thankyou.module.chat.view.MessageActivity;
 import com.yhcloud.thankyou.module.classcadre.view.ClassCadreActivity;
 import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationActivity;
 import com.yhcloud.thankyou.module.classteachers.view.ClassTeacherListActivity;
@@ -23,8 +29,9 @@ import com.yhcloud.thankyou.module.dutystudent.view.DutyStudentActivity;
 import com.yhcloud.thankyou.module.homework.view.HomeworkActivity;
 import com.yhcloud.thankyou.module.propslist.view.PropsListActivity;
 import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementActivity;
-import com.yhcloud.thankyou.module.chat.view.MessageActivity;
 import com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesActivity;
+import com.yhcloud.thankyou.service.BaseService;
+import com.yhcloud.thankyou.service.LogicService;
 import com.yuyh.library.imgsel.ImageLoader;
 import com.yuyh.library.imgsel.ImgSelConfig;
 
@@ -302,5 +309,22 @@ public class Tools {
     //环信聊天界面分类
     public enum ChatType {
         SINGLE, GROUP;
+    }
+
+    //获得服务方法
+    public static void bingBaseService(Context context, final IBindBaseServiceCallBack iBindBaseServiceCallBack) {
+        Intent intent = new Intent(context, LogicService.class);
+        context.bindService(intent, new ServiceConnection() {
+            @Override
+            public void onServiceConnected(ComponentName name, IBinder service) {
+                LogicService logicService = (LogicService) ((BaseService.MyBinder)service).getService();
+                iBindBaseServiceCallBack.bindBaseServiceSuccess(logicService);
+            }
+
+            @Override
+            public void onServiceDisconnected(ComponentName name) {
+                iBindBaseServiceCallBack.bindBaseServiceFailure();
+            }
+        }, Service.BIND_AUTO_CREATE);
     }
 }

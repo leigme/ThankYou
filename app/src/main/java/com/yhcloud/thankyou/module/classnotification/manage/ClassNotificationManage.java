@@ -12,7 +12,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationDetailActivity;
 import com.yhcloud.thankyou.module.classnotification.view.IClassNotificationActivityView;
@@ -97,7 +97,7 @@ public class ClassNotificationManage {
     //获取数据
     public void getClassNotificationData(int page) {
         mIClassNotificationView.showLoading(R.string.loading_data);
-        mService.getClassNotificationData(page, new ICallListener<String>() {
+        mService.getClassNotificationData(page, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -147,7 +147,7 @@ public class ClassNotificationManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 if (refreshing) {
                     mIClassNotificationView.completeRefreshList();
                     refreshing = false;

@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.account.bean.AccountFunctionBean;
 import com.yhcloud.thankyou.module.account.view.IAccountView;
 import com.yhcloud.thankyou.module.account.view.IntegralActivity;
@@ -68,7 +68,7 @@ public class AccountManage {
 
     public void showSpreadList(String updateTime) {
         mIAccountView.showLoading(R.string.loading_data);
-        mService.getBannerImages(updateTime, new ICallListener<String>() {
+        mService.getBannerImages(updateTime, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -99,7 +99,7 @@ public class AccountManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 if (3 > refreshSpreadNum) {
                     showSpreadList("-1");
                     refreshSpreadNum += 1;

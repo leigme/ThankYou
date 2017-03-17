@@ -15,7 +15,7 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.minterface.IOnClickListener;
 import com.yhcloud.thankyou.module.propslist.adapter.PropsListAdapter;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListBean;
@@ -72,7 +72,7 @@ public class PropsListManage {
     }
 
     public void getPropsListData(final int typeId, int pageNum) {
-        mService.getPropsList(typeId, pageNum, new ICallListener<String>() {
+        mService.getPropsList(typeId, pageNum, new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -113,7 +113,7 @@ public class PropsListManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
 
             }
         });

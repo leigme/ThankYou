@@ -1,9 +1,10 @@
-package com.yhcloud.thankyou.logic;
+package com.yhcloud.thankyou.service.logic.mimplement;
 
 import android.util.Log;
 
 import com.yhcloud.thankyou.bean.ClassInfoBean;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.service.logic.minterface.IMainLogic;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -22,7 +23,7 @@ public class MainLogic implements IMainLogic {
     private String TAG = getClass().getSimpleName();
 
     @Override
-    public void getClassInfoList(String userId, final ICallListener<ArrayList<ClassInfoBean>> iCallListener) {
+    public void getClassInfoList(String userId, final ICallBackListener<ArrayList<ClassInfoBean>> iCallBackListener) {
         OkHttpUtils.post()
                 .url("")
                 .addParams("userId", userId)
@@ -31,7 +32,7 @@ public class MainLogic implements IMainLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.e(TAG, "getClassInfoList-请求失败:" + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
@@ -40,12 +41,12 @@ public class MainLogic implements IMainLogic {
                         ArrayList<ClassInfoBean> classInfoBeen = new ArrayList<>();
                         ClassInfoBean classInfoBean = new ClassInfoBean();
                         classInfoBeen.add(classInfoBean);
-                        iCallListener.callSuccess(classInfoBeen);
+                        iCallBackListener.callSuccess(classInfoBeen);
                     }
                 });
     }
 
-    public void getFriendList(String userId, String updateTime, final ICallListener<String> iCallListener) {
+    public void getFriendList(String userId, String updateTime, final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GETFRIENDLIST)
                 .addParams("id", userId)
@@ -55,18 +56,18 @@ public class MainLogic implements IMainLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getFriendList-请求失败:" + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getFriendList-请求成功:" + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }
 
-    public void getTermListForService(String userId, final ICallListener<String> iCallListener) {
+    public void getTermListForService(String userId, final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GETTERMLIST)
                 .addParams("userid", userId)
@@ -75,18 +76,18 @@ public class MainLogic implements IMainLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getTermListForService-请求失败: " + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getTermListForService-请求成功: " + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }
 
-    public void getWeekListForService(String termId, final ICallListener<String> iCallListener) {
+    public void getWeekListForService(String termId, final ICallBackListener<String> iCallBackListener) {
         OkHttpUtils.post()
                 .url(Constant.GETWEEKLIST)
                 .addParams("termId", termId)
@@ -95,13 +96,13 @@ public class MainLogic implements IMainLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getWeekListForService-请求失败: " + e);
-                        iCallListener.callFailed();
+                        iCallBackListener.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getWeekListForService-请求成功: " + response);
-                        iCallListener.callSuccess(response);
+                        iCallBackListener.callSuccess(response);
                     }
                 });
     }

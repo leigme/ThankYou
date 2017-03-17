@@ -10,7 +10,7 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallListener;
+import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumDataBean;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
 import com.yhcloud.thankyou.module.curriculum.view.ICurriculumActivityView;
@@ -60,7 +60,7 @@ public class CurriculumManage {
     }
 
     public void getClassCurriculum() {
-        mService.getClassCurriculum(new ICallListener<String>() {
+        mService.getClassCurriculum(new ICallBackListener<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -140,7 +140,7 @@ public class CurriculumManage {
             }
 
             @Override
-            public void callFailed() {
+            public void callFailure() {
                 mICurriculumView.initViewStub("本班没有排课");
                 mICurriculumView.hiddenLoading();
             }

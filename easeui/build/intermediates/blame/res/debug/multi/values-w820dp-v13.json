@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+        "outputFile": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 108
                 },
                 "from": {
-                    "file": "D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\values-w820dp\\ease_dimens.xml",
+                    "file": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\values-w820dp\\ease_dimens.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -24,7 +24,7 @@
         ]
     },
     {
-        "outputFile": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+        "outputFile": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/incremental/mergeDebugResources/merged.dir/values-w820dp-v13/values-w820dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -35,7 +35,31 @@
                     "endOffset": 108
                 },
                 "from": {
-                    "file": "D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\values-w820dp\\ease_dimens.xml",
+                    "file": "/Users/leig/Desktop/Thankyou/easeui/res/values-w820dp/ease_dimens.xml",
+                    "position": {
+                        "startLine": 7,
+                        "startColumn": 4,
+                        "startOffset": 305,
+                        "endColumn": 57,
+                        "endOffset": 358
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-w820dp-v13\\values-w820dp-v13.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 57,
+                    "endOffset": 108
+                },
+                "from": {
+                    "file": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\values-w820dp\\ease_dimens.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,

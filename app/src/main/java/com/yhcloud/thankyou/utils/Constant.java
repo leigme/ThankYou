@@ -39,6 +39,7 @@ public class Constant {
 
     //回调标志
     public static final int ALLFUNCATION_REQUEST = 101;
+    public static final int ADDCLASSNOTIFICATION = 102;
 
 
 //=================//

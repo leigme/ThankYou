@@ -12,12 +12,12 @@ import android.os.IBinder;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.homework.bean.StudentQuestionBean;
-import com.yhcloud.thankyou.module.image.view.BigImageActivity;
 import com.yhcloud.thankyou.module.homework.view.IAddPhotoActivityView;
+import com.yhcloud.thankyou.module.image.view.BigImageActivity;
+import com.yhcloud.thankyou.module.image.view.MyImgSelActivity;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yuyh.library.imgsel.ImgSelActivity;
 import com.yuyh.library.imgsel.ImgSelConfig;
 
 import org.json.JSONException;
@@ -104,7 +104,7 @@ public class AddPhotoManage {
                 mIAddPhotoView.showToastMsg("最多添加9张图片");
             } else {
                 config.maxNum = 10 - mBeen.size();
-                ImgSelActivity.startActivity(mActivity, config, REQUEST_PHOTO);
+                MyImgSelActivity.startActivity(mActivity, config, REQUEST_PHOTO);
             }
         }
     }
@@ -118,8 +118,9 @@ public class AddPhotoManage {
     }
 
     public void result(int requestCode, int resultCode, Intent data) {
+        //从图库里
         if (requestCode == REQUEST_PHOTO && resultCode == mActivity.RESULT_OK && data != null) {
-            List<String> pathList = data.getStringArrayListExtra(ImgSelActivity.INTENT_RESULT);
+            List<String> pathList = data.getStringArrayListExtra(MyImgSelActivity.INTENT_RESULT);
             int iNum = mBeen.size();
             if (iNum + pathList.size() <= 10) {
                 mBeen.addAll(0, pathList);

@@ -8,4 +8,61 @@
     android:orientation="vertical"
     tools:context="com.yhcloud.thankyou.module.classnotification.view.AddClassNotificationDetailActivity">
     <include layout="@layout/include_header"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlack"
+            android:text="标题: "/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/et_addclassnotice_title"
+            android:layout_marginRight="10dp"
+            android:textSize="18sp"
+            android:lines="1"
+            android:hint="请输入班级通知标题..."/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/colorGray"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="top"
+            android:textSize="18sp"
+            android:textColor="@color/colorBlack"
+            android:text="内容: "/>
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:id="@+id/et_addclassnotice_content"
+            android:gravity="top"
+            android:textSize="18sp"
+            android:lines="10"
+            android:hint="请输入班级通知内容..."/>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/colorGray"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/rv_addclassnotice_list">
+    </android.support.v7.widget.RecyclerView>
 </LinearLayout>

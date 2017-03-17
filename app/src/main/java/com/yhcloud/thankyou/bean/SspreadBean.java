@@ -6,7 +6,7 @@ import java.io.Serializable;
  * Created by leig on 2016/11/20.
  */
 
-public class SpreadBean implements Serializable {
+public class SspreadBean implements Serializable {
 
     private String Id;
     private String SummaryPicUrl;

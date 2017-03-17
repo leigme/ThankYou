@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class LoginManage extends ABaseManager implements IBindBaseServiceCallBack, ICallBackListener<String>, EMCallBack {
 
-    private String TAG = getClass().getSimpleName();
+    private String TAG = LoginManage.class.getName();
 
     private ILoginActivityView mILoginView;
     private Activity mActivity;

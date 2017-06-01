@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class MineFunctionAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<FunctionBean> mBeen;
-    private SubmitCallBack mSubmitCallBack;
+    private ItemClinkListener mItemClinkListener;
     private static final int TYPE_DATA = 1;
     private static final int TYPE_LINE = 0;
 
@@ -52,12 +52,12 @@ public class MineFunctionAdapter extends RecyclerView.Adapter {
             final MyViewHolder viewHolder = (MyViewHolder) holder;
             viewHolder.ivImage.setImageResource(mBeen.get(position).getIcon());
             viewHolder.tvTitle.setText(mBeen.get(position).getTitle());
-            if (null != mSubmitCallBack) {
+            if (null != mItemClinkListener) {
                 viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         int pos = viewHolder.getLayoutPosition();
-                        mSubmitCallBack.OnItemClickListener(viewHolder.itemView, pos);
+                        mItemClinkListener.OnItemClickListener(viewHolder.itemView, pos);
                     }
                 });
             }
@@ -81,8 +81,8 @@ public class MineFunctionAdapter extends RecyclerView.Adapter {
         }
     }
 
-    public void setIOnClickListener(SubmitCallBack submitCallBack) {
-        this.mSubmitCallBack = submitCallBack;
+    public void setIOnClickListener(ItemClinkListener itemClinkListener) {
+        this.mItemClinkListener = itemClinkListener;
     }
 
     public void refreshData(ArrayList<FunctionBean> list) {

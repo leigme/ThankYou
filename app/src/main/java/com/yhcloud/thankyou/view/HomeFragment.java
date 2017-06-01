@@ -17,7 +17,7 @@ import com.yhcloud.thankyou.adapter.HomeSpreadAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.comm.BaseFragment;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.manage.HomeManage;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.GlideImageLoader;
@@ -181,7 +181,7 @@ public class HomeFragment extends BaseFragment implements HomeActivityView {
                 }
             };
             hfla = new HomeFunctionListAdapter(getActivity(), list, rcb);
-            hfla.setIOnClickListener(new SubmitCallBack() {
+            hfla.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goFunction(position);
@@ -250,6 +250,31 @@ public class HomeFragment extends BaseFragment implements HomeActivityView {
 
     public void setFunctionList(ArrayList<FunctionBean> list) {
         mManage.setBeen(list);
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 
     /**

@@ -94,4 +94,34 @@ public class PropsListActivity extends BaseActivity implements PropsListActivity
             }
         });
     }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
+    }
 }

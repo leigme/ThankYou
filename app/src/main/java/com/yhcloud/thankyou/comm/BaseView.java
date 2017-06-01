@@ -1,5 +1,7 @@
 package com.yhcloud.thankyou.comm;
 
+import android.view.View;
+
 /**
  * 基础视图接口
  * @author leig
@@ -7,6 +9,41 @@ package com.yhcloud.thankyou.comm;
  */
 
 public interface BaseView {
+
+    /**
+     * 返回视图资源编号
+     * @author leig
+     * @version 20170301
+     */
+    int getLayoutId();
+
+    /**
+     * 初始化视图集合
+     * @author leig
+     * @version 20170301
+     */
+    void initViews();
+
+    /**
+     * 初始化事件集合
+     * @author leig
+     * @version 20170301
+     */
+    void initEvents();
+
+    /**
+     * 初始化页面数据
+     * @author leig
+     * @version 20170301
+     */
+    void initDatas();
+
+    /**
+     * 点击事件
+     * @author leig
+     * @version 20170301
+     */
+    void processClick(View view);
 
     /**
      * 显示加载等待

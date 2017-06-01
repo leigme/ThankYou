@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkListAdapter;
 import com.yhcloud.thankyou.module.homework.adapter.TeacherHomeworkListAdapter;
 import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
@@ -133,7 +133,7 @@ public class HomeworkActivity extends BaseActivity implements HomeworkActivityVi
                 }
             });
             rvHomeworkList.setAdapter(thla);
-            thla.setIOnClickListener(new SubmitCallBack() {
+            thla.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goHomeworkInfo(position);
@@ -180,7 +180,7 @@ public class HomeworkActivity extends BaseActivity implements HomeworkActivityVi
                 }
             });
             rvHomeworkList.setAdapter(shla);
-            shla.setIOnClickListener(new SubmitCallBack() {
+            shla.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goHomeworkInfo(position);
@@ -206,5 +206,35 @@ public class HomeworkActivity extends BaseActivity implements HomeworkActivityVi
         super.onActivityResult(requestCode, resultCode, data);
         Tools.print(TAG, "返回列表页面了");
         mManage.refreshData();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

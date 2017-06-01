@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.utils.Constant;
 
@@ -25,7 +25,7 @@ public class AccountPropAdapter extends RecyclerView.Adapter<AccountPropAdapter.
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<AccountPropBean> mBeen;
-    private SubmitCallBack mSubmitCallBack;
+    private ItemClinkListener mItemClinkListener;
 
     public AccountPropAdapter(Context context, ArrayList<AccountPropBean> list) {
         this.mContext = context;
@@ -49,12 +49,12 @@ public class AccountPropAdapter extends RecyclerView.Adapter<AccountPropAdapter.
         holder.propsName.setText(mBeen.get(position).getPropName());
         holder.propsIntroduction.setText("道具简介: " + mBeen.get(position).getDescription());
         holder.propsCoin.setText(mBeen.get(position).getPropPrice());
-        if (null != mSubmitCallBack) {
+        if (null != mItemClinkListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
+                    mItemClinkListener.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -82,7 +82,7 @@ public class AccountPropAdapter extends RecyclerView.Adapter<AccountPropAdapter.
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(SubmitCallBack onClickListener) {
-        this.mSubmitCallBack = onClickListener;
+    public void setIOnClickListener(ItemClinkListener onClickListener) {
+        this.mItemClinkListener = onClickListener;
     }
 }

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.minterface.IButtonOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.homework.adapter.HomeworkInfoViewPagerAdapter;
 import com.yhcloud.thankyou.module.homework.bean.HomeworkInfoViewPagerBean;
 import com.yhcloud.thankyou.module.homework.manage.HomeworkInfoManage;
@@ -141,7 +141,7 @@ public class HomeworkInfoActivity extends BaseActivity implements HomeworkInfoAc
     @Override
     public void showDialog() {
         super.showDialog("", "提交之后将无法更改,是否确认提交本次作业？");
-        this.setIButtonOnClickListener(new IButtonOnClickListener() {
+        this.setSubmitCallBack(new SubmitCallBack() {
             @Override
             public void btnOnClick() {
                 mManage.updateStudentHomework();
@@ -153,5 +153,35 @@ public class HomeworkInfoActivity extends BaseActivity implements HomeworkInfoAc
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mManage.refreshData(data);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

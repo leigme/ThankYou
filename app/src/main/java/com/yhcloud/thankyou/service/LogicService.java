@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
+import com.yhcloud.thankyou.comm.BaseService;
 import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.service.logic.mimplement.ClassLogic;
 import com.yhcloud.thankyou.service.logic.mimplement.HomeLogic;

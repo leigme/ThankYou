@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountIntegralListAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
 import com.yhcloud.thankyou.module.account.manage.AccountIntegralManage;
@@ -96,7 +96,7 @@ public class IntegralActivity extends BaseActivity implements IntegralView {
         if (null == aila) {
             aila = new AccountIntegralListAdapter(this, list);
             rvList.setLayoutManager(new GridLayoutManager(this, 3));
-            aila.setIOnClickListener(new SubmitCallBack() {
+            aila.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     for (AccountIntegralBean bean: list) {
@@ -211,5 +211,35 @@ public class IntegralActivity extends BaseActivity implements IntegralView {
             }
         });
         dialog.show();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

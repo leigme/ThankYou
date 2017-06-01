@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.schoolannouncement.adapter.SchoolAnnouncementListAdapter;
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
 import com.yhcloud.thankyou.module.schoolannouncement.manage.SchoolAnnouncementManage;
@@ -122,7 +122,7 @@ public class SchoolAnnouncementActivity extends BaseActivity implements SchoolAn
                 }
             });
             rvSchoolAnnouncementList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
-            sala.setIOnClickListener(new SubmitCallBack() {
+            sala.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goSchoolAnnouncementDetail(position);
@@ -137,5 +137,35 @@ public class SchoolAnnouncementActivity extends BaseActivity implements SchoolAn
         } else {
             sala.refreshData(list);
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

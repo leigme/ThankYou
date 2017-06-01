@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.ResponseCallBack;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.propslist.adapter.PropsListAdapter;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListBean;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListViewBean;
@@ -146,7 +146,7 @@ public class PropsListManage {
                             }
                         }
                     });
-                    plaSendAdapter.setIOnClickListener(new SubmitCallBack() {
+                    plaSendAdapter.setIOnClickListener(new ItemClinkListener() {
                         @Override
                         public void OnItemClickListener(View view, int position) {
 
@@ -188,7 +188,7 @@ public class PropsListManage {
                             }
                         }
                     });
-                    plaReceiveAdapter.setIOnClickListener(new SubmitCallBack() {
+                    plaReceiveAdapter.setIOnClickListener(new ItemClinkListener() {
                         @Override
                         public void OnItemClickListener(View view, int position) {
 

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class TeacherHomeworkSubjectiveListAdapter extends RecyclerView.Adapter<T
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<String> mArrayList;
-    private SubmitCallBack mSubmitCallBack;
+    private ItemClinkListener mItemClinkListener;
 
     public TeacherHomeworkSubjectiveListAdapter(Context context, ArrayList<String> list) {
         this.mContext = context;
@@ -40,12 +40,12 @@ public class TeacherHomeworkSubjectiveListAdapter extends RecyclerView.Adapter<T
     @Override
     public void onBindViewHolder(final SubjectiveViewHolder holder, int position) {
         Tools.GlideImageUrl(mContext, mArrayList.get(position), holder.mImageView);
-        if (null != mSubmitCallBack) {
+        if (null != mItemClinkListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
+                    mItemClinkListener.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -61,8 +61,8 @@ public class TeacherHomeworkSubjectiveListAdapter extends RecyclerView.Adapter<T
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(SubmitCallBack SubmitCallBack) {
-        this.mSubmitCallBack = SubmitCallBack;
+    public void setIOnClickListener(ItemClinkListener ItemClinkListener) {
+        this.mItemClinkListener = ItemClinkListener;
     }
 
     public static class SubjectiveViewHolder extends RecyclerView.ViewHolder {

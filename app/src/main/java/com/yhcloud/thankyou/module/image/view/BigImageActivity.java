@@ -78,6 +78,31 @@ public class BigImageActivity extends BaseActivity implements BigImageActivityVi
     }
 
     @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
+    }
+
+    @Override
     public void showLoading(int msgId) {
         hiddenLoading();
         mProgressDialog = ProgressDialog.show(this, null, getString(R.string.loading_data));
@@ -121,5 +146,10 @@ public class BigImageActivity extends BaseActivity implements BigImageActivityVi
     @Override
     public void setViewPager(int position) {
         vpImages.setCurrentItem(position);
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 }

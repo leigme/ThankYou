@@ -21,7 +21,7 @@ import com.yhcloud.thankyou.adapter.FragmentViewPagerAdapter;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
@@ -148,7 +148,7 @@ public class MainActivity extends BaseActivity implements MainActivityView,
     public void showDrawer(final ArrayList<ClassInfoBean> classInfoBeen) {
         if (null == cdla) {
             cdla = new ClassDrawerListAdapter(this, classInfoBeen);
-            cdla.setMyOnClickListener(new SubmitCallBack() {
+            cdla.setMyOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     Log.e(TAG, "设置默认班级:" + position);
@@ -291,5 +291,35 @@ public class MainActivity extends BaseActivity implements MainActivityView,
         firstClickTime = System.currentTimeMillis();
         MyToast.showToast(this, "再按一次返回键退出应用");
         return;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountMyPropsAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.manage.AccountMyPropsManage;
@@ -77,7 +77,7 @@ public class MyPropsActivity extends BaseActivity implements MyPropsView {
         if (null == ampa) {
             ampa = new AccountMyPropsAdapter(this, list, canOnClick);
             if (canOnClick) {
-                ampa.setIOnClickListener(new SubmitCallBack() {
+                ampa.setIOnClickListener(new ItemClinkListener() {
                     @Override
                     public void OnItemClickListener(View view, int position) {
                         for (AccountPropBean bean: list) {
@@ -199,6 +199,36 @@ public class MyPropsActivity extends BaseActivity implements MyPropsView {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
 
     }
 }

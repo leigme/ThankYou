@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.classnotification.adapter.ClassNotificationListAdapter;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 import com.yhcloud.thankyou.module.classnotification.manage.ClassNotificationManage;
@@ -135,7 +135,7 @@ public class ClassNotificationActivity extends BaseActivity implements ClassNoti
                     }
                 }
             });
-            cnla.setIOnClickListener(new SubmitCallBack() {
+            cnla.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goClassNotificationDetail(position);
@@ -164,5 +164,35 @@ public class ClassNotificationActivity extends BaseActivity implements ClassNoti
         super.onActivityResult(requestCode, resultCode, data);
         ArrayList<ClassNotificationBean> list = (ArrayList<ClassNotificationBean>) data.getSerializableExtra("list");
         mManage.refreshData(list);
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

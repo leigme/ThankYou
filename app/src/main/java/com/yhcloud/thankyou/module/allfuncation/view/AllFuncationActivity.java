@@ -257,4 +257,34 @@ public class AllFuncationActivity extends BaseActivity implements AllFuncationAc
         afla.setEditMode(edited, 1);
         nfla.setEditMode(edited, 0);
     }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
+    }
 }

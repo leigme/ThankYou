@@ -30,7 +30,7 @@ import com.yhcloud.thankyou.module.homework.view.HomeworkActivity;
 import com.yhcloud.thankyou.module.propslist.view.PropsListActivity;
 import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementActivity;
 import com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesActivity;
-import com.yhcloud.thankyou.service.BaseService;
+import com.yhcloud.thankyou.comm.BaseService;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yuyh.library.imgsel.ImageLoader;
 import com.yuyh.library.imgsel.ImgSelConfig;
@@ -317,7 +317,7 @@ public class Tools {
         context.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                LogicService logicService = (LogicService) ((BaseService.MyBinder)service).getService();
+                LogicService logicService = (LogicService) ((BaseService.BaseBinder)service).getService();
                 bindServiceCallBack.bindBaseServiceSuccess(logicService);
             }
 

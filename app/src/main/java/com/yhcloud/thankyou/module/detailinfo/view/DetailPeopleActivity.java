@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.detailinfo.adapter.DetailPeopleListAdapter;
 import com.yhcloud.thankyou.module.detailinfo.manage.DetailPeopleManage;
 import com.yhcloud.thankyou.utils.Tools;
@@ -139,7 +139,7 @@ public class DetailPeopleActivity extends BaseActivity implements DetailPeopleAc
         tvDefault.setVisibility(View.GONE);
         if (null == dpla) {
             dpla = new DetailPeopleListAdapter(this, list);
-            dpla.setIOnClickListener(new SubmitCallBack() {
+            dpla.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goParentChat(position);
@@ -200,5 +200,35 @@ public class DetailPeopleActivity extends BaseActivity implements DetailPeopleAc
             tvRemarkName.setVisibility(View.VISIBLE);
             etRemarkName.setVisibility(View.INVISIBLE);
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

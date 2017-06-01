@@ -16,7 +16,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.ClassPeopleListAdapter;
 import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.comm.BaseFragment;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.manage.ClassManage;
 import com.yhcloud.thankyou.service.LogicService;
 
@@ -135,7 +135,7 @@ public class ClassFragment extends BaseFragment implements ClassActivityView {
     public void showList(ArrayList<UserInfoBean> list) {
         if (null == cpla) {
             cpla = new ClassPeopleListAdapter(getActivity(), list);
-            cpla.setIOnClickListener(new SubmitCallBack() {
+            cpla.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     Log.e(TAG, MessageFormat.format("点击了第{0}个学生", position));
@@ -157,6 +157,31 @@ public class ClassFragment extends BaseFragment implements ClassActivityView {
     @Override
     public ClassManage getClassManage() {
         return mManage;
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 
     /**

@@ -163,4 +163,34 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
         et_login_username.setText(username);
         et_login_password.setText(password);
     }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
+    }
 }

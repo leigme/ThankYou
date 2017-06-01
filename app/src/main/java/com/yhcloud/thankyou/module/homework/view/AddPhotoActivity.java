@@ -17,8 +17,8 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.minterface.IButtonOnClickListener;
 import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.homework.adapter.AddPhotoListAdapter;
 import com.yhcloud.thankyou.module.homework.manage.AddPhotoManage;
 import com.yhcloud.thankyou.utils.Tools;
@@ -122,7 +122,7 @@ public class AddPhotoActivity extends BaseActivity implements AddPhotoActivityVi
         if (null == apla) {
             apla = new AddPhotoListAdapter(this, list);
             rvPhotoList.setLayoutManager(new GridLayoutManager(this, 3));
-            apla.setIOnClickListener(new SubmitCallBack() {
+            apla.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goAddPhoto(position);
@@ -164,7 +164,7 @@ public class AddPhotoActivity extends BaseActivity implements AddPhotoActivityVi
     @Override
     public void showDialog() {
         super.showDialog("", "提交之后将无法更改,是否确认提交本次作业？");
-        this.setIButtonOnClickListener(new IButtonOnClickListener() {
+        this.setSubmitCallBack(new SubmitCallBack() {
             @Override
             public void btnOnClick() {
                 mManage.updateStudentHomework();
@@ -182,5 +182,35 @@ public class AddPhotoActivity extends BaseActivity implements AddPhotoActivityVi
     @Override
     public void onBackPressed() {
         mManage.closePage();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

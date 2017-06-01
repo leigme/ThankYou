@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargeBean;
 
 import java.math.BigDecimal;
@@ -25,7 +25,7 @@ public class AccountRechargeListAdapter extends RecyclerView.Adapter<AccountRech
     private Context mContext;
     private ArrayList<AccountRechargeBean> mBeen;
     private LayoutInflater mInflater;
-    private SubmitCallBack mSubmitCallBack;
+    private ItemClinkListener mItemClinkListener;
 
     public AccountRechargeListAdapter(Context context, ArrayList<AccountRechargeBean> list) {
         this.mContext = context;
@@ -60,12 +60,12 @@ public class AccountRechargeListAdapter extends RecyclerView.Adapter<AccountRech
         } else {
             holder.llItemRechargebg.setBackgroundResource(R.mipmap.bg_recharge_item);
         }
-        if (null != mSubmitCallBack) {
+        if (null != mItemClinkListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
+                    mItemClinkListener.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -76,8 +76,8 @@ public class AccountRechargeListAdapter extends RecyclerView.Adapter<AccountRech
         return mBeen.size();
     }
 
-    public void setIOnClickListener(SubmitCallBack submitCallBack) {
-        this.mSubmitCallBack = submitCallBack;
+    public void setIOnClickListener(ItemClinkListener itemClinkListener) {
+        this.mItemClinkListener = itemClinkListener;
     }
 
     public void refreshData(ArrayList<AccountRechargeBean> list) {

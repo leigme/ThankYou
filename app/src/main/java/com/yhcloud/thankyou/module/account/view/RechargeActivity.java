@@ -16,7 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountRechargeListAdapter;
 import com.yhcloud.thankyou.module.account.adapter.AccountRechargePayListAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargeBean;
@@ -98,7 +98,7 @@ public class RechargeActivity extends BaseActivity implements RechargeView {
         if (null == arla) {
             arla = new AccountRechargeListAdapter(this, list);
             rvList.setLayoutManager(new GridLayoutManager(this, 3));
-            arla.setIOnClickListener(new SubmitCallBack() {
+            arla.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     for (AccountRechargeBean bean: list) {
@@ -167,7 +167,7 @@ public class RechargeActivity extends BaseActivity implements RechargeView {
         rvList.setLayoutManager(new LinearLayoutManager(this));
         if (null == arpla) {
             arpla = new AccountRechargePayListAdapter(this, list);
-            arpla.setIOnClickListener(new SubmitCallBack() {
+            arpla.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     for (AccountRechargePayBean payBean: list) {
@@ -213,5 +213,35 @@ public class RechargeActivity extends BaseActivity implements RechargeView {
         if (null != mDialog) {
             mDialog.dismiss();
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

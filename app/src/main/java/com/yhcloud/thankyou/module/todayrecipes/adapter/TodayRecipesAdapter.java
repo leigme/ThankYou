@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.todayrecipes.bean.RecipesBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesBean;
 import com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesInfoActivity;
@@ -60,7 +60,7 @@ public class TodayRecipesAdapter extends RecyclerView.Adapter<TodayRecipesAdapte
                 break;
         }
         RecipesListAdapter rla = new RecipesListAdapter(mContext, list);
-        rla.setIOnClickListener(new SubmitCallBack() {
+        rla.setIOnClickListener(new ItemClinkListener() {
             @Override
             public void OnItemClickListener(View view, int position) {
                 Intent intent = new Intent(mContext, TodayRecipesInfoActivity.class);

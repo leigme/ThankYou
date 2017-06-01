@@ -8,14 +8,13 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.mabstract.ABaseManager;
+import com.yhcloud.thankyou.comm.BaseService;
 import com.yhcloud.thankyou.comm.BindServiceCallBack;
 import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 import com.yhcloud.thankyou.module.classnotification.view.AddClassNotificationDetailActivity;
-import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationDetailActivity;
 import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationActivityView;
-import com.yhcloud.thankyou.service.BaseService;
+import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationDetailActivity;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
@@ -29,7 +28,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2017/1/6.
  */
 
-public class ClassNotificationManage extends ABaseManager implements BindServiceCallBack, ResponseCallBack<String> {
+public class ClassNotificationManage implements BindServiceCallBack, ResponseCallBack<String> {
 
     private String TAG = getClass().getSimpleName();
 

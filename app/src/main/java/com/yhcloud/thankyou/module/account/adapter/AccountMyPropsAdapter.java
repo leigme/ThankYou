@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.utils.Constant;
 
@@ -27,7 +27,7 @@ public class AccountMyPropsAdapter extends RecyclerView.Adapter<AccountMyPropsAd
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<AccountPropBean> mBeen;
-    private SubmitCallBack mSubmitCallBack;
+    private ItemClinkListener mItemClinkListener;
     private boolean mCanOnClcik;
 
     public AccountMyPropsAdapter(Context context, ArrayList<AccountPropBean> list, boolean canOnClick) {
@@ -64,12 +64,12 @@ public class AccountMyPropsAdapter extends RecyclerView.Adapter<AccountMyPropsAd
         } else {
             holder.propsSelect.setImageResource(R.mipmap.chose_off);
         }
-        if (null != mSubmitCallBack) {
+        if (null != mItemClinkListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
+                    mItemClinkListener.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -86,8 +86,8 @@ public class AccountMyPropsAdapter extends RecyclerView.Adapter<AccountMyPropsAd
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(SubmitCallBack submitCallBack) {
-        this.mSubmitCallBack = submitCallBack;
+    public void setIOnClickListener(ItemClinkListener itemClinkListener) {
+        this.mItemClinkListener = itemClinkListener;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

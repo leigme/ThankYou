@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.utils.myview.drag.DragHolderCallBack;
 import com.yhcloud.thankyou.utils.myview.drag.RecycleCallBack;
 
@@ -30,7 +30,7 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
     private LayoutInflater mInflater;
     private ArrayList<FunctionBean> mBeen;
     private RecycleCallBack mCallBack;
-    private SubmitCallBack mSubmitCallBack;
+    private ItemClinkListener mItemClinkListener;
     public SparseArray<Integer> show = new SparseArray<>();
 
     public HomeFunctionListAdapter(Context context, ArrayList<FunctionBean> list, RecycleCallBack callBack) {
@@ -80,8 +80,8 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
                 show.clear();
                 mCallBack.itemOnClick(getAdapterPosition(), v);
             }
-            if (null != mSubmitCallBack) {
-                mSubmitCallBack.OnItemClickListener(v, getAdapterPosition());
+            if (null != mItemClinkListener) {
+                mItemClinkListener.OnItemClickListener(v, getAdapterPosition());
             }
         }
 
@@ -99,8 +99,8 @@ public class HomeFunctionListAdapter extends RecyclerView.Adapter<HomeFunctionLi
         }
     }
 
-    public void setIOnClickListener(SubmitCallBack submitCallBack) {
-        this.mSubmitCallBack = submitCallBack;
+    public void setIOnClickListener(ItemClinkListener itemClinkListener) {
+        this.mItemClinkListener = itemClinkListener;
     }
 
     public void refreshData(ArrayList<FunctionBean> list) {

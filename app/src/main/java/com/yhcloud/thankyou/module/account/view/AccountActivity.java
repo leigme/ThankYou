@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountFunctionAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountFunctionBean;
 import com.yhcloud.thankyou.module.account.manage.AccountManage;
@@ -87,7 +87,7 @@ public class AccountActivity extends BaseActivity implements AccountView {
     public void showFunction(final ArrayList<AccountFunctionBean> list) {
         if (null == afa) {
             afa = new AccountFunctionAdapter(this, list);
-            afa.setIOnClickListener(new SubmitCallBack() {
+            afa.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goFunction(position);
@@ -114,5 +114,35 @@ public class AccountActivity extends BaseActivity implements AccountView {
 //                Tools.print(TAG, "返回界面是:" + afb.getTitle());
 //            }
 //        }
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

@@ -9,8 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.BaseFragmentView;
-import com.yhcloud.thankyou.minterface.IButtonOnClickListener;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
 /**
@@ -21,7 +19,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     private ProgressDialog mProgressDialog;
     private Dialog mDialog;
-    private IButtonOnClickListener mIButtonOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     @Override
     public void showLoading(int msgId) {
@@ -58,7 +56,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         dSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mIButtonOnClickListener.btnOnClick();
+                mSubmitCallBack.btnOnClick();
             }
         });
     }
@@ -94,7 +92,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         MyToast.showToast(getActivity(), msg);
     }
 
-    public void setIButtonOnClickListener(IButtonOnClickListener IButtonOnClickListener) {
-        this.mIButtonOnClickListener = IButtonOnClickListener;
+    public void setSubmitCallBack(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 }

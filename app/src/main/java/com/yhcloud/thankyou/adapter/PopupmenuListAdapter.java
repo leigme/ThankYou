@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class PopupmenuListAdapter extends RecyclerView.Adapter<PopupmenuListAdap
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<FunctionBean> mBeen;
-    private SubmitCallBack mSubmitCallBack;
+    private ItemClinkListener mItemClinkListener;
 
     public PopupmenuListAdapter(Context context, ArrayList<FunctionBean> list) {
         this.mContext = context;
@@ -45,12 +45,12 @@ public class PopupmenuListAdapter extends RecyclerView.Adapter<PopupmenuListAdap
                 .load(mBeen.get(position).getIcon())
                 .into(holder.ivImage);
         holder.tvTitle.setText(mBeen.get(position).getTitle());
-        if (null != mSubmitCallBack) {
+        if (null != mItemClinkListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
+                    mItemClinkListener.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -61,8 +61,8 @@ public class PopupmenuListAdapter extends RecyclerView.Adapter<PopupmenuListAdap
         return mBeen.size();
     }
 
-    public void setIOnClickListener(SubmitCallBack submitCallBack) {
-        this.mSubmitCallBack = submitCallBack;
+    public void setIOnClickListener(ItemClinkListener itemClinkListener) {
+        this.mItemClinkListener = itemClinkListener;
     }
 
     public static class PopupmenuViewHolder extends RecyclerView.ViewHolder {

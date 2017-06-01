@@ -32,7 +32,7 @@
 
         <!-- android:theme="@style/AppTheme"> -->
         <activity
-            android:name=".LoadingActivity"
+            android:name=".module.loading.view.LoadingActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -49,8 +49,6 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <service android:name=".service.MyService">
-        </service>
         <service
             android:name=".service.LogicService"
             android:enabled="true"

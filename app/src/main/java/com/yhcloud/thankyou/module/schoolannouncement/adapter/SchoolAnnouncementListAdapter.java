@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class SchoolAnnouncementListAdapter extends RecyclerView.Adapter<SchoolAn
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<SchoolAnnouncementBean> mBeen;
-    private SubmitCallBack mSubmitCallBack;
+    private ItemClinkListener mItemClinkListener;
 
     public SchoolAnnouncementListAdapter(Context context, ArrayList<SchoolAnnouncementBean> list) {
         this.mContext = context;
@@ -46,12 +46,12 @@ public class SchoolAnnouncementListAdapter extends RecyclerView.Adapter<SchoolAn
             strTime = strTime.substring(0, 10);
         }
         holder.tvTime.setText(strTime);
-        if (null != mSubmitCallBack) {
+        if (null != mItemClinkListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
+                    mItemClinkListener.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -67,8 +67,8 @@ public class SchoolAnnouncementListAdapter extends RecyclerView.Adapter<SchoolAn
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(SubmitCallBack submitCallBack) {
-        this.mSubmitCallBack = submitCallBack;
+    public void setIOnClickListener(ItemClinkListener itemClinkListener) {
+        this.mItemClinkListener = itemClinkListener;
     }
 
     public static class SchoolAnnouncementViewHolder extends RecyclerView.ViewHolder {

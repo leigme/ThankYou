@@ -75,4 +75,34 @@ public class TodayRecipesInfoActivity extends BaseActivity implements TodayRecip
     public void setDishInfo(String dishInfo) {
         tvContent.setText(dishInfo);
     }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
+    }
 }

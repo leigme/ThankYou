@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class StudentHomeworkListAdapter extends RecyclerView.Adapter<StudentHome
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<StudentHomeworkBean> mBeen;
-    private SubmitCallBack mSubmitCallBack;
+    private ItemClinkListener mItemClinkListener;
 
     public StudentHomeworkListAdapter(Context context, ArrayList<StudentHomeworkBean> list) {
         this.mContext = context;
@@ -52,12 +52,12 @@ public class StudentHomeworkListAdapter extends RecyclerView.Adapter<StudentHome
         } else {
             holder.ivStatus.setImageResource(R.mipmap.icon_unsubmitted);
         }
-        if (null != mSubmitCallBack) {
+        if (null != mItemClinkListener) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
+                    mItemClinkListener.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -73,8 +73,8 @@ public class StudentHomeworkListAdapter extends RecyclerView.Adapter<StudentHome
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(SubmitCallBack submitCallBack) {
-        this.mSubmitCallBack = submitCallBack;
+    public void setIOnClickListener(ItemClinkListener itemClinkListener) {
+        this.mItemClinkListener = itemClinkListener;
     }
 
     public static class StudentHomeworkViewHolder extends RecyclerView.ViewHolder {

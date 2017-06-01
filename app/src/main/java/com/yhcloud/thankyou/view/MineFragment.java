@@ -14,7 +14,7 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.MineFunctionAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.comm.BaseFragment;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.manage.MineManage;
 import com.yhcloud.thankyou.service.LogicService;
 
@@ -108,7 +108,7 @@ public class MineFragment extends BaseFragment implements MineActivityView {
         if (null == mfa) {
             mfa = new MineFunctionAdapter(getActivity(), list);
             rvMineFunction.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mfa.setIOnClickListener(new SubmitCallBack() {
+            mfa.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goFunction(position);
@@ -132,6 +132,31 @@ public class MineFragment extends BaseFragment implements MineActivityView {
 
     @Override
     public void setRightTitle(String title) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
 
     }
 

@@ -12,10 +12,9 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.comm.ResponseCallBack;
-import com.yhcloud.thankyou.mabstract.ABaseManager;
+import com.yhcloud.thankyou.comm.BaseService;
 import com.yhcloud.thankyou.comm.BindServiceCallBack;
-import com.yhcloud.thankyou.service.BaseService;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.service.logic.mimplement.LoginLogic;
 import com.yhcloud.thankyou.utils.Constant;
@@ -32,7 +31,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/11/14.
  */
 
-public class LoginManage extends ABaseManager implements BindServiceCallBack, ResponseCallBack<String>, EMCallBack {
+public class LoginManage implements BindServiceCallBack, ResponseCallBack<String>, EMCallBack {
 
     private String TAG = LoginManage.class.getName();
 

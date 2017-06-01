@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
+import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.account.adapter.AccountPropAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.manage.AccountPropsManage;
@@ -102,7 +102,7 @@ public class PropsActivity extends BaseActivity implements PropsView {
                     super.onScrolled(recyclerView, dx, dy);
                 }
             });
-            apa.setIOnClickListener(new SubmitCallBack() {
+            apa.setIOnClickListener(new ItemClinkListener() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goPropInfo(position);
@@ -120,5 +120,35 @@ public class PropsActivity extends BaseActivity implements PropsView {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         mManage.getUserCurrency();
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public int getLayoutId() {
+        return 0;
+    }
+
+    @Override
+    public void initViews() {
+
+    }
+
+    @Override
+    public void initEvents() {
+
+    }
+
+    @Override
+    public void initDatas() {
+
+    }
+
+    @Override
+    public void processClick(View view) {
+
     }
 }

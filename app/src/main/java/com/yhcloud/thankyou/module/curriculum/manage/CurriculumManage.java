@@ -10,10 +10,10 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumDataBean;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
-import com.yhcloud.thankyou.module.curriculum.view.ICurriculumActivityView;
+import com.yhcloud.thankyou.module.curriculum.view.CurriculumActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -31,12 +31,12 @@ public class CurriculumManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private ICurriculumActivityView mICurriculumView;
+    private CurriculumActivityView mICurriculumView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<CurriculumItemBean> mBeen;
 
-    public CurriculumManage(ICurriculumActivityView iCurriculumView) {
+    public CurriculumManage(CurriculumActivityView iCurriculumView) {
         this.mICurriculumView = iCurriculumView;
         this.mActivity = (Activity) mICurriculumView;
         mICurriculumView.showLoading(R.string.loading_data);
@@ -60,7 +60,7 @@ public class CurriculumManage {
     }
 
     public void getClassCurriculum() {
-        mService.getClassCurriculum(new ICallBackListener<String>() {
+        mService.getClassCurriculum(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

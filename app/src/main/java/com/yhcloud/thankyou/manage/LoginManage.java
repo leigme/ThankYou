@@ -12,15 +12,15 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.mabstract.ABaseManager;
-import com.yhcloud.thankyou.minterface.IBindBaseServiceCallBack;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.BindServiceCallBack;
 import com.yhcloud.thankyou.service.BaseService;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.service.logic.mimplement.LoginLogic;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.view.ILoginActivityView;
+import com.yhcloud.thankyou.view.LoginActivityView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,18 +32,18 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/11/14.
  */
 
-public class LoginManage extends ABaseManager implements IBindBaseServiceCallBack, ICallBackListener<String>, EMCallBack {
+public class LoginManage extends ABaseManager implements BindServiceCallBack, ResponseCallBack<String>, EMCallBack {
 
     private String TAG = LoginManage.class.getName();
 
-    private ILoginActivityView mILoginView;
+    private LoginActivityView mILoginView;
     private Activity mActivity;
     private LogicService mService;
     private LoginLogic mLoginLogic;
     private String username, password;
     private UserInfo userInfo;
 
-    public LoginManage(ILoginActivityView loginView) {
+    public LoginManage(LoginActivityView loginView) {
         this.mILoginView = loginView;
         this.mActivity = (Activity) loginView;
         SharedPreferences mPreferences = mActivity.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);

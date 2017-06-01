@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.classnotification.logic;
 
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -17,7 +17,7 @@ import okhttp3.Call;
 public class ClassNotificationLogic {
     private String TAG = getClass().getSimpleName();
 
-    public void getClassNotificationData(String userId, String classId, int pageNum, String updateTime, final ICallBackListener<String> iCallBackListener) {
+    public void getClassNotificationData(String userId, String classId, int pageNum, String updateTime, final ResponseCallBack<String> responseCallBack) {
         Tools.print(TAG, MessageFormat.format("请求连接:{0}/userId/{1}/classId/{2}/pageNum/{3}/updateTime/{4}", Constant.GETCLASSNOTIFICATIONLIST, userId, classId, String.valueOf(pageNum), updateTime));
         OkHttpUtils.post()
                 .url(Constant.GETCLASSNOTIFICATIONLIST)
@@ -30,13 +30,13 @@ public class ClassNotificationLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getClassNotificationData-请求失败:" + e);
-                        iCallBackListener.callFailure();
+                        responseCallBack.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getClassNotificationData-请求成功:" + response);
-                        iCallBackListener.callSuccess(response);
+                        responseCallBack.callSuccess(response);
                     }
                 });
         /*OkHttpUtils.post()
@@ -48,18 +48,18 @@ public class ClassNotificationLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getClassNotificationData-请求失败:" + e);
-                        iCallBackListener.callFailure();
+                        responseCallBack.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getClassNotificationData-请求成功:" + response);
-                        iCallBackListener.callSuccess(response);
+                        responseCallBack.callSuccess(response);
                     }
                 });*/
     }
 
-    public void updateReadState(String noticeId, String userId, final ICallBackListener<String> iCallBackListener) {
+    public void updateReadState(String noticeId, String userId, final ResponseCallBack<String> responseCallBack) {
         OkHttpUtils.post()
                 .url(Constant.UPDATEREADSTATE)
                 .addParams("noticeId", noticeId)
@@ -69,13 +69,13 @@ public class ClassNotificationLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "updateReadStatu-请求失败:" + e);
-                        iCallBackListener.callFailure();
+                        responseCallBack.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "updateReadStatu-请求成功:" + response);
-                        iCallBackListener.callSuccess(response);
+                        responseCallBack.callSuccess(response);
                     }
                 });
     }

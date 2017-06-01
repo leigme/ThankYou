@@ -9,15 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.chat.adapter.AddChatAdapter;
 import com.yhcloud.thankyou.module.chat.bean.ChatContact;
 import com.yhcloud.thankyou.module.chat.manage.AddChatManage;
 
 import java.util.ArrayList;
 
-public class AddChatActivity extends ABaseActivity implements IAddChatView {
+public class AddChatActivity extends BaseActivity implements AddChatView {
 
     //视图控件
     private LinearLayout llBack, llRight;
@@ -90,7 +90,7 @@ public class AddChatActivity extends ABaseActivity implements IAddChatView {
     public void showList(ArrayList<ChatContact> list) {
         if (null == aca) {
             aca = new AddChatAdapter(this, list);
-            aca.setIOnClickListener(new IOnClickListener() {
+            aca.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
 

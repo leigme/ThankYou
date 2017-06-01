@@ -10,11 +10,11 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.view.IHomeActivityView;
+import com.yhcloud.thankyou.view.HomeActivityView;
 import com.yhcloud.thankyou.view.WebActivity;
 
 import org.json.JSONException;
@@ -32,7 +32,7 @@ import java.util.Iterator;
 public class HomeManage {
 
     private String TAG = getClass().getSimpleName();
-    private IHomeActivityView mIHomeView;
+    private HomeActivityView mIHomeView;
     private Activity mActivity;
     private Fragment mFragment;
     private LogicService mService;
@@ -43,7 +43,7 @@ public class HomeManage {
     private boolean refrshBanner;
     private int refreshBannerNum, refreshSpreadNum;
 
-    public HomeManage(IHomeActivityView homeView, LogicService service) {
+    public HomeManage(HomeActivityView homeView, LogicService service) {
         this.mIHomeView = homeView;
         this.mFragment = (Fragment) mIHomeView;
         this.mActivity = mFragment.getActivity();
@@ -73,7 +73,7 @@ public class HomeManage {
     }
 
     public void showBanner(String updateTime) {
-        mService.getBannerImageUrls(updateTime, new ICallBackListener<String>() {
+        mService.getBannerImageUrls(updateTime, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -129,7 +129,7 @@ public class HomeManage {
     }
 
     public void showSpreadList(String updateTime) {
-        mService.getSpreadList(updateTime, new ICallBackListener<String>() {
+        mService.getSpreadList(updateTime, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

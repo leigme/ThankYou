@@ -11,9 +11,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.account.bean.AccountFunctionBean;
-import com.yhcloud.thankyou.module.account.view.IAccountView;
+import com.yhcloud.thankyou.module.account.view.AccountView;
 import com.yhcloud.thankyou.module.account.view.IntegralActivity;
 import com.yhcloud.thankyou.module.account.view.MyPropsActivity;
 import com.yhcloud.thankyou.module.account.view.PropsActivity;
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 public class AccountManage {
 
-    private IAccountView mIAccountView;
+    private AccountView mIAccountView;
     private Activity mActivity;
     private LogicService mService;
 
@@ -43,7 +43,7 @@ public class AccountManage {
     private int refreshSpreadNum;
     private int RequestCode_AccountManage = 101;
 
-    public AccountManage(IAccountView accountView) {
+    public AccountManage(AccountView accountView) {
         this.mIAccountView = accountView;
         mActivity = (Activity) mIAccountView;
         imageUrls = new ArrayList<>();
@@ -68,7 +68,7 @@ public class AccountManage {
 
     public void showSpreadList(String updateTime) {
         mIAccountView.showLoading(R.string.loading_data);
-        mService.getBannerImages(updateTime, new ICallBackListener<String>() {
+        mService.getBannerImages(updateTime, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

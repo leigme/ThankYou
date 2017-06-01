@@ -13,15 +13,15 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.detailinfo.adapter.DetailPeopleListAdapter;
 import com.yhcloud.thankyou.module.detailinfo.manage.DetailPeopleManage;
 import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
 
-public class DetailPeopleActivity extends ABaseActivity implements IDetailPeopleActivityView {
+public class DetailPeopleActivity extends BaseActivity implements DetailPeopleActivityView {
 
     //视图控件
     private LinearLayout llBack, llNameTitle, llOfficeTitle, llSendMessage, llSentProps;
@@ -139,7 +139,7 @@ public class DetailPeopleActivity extends ABaseActivity implements IDetailPeople
         tvDefault.setVisibility(View.GONE);
         if (null == dpla) {
             dpla = new DetailPeopleListAdapter(this, list);
-            dpla.setIOnClickListener(new IOnClickListener() {
+            dpla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goParentChat(position);

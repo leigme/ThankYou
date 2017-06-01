@@ -11,9 +11,9 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
-import com.yhcloud.thankyou.module.classnotification.view.IClassNotificationDetailActivityView;
+import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationDetailActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
@@ -32,13 +32,13 @@ public class ClassNotificationDetailManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IClassNotificationDetailActivityView mIClassNotificationDetailView;
+    private ClassNotificationDetailActivityView mIClassNotificationDetailView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<ClassNotificationBean> mBeen;
     private int record = 0, pageNum = 1, pageCount = -1;
 
-    public ClassNotificationDetailManage(IClassNotificationDetailActivityView iClassNotificationDetailView) {
+    public ClassNotificationDetailManage(ClassNotificationDetailActivityView iClassNotificationDetailView) {
         this.mIClassNotificationDetailView = iClassNotificationDetailView;
         this.mActivity = (Activity) mIClassNotificationDetailView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -81,7 +81,7 @@ public class ClassNotificationDetailManage {
     }
 
     public void getClassNotificationData(final int record) {
-        mService.getClassNotificationData(pageNum, new ICallBackListener<String>() {
+        mService.getClassNotificationData(pageNum, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -126,7 +126,7 @@ public class ClassNotificationDetailManage {
 
     //更新阅读状态
     private void updateClassNotificationReadState(int position) {
-        mService.updateClassNotificationReadState(mBeen.get(position).getNoticeId(), new ICallBackListener<String>() {
+        mService.updateClassNotificationReadState(mBeen.get(position).getNoticeId(), new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
 

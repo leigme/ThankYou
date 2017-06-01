@@ -7,11 +7,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.aboutus.manage.AboutUsManage;
 import com.yhcloud.thankyou.utils.Tools;
 
-public class AboutUsActivity extends ABaseActivity implements IAboutUsActivityView {
+public class AboutUsActivity extends BaseActivity implements AboutUsActivityView {
 
     //视图控件
     private LinearLayout llBack;

@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.detailinfo.logic;
 
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -17,7 +17,7 @@ public class DetailPeopleLogic implements IDetailPeopleLogic {
     private String TAG = getClass().getSimpleName();
 
     @Override
-    public void getDetailInfo(String userId, String uId, final ICallBackListener<String> iCallBackListener) {
+    public void getDetailInfo(String userId, String uId, final ResponseCallBack<String> responseCallBack) {
         OkHttpUtils.post()
                 .url(Constant.GETDETAILINFO)
                 .addParams("uid", userId)
@@ -27,13 +27,13 @@ public class DetailPeopleLogic implements IDetailPeopleLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getDetailInfo-请求失败：" + e);
-                        iCallBackListener.callFailure();
+                        responseCallBack.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getDetailInfo-请求成功：" + response);
-                        iCallBackListener.callSuccess(response);
+                        responseCallBack.callSuccess(response);
                     }
                 });
     }

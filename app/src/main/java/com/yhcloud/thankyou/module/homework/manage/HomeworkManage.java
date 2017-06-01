@@ -11,12 +11,12 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
 import com.yhcloud.thankyou.module.homework.bean.TeacherHomeworkBean;
 import com.yhcloud.thankyou.module.homework.view.AddHomeworkActivity;
 import com.yhcloud.thankyou.module.homework.view.HomeworkInfoActivity;
-import com.yhcloud.thankyou.module.homework.view.IHomeworkActivityView;
+import com.yhcloud.thankyou.module.homework.view.HomeworkActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -33,14 +33,14 @@ public class HomeworkManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IHomeworkActivityView mIHomeworkView;
+    private HomeworkActivityView mIHomeworkView;
     private Activity mActivity;
     private LogicService mService;
     private int roleId, pageNum = 1, pageCount = -1;
     private ArrayList<TeacherHomeworkBean> mTeacherHomeworkBeen;
     private ArrayList<StudentHomeworkBean> mStudentHomeworkBeen;
 
-    public HomeworkManage(IHomeworkActivityView iHomeworkView) {
+    public HomeworkManage(HomeworkActivityView iHomeworkView) {
         this.mIHomeworkView = iHomeworkView;
         this.mActivity = (Activity) mIHomeworkView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -83,7 +83,7 @@ public class HomeworkManage {
 
     public void getTeacherHomeworkList() {
         mIHomeworkView.showLoading(R.string.loading_data);
-        mService.getTeacherHomeworkList(pageNum, new ICallBackListener<String>() {
+        mService.getTeacherHomeworkList(pageNum, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -134,7 +134,7 @@ public class HomeworkManage {
 
     public void getStudentHomeworkList() {
         mIHomeworkView.showLoading(R.string.loading_data);
-        mService.getStudentHomeworkList(pageNum, new ICallBackListener<String>() {
+        mService.getStudentHomeworkList(pageNum, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

@@ -16,8 +16,8 @@ import com.yhcloud.thankyou.adapter.HomeFunctionListAdapter;
 import com.yhcloud.thankyou.adapter.HomeSpreadAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.mabstract.ABaseFragment;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseFragment;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.manage.HomeManage;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.GlideImageLoader;
@@ -41,7 +41,7 @@ import java.util.Collections;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends ABaseFragment implements IHomeActivityView {
+public class HomeFragment extends BaseFragment implements HomeActivityView {
 
     private String TAG = getClass().getSimpleName();
 
@@ -181,7 +181,7 @@ public class HomeFragment extends ABaseFragment implements IHomeActivityView {
                 }
             };
             hfla = new HomeFunctionListAdapter(getActivity(), list, rcb);
-            hfla.setIOnClickListener(new IOnClickListener() {
+            hfla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goFunction(position);

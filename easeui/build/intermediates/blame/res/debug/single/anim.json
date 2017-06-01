@@ -1,326 +1,110 @@
 [
     {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/slide_in_from_left.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/slide_in_from_left.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/head_in.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/head_in.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
-        "source": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/anim/abc_slide_out_bottom.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/voice_from_icon.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/voice_from_icon.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\head_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\head_in.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
+        "source": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/anim/abc_fade_in.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_in_top.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/slide_in_from_left.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/slide_in_from_left.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\slide_out_to_right.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\slide_out_to_right.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/anim/abc_slide_out_bottom.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_top_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\push_top_in.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/push_bottom_in.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/push_bottom_in.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\slide_in_from_right.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\slide_in_from_right.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/anim/abc_popup_exit.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/push_top_out2.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/push_top_out2.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/hold.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/hold.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\slide_in_from_left.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\slide_in_from_left.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/push_top_out.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/push_top_out.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\fade_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\fade_in.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/fade_in.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/fade_in.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_fade_in.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/slide_out_to_right.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/slide_out_to_right.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\slide_out_to_left.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\slide_out_to_left.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/anim/abc_popup_enter.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/slide_out_to_right.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/slide_out_to_right.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/anim/abc_slide_in_top.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_popup_enter.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/fade_out.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/fade_out.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/slide_in_from_right.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/slide_in_from_right.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/push_top_in2.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/push_top_in2.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_bottom_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\push_bottom_out.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
+        "source": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/anim/abc_fade_out.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_out_top.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/push_bottom_out.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/push_bottom_out.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_top_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\push_top_out.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/push_top_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/push_top_out.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/anim/abc_grow_fade_in_from_bottom.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\anim\\abc_fade_out.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/slide_out_to_left.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/slide_out_to_left.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
-        "source": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/anim/abc_fade_out.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/anim/abc_slide_out_top.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/push_top_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/push_top_in.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/push_top_out2.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/push_top_out2.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
-        "source": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/anim/abc_slide_out_top.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/head_out.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/head_out.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\head_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\head_out.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/anim/abc_slide_in_bottom.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/push_top_in2.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/push_top_in2.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/voice_to_icon.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/voice_to_icon.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/slide_in_from_right.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/slide_in_from_right.xml"
     },
     {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\slide_out_to_left.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\slide_out_to_left.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\head_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\head_in.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_top_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\push_top_in.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_bottom_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\push_bottom_in.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/head_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/head_out.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/head_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/head_in.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\anim\\abc_fade_in.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_in_bottom.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\fade_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\fade_in.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_enter.xml",
-        "source": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\anim\\abc_popup_enter.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\slide_in_from_left.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\slide_in_from_left.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_bottom_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\push_bottom_in.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
-        "source": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/anim/abc_fade_in.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_top_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\push_top_out.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_top_out2.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\push_top_out2.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\voice_from_icon.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\voice_from_icon.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\hold.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\hold.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\voice_from_icon.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\voice_from_icon.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\voice_to_icon.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\voice_to_icon.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
-        "source": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/voice_from_icon.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/voice_from_icon.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
-        "source": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/anim/abc_slide_in_bottom.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/fade_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/fade_in.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_slide_out_bottom.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/abc_popup_exit.xml",
-        "source": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/anim/abc_popup_exit.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/voice_to_icon.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/voice_to_icon.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_bottom_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\push_bottom_out.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_shrink_fade_out_from_bottom.xml",
-        "source": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\anim\\abc_shrink_fade_out_from_bottom.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_top.xml",
-        "source": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\anim\\abc_slide_out_top.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\hold.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\hold.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_out_bottom.xml",
-        "source": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\anim\\abc_slide_out_bottom.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
-        "source": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/anim/abc_slide_in_top.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/push_bottom_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/push_bottom_out.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/fade_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/fade_out.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_top_in2.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\push_top_in2.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\fade_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\fade_out.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_grow_fade_in_from_bottom.xml",
-        "source": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\anim\\abc_grow_fade_in_from_bottom.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_popup_exit.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
-        "source": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/anim/abc_popup_enter.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\head_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\head_out.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\fade_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\fade_out.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_top.xml",
-        "source": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\anim\\abc_slide_in_top.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\slide_in_from_right.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\slide_in_from_right.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_top_in2.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\push_top_in2.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\voice_to_icon.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\voice_to_icon.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_fade_out.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\anim\\abc_fade_out.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_slide_in_bottom.xml",
-        "source": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\anim\\abc_slide_in_bottom.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
-        "source": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/anim/abc_grow_fade_in_from_bottom.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\abc_popup_exit.xml",
-        "source": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\anim\\abc_popup_exit.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\push_top_out2.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\res\\anim\\push_top_out2.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/hold.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/hold.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/slide_out_to_left.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/slide_out_to_left.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\res\\merged\\debug\\anim\\slide_out_to_right.xml",
-        "source": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\res\\anim\\slide_out_to_right.xml"
-    },
-    {
-        "merged": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/res/merged/debug/anim/push_bottom_in.xml",
-        "source": "/Users/leig/Desktop/Thankyou/easeui/res/anim/push_bottom_in.xml"
+        "merged": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/res/merged/debug/anim/push_top_in.xml",
+        "source": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/res/anim/push_top_in.xml"
     }
 ]

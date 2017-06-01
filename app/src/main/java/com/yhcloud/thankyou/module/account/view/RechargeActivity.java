@@ -15,8 +15,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.account.adapter.AccountRechargeListAdapter;
 import com.yhcloud.thankyou.module.account.adapter.AccountRechargePayListAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargeBean;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
-public class RechargeActivity extends ABaseActivity implements IRechargeView {
+public class RechargeActivity extends BaseActivity implements RechargeView {
 
     private LinearLayout llBack;
     private TextView tvTitle, tvRealname, tvUsername, tvCoin, tvRule;
@@ -98,7 +98,7 @@ public class RechargeActivity extends ABaseActivity implements IRechargeView {
         if (null == arla) {
             arla = new AccountRechargeListAdapter(this, list);
             rvList.setLayoutManager(new GridLayoutManager(this, 3));
-            arla.setIOnClickListener(new IOnClickListener() {
+            arla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     for (AccountRechargeBean bean: list) {
@@ -167,7 +167,7 @@ public class RechargeActivity extends ABaseActivity implements IRechargeView {
         rvList.setLayoutManager(new LinearLayoutManager(this));
         if (null == arpla) {
             arpla = new AccountRechargePayListAdapter(this, list);
-            arpla.setIOnClickListener(new IOnClickListener() {
+            arpla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     for (AccountRechargePayBean payBean: list) {

@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.allfuncation.adapter.AllFuncationListAdapter;
 import com.yhcloud.thankyou.module.allfuncation.manage.AllFuncationManage;
 import com.yhcloud.thankyou.utils.Tools;
@@ -23,7 +23,7 @@ import com.yhcloud.thankyou.utils.myview.drag.RecycleCallBack;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class AllFuncationActivity extends ABaseActivity implements IAllFuncationActivityView {
+public class AllFuncationActivity extends BaseActivity implements AllFuncationActivityView {
 
     private String TAG = getClass().getSimpleName();
 

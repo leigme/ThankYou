@@ -8,7 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.module.allfuncation.view.IAllFuncationActivityView;
+import com.yhcloud.thankyou.module.allfuncation.view.AllFuncationActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -23,13 +23,13 @@ import static com.huawei.android.pushagent.plugin.tools.BLocation.TAG;
 
 public class AllFuncationManage {
 
-    private IAllFuncationActivityView mIAllFuncationView;
+    private AllFuncationActivityView mIAllFuncationView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<FunctionBean> mAddFunctionBeen, mNoneFunctionBeen;
     private boolean edited;
 
-    public AllFuncationManage(IAllFuncationActivityView iAllFuncationView) {
+    public AllFuncationManage(AllFuncationActivityView iAllFuncationView) {
         this.mIAllFuncationView = iAllFuncationView;
         this.mActivity = (Activity) mIAllFuncationView;
         Intent intent = new Intent(mActivity, LogicService.class);

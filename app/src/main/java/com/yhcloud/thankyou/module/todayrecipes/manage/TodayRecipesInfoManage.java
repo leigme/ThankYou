@@ -8,7 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.yhcloud.thankyou.module.todayrecipes.bean.RecipesBean;
-import com.yhcloud.thankyou.module.todayrecipes.view.ITodayRecipesInfoView;
+import com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesInfoView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
@@ -22,12 +22,12 @@ public class TodayRecipesInfoManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private ITodayRecipesInfoView mITodayRecipesInfoView;
+    private TodayRecipesInfoView mITodayRecipesInfoView;
     private Activity mActivity;
     private LogicService mService;
     private String dishTitle, imageUrl, dishInfo;
 
-    public TodayRecipesInfoManage(ITodayRecipesInfoView iTodayRecipesInfoView) {
+    public TodayRecipesInfoManage(TodayRecipesInfoView iTodayRecipesInfoView) {
         this.mITodayRecipesInfoView = iTodayRecipesInfoView;
         this.mActivity = (Activity) mITodayRecipesInfoView;
         Intent intent = new Intent(mActivity, LogicService.class);

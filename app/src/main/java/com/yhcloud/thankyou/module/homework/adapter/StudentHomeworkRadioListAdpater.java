@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.homework.bean.QuestionBean;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class StudentHomeworkRadioListAdpater extends RecyclerView.Adapter<Studen
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<QuestionBean> mBeen;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public StudentHomeworkRadioListAdpater(Context context, ArrayList<QuestionBean> list) {
         this.mContext = context;
@@ -46,12 +46,12 @@ public class StudentHomeworkRadioListAdpater extends RecyclerView.Adapter<Studen
             holder.mImageView.setImageResource(R.mipmap.chose_off);
         }
         holder.mTextView.setText(mBeen.get(position).getQuestionTitle());
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -67,8 +67,8 @@ public class StudentHomeworkRadioListAdpater extends RecyclerView.Adapter<Studen
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 
     public static class StudentQuestionViewHolder extends RecyclerView.ViewHolder {

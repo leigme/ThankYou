@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.chat.bean.ChatContact;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class AddChatAdapter extends RecyclerView.Adapter<AddChatAdapter.AddChatV
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<ChatContact> mBeen;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public AddChatAdapter(Context context, ArrayList<ChatContact> list) {
         this.mContext = context;
@@ -38,12 +38,12 @@ public class AddChatAdapter extends RecyclerView.Adapter<AddChatAdapter.AddChatV
 
     @Override
     public void onBindViewHolder(final AddChatViewHolder holder, int position) {
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -59,8 +59,8 @@ public class AddChatAdapter extends RecyclerView.Adapter<AddChatAdapter.AddChatV
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(IOnClickListener IOnClickListener) {
-        mIOnClickListener = IOnClickListener;
+    public void setIOnClickListener(SubmitCallBack SubmitCallBack) {
+        mSubmitCallBack = SubmitCallBack;
     }
 
     public static class AddChatViewHolder extends RecyclerView.ViewHolder {

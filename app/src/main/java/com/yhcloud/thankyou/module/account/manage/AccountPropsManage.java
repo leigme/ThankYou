@@ -11,9 +11,9 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
-import com.yhcloud.thankyou.module.account.view.IPropsView;
+import com.yhcloud.thankyou.module.account.view.PropsView;
 import com.yhcloud.thankyou.module.account.view.PropsInfoActivity;
 import com.yhcloud.thankyou.service.LogicService;
 
@@ -30,13 +30,13 @@ public class AccountPropsManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IPropsView mIPropsView;
+    private PropsView mIPropsView;
     private LogicService mService;
     private Activity mActivity;
     private int coin;
     private ArrayList<AccountPropBean> mBeen;
 
-    public AccountPropsManage(IPropsView propsView) {
+    public AccountPropsManage(PropsView propsView) {
         this.mIPropsView = propsView;
         this.mActivity = (Activity)propsView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -61,7 +61,7 @@ public class AccountPropsManage {
 
     public void getPropData() {
         mIPropsView.showLoading(R.string.loading_data);
-        mService.getPropsStoreList(new ICallBackListener<String>() {
+        mService.getPropsStoreList(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -107,7 +107,7 @@ public class AccountPropsManage {
     }
 
     public void getUserCurrency() {
-        mService.getUserCurrency(new ICallBackListener<String>() {
+        mService.getUserCurrency(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

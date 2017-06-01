@@ -14,8 +14,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.account.adapter.AccountIntegralListAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
 import com.yhcloud.thankyou.module.account.manage.AccountIntegralManage;
@@ -25,7 +25,7 @@ import java.util.ArrayList;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
-public class IntegralActivity extends ABaseActivity implements IIntegralView {
+public class IntegralActivity extends BaseActivity implements IntegralView {
 
     private LinearLayout llBack;
     private TextView tvTitle, tvRealname, tvUsername, tvCoin, tvRule;
@@ -96,7 +96,7 @@ public class IntegralActivity extends ABaseActivity implements IIntegralView {
         if (null == aila) {
             aila = new AccountIntegralListAdapter(this, list);
             rvList.setLayoutManager(new GridLayoutManager(this, 3));
-            aila.setIOnClickListener(new IOnClickListener() {
+            aila.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     for (AccountIntegralBean bean: list) {

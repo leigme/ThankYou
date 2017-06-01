@@ -8,7 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.hyphenate.easeui.EaseConstant;
-import com.yhcloud.thankyou.module.chat.view.IEaseChatView;
+import com.yhcloud.thankyou.module.chat.view.EaseChatView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -22,12 +22,12 @@ public class EaseChatManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IEaseChatView mIEaseChatView;
+    private EaseChatView mIEaseChatView;
     private Activity mActivity;
     private LogicService mService;
     private String HxId;
 
-    public EaseChatManage(IEaseChatView iEaseChatView) {
+    public EaseChatManage(EaseChatView iEaseChatView) {
         this.mIEaseChatView = iEaseChatView;
         this.mActivity = (Activity) mIEaseChatView;
         Intent intent = new Intent(mActivity, LogicService.class);

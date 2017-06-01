@@ -3,9 +3,9 @@ package com.yhcloud.thankyou.module.classnotification.view;
 import android.os.Bundle;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 
-public class AddClassNotificationDetailActivity extends ABaseActivity implements IAddClassNotificationDetailActivityView {
+public class AddClassNotificationDetailActivity extends BaseActivity implements AddClassNotificationDetailActivityView {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

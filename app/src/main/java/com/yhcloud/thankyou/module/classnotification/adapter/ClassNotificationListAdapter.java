@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 
 import java.text.MessageFormat;
@@ -24,7 +24,7 @@ public class ClassNotificationListAdapter extends RecyclerView.Adapter<ClassNoti
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<ClassNotificationBean> mBeen;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public ClassNotificationListAdapter(Context context, ArrayList<ClassNotificationBean> list) {
         this.mContext = context;
@@ -55,12 +55,12 @@ public class ClassNotificationListAdapter extends RecyclerView.Adapter<ClassNoti
         } else {
             holder.ivNew.setVisibility(View.GONE);
         }
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -76,8 +76,8 @@ public class ClassNotificationListAdapter extends RecyclerView.Adapter<ClassNoti
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 
     public static class ClassNotificationViewHolder extends RecyclerView.ViewHolder {

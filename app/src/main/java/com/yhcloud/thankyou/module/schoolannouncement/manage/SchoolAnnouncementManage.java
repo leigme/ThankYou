@@ -11,9 +11,9 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
-import com.yhcloud.thankyou.module.schoolannouncement.view.ISchoolAnnouncementActivityView;
+import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementActivityView;
 import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementDetailActivity;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
@@ -31,14 +31,14 @@ public class SchoolAnnouncementManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private ISchoolAnnouncementActivityView mISchoolAnnouncementView;
+    private SchoolAnnouncementActivityView mISchoolAnnouncementView;
     private Activity mActivity;
     private LogicService mService;
     private int pageNum = 1, pageCount = -1;
     private ArrayList<SchoolAnnouncementBean> mBeen;
     private boolean refreshing;
 
-    public SchoolAnnouncementManage(ISchoolAnnouncementActivityView iSchoolAnnouncementView) {
+    public SchoolAnnouncementManage(SchoolAnnouncementActivityView iSchoolAnnouncementView) {
         this.mISchoolAnnouncementView = iSchoolAnnouncementView;
         this.mActivity = (Activity) mISchoolAnnouncementView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -62,7 +62,7 @@ public class SchoolAnnouncementManage {
 
     public void getSchoolAnnouncementData(int page) {
         mISchoolAnnouncementView.showLoading(R.string.loading_data);
-        mService.getSchoolAnnouncementData(page, new ICallBackListener<String>() {
+        mService.getSchoolAnnouncementData(page, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

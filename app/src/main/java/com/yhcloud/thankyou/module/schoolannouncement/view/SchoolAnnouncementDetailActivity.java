@@ -8,12 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.schoolannouncement.manage.SchoolAnnouncementDetailManage;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.myview.MyWebView;
 
-public class SchoolAnnouncementDetailActivity extends ABaseActivity implements ISchoolAnnouncementDetailActivityView {
+public class SchoolAnnouncementDetailActivity extends BaseActivity implements SchoolAnnouncementDetailActivityView {
 
     //视图控件
     private LinearLayout llBack, llMenu;

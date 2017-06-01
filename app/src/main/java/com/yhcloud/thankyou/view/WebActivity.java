@@ -6,11 +6,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.manage.WebManage;
 import com.yhcloud.thankyou.utils.myview.MyWebView;
 
-public class WebActivity extends ABaseActivity implements IWebActivityView {
+public class WebActivity extends BaseActivity implements WebActivityView {
 
     //视图控件
     private LinearLayout llBack;

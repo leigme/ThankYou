@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.todayrecipes.bean.RecipesBean;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -24,7 +24,7 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<RecipesBean> mBeen;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public RecipesListAdapter(Context context, ArrayList<RecipesBean> list) {
         this.mContext = context;
@@ -43,12 +43,12 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
     public void onBindViewHolder(final RecipesListViewHolder holder, int position) {
         Tools.GlideImageUrl(mContext, mBeen.get(position).getImageUrl(), holder.ivImage);
         holder.tvTitle.setText(mBeen.get(position).getTitle());
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -59,8 +59,8 @@ public class RecipesListAdapter extends RecyclerView.Adapter<RecipesListAdapter.
         return mBeen.size();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 
     public static class RecipesListViewHolder extends RecyclerView.ViewHolder {

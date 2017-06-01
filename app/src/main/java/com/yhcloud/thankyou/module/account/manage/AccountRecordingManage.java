@@ -10,9 +10,9 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.account.bean.AccountRecordingBean;
-import com.yhcloud.thankyou.module.account.view.IRecordingView;
+import com.yhcloud.thankyou.module.account.view.RecordingView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -29,13 +29,13 @@ public class AccountRecordingManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IRecordingView mIRecordingView;
+    private RecordingView mIRecordingView;
     private Activity mActivity;
     private LogicService mService;
     private int pageCount = -1, pageNow = 1;
     private ArrayList<AccountRecordingBean> mBeen;
 
-    public AccountRecordingManage(IRecordingView iRecordingView) {
+    public AccountRecordingManage(RecordingView iRecordingView) {
         this.mIRecordingView = iRecordingView;
         this.mActivity = (Activity) iRecordingView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -61,7 +61,7 @@ public class AccountRecordingManage {
         if (pageNow < pageCount || -1 == pageCount) {
             mIRecordingView.showLoading(R.string.loading_data);
             Tools.print(TAG, "下拉刷新");
-            mService.getUserRecordingList(pageNow, new ICallBackListener<String>() {
+            mService.getUserRecordingList(pageNow, new ResponseCallBack<String>() {
                 @Override
                 public void callSuccess(String s) {
                     try {

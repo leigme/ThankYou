@@ -11,9 +11,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
-import com.yhcloud.thankyou.module.account.view.IIntegralView;
+import com.yhcloud.thankyou.module.account.view.IntegralView;
 import com.yhcloud.thankyou.module.account.view.RechargeActivity;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
@@ -31,14 +31,14 @@ public class AccountIntegralManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IIntegralView mIIntegralView;
+    private IntegralView mIIntegralView;
     private Activity mActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
     private int uCoin, coin;
     private ArrayList<AccountIntegralBean> mBeen;
 
-    public AccountIntegralManage(IIntegralView integralView) {
+    public AccountIntegralManage(IntegralView integralView) {
         this.mIIntegralView = integralView;
         this.mActivity = (Activity) integralView;
         mIIntegralView.showLoading(R.string.loading_data);
@@ -67,7 +67,7 @@ public class AccountIntegralManage {
 
     public void getUserCurrency() {
         mIIntegralView.showLoading(R.string.loading_data);
-        mService.getUserCurrency(new ICallBackListener<String>() {
+        mService.getUserCurrency(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -94,7 +94,7 @@ public class AccountIntegralManage {
     public void getIntegralListData() {
         mIIntegralView.showLoading(R.string.loading_data);
         mBeen = new ArrayList<>();
-        mService.getIntegralExchangeList(new ICallBackListener<String>() {
+        mService.getIntegralExchangeList(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -124,7 +124,7 @@ public class AccountIntegralManage {
 
     public void send() {
         mIIntegralView.showLoading(R.string.loading_data);
-        mService.getUserCurrency(new ICallBackListener<String>() {
+        mService.getUserCurrency(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -161,7 +161,7 @@ public class AccountIntegralManage {
         mIIntegralView.showLoading(R.string.exchangeing);
         for (AccountIntegralBean bean: mBeen) {
             if (bean.isSelected()) {
-                mService.getUserCoin(bean.getMoney(), bean.getCoin(), new ICallBackListener<String>() {
+                mService.getUserCoin(bean.getMoney(), bean.getCoin(), new ResponseCallBack<String>() {
                     @Override
                     public void callSuccess(String s) {
                         mIIntegralView.showDialogMsg();

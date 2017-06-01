@@ -12,7 +12,7 @@ import android.view.View;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.PopupmenuListAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -49,7 +49,7 @@ public class PopupMenu extends PopupWindow {
             pla = new PopupmenuListAdapter(mActivity, list);
             rvPopupmenuList.setLayoutManager(new LinearLayoutManager(mActivity));
             rvPopupmenuList.addItemDecoration(new DividerItemDecoration(mActivity, DividerItemDecoration.VERTICAL_LIST));
-            pla.setIOnClickListener(new IOnClickListener() {
+            pla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mActivity.startActivity(list.get(position).getIntent());

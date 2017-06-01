@@ -13,10 +13,10 @@ import com.hyphenate.easeui.EaseConstant;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
 import com.yhcloud.thankyou.bean.UserRoleBean;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.chat.view.EaseChatActivity;
 import com.yhcloud.thankyou.module.detailinfo.bean.DetailPeopleInfoBean;
-import com.yhcloud.thankyou.module.detailinfo.view.IDetailPeopleActivityView;
+import com.yhcloud.thankyou.module.detailinfo.view.DetailPeopleActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 
@@ -33,7 +33,7 @@ public class DetailPeopleManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IDetailPeopleActivityView mIDetailPeopleView;
+    private DetailPeopleActivityView mIDetailPeopleView;
     private Activity mActivity;
     private LogicService mService;
     private String uId, userRealName;
@@ -41,7 +41,7 @@ public class DetailPeopleManage {
     private int roleId;
     private boolean edited;
 
-    public DetailPeopleManage(IDetailPeopleActivityView iDetailPeopleView) {
+    public DetailPeopleManage(DetailPeopleActivityView iDetailPeopleView) {
         this.mIDetailPeopleView = iDetailPeopleView;
         this.mActivity = (Activity) mIDetailPeopleView;
         mIDetailPeopleView.showLoading(R.string.loading_data);
@@ -66,7 +66,7 @@ public class DetailPeopleManage {
     }
 
     public void getDetailData() {
-        mService.getDetailInfo(uId, new ICallBackListener<String>() {
+        mService.getDetailInfo(uId, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

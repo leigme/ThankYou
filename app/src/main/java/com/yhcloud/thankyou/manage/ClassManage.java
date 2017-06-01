@@ -9,11 +9,11 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.module.classteachers.view.ClassTeacherListActivity;
 import com.yhcloud.thankyou.module.detailinfo.view.DetailPeopleActivity;
-import com.yhcloud.thankyou.view.IClassActivityView;
+import com.yhcloud.thankyou.view.ClassActivityView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,7 +26,7 @@ import java.util.ArrayList;
 
 public class ClassManage {
 
-    private IClassActivityView mIClassView;
+    private ClassActivityView mIClassView;
     private Fragment mFragment;
     private Activity mActivity;
     private LogicService mService;
@@ -34,7 +34,7 @@ public class ClassManage {
     private ArrayList<UserInfoBean> mBeen;
     private int refreshNum;
 
-    public ClassManage(IClassActivityView iClassView, LogicService service) {
+    public ClassManage(ClassActivityView iClassView, LogicService service) {
         this.mIClassView = iClassView;
         this.mFragment = (Fragment) mIClassView;
         this.mActivity = mFragment.getActivity();
@@ -52,7 +52,7 @@ public class ClassManage {
         } else {
             classId = mUserInfo.getUserInfoBean().getDefaultClassId();
         }
-        mService.getClassPeopleList(classId, "-1", new ICallBackListener<String>() {
+        mService.getClassPeopleList(classId, "-1", new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

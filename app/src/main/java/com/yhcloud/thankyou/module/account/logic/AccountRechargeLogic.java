@@ -2,7 +2,7 @@ package com.yhcloud.thankyou.module.account.logic;
 
 import android.util.Log;
 
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -18,7 +18,7 @@ public class AccountRechargeLogic {
 
     private String TAG = getClass().getSimpleName();
 
-    public void getRechargeList(final ICallBackListener<String> iCallBackListener) {
+    public void getRechargeList(final ResponseCallBack<String> responseCallBack) {
         OkHttpUtils.post()
                 .url(Constant.GETEXCHANGELIST)
                 .addParams("type", "2")
@@ -27,24 +27,24 @@ public class AccountRechargeLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Log.e(TAG, "getRechargeList-请求失败:" + e);
-                        iCallBackListener.callFailure();
+                        responseCallBack.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e(TAG, "getRechargeList-请求成功:" + response);
-                        iCallBackListener.callSuccess(response);
+                        responseCallBack.callSuccess(response);
                     }
                 });
     }
 
-//    public void getUserInfoForLocal(Context context, String userId, ICallBackListener<UserInfoBean> iCallListener) {
+//    public void getUserInfoForLocal(Context context, String userId, ResponseCallBack<UserInfoBean> iCallListener) {
 //        UserInfoBean userInfoBean = new UserInfoBean();
 //        userInfoBean.setUserId(userId);
 //        iCallListener.callSuccess(DbSelect.yhSelect(context, userInfoBean));
 //    }
 
-    public void getPayList(final ICallBackListener<String> iCallBackListener) {
+    public void getPayList(final ResponseCallBack<String> responseCallBack) {
         OkHttpUtils.post()
                 .url(Constant.GETPAYLIST)
                 .build()
@@ -52,18 +52,18 @@ public class AccountRechargeLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getPayList-请求失败:" + e);
-                        iCallBackListener.callFailure();
+                        responseCallBack.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getPayList-请求成功:" + response);
-                        iCallBackListener.callSuccess(response);
+                        responseCallBack.callSuccess(response);
                     }
                 });
     }
 
-    public void getOrderNumForService(String userId, String productId, String payId, String userName, final ICallBackListener<String> iCallBackListener) {
+    public void getOrderNumForService(String userId, String productId, String payId, String userName, final ResponseCallBack<String> responseCallBack) {
         OkHttpUtils.post()
                 .url(Constant.PAYMONEY)
                 .addParams("userId", userId)
@@ -75,13 +75,13 @@ public class AccountRechargeLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getOrderNumForService-请求失败:" + e);
-                        iCallBackListener.callFailure();
+                        responseCallBack.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getOrderNumForService-请求成功:" + response);
-                        iCallBackListener.callSuccess(response);
+                        responseCallBack.callSuccess(response);
                     }
                 });
     }

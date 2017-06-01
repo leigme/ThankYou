@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.module.image.view.IBigImageActivityView;
+import com.yhcloud.thankyou.module.image.view.BigImageActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 
@@ -25,14 +25,14 @@ import java.util.ArrayList;
 
 public class BigImageManage {
 
-    private IBigImageActivityView mIBigImageView;
+    private BigImageActivityView mIBigImageView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<String> imageUrls;
     private ArrayList<View> mViews;
     private LayoutInflater mInflater;
 
-    public BigImageManage(IBigImageActivityView iBigImageView) {
+    public BigImageManage(BigImageActivityView iBigImageView) {
         this.mIBigImageView = iBigImageView;
         this.mActivity = (Activity) mIBigImageView;
         Intent intent = new Intent(mActivity, LogicService.class);

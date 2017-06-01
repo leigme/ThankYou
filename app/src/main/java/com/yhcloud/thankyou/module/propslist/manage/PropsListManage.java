@@ -15,12 +15,12 @@ import android.view.View;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.propslist.adapter.PropsListAdapter;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListBean;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListViewBean;
-import com.yhcloud.thankyou.module.propslist.view.IPropsListActivityView;
+import com.yhcloud.thankyou.module.propslist.view.PropsListActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
 
@@ -38,13 +38,13 @@ public class PropsListManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IPropsListActivityView mIPropsListView;
+    private PropsListActivityView mIPropsListView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<PropsListBean> plbReceiveBeen, plbSendBeen;
     private ArrayList<PropsListViewBean> mViewBeen;
 
-    public PropsListManage(IPropsListActivityView iPropsListView) {
+    public PropsListManage(PropsListActivityView iPropsListView) {
         this.mIPropsListView = iPropsListView;
         this.mActivity = (Activity) mIPropsListView;
         plbReceiveBeen = new ArrayList<>();
@@ -72,7 +72,7 @@ public class PropsListManage {
     }
 
     public void getPropsListData(final int typeId, int pageNum) {
-        mService.getPropsList(typeId, pageNum, new ICallBackListener<String>() {
+        mService.getPropsList(typeId, pageNum, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -146,7 +146,7 @@ public class PropsListManage {
                             }
                         }
                     });
-                    plaSendAdapter.setIOnClickListener(new IOnClickListener() {
+                    plaSendAdapter.setIOnClickListener(new SubmitCallBack() {
                         @Override
                         public void OnItemClickListener(View view, int position) {
 
@@ -188,7 +188,7 @@ public class PropsListManage {
                             }
                         }
                     });
-                    plaReceiveAdapter.setIOnClickListener(new IOnClickListener() {
+                    plaReceiveAdapter.setIOnClickListener(new SubmitCallBack() {
                         @Override
                         public void OnItemClickListener(View view, int position) {
 

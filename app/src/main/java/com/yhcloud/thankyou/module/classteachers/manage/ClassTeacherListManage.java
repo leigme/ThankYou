@@ -10,9 +10,9 @@ import android.os.IBinder;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.bean.TeacherBean;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.module.classteachers.view.IClassTeacherListActivityView;
+import com.yhcloud.thankyou.module.classteachers.view.ClassTeacherListActivityView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,11 +26,11 @@ import java.util.ArrayList;
 
 public class ClassTeacherListManage {
 
-    private IClassTeacherListActivityView mIClassTeacherListView;
+    private ClassTeacherListActivityView mIClassTeacherListView;
     private Activity mActivity;
     private LogicService mService;
 
-    public ClassTeacherListManage(IClassTeacherListActivityView iClassTeacherListView) {
+    public ClassTeacherListManage(ClassTeacherListActivityView iClassTeacherListView) {
         this.mIClassTeacherListView = iClassTeacherListView;
         this.mActivity = (Activity) mIClassTeacherListView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -51,7 +51,7 @@ public class ClassTeacherListManage {
     }
 
     public void getClassTeacherList() {
-        mService.getClassTeacherList(new ICallBackListener<String>() {
+        mService.getClassTeacherList(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

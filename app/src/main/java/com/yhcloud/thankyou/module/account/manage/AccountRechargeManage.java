@@ -16,12 +16,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.account.alipay.AuthResult;
 import com.yhcloud.thankyou.module.account.alipay.PayResult;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargeBean;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargePayBean;
-import com.yhcloud.thankyou.module.account.view.IRechargeView;
+import com.yhcloud.thankyou.module.account.view.RechargeView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 
@@ -39,7 +39,7 @@ public class AccountRechargeManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IRechargeView mIRechargeView;
+    private RechargeView mIRechargeView;
     private Activity mActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
@@ -99,7 +99,7 @@ public class AccountRechargeManage {
         }
     });
 
-    public AccountRechargeManage(IRechargeView rechargeView) {
+    public AccountRechargeManage(RechargeView rechargeView) {
         this.mIRechargeView = rechargeView;
         this.mActivity = (Activity) rechargeView;
         mIRechargeView.showLoading(R.string.loading_data);
@@ -133,7 +133,7 @@ public class AccountRechargeManage {
     public void getRechargeData() {
         mIRechargeView.showLoading(R.string.loading_data);
         mBeen = new ArrayList<>();
-        mService.getRechargeList(new ICallBackListener<String>() {
+        mService.getRechargeList(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -170,7 +170,7 @@ public class AccountRechargeManage {
     }
 
     public void getUserCurrency() {
-        mService.getUserCurrency(new ICallBackListener<String>() {
+        mService.getUserCurrency(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -192,7 +192,7 @@ public class AccountRechargeManage {
     }
 
     public void getPayList() {
-        mService.getPayList(new ICallBackListener<String>() {
+        mService.getPayList(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -254,7 +254,7 @@ public class AccountRechargeManage {
                 payId = payBean.getPay_id();
             }
         }
-        mService.getOrderNum(productId, payId, new ICallBackListener<String>() {
+        mService.getOrderNum(productId, payId, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

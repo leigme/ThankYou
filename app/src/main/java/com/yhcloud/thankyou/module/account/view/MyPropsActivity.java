@@ -11,15 +11,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.account.adapter.AccountMyPropsAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.manage.AccountMyPropsManage;
 
 import java.util.ArrayList;
 
-public class MyPropsActivity extends ABaseActivity implements IMyPropsView {
+public class MyPropsActivity extends BaseActivity implements MyPropsView {
 
     //视图控件
     private LinearLayout llBack, llRight, llAddPropsNum, llSubPropsNum;
@@ -77,7 +77,7 @@ public class MyPropsActivity extends ABaseActivity implements IMyPropsView {
         if (null == ampa) {
             ampa = new AccountMyPropsAdapter(this, list, canOnClick);
             if (canOnClick) {
-                ampa.setIOnClickListener(new IOnClickListener() {
+                ampa.setIOnClickListener(new SubmitCallBack() {
                     @Override
                     public void OnItemClickListener(View view, int position) {
                         for (AccountPropBean bean: list) {

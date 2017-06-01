@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.account.logic;
 
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -16,7 +16,7 @@ public class AccountRecordingLogic {
 
     private String TAG = getClass().getSimpleName();
 
-    public void getUserRecordingList(String userId, int pageNow, final ICallBackListener<String> iCallBackListener) {
+    public void getUserRecordingList(String userId, int pageNow, final ResponseCallBack<String> responseCallBack) {
         OkHttpUtils.post()
                 .url(Constant.GETUSERRECORDINGLIST)
                 .addParams("userId", userId)
@@ -26,13 +26,13 @@ public class AccountRecordingLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getUserRecordingList-请求失败:" + e);
-                        iCallBackListener.callFailure();
+                        responseCallBack.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getUserRecordingList-请求成功:" + response);
-                        iCallBackListener.callSuccess(response);
+                        responseCallBack.callSuccess(response);
                     }
                 });
     }

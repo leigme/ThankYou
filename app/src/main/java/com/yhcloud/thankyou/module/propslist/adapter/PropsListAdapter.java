@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListBean;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -26,7 +26,7 @@ public class PropsListAdapter extends RecyclerView.Adapter<PropsListAdapter.Prop
     private LayoutInflater mInflater;
     private ArrayList<PropsListBean> mBeen;
     private int mListType;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public PropsListAdapter(Context context, ArrayList<PropsListBean> list, int typeId) {
         this.mContext = context;
@@ -61,12 +61,12 @@ public class PropsListAdapter extends RecyclerView.Adapter<PropsListAdapter.Prop
         }
         holder.tvContent.setText(content);
         holder.tvTime.setText(plb.getCreateTime());
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemLongClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemLongClickListener(holder.itemView, pos);
                     return false;
                 }
             });
@@ -83,8 +83,8 @@ public class PropsListAdapter extends RecyclerView.Adapter<PropsListAdapter.Prop
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 
     public static class PropsListViewHolder extends RecyclerView.ViewHolder {

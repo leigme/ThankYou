@@ -7,11 +7,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.classnotification.manage.ClassNotificationDetailManage;
 import com.yhcloud.thankyou.utils.myview.MyWebView;
 
-public class ClassNotificationDetailActivity extends ABaseActivity implements IClassNotificationDetailActivityView {
+public class ClassNotificationDetailActivity extends BaseActivity implements ClassNotificationDetailActivityView {
 
     //视图控件
     private LinearLayout llBack, llMenu;

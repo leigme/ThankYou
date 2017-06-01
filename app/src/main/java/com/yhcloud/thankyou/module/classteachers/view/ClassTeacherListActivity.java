@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.classteachers.adapter.TeacherListAdapter;
 import com.yhcloud.thankyou.bean.TeacherBean;
 import com.yhcloud.thankyou.module.classteachers.manage.ClassTeacherListManage;
@@ -17,7 +17,7 @@ import com.yhcloud.thankyou.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
 
-public class ClassTeacherListActivity extends ABaseActivity implements IClassTeacherListActivityView {
+public class ClassTeacherListActivity extends BaseActivity implements ClassTeacherListActivityView {
 
     //视图控件
     private LinearLayout llBack;

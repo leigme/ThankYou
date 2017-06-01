@@ -11,8 +11,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
-import com.yhcloud.thankyou.module.dutystudent.view.IDutyStudentActivityView;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
+import com.yhcloud.thankyou.module.dutystudent.view.DutyStudentActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 
 import org.json.JSONException;
@@ -26,11 +26,11 @@ import java.util.ArrayList;
 
 public class DutyStudentManage {
 
-    private IDutyStudentActivityView mIDutyStudentView;
+    private DutyStudentActivityView mIDutyStudentView;
     private Activity mActivity;
     private LogicService mService;
 
-    public DutyStudentManage(IDutyStudentActivityView iDutyStudentView) {
+    public DutyStudentManage(DutyStudentActivityView iDutyStudentView) {
         this.mIDutyStudentView = iDutyStudentView;
         this.mActivity = (Activity) mIDutyStudentView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -52,7 +52,7 @@ public class DutyStudentManage {
     }
 
     public void getDutyStudentList() {
-        mService.getDutyStudentList(new ICallBackListener<String>() {
+        mService.getDutyStudentList(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

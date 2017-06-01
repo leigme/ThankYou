@@ -9,12 +9,12 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.mabstract.ABaseManager;
-import com.yhcloud.thankyou.minterface.IBindBaseServiceCallBack;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.BindServiceCallBack;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 import com.yhcloud.thankyou.module.classnotification.view.AddClassNotificationDetailActivity;
 import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationDetailActivity;
-import com.yhcloud.thankyou.module.classnotification.view.IClassNotificationActivityView;
+import com.yhcloud.thankyou.module.classnotification.view.ClassNotificationActivityView;
 import com.yhcloud.thankyou.service.BaseService;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
@@ -29,11 +29,11 @@ import java.util.ArrayList;
  * Created by Administrator on 2017/1/6.
  */
 
-public class ClassNotificationManage extends ABaseManager implements IBindBaseServiceCallBack, ICallBackListener<String> {
+public class ClassNotificationManage extends ABaseManager implements BindServiceCallBack, ResponseCallBack<String> {
 
     private String TAG = getClass().getSimpleName();
 
-    private IClassNotificationActivityView mIClassNotificationView;
+    private ClassNotificationActivityView mIClassNotificationView;
     private Activity mActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
@@ -41,7 +41,7 @@ public class ClassNotificationManage extends ABaseManager implements IBindBaseSe
     private ArrayList<ClassNotificationBean> mBeen;
     private boolean refreshing;
 
-    public ClassNotificationManage(IClassNotificationActivityView iClassNotificationView) {
+    public ClassNotificationManage(ClassNotificationActivityView iClassNotificationView) {
         this.mIClassNotificationView = iClassNotificationView;
         this.mActivity = (Activity) mIClassNotificationView;
         Tools.bingBaseService(mActivity, this);

@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.classnotification.adapter.ClassNotificationListAdapter;
 import com.yhcloud.thankyou.module.classnotification.bean.ClassNotificationBean;
 import com.yhcloud.thankyou.module.classnotification.manage.ClassNotificationManage;
@@ -20,7 +20,7 @@ import com.yhcloud.thankyou.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
 
-public class ClassNotificationActivity extends ABaseActivity implements IClassNotificationActivityView {
+public class ClassNotificationActivity extends BaseActivity implements ClassNotificationActivityView {
 
     private String TAG = getClass().getSimpleName();
 
@@ -135,7 +135,7 @@ public class ClassNotificationActivity extends ABaseActivity implements IClassNo
                     }
                 }
             });
-            cnla.setIOnClickListener(new IOnClickListener() {
+            cnla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goClassNotificationDetail(position);

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.manage.LoginManage;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import rx.Observable;
 import rx.Observer;
 
-public class LoginActivity extends ABaseActivity implements ILoginActivityView {
+public class LoginActivity extends BaseActivity implements LoginActivityView {
 
     private String TAG = getClass().getSimpleName();
     //视图控件

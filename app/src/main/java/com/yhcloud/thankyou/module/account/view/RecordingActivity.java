@@ -8,14 +8,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.account.adapter.AccountRecordingListAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountRecordingBean;
 import com.yhcloud.thankyou.module.account.manage.AccountRecordingManage;
 
 import java.util.ArrayList;
 
-public class RecordingActivity extends ABaseActivity implements IRecordingView {
+public class RecordingActivity extends BaseActivity implements RecordingView {
 
     //视图控件
     private LinearLayout llBack;

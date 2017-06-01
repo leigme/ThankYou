@@ -8,7 +8,7 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.yhcloud.thankyou.service.LogicService;
-import com.yhcloud.thankyou.view.IWebActivityView;
+import com.yhcloud.thankyou.view.WebActivityView;
 
 /**
  * Created by Administrator on 2016/12/23.
@@ -16,12 +16,12 @@ import com.yhcloud.thankyou.view.IWebActivityView;
 
 public class WebManage {
 
-    private IWebActivityView mIWebView;
+    private WebActivityView mIWebView;
     private Activity mActivity;
     private LogicService mService;
     private String title, url;
 
-    public WebManage(IWebActivityView iWebView) {
+    public WebManage(WebActivityView iWebView) {
         this.mIWebView = iWebView;
         this.mActivity = (Activity) mIWebView;
         Intent intent = new Intent(mActivity, LogicService.class);

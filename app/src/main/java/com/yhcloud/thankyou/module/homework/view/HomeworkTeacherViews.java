@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.homework.adapter.TeacherHomeworkObjectiveListAdapter;
 import com.yhcloud.thankyou.module.homework.adapter.TeacherHomeworkSubjectiveListAdapter;
 import com.yhcloud.thankyou.module.homework.bean.TeacherQuestionBean;
@@ -58,7 +58,7 @@ public class HomeworkTeacherViews {
         }
         TeacherHomeworkSubjectiveListAdapter thsla = new TeacherHomeworkSubjectiveListAdapter(mContext, subjectiveImageList);
         questionList.setLayoutManager(new GridLayoutManager(mContext, 4));
-        thsla.setIOnClickListener(new IOnClickListener() {
+        thsla.setIOnClickListener(new SubmitCallBack() {
             @Override
             public void OnItemClickListener(View view, int position) {
                 Intent intent = new Intent(mContext, BigImageActivity.class);

@@ -9,9 +9,9 @@ import android.os.IBinder;
 
 import com.google.gson.Gson;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.aboutus.bean.AboutUsBean;
-import com.yhcloud.thankyou.module.aboutus.view.IAboutUsActivityView;
+import com.yhcloud.thankyou.module.aboutus.view.AboutUsActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -25,11 +25,11 @@ import java.text.MessageFormat;
  */
 
 public class AboutUsManage {
-    private IAboutUsActivityView mIAboutUsView;
+    private AboutUsActivityView mIAboutUsView;
     private Activity mActivity;
     private LogicService mService;
 
-    public AboutUsManage(IAboutUsActivityView iAboutUsView) {
+    public AboutUsManage(AboutUsActivityView iAboutUsView) {
         this.mIAboutUsView = iAboutUsView;
         this.mActivity = (Activity) mIAboutUsView;
 
@@ -58,7 +58,7 @@ public class AboutUsManage {
 
     public void getAboutUsInfo() {
         mIAboutUsView.showLoading(R.string.loading_data);
-        mService.getAboutUsInfo(new ICallBackListener<String>() {
+        mService.getAboutUsInfo(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.account.bean.AccountFunctionBean;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class AccountFunctionAdapter extends RecyclerView.Adapter<AccountFunction
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<AccountFunctionBean> mBeen;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public AccountFunctionAdapter(Context context, ArrayList<AccountFunctionBean> list) {
         this.mContext = context;
@@ -42,12 +42,12 @@ public class AccountFunctionAdapter extends RecyclerView.Adapter<AccountFunction
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         holder.mLinearLayout.setBackgroundResource(mBeen.get(position).getBgResId());
         holder.mTextView.setText(mBeen.get(position).getTitle());
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -68,8 +68,8 @@ public class AccountFunctionAdapter extends RecyclerView.Adapter<AccountFunction
         }
     }
 
-    public void setIOnClickListener(IOnClickListener onClickListener) {
-        this.mIOnClickListener = onClickListener;
+    public void setIOnClickListener(SubmitCallBack onClickListener) {
+        this.mSubmitCallBack = onClickListener;
     }
 
     public void refreshData(ArrayList<AccountFunctionBean> list) {

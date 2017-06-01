@@ -1,6 +1,6 @@
 package com.yhcloud.thankyou.module.classteachers.logic;
 
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -17,7 +17,7 @@ public class ClassTeacherListLogic implements IClassTeacherListLogic {
     private String TAG = getClass().getSimpleName();
 
     @Override
-    public void getClassTeacherList(String classId, final ICallBackListener<String> iCallBackListener) {
+    public void getClassTeacherList(String classId, final ResponseCallBack<String> responseCallBack) {
         OkHttpUtils.post()
                 .url(Constant.GETCLASSTEACHERLIST)
                 .addParams("classId", classId)
@@ -26,13 +26,13 @@ public class ClassTeacherListLogic implements IClassTeacherListLogic {
                     @Override
                     public void onError(Call call, Exception e, int id) {
                         Tools.print(TAG, "getClassTeacherList-请求失败：" + e);
-                        iCallBackListener.callFailure();
+                        responseCallBack.callFailure();
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
                         Tools.print(TAG, "getClassTeacherList-请求成功：" + response);
-                        iCallBackListener.callSuccess(response);
+                        responseCallBack.callSuccess(response);
                     }
                 });
     }

@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.ui.EaseConversationListFragment;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.chat.manage.MessageManage;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -16,7 +16,7 @@ import com.yhcloud.thankyou.utils.Tools;
  * 消息列表
  * */
 
-public class MessageActivity extends ABaseActivity implements IMessageView{
+public class MessageActivity extends BaseActivity implements MessageView {
 
     private String TAG = getClass().getSimpleName();
     //视图控件

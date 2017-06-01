@@ -8,10 +8,10 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.todayrecipes.manage.TodayRecipesInfoManage;
 
-public class TodayRecipesInfoActivity extends ABaseActivity implements ITodayRecipesInfoView {
+public class TodayRecipesInfoActivity extends BaseActivity implements TodayRecipesInfoView {
     //视图控件
     private LinearLayout llBack;
     private TextView tvTitle, tvContent;

@@ -3,10 +3,10 @@ package com.yhcloud.thankyou.module.classnotification.manage;
 import android.app.Activity;
 import android.content.Intent;
 
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.mabstract.ABaseManager;
-import com.yhcloud.thankyou.minterface.IBindBaseServiceCallBack;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
-import com.yhcloud.thankyou.module.classnotification.view.IAddClassNotificationDetailActivityView;
+import com.yhcloud.thankyou.comm.BindServiceCallBack;
+import com.yhcloud.thankyou.module.classnotification.view.AddClassNotificationDetailActivityView;
 import com.yhcloud.thankyou.module.image.view.MyImgSelActivity;
 import com.yhcloud.thankyou.service.BaseService;
 import com.yhcloud.thankyou.service.LogicService;
@@ -21,17 +21,17 @@ import java.util.List;
  * Created by leig on 2017/2/17.
  */
 
-public class AddClassNotificationManage extends ABaseManager implements IBindBaseServiceCallBack, ICallBackListener<String>{
+public class AddClassNotificationManage extends ABaseManager implements BindServiceCallBack, ResponseCallBack<String> {
 
     private String TAG = getClass().getSimpleName();
 
-    private IAddClassNotificationDetailActivityView mIAddClassNotificationDetailActivityView;
+    private AddClassNotificationDetailActivityView mIAddClassNotificationDetailActivityView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<String> imageList;
     private ImgSelConfig config;
 
-    public AddClassNotificationManage(IAddClassNotificationDetailActivityView iAddClassNotificationDetailActivityView) {
+    public AddClassNotificationManage(AddClassNotificationDetailActivityView iAddClassNotificationDetailActivityView) {
         this.mIAddClassNotificationDetailActivityView = iAddClassNotificationDetailActivityView;
         this.mActivity = (Activity) mIAddClassNotificationDetailActivityView;
         Tools.bingBaseService(mActivity, this);

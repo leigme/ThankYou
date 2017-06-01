@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
 
-import com.yhcloud.thankyou.module.chat.view.IAddChatView;
+import com.yhcloud.thankyou.module.chat.view.AddChatView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -19,11 +19,11 @@ public class AddChatManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IAddChatView mIAddChatView;
+    private AddChatView mIAddChatView;
     private Activity mActivity;
     private LogicService mService;
 
-    public AddChatManage(IAddChatView IAddChatView) {
+    public AddChatManage(AddChatView IAddChatView) {
         this.mIAddChatView = IAddChatView;
         this.mActivity = (Activity) mIAddChatView;
         Intent intent = new Intent(mActivity, LogicService.class);

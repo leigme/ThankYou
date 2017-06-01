@@ -10,9 +10,9 @@ import android.os.Environment;
 import android.os.IBinder;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.homework.bean.StudentQuestionBean;
-import com.yhcloud.thankyou.module.homework.view.IAddPhotoActivityView;
+import com.yhcloud.thankyou.module.homework.view.AddPhotoActivityView;
 import com.yhcloud.thankyou.module.image.view.BigImageActivity;
 import com.yhcloud.thankyou.module.image.view.MyImgSelActivity;
 import com.yhcloud.thankyou.service.LogicService;
@@ -37,7 +37,7 @@ public class AddPhotoManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IAddPhotoActivityView mIAddPhotoView;
+    private AddPhotoActivityView mIAddPhotoView;
     private Activity mActivity;
     private LogicService mService;
     private ArrayList<String> mBeen;
@@ -47,7 +47,7 @@ public class AddPhotoManage {
     private ImgSelConfig config;
     private StudentQuestionBean mStudentQuestionBean;
 
-    public AddPhotoManage(IAddPhotoActivityView iAddPhotoView) {
+    public AddPhotoManage(AddPhotoActivityView iAddPhotoView) {
         this.mIAddPhotoView = iAddPhotoView;
         this.mActivity = (Activity) mIAddPhotoView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -157,7 +157,7 @@ public class AddPhotoManage {
         mService.sendStudentSubjectiveHomework(workId,
                 mStudentQuestionBean.getQusetionId(), content, mStudentQuestionBean.getScore(),
                 startTime, Tools.getNowDateTime(), addImageUrls,
-                new ICallBackListener<String>() {
+                new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -190,7 +190,7 @@ public class AddPhotoManage {
 
     public void updateStudentHomework() {
         mIAddPhotoView.showLoading(R.string.loading_data);
-        mService.updateStudentHomework(mStudentQuestionBean.getHomeworkId(), new ICallBackListener<String>() {
+        mService.updateStudentHomework(mStudentQuestionBean.getHomeworkId(), new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

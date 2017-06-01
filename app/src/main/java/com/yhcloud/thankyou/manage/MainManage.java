@@ -19,15 +19,15 @@ import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.service.logic.minterface.IMainLogic;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.view.ClassFragment;
 import com.yhcloud.thankyou.view.HomeFragment;
-import com.yhcloud.thankyou.view.IClassActivityView;
-import com.yhcloud.thankyou.view.IMainActivityView;
+import com.yhcloud.thankyou.view.ClassActivityView;
+import com.yhcloud.thankyou.view.MainActivityView;
 import com.yhcloud.thankyou.view.MineFragment;
 
 import org.json.JSONException;
@@ -45,7 +45,7 @@ public class MainManage {
 
     private String TAG = getClass().getSimpleName();
     private IMainLogic mIMainLogic;
-    private IMainActivityView mIMainView;
+    private MainActivityView mIMainView;
     private Activity mActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
@@ -55,7 +55,7 @@ public class MainManage {
     private ArrayList<FunctionBean> mMenuBeen;
     private ArrayList<UserInfoBean> mUserInfoBeen;
 
-    public MainManage(IMainActivityView mainView) {
+    public MainManage(MainActivityView mainView) {
         this.mIMainView = mainView;
         this.mActivity = (Activity) mainView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -102,7 +102,7 @@ public class MainManage {
     }
 
     private void getFriendList(String updateTime) {
-        mService.getFriendList(updateTime, new ICallBackListener<String>() {
+        mService.getFriendList(updateTime, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 Tools.print(TAG, "获取用户好友列表信息成功...");
@@ -199,7 +199,7 @@ public class MainManage {
     }
 
     public void setClassPeopleList(String classId) {
-        IClassActivityView iClassView = (IClassActivityView) mFragments.get(1);
+        ClassActivityView iClassView = (ClassActivityView) mFragments.get(1);
         iClassView.getClassManage().getClassPeopleList(classId);
     }
 

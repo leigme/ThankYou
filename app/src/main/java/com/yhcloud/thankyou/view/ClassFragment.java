@@ -15,8 +15,8 @@ import android.widget.LinearLayout;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.adapter.ClassPeopleListAdapter;
 import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.mabstract.ABaseFragment;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseFragment;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.manage.ClassManage;
 import com.yhcloud.thankyou.service.LogicService;
 
@@ -31,7 +31,7 @@ import java.util.ArrayList;
  * Use the {@link ClassFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ClassFragment extends ABaseFragment implements IClassActivityView {
+public class ClassFragment extends BaseFragment implements ClassActivityView {
 
     private String TAG = getClass().getSimpleName();
 
@@ -135,7 +135,7 @@ public class ClassFragment extends ABaseFragment implements IClassActivityView {
     public void showList(ArrayList<UserInfoBean> list) {
         if (null == cpla) {
             cpla = new ClassPeopleListAdapter(getActivity(), list);
-            cpla.setIOnClickListener(new IOnClickListener() {
+            cpla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     Log.e(TAG, MessageFormat.format("点击了第{0}个学生", position));

@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.RelativeInfoBean;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 
 import java.util.ArrayList;
 
@@ -23,7 +23,7 @@ public class DetailPeopleListAdapter extends RecyclerView.Adapter<DetailPeopleLi
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<RelativeInfoBean> mBeen;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public DetailPeopleListAdapter(Context context, ArrayList<RelativeInfoBean> list) {
         this.mContext = context;
@@ -46,12 +46,12 @@ public class DetailPeopleListAdapter extends RecyclerView.Adapter<DetailPeopleLi
         } else {
             holder.llDetailItem.setVisibility(View.GONE);
         }
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -62,8 +62,8 @@ public class DetailPeopleListAdapter extends RecyclerView.Adapter<DetailPeopleLi
         return mBeen.size();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 
     public void refreshData(ArrayList<RelativeInfoBean> list) {

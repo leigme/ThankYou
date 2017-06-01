@@ -8,9 +8,9 @@ import android.content.ServiceConnection;
 import android.os.IBinder;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
-import com.yhcloud.thankyou.module.account.view.IPropsInfoView;
+import com.yhcloud.thankyou.module.account.view.PropsInfoView;
 import com.yhcloud.thankyou.module.account.view.IntegralActivity;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
@@ -26,13 +26,13 @@ public class AccountPropsInfoManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IPropsInfoView mIPropsInfoView;
+    private PropsInfoView mIPropsInfoView;
     private Activity mActivity;
     private LogicService mService;
     private int coin, sumCoin;
     private AccountPropBean mAccountPropBean;
 
-    public AccountPropsInfoManage(IPropsInfoView propsInfoView) {
+    public AccountPropsInfoManage(PropsInfoView propsInfoView) {
         this.mIPropsInfoView = propsInfoView;
         this.mActivity = (Activity) propsInfoView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -91,7 +91,7 @@ public class AccountPropsInfoManage {
     public void buyProps() {
         mIPropsInfoView.showLoading(R.string.exchangeing);
         int i = mIPropsInfoView.getBuynum();
-        mService.buyProps(mAccountPropBean.getPropId(), String.valueOf(i), new ICallBackListener<String>() {
+        mService.buyProps(mAccountPropBean.getPropId(), String.valueOf(i), new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

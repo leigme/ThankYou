@@ -10,13 +10,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.manage.AccountPropsInfoManage;
 
 import java.text.MessageFormat;
 
-public class PropsInfoActivity extends ABaseActivity implements IPropsInfoView {
+public class PropsInfoActivity extends BaseActivity implements PropsInfoView {
 
     private LinearLayout llBack;
     private TextView tvTitle, tvPropsName, tvPropsDetails, tvPropsCoin, tvPropsPeopleNum,

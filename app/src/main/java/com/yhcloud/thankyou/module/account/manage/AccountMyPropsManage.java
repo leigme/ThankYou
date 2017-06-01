@@ -11,9 +11,9 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfo;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
-import com.yhcloud.thankyou.module.account.view.IMyPropsView;
+import com.yhcloud.thankyou.module.account.view.MyPropsView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -30,7 +30,7 @@ public class AccountMyPropsManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IMyPropsView mIMyPropsView;
+    private MyPropsView mIMyPropsView;
     private Activity mActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
@@ -39,7 +39,7 @@ public class AccountMyPropsManage {
     private boolean canGive;
     private int give, sum;
 
-    public AccountMyPropsManage(IMyPropsView myPropsView) {
+    public AccountMyPropsManage(MyPropsView myPropsView) {
         this.mIMyPropsView = myPropsView;
         this.mActivity = (Activity) myPropsView;
         mIMyPropsView.showLoading(R.string.loading_data);
@@ -77,7 +77,7 @@ public class AccountMyPropsManage {
 
     public void getPropsDataForService() {
         mIMyPropsView.showLoading(R.string.loading_data);
-        mService.getUserPropsList(new ICallBackListener<String>() {
+        mService.getUserPropsList(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -141,7 +141,7 @@ public class AccountMyPropsManage {
         if (null != propId && !"".equals(propId)) {
             if (0 < mIMyPropsView.getNum()) {
                 Tools.print(TAG, "开始赠送~~~");
-                mService.givePropsToPeople(recvUserId, propId, mIMyPropsView.getNum(), new ICallBackListener<String>() {
+                mService.givePropsToPeople(recvUserId, propId, mIMyPropsView.getNum(), new ResponseCallBack<String>() {
                     @Override
                     public void callSuccess(String s) {
                         try {

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ public class StudentHomeworkSubjectiveListAdapter extends RecyclerView.Adapter<S
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<String> urls;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public StudentHomeworkSubjectiveListAdapter(Context context, ArrayList<String> list) {
         this.mContext = context;
@@ -45,12 +45,12 @@ public class StudentHomeworkSubjectiveListAdapter extends RecyclerView.Adapter<S
 //                .placeholder(R.mipmap.loading)
 //                .error(R.mipmap.icon_big_404)
 //                .into(holder.ivImage);
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -66,8 +66,8 @@ public class StudentHomeworkSubjectiveListAdapter extends RecyclerView.Adapter<S
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 
     public static class SubjectiveViewHolder extends RecyclerView.ViewHolder {

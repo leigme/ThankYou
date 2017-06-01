@@ -11,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkBlankListAdapter;
 import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkSubjectiveListAdapter;
 import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkRadioListAdpater;
@@ -63,7 +63,7 @@ public class HomeworkStudentViews {
         }
         StudentHomeworkSubjectiveListAdapter hsla = new StudentHomeworkSubjectiveListAdapter(mContext, subjectiveImageList);
         questionList.setLayoutManager(new GridLayoutManager(mContext, 4));
-        hsla.setIOnClickListener(new IOnClickListener() {
+        hsla.setIOnClickListener(new SubmitCallBack() {
             @Override
             public void OnItemClickListener(View view, int position) {
                 Intent intent = new Intent(mContext, BigImageActivity.class);
@@ -119,7 +119,7 @@ public class HomeworkStudentViews {
         if (!status) {
             answer.setVisibility(View.GONE);
             answerTitle.setVisibility(View.GONE);
-            hrla.setIOnClickListener(new IOnClickListener() {
+            hrla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     ArrayList<String> list = new ArrayList<>();
@@ -185,7 +185,7 @@ public class HomeworkStudentViews {
         if (!status) {
             answer.setVisibility(View.GONE);
             answerTitle.setVisibility(View.GONE);
-            hrla.setIOnClickListener(new IOnClickListener() {
+            hrla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     ArrayList<String> list = new ArrayList<>();

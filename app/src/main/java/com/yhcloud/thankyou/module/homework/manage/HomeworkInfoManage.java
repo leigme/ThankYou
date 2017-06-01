@@ -12,7 +12,7 @@ import android.view.LayoutInflater;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.homework.bean.AnswerBean;
 import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
 import com.yhcloud.thankyou.module.homework.bean.StudentQuestionBean;
@@ -23,7 +23,7 @@ import com.yhcloud.thankyou.module.homework.view.AddPhotoActivity;
 import com.yhcloud.thankyou.module.homework.bean.HomeworkInfoViewPagerBean;
 import com.yhcloud.thankyou.module.homework.view.HomeworkStudentViews;
 import com.yhcloud.thankyou.module.homework.view.HomeworkTeacherViews;
-import com.yhcloud.thankyou.module.homework.view.IHomeworkInfoActivityView;
+import com.yhcloud.thankyou.module.homework.view.HomeworkInfoActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -43,7 +43,7 @@ public class HomeworkInfoManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IHomeworkInfoActivityView mIHomeworkInfoView;
+    private HomeworkInfoActivityView mIHomeworkInfoView;
     private Activity mActivity;
     private LogicService mService;
     private LayoutInflater mInflater;
@@ -61,7 +61,7 @@ public class HomeworkInfoManage {
     private boolean status;
 
     //初始化管理器并连接服务
-    public HomeworkInfoManage(IHomeworkInfoActivityView iHomeworkInfoView) {
+    public HomeworkInfoManage(HomeworkInfoActivityView iHomeworkInfoView) {
         this.mIHomeworkInfoView = iHomeworkInfoView;
         this.mActivity = (Activity) mIHomeworkInfoView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -130,7 +130,7 @@ public class HomeworkInfoManage {
     //拿去老师作业详细信息
     public void getTeacherHomeworkInfo(final int pageNum) {
         mIHomeworkInfoView.showLoading(R.string.loading_data);
-        mService.getTeacherHomeworkInfo(mTeacherHomeworkBean.getHomeworkId(), new ICallBackListener<String>() {
+        mService.getTeacherHomeworkInfo(mTeacherHomeworkBean.getHomeworkId(), new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -171,7 +171,7 @@ public class HomeworkInfoManage {
     //拿去学生作业详细信息
     public void getStudentHomeworkInfo(final int pageNum) {
         mIHomeworkInfoView.showLoading(R.string.loading_data);
-        mService.getStudentHomeworkInfo(mStudentHomeworkBean.getWorkId(), new ICallBackListener<String>() {
+        mService.getStudentHomeworkInfo(mStudentHomeworkBean.getWorkId(), new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -426,7 +426,7 @@ public class HomeworkInfoManage {
         Gson gson = new Gson();
         String jsonObject = gson.toJson(sendAnswerBean);
         Tools.print(TAG, "提交的json为:" + jsonObject);
-        mService.sendStudentObjectiveHomework(jsonObject, new ICallBackListener<String>() {
+        mService.sendStudentObjectiveHomework(jsonObject, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 mIHomeworkInfoView.hiddenLoading();
@@ -460,7 +460,7 @@ public class HomeworkInfoManage {
 
     public void updateStudentHomework() {
         mIHomeworkInfoView.showLoading(R.string.loading_data);
-        mService.updateStudentHomework(mStudentHomeworkBean.getWorkId(), new ICallBackListener<String>() {
+        mService.updateStudentHomework(mStudentHomeworkBean.getWorkId(), new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

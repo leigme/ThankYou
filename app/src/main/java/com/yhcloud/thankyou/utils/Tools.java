@@ -16,7 +16,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.minterface.IBindBaseServiceCallBack;
+import com.yhcloud.thankyou.comm.BindServiceCallBack;
 import com.yhcloud.thankyou.module.aboutus.view.AboutUsActivity;
 import com.yhcloud.thankyou.module.account.view.AccountActivity;
 import com.yhcloud.thankyou.module.allfuncation.view.AllFuncationActivity;
@@ -312,18 +312,18 @@ public class Tools {
     }
 
     //获得服务方法
-    public static void bingBaseService(Context context, final IBindBaseServiceCallBack iBindBaseServiceCallBack) {
+    public static void bingBaseService(Context context, final BindServiceCallBack bindServiceCallBack) {
         Intent intent = new Intent(context, LogicService.class);
         context.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
                 LogicService logicService = (LogicService) ((BaseService.MyBinder)service).getService();
-                iBindBaseServiceCallBack.bindBaseServiceSuccess(logicService);
+                bindServiceCallBack.bindBaseServiceSuccess(logicService);
             }
 
             @Override
             public void onServiceDisconnected(ComponentName name) {
-                iBindBaseServiceCallBack.bindBaseServiceFailure();
+                bindServiceCallBack.bindBaseServiceFailure();
             }
         }, Service.BIND_AUTO_CREATE);
     }

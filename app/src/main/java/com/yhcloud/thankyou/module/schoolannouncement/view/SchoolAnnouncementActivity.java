@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.schoolannouncement.adapter.SchoolAnnouncementListAdapter;
 import com.yhcloud.thankyou.module.schoolannouncement.bean.SchoolAnnouncementBean;
 import com.yhcloud.thankyou.module.schoolannouncement.manage.SchoolAnnouncementManage;
@@ -19,7 +19,7 @@ import com.yhcloud.thankyou.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
 
-public class SchoolAnnouncementActivity extends ABaseActivity implements ISchoolAnnouncementActivityView {
+public class SchoolAnnouncementActivity extends BaseActivity implements SchoolAnnouncementActivityView {
 
     //视图控件
     private LinearLayout llBack;
@@ -122,7 +122,7 @@ public class SchoolAnnouncementActivity extends ABaseActivity implements ISchool
                 }
             });
             rvSchoolAnnouncementList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL_LIST));
-            sala.setIOnClickListener(new IOnClickListener() {
+            sala.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goSchoolAnnouncementDetail(position);

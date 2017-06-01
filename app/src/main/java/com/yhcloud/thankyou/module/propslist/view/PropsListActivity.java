@@ -9,14 +9,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.propslist.adapter.PropsListViewAdapter;
 import com.yhcloud.thankyou.module.propslist.bean.PropsListViewBean;
 import com.yhcloud.thankyou.module.propslist.manage.PropsListManage;
 
 import java.util.ArrayList;
 
-public class PropsListActivity extends ABaseActivity implements IPropsListActivityView {
+public class PropsListActivity extends BaseActivity implements PropsListActivityView {
 
     //视图控件
     private LinearLayout llBack;

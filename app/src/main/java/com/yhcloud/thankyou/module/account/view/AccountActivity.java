@@ -9,8 +9,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.account.adapter.AccountFunctionAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountFunctionBean;
 import com.yhcloud.thankyou.module.account.manage.AccountManage;
@@ -19,7 +19,7 @@ import com.youth.banner.Banner;
 
 import java.util.ArrayList;
 
-public class AccountActivity extends ABaseActivity implements IAccountView {
+public class AccountActivity extends BaseActivity implements AccountView {
 
     private String TAG = getClass().getSimpleName();
 
@@ -87,7 +87,7 @@ public class AccountActivity extends ABaseActivity implements IAccountView {
     public void showFunction(final ArrayList<AccountFunctionBean> list) {
         if (null == afa) {
             afa = new AccountFunctionAdapter(this, list);
-            afa.setIOnClickListener(new IOnClickListener() {
+            afa.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goFunction(position);

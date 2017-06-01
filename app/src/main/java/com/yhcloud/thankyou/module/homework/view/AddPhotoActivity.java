@@ -16,16 +16,16 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.minterface.IButtonOnClickListener;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.homework.adapter.AddPhotoListAdapter;
 import com.yhcloud.thankyou.module.homework.manage.AddPhotoManage;
 import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
 
-public class AddPhotoActivity extends ABaseActivity implements IAddPhotoActivityView {
+public class AddPhotoActivity extends BaseActivity implements AddPhotoActivityView {
 
     private String TAG = getClass().getSimpleName();
 
@@ -122,7 +122,7 @@ public class AddPhotoActivity extends ABaseActivity implements IAddPhotoActivity
         if (null == apla) {
             apla = new AddPhotoListAdapter(this, list);
             rvPhotoList.setLayoutManager(new GridLayoutManager(this, 3));
-            apla.setIOnClickListener(new IOnClickListener() {
+            apla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goAddPhoto(position);

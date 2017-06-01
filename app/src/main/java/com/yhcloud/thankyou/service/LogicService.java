@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.service.logic.mimplement.ClassLogic;
 import com.yhcloud.thankyou.service.logic.mimplement.HomeLogic;
 import com.yhcloud.thankyou.service.logic.minterface.IClassLogic;
@@ -19,7 +20,6 @@ import com.yhcloud.thankyou.service.logic.minterface.IHomeLogic;
 import com.yhcloud.thankyou.service.logic.minterface.ILoginLogic;
 import com.yhcloud.thankyou.service.logic.mimplement.LoginLogic;
 import com.yhcloud.thankyou.service.logic.mimplement.MainLogic;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
 import com.yhcloud.thankyou.module.aboutus.logic.AboutUsLogic;
 import com.yhcloud.thankyou.module.account.logic.AccountIntegralLogic;
 import com.yhcloud.thankyou.module.account.logic.AccountLogic;
@@ -164,9 +164,9 @@ public class LogicService extends BaseService {
     //==========================//
 
     //登录
-    public void login(String username, String password, ICallBackListener<String> iCallBackListener) {
+    public void login(String username, String password, ResponseCallBack<String> responseCallBack) {
         ILoginLogic loginLogic = new LoginLogic();
-        loginLogic.login(username, password, iCallBackListener);
+        loginLogic.login(username, password, responseCallBack);
     }
 
     //存储用户登录信息
@@ -341,7 +341,7 @@ public class LogicService extends BaseService {
 
 
     //获取轮播图
-    public void getBannerImageUrls(String updateTime, ICallBackListener<String> iCallBackListener) {
+    public void getBannerImageUrls(String updateTime, ResponseCallBack<String> responseCallBack) {
         String flag;
         switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
             case 1004:
@@ -361,11 +361,11 @@ public class LogicService extends BaseService {
                 break;
         }
         IHomeLogic homeLogic = new HomeLogic();
-        homeLogic.getSpreadList("16", flag, updateTime, iCallBackListener);
+        homeLogic.getSpreadList("16", flag, updateTime, responseCallBack);
     }
 
     //获取推广列表
-    public void getSpreadList(String updateTime, ICallBackListener<String> iCallBackListener) {
+    public void getSpreadList(String updateTime, ResponseCallBack<String> responseCallBack) {
         String flag;
         switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
             case 1004:
@@ -385,140 +385,140 @@ public class LogicService extends BaseService {
                 break;
         }
         IHomeLogic homeLogic = new HomeLogic();
-        homeLogic.getSpreadList("2", flag, updateTime, iCallBackListener);
+        homeLogic.getSpreadList("2", flag, updateTime, responseCallBack);
     }
 
     //获取用户好友列表
-    public void getFriendList(String updateTime, ICallBackListener<String> iCallBackListener) {
+    public void getFriendList(String updateTime, ResponseCallBack<String> responseCallBack) {
         MainLogic mainLogic = new MainLogic();
-        mainLogic.getFriendList(mUserInfo.getUserInfoBean().getUserId(), updateTime, iCallBackListener);
+        mainLogic.getFriendList(mUserInfo.getUserInfoBean().getUserId(), updateTime, responseCallBack);
     }
 
     //获取学校公告
-    public void getSchoolAnnouncementData(int pageNum, ICallBackListener<String> iCallBackListener) {
+    public void getSchoolAnnouncementData(int pageNum, ResponseCallBack<String> responseCallBack) {
         SchoolAnnouncementLogic schoolAnnouncementLogic = new SchoolAnnouncementLogic();
-        schoolAnnouncementLogic.getSchoolAnnouncementData(mUserInfo.getUserInfoBean().getSchoolId(), pageNum, iCallBackListener);
+        schoolAnnouncementLogic.getSchoolAnnouncementData(mUserInfo.getUserInfoBean().getSchoolId(), pageNum, responseCallBack);
     }
 
     //获取班级通知
-    public void getClassNotificationData(int pageNum, ICallBackListener<String> iCallBackListener) {
+    public void getClassNotificationData(int pageNum, ResponseCallBack<String> responseCallBack) {
         ClassNotificationLogic classNotificationLogic = new ClassNotificationLogic();
         classNotificationLogic.getClassNotificationData(mUserInfo.getUserInfoBean().getUserId(),
-                mUserInfo.getUserInfoBean().getDefaultClassId(), pageNum, "-1", iCallBackListener);
+                mUserInfo.getUserInfoBean().getDefaultClassId(), pageNum, "-1", responseCallBack);
     }
 
     //更新班级通知阅读状态
-    public void updateClassNotificationReadState(String noticeId, ICallBackListener<String> iCallBackListener) {
+    public void updateClassNotificationReadState(String noticeId, ResponseCallBack<String> responseCallBack) {
         ClassNotificationLogic classNotificationLogic = new ClassNotificationLogic();
-        classNotificationLogic.updateReadState(noticeId, mUserInfo.getUserInfoBean().getUserId(), iCallBackListener);
+        classNotificationLogic.updateReadState(noticeId, mUserInfo.getUserInfoBean().getUserId(), responseCallBack);
     }
 
     //获取老师端作业列表
-    public void getTeacherHomeworkList(int page, ICallBackListener<String> iCallBackListener) {
+    public void getTeacherHomeworkList(int page, ResponseCallBack<String> responseCallBack) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.getTeacherHomeworkList(mUserInfo.getUserInfoBean().getUserId(), String.valueOf(page), iCallBackListener);
+        homeworkLogic.getTeacherHomeworkList(mUserInfo.getUserInfoBean().getUserId(), String.valueOf(page), responseCallBack);
     }
 
     //获取老师端作业详情
-    public void getTeacherHomeworkInfo(String homewrokId, ICallBackListener<String> iCallBackListener) {
+    public void getTeacherHomeworkInfo(String homewrokId, ResponseCallBack<String> responseCallBack) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.getTeacherHomeworkInfo(homewrokId, iCallBackListener);
+        homeworkLogic.getTeacherHomeworkInfo(homewrokId, responseCallBack);
     }
 
     //获取学生作业列表
-    public void getStudentHomeworkList(int page, ICallBackListener<String> iCallBackListener) {
+    public void getStudentHomeworkList(int page, ResponseCallBack<String> responseCallBack) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.getStudentHomeworkList(mUserInfo.getUserInfoBean().getUserId(), String.valueOf(page), iCallBackListener);
+        homeworkLogic.getStudentHomeworkList(mUserInfo.getUserInfoBean().getUserId(), String.valueOf(page), responseCallBack);
     }
 
     //获取学生作业详情
-    public void getStudentHomeworkInfo(String workBookId, ICallBackListener<String> iCallBackListener) {
+    public void getStudentHomeworkInfo(String workBookId, ResponseCallBack<String> responseCallBack) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.getStudentHomeworkInfo(mUserInfo.getUserInfoBean().getUserId(), workBookId, iCallBackListener);
+        homeworkLogic.getStudentHomeworkInfo(mUserInfo.getUserInfoBean().getUserId(), workBookId, responseCallBack);
     }
 
     //学生发送客观题作业
-    public void sendStudentObjectiveHomework(String jsonObject, ICallBackListener<String> iCallBackListener) {
+    public void sendStudentObjectiveHomework(String jsonObject, ResponseCallBack<String> responseCallBack) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.sendObjectiveHomeworkToService(mUserInfo.getUserInfoBean().getUserId(), jsonObject, iCallBackListener);
+        homeworkLogic.sendObjectiveHomeworkToService(mUserInfo.getUserInfoBean().getUserId(), jsonObject, responseCallBack);
     }
 
     //发送学生主观题作业
     public void sendStudentSubjectiveHomework(String workId, String questionId, String content,
                                               String score, String startTime, String endTime,
-                                              List<String> images, ICallBackListener<String> iCallBackListener) {
+                                              List<String> images, ResponseCallBack<String> responseCallBack) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.sendImagesToService(mUserInfo.getUserInfoBean().getUserId(), workId, questionId, content, score, startTime, endTime, images, iCallBackListener);
+        homeworkLogic.sendImagesToService(mUserInfo.getUserInfoBean().getUserId(), workId, questionId, content, score, startTime, endTime, images, responseCallBack);
     }
 
     //更新提交学生作业状态
-    public void updateStudentHomework(String workId, ICallBackListener<String> iCallBackListener) {
+    public void updateStudentHomework(String workId, ResponseCallBack<String> responseCallBack) {
         HomeworkLogic homeworkLogic = new HomeworkLogic();
-        homeworkLogic.updateStudentHomework(workId, iCallBackListener);
+        homeworkLogic.updateStudentHomework(workId, responseCallBack);
     }
 
     //获取学期数列表
-    public void getTermList(ICallBackListener<String> iCallBackListener) {
+    public void getTermList(ResponseCallBack<String> responseCallBack) {
         MainLogic mainLogic = new MainLogic();
-        mainLogic.getTermListForService(mUserInfo.getUserInfoBean().getUserId(), iCallBackListener);
+        mainLogic.getTermListForService(mUserInfo.getUserInfoBean().getUserId(), responseCallBack);
     }
 
     //获取周次列表
-    public void getWeekList(String termId, ICallBackListener<String> iCallBackListener) {
+    public void getWeekList(String termId, ResponseCallBack<String> responseCallBack) {
         MainLogic mainLogic = new MainLogic();
-        mainLogic.getWeekListForService(termId, iCallBackListener);
+        mainLogic.getWeekListForService(termId, responseCallBack);
     }
 
     //获取一周菜谱数据
-    public void getRecipesData(ICallBackListener<String> iCallBackListener) {
+    public void getRecipesData(ResponseCallBack<String> responseCallBack) {
         TodayRecipesLogic todayRecipesLogic = new TodayRecipesLogic();
-        todayRecipesLogic.getRecipesDataForService(mUserInfo.getUserInfoBean().getUserId(), iCallBackListener);
+        todayRecipesLogic.getRecipesDataForService(mUserInfo.getUserInfoBean().getUserId(), responseCallBack);
     }
 
-    public void getRecipesData(String termId, String weekId, ICallBackListener<String> iCallBackListener) {
+    public void getRecipesData(String termId, String weekId, ResponseCallBack<String> responseCallBack) {
         TodayRecipesLogic todayRecipesLogic = new TodayRecipesLogic();
-        todayRecipesLogic.getRecipesDataForService(mUserInfo.getUserInfoBean().getUserId(), termId, weekId, iCallBackListener);
+        todayRecipesLogic.getRecipesDataForService(mUserInfo.getUserInfoBean().getUserId(), termId, weekId, responseCallBack);
     }
 
 
     //获取班干部
-    public void getClassCadreList(ICallBackListener<String> iCallBackListener) {
+    public void getClassCadreList(ResponseCallBack<String> responseCallBack) {
         ClassCadreLogic cadreLogic = new ClassCadreLogic();
-        cadreLogic.getClassCadreList(mUserInfo.getUserInfoBean().getDefaultClassId(), iCallBackListener);
+        cadreLogic.getClassCadreList(mUserInfo.getUserInfoBean().getDefaultClassId(), responseCallBack);
     }
 
     //获取值日生
-    public void getDutyStudentList(ICallBackListener<String> iCallBackListener) {
+    public void getDutyStudentList(ResponseCallBack<String> responseCallBack) {
         DutyStudentLogic dutyStudentLogic = new DutyStudentLogic();
-        dutyStudentLogic.getDutyStudentList(mUserInfo.getUserInfoBean().getDefaultClassId(), iCallBackListener);
+        dutyStudentLogic.getDutyStudentList(mUserInfo.getUserInfoBean().getDefaultClassId(), responseCallBack);
     }
 
     //获取班级课表
-    public void getClassCurriculum(ICallBackListener<String> iCallBackListener) {
+    public void getClassCurriculum(ResponseCallBack<String> responseCallBack) {
         CurriculumLogic curriculumLogic = new CurriculumLogic();
-        curriculumLogic.getClassCurriculum(mUserInfo.getUserInfoBean().getUserId(), mUserInfo.getUserInfoBean().getDefaultClassId(), iCallBackListener);
+        curriculumLogic.getClassCurriculum(mUserInfo.getUserInfoBean().getUserId(), mUserInfo.getUserInfoBean().getDefaultClassId(), responseCallBack);
     }
 
     //获取班级用户列表
-    public void getClassPeopleList(String classId, String updateTime, ICallBackListener<String> iCallBackListener) {
+    public void getClassPeopleList(String classId, String updateTime, ResponseCallBack<String> responseCallBack) {
         IClassLogic classLogic = new ClassLogic();
-        classLogic.getClassPeopleListForService(mUserInfo.getUserInfoBean().getUserId(), classId, updateTime, iCallBackListener);
+        classLogic.getClassPeopleListForService(mUserInfo.getUserInfoBean().getUserId(), classId, updateTime, responseCallBack);
     }
 
     //获取本班老师
-    public void getClassTeacherList(ICallBackListener<String> iCallBackListener) {
+    public void getClassTeacherList(ResponseCallBack<String> responseCallBack) {
         IClassTeacherListLogic classTeacherListLogic = new ClassTeacherListLogic();
-        classTeacherListLogic.getClassTeacherList(mUserInfo.getUserInfoBean().getDefaultClassId(), iCallBackListener);
+        classTeacherListLogic.getClassTeacherList(mUserInfo.getUserInfoBean().getDefaultClassId(), responseCallBack);
     }
 
     //获取用户详情
-    public void getDetailInfo(String uId, ICallBackListener<String> iCallBackListener) {
+    public void getDetailInfo(String uId, ResponseCallBack<String> responseCallBack) {
         IDetailPeopleLogic detailPeopleLogic = new DetailPeopleLogic();
-        detailPeopleLogic.getDetailInfo(mUserInfo.getUserInfoBean().getUserId(), uId, iCallBackListener);
+        detailPeopleLogic.getDetailInfo(mUserInfo.getUserInfoBean().getUserId(), uId, responseCallBack);
     }
 
     //获取用户账户轮播图
-    public void getBannerImages(String updateTime, ICallBackListener<String> iCallBackListener) {
+    public void getBannerImages(String updateTime, ResponseCallBack<String> responseCallBack) {
         String flag;
         switch (mUserInfo.getUserInfoBean().getUserRoleId()) {
             case 1004:
@@ -538,87 +538,87 @@ public class LogicService extends BaseService {
                 break;
         }
         AccountLogic accountLogic = new AccountLogic();
-        accountLogic.getImageUrlsForService("16", flag, updateTime, iCallBackListener);
+        accountLogic.getImageUrlsForService("16", flag, updateTime, responseCallBack);
     }
 
     //获取用户货币信息
-    public void getUserCurrency(ICallBackListener<String> iCallBackListener) {
+    public void getUserCurrency(ResponseCallBack<String> responseCallBack) {
         AccountLogic accountLogic = new AccountLogic();
-        accountLogic.getUserCurrency(mUserInfo.getUserInfoBean().getUserId(), iCallBackListener);
+        accountLogic.getUserCurrency(mUserInfo.getUserInfoBean().getUserId(), responseCallBack);
     }
 
 
     //用户充值
     //获取充值列表
-    public void getRechargeList(ICallBackListener<String> iCallBackListener) {
+    public void getRechargeList(ResponseCallBack<String> responseCallBack) {
         AccountRechargeLogic accountRechargeLogic = new AccountRechargeLogic();
-        accountRechargeLogic.getRechargeList(iCallBackListener);
+        accountRechargeLogic.getRechargeList(responseCallBack);
     }
 
     //获取支付列表
-    public void getPayList(ICallBackListener<String> iCallBackListener) {
+    public void getPayList(ResponseCallBack<String> responseCallBack) {
         AccountRechargeLogic accountRechargeLogic = new AccountRechargeLogic();
-        accountRechargeLogic.getPayList(iCallBackListener);
+        accountRechargeLogic.getPayList(responseCallBack);
     }
 
     //得到支付订单
-    public void getOrderNum(String productId, String payId, ICallBackListener<String> iCallBackListener) {
+    public void getOrderNum(String productId, String payId, ResponseCallBack<String> responseCallBack) {
         AccountRechargeLogic accountRechargeLogic = new AccountRechargeLogic();
-        accountRechargeLogic.getOrderNumForService(mUserInfo.getUserInfoBean().getUserId(), productId, payId, mUserInfo.getUserInfoBean().getRealName(), iCallBackListener);
+        accountRechargeLogic.getOrderNumForService(mUserInfo.getUserInfoBean().getUserId(), productId, payId, mUserInfo.getUserInfoBean().getRealName(), responseCallBack);
     }
 
     //获取积分兑换列表
-    public void getIntegralExchangeList(ICallBackListener<String> iCallBackListener) {
+    public void getIntegralExchangeList(ResponseCallBack<String> responseCallBack) {
         AccountIntegralLogic accountIntegralLogic = new AccountIntegralLogic();
-        accountIntegralLogic.getIntegralList(iCallBackListener);
+        accountIntegralLogic.getIntegralList(responseCallBack);
     }
 
     //兑换积分
-    public void getUserCoin(String uCoin, String coin, ICallBackListener<String> iCallBackListener) {
+    public void getUserCoin(String uCoin, String coin, ResponseCallBack<String> responseCallBack) {
         AccountIntegralLogic accountIntegralLogic = new AccountIntegralLogic();
-        accountIntegralLogic.getUserCoin(mUserInfo.getUserInfoBean().getUserId(), uCoin, coin, iCallBackListener);
+        accountIntegralLogic.getUserCoin(mUserInfo.getUserInfoBean().getUserId(), uCoin, coin, responseCallBack);
     }
 
     //获取商城道具列表
-    public void getPropsStoreList(ICallBackListener<String> iCallBackListener) {
+    public void getPropsStoreList(ResponseCallBack<String> responseCallBack) {
         AccountPropsLogic accountPropsLogic = new AccountPropsLogic();
-        accountPropsLogic.getPropsListForService(mUserInfo.getUserInfoBean().getUserId(), iCallBackListener);
+        accountPropsLogic.getPropsListForService(mUserInfo.getUserInfoBean().getUserId(), responseCallBack);
     }
 
     //购买道具
-    public void buyProps(String propId, String propNum, ICallBackListener<String> iCallBackListener) {
+    public void buyProps(String propId, String propNum, ResponseCallBack<String> responseCallBack) {
         AccountPropsInfoLogic accountPropsInfoLogic = new AccountPropsInfoLogic();
-        accountPropsInfoLogic.buyProps(mUserInfo.getUserInfoBean().getUserId(), propId, propNum, iCallBackListener);
+        accountPropsInfoLogic.buyProps(mUserInfo.getUserInfoBean().getUserId(), propId, propNum, responseCallBack);
     }
 
     //获取用户道具列表
-    public void getUserPropsList(ICallBackListener<String> iCallBackListener) {
+    public void getUserPropsList(ResponseCallBack<String> responseCallBack) {
         AccountMyPropsLogic accountMyPropsLogic= new AccountMyPropsLogic();
-        accountMyPropsLogic.getUserPropsForService(mUserInfo.getUserInfoBean().getUserId(), iCallBackListener);
+        accountMyPropsLogic.getUserPropsForService(mUserInfo.getUserInfoBean().getUserId(), responseCallBack);
     }
 
     //赠送道具
-    public void givePropsToPeople(String recvUserId, String propId, int propNum, ICallBackListener<String> iCallBackListener) {
+    public void givePropsToPeople(String recvUserId, String propId, int propNum, ResponseCallBack<String> responseCallBack) {
         AccountMyPropsLogic accountMyPropsLogic = new AccountMyPropsLogic();
-        accountMyPropsLogic.givePropsToPeople(mUserInfo.getUserInfoBean().getUserId(), recvUserId, propId, propNum, iCallBackListener);
+        accountMyPropsLogic.givePropsToPeople(mUserInfo.getUserInfoBean().getUserId(), recvUserId, propId, propNum, responseCallBack);
     }
 
 
     //获取账户往来列表
-    public void getUserRecordingList(int pageNow, ICallBackListener<String> iCallBackListener) {
+    public void getUserRecordingList(int pageNow, ResponseCallBack<String> responseCallBack) {
         AccountRecordingLogic accountRecordingLogic = new AccountRecordingLogic();
-        accountRecordingLogic.getUserRecordingList(mUserInfo.getUserInfoBean().getUserId(), pageNow, iCallBackListener);
+        accountRecordingLogic.getUserRecordingList(mUserInfo.getUserInfoBean().getUserId(), pageNow, responseCallBack);
     }
 
     //获取关于我们的信息
-    public void getAboutUsInfo(ICallBackListener<String> iCallBackListener) {
+    public void getAboutUsInfo(ResponseCallBack<String> responseCallBack) {
         AboutUsLogic aboutUsLogic = new AboutUsLogic();
-        aboutUsLogic.getAboutUsInfo(iCallBackListener);
+        aboutUsLogic.getAboutUsInfo(responseCallBack);
     }
 
     //获取道具流转列表
-    public void getPropsList(int typeId, int pageNum, ICallBackListener<String> iCallBackListener) {
+    public void getPropsList(int typeId, int pageNum, ResponseCallBack<String> responseCallBack) {
         PropsListLogic propsListLogic = new PropsListLogic();
-        propsListLogic.getPropsListData(mUserInfo.getUserInfoBean().getUserId(), typeId, pageNum, iCallBackListener);
+        propsListLogic.getPropsListData(mUserInfo.getUserInfoBean().getUserId(), typeId, pageNum, responseCallBack);
     }
 }

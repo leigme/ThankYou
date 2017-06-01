@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.account.bean.AccountRechargePayBean;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class AccountRechargePayListAdapter extends RecyclerView.Adapter<AccountR
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<AccountRechargePayBean> mBeen;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public AccountRechargePayListAdapter(Context context, ArrayList<AccountRechargePayBean> list) {
         this.mContext = context;
@@ -49,12 +49,12 @@ public class AccountRechargePayListAdapter extends RecyclerView.Adapter<AccountR
         } else {
             holder.ivSelected.setVisibility(View.INVISIBLE);
         }
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -70,8 +70,8 @@ public class AccountRechargePayListAdapter extends RecyclerView.Adapter<AccountR
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {

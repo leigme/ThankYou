@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.utils.Constant;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class AddPhotoListAdapter extends RecyclerView.Adapter<AddPhotoListAdapte
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<String> mBeen;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
     private IDelOnClickListerner mIDelOnClickListerner;
 
     public AddPhotoListAdapter(Context context, ArrayList<String> list) {
@@ -57,12 +57,12 @@ public class AddPhotoListAdapter extends RecyclerView.Adapter<AddPhotoListAdapte
                 });
             }
         }
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -78,8 +78,8 @@ public class AddPhotoListAdapter extends RecyclerView.Adapter<AddPhotoListAdapte
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener, IDelOnClickListerner iDelOnClickListerner) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack, IDelOnClickListerner iDelOnClickListerner) {
+        this.mSubmitCallBack = submitCallBack;
         this.mIDelOnClickListerner = iDelOnClickListerner;
     }
 

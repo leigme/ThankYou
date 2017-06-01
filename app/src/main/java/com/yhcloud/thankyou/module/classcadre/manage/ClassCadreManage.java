@@ -11,8 +11,8 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
-import com.yhcloud.thankyou.module.classcadre.view.IClassCadreActivityView;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
+import com.yhcloud.thankyou.module.classcadre.view.ClassCadreActivityView;
 import com.yhcloud.thankyou.service.LogicService;
 
 import org.json.JSONException;
@@ -26,11 +26,11 @@ import java.util.ArrayList;
 
 public class ClassCadreManage {
 
-    private IClassCadreActivityView mIClassCadreView;
+    private ClassCadreActivityView mIClassCadreView;
     private Activity mActivity;
     private LogicService mService;
 
-    public ClassCadreManage(IClassCadreActivityView iClassCadreView) {
+    public ClassCadreManage(ClassCadreActivityView iClassCadreView) {
         this.mIClassCadreView = iClassCadreView;
         this.mActivity = (Activity) mIClassCadreView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -52,7 +52,7 @@ public class ClassCadreManage {
     }
 
     public void getClassCadreList() {
-        mService.getClassCadreList(new ICallBackListener<String>() {
+        mService.getClassCadreList(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

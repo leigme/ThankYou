@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TermBean;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.todayrecipes.adapter.TodayRecipesPagerAdapter;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesPagerBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.WeekBean;
@@ -19,7 +19,7 @@ import com.yhcloud.thankyou.utils.myview.pickerview.OptionsPickerView;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-public class TodayRecipesActivity extends ABaseActivity implements ITodayRecipesView {
+public class TodayRecipesActivity extends BaseActivity implements TodayRecipesView {
 
     private String TAG = getClass().getSimpleName();
 

@@ -1,7 +1,7 @@
 package com.yhcloud.thankyou.service.logic.minterface;
 
 import com.yhcloud.thankyou.bean.ClassInfoBean;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 
 import java.util.ArrayList;
 
@@ -10,6 +10,6 @@ import java.util.ArrayList;
  */
 
 public interface IMainLogic {
-    void getClassInfoList(String userId, ICallBackListener<ArrayList<ClassInfoBean>> iCallBackListener);
-    void getFriendList(String userId, String updateTime, final ICallBackListener<String> iCallBackListener);
+    void getClassInfoList(String userId, ResponseCallBack<ArrayList<ClassInfoBean>> responseCallBack);
+    void getFriendList(String userId, String updateTime, final ResponseCallBack<String> responseCallBack);
 }

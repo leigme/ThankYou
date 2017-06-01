@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.homework.bean.TeacherHomeworkBean;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class TeacherHomeworkListAdapter extends RecyclerView.Adapter<TeacherHome
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<TeacherHomeworkBean> mBeen;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public TeacherHomeworkListAdapter(Context context, ArrayList<TeacherHomeworkBean> list) {
         this.mContext = context;
@@ -55,12 +55,12 @@ public class TeacherHomeworkListAdapter extends RecyclerView.Adapter<TeacherHome
             holder.ivStatus.setImageResource(R.mipmap.icon_unpublished);
             holder.btnSend.setVisibility(View.VISIBLE);
         }
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -76,8 +76,8 @@ public class TeacherHomeworkListAdapter extends RecyclerView.Adapter<TeacherHome
         this.notifyDataSetChanged();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 
     public static class HomeworkViewHolder extends RecyclerView.ViewHolder {

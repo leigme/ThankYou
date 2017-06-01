@@ -11,14 +11,14 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TermBean;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.module.todayrecipes.bean.RecipesBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesJsonBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesPagerBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.TodayRecipesTimeBean;
 import com.yhcloud.thankyou.module.todayrecipes.bean.WeekBean;
-import com.yhcloud.thankyou.module.todayrecipes.view.ITodayRecipesView;
+import com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesView;
 import com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesFragmentViews;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
@@ -37,7 +37,7 @@ public class TodayRecipesManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private ITodayRecipesView mITodayRecipesView;
+    private TodayRecipesView mITodayRecipesView;
     private Activity mActivity;
     private LogicService mService;
     private TodayRecipesFragmentViews fragmentViews;
@@ -47,7 +47,7 @@ public class TodayRecipesManage {
     private ArrayList<WeekBean> weekList;
     private int termNum, weekNum;
 
-    public TodayRecipesManage(ITodayRecipesView iTodayRecipesView) {
+    public TodayRecipesManage(TodayRecipesView iTodayRecipesView) {
         this.mITodayRecipesView = iTodayRecipesView;
         this.mActivity = (Activity) mITodayRecipesView;
         Intent intent = new Intent(mActivity, LogicService.class);
@@ -71,7 +71,7 @@ public class TodayRecipesManage {
     }
 
     public void getTermData() {
-        mService.getTermList(new ICallBackListener<String>() {
+        mService.getTermList(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -140,7 +140,7 @@ public class TodayRecipesManage {
 
     public void getRecipesData() {
         mITodayRecipesView.showLoading(R.string.loading_data);
-        mService.getRecipesData(new ICallBackListener<String>() {
+        mService.getRecipesData(new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {
@@ -337,7 +337,7 @@ public class TodayRecipesManage {
 
     public void getRecipesData(String termId, String weekId) {
         mITodayRecipesView.showLoading(R.string.loading_data);
-        mService.getRecipesData(termId, weekId, new ICallBackListener<String>() {
+        mService.getRecipesData(termId, weekId, new ResponseCallBack<String>() {
             @Override
             public void callSuccess(String s) {
                 try {

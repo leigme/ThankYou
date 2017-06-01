@@ -11,8 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.homework.adapter.StudentHomeworkListAdapter;
 import com.yhcloud.thankyou.module.homework.adapter.TeacherHomeworkListAdapter;
 import com.yhcloud.thankyou.module.homework.bean.StudentHomeworkBean;
@@ -22,7 +22,7 @@ import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
 
-public class HomeworkActivity extends ABaseActivity implements IHomeworkActivityView {
+public class HomeworkActivity extends BaseActivity implements HomeworkActivityView {
 
     private String TAG = getClass().getSimpleName();
 
@@ -133,7 +133,7 @@ public class HomeworkActivity extends ABaseActivity implements IHomeworkActivity
                 }
             });
             rvHomeworkList.setAdapter(thla);
-            thla.setIOnClickListener(new IOnClickListener() {
+            thla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goHomeworkInfo(position);
@@ -180,7 +180,7 @@ public class HomeworkActivity extends ABaseActivity implements IHomeworkActivity
                 }
             });
             rvHomeworkList.setAdapter(shla);
-            shla.setIOnClickListener(new IOnClickListener() {
+            shla.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goHomeworkInfo(position);

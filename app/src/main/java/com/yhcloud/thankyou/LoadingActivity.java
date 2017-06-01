@@ -18,7 +18,7 @@ import com.hyphenate.chat.EMClient;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.minterface.ICallBackListener;
+import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
@@ -65,7 +65,7 @@ public class LoadingActivity extends AppCompatActivity {
                     if (null != username && !"".equals(username) && null != password && !"".equals(password)) {
                         mUserInfo.setUsername(username);
                         mUserInfo.setPassword(password);
-                        mService.login(username, password, new ICallBackListener<String>() {
+                        mService.login(username, password, new ResponseCallBack<String>() {
                             @Override
                             public void callSuccess(String s) {
                                 try {

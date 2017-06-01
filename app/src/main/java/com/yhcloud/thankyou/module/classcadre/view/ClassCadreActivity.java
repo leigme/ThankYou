@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.TeacherBean;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.classcadre.adapter.ClassCadreListAdpater;
 import com.yhcloud.thankyou.module.classcadre.manage.ClassCadreManage;
 import com.yhcloud.thankyou.utils.DividerItemDecoration;
 
 import java.util.ArrayList;
 
-public class ClassCadreActivity extends ABaseActivity implements IClassCadreActivityView {
+public class ClassCadreActivity extends BaseActivity implements ClassCadreActivityView {
 
     //视图控件
     private LinearLayout llBack;

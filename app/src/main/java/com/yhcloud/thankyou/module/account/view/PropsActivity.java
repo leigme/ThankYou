@@ -9,15 +9,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.account.adapter.AccountPropAdapter;
 import com.yhcloud.thankyou.module.account.bean.AccountPropBean;
 import com.yhcloud.thankyou.module.account.manage.AccountPropsManage;
 
 import java.util.ArrayList;
 
-public class PropsActivity extends ABaseActivity implements IPropsView {
+public class PropsActivity extends BaseActivity implements PropsView {
 
     //视图控件
     private LinearLayout llBack;
@@ -102,7 +102,7 @@ public class PropsActivity extends ABaseActivity implements IPropsView {
                     super.onScrolled(recyclerView, dx, dy);
                 }
             });
-            apa.setIOnClickListener(new IOnClickListener() {
+            apa.setIOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     mManage.goPropInfo(position);

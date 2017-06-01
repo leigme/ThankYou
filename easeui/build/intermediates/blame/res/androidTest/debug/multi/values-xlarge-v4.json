@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
+        "outputFile": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 121
                 },
                 "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
+                    "file": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -30,7 +30,7 @@
                     "endOffset": 192
                 },
                 "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
+                    "file": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,
@@ -49,7 +49,7 @@
                     "endOffset": 262
                 },
                 "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
+                    "file": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,
@@ -68,7 +68,7 @@
                     "endOffset": 332
                 },
                 "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
+                    "file": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -87,7 +87,7 @@
                     "endOffset": 400
                 },
                 "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
+                    "file": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "position": {
                         "startLine": 6,
                         "startColumn": 4,
@@ -106,7 +106,7 @@
                     "endOffset": 468
                 },
                 "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/C:\\Users\\leig\\.android\\build-cache\\c4a878dd1410706ce9d3a24317cc3d8594463ce7\\output\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
+                    "file": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "position": {
                         "startLine": 7,
                         "startColumn": 4,
@@ -125,7 +125,7 @@
                     "endOffset": 521
                 },
                 "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\bundles\\debug\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
+                    "file": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/bundles/debug/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -144,321 +144,7 @@
                     "endOffset": 575
                 },
                 "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/D:\\Desktop\\Projects\\Thankyou\\easeui\\build\\intermediates\\bundles\\debug\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 108,
-                        "endColumn": 53,
-                        "endOffset": 157
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-xlarge-v4\\values-xlarge-v4.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 70,
-                    "endOffset": 121
-                },
-                "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 70,
-                        "endOffset": 121
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 3,
-                    "startColumn": 4,
-                    "startOffset": 126,
-                    "endColumn": 70,
-                    "endOffset": 192
-                },
-                "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 126,
-                        "endColumn": 70,
-                        "endOffset": 192
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 4,
-                    "startColumn": 4,
-                    "startOffset": 197,
-                    "endColumn": 69,
-                    "endOffset": 262
-                },
-                "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 197,
-                        "endColumn": 69,
-                        "endOffset": 262
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 5,
-                    "startColumn": 4,
-                    "startOffset": 267,
-                    "endColumn": 69,
-                    "endOffset": 332
-                },
-                "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 5,
-                        "startColumn": 4,
-                        "startOffset": 267,
-                        "endColumn": 69,
-                        "endOffset": 332
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 6,
-                    "startColumn": 4,
-                    "startOffset": 337,
-                    "endColumn": 67,
-                    "endOffset": 400
-                },
-                "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 6,
-                        "startColumn": 4,
-                        "startOffset": 337,
-                        "endColumn": 67,
-                        "endOffset": 400
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 7,
-                    "startColumn": 4,
-                    "startOffset": 405,
-                    "endColumn": 67,
-                    "endOffset": 468
-                },
-                "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\24.2.1\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 7,
-                        "startColumn": 4,
-                        "startOffset": 405,
-                        "endColumn": 67,
-                        "endOffset": 468
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 8,
-                    "startColumn": 4,
-                    "startOffset": 473,
-                    "endColumn": 52,
-                    "endOffset": 521
-                },
-                "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\bundles\\debug\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 52,
-                        "endOffset": 103
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 9,
-                    "startColumn": 4,
-                    "startOffset": 526,
-                    "endColumn": 53,
-                    "endOffset": 575
-                },
-                "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/D:\\Users\\leig\\Desktop\\Thankyou\\easeui\\build\\intermediates\\bundles\\debug\\res\\values-xlarge-v4\\values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 108,
-                        "endColumn": 53,
-                        "endOffset": 157
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-xlarge-v4/values-xlarge-v4.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 70,
-                    "endOffset": 121
-                },
-                "from": {
-                    "file": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/values-xlarge-v4/values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 70,
-                        "endOffset": 121
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 3,
-                    "startColumn": 4,
-                    "startOffset": 126,
-                    "endColumn": 70,
-                    "endOffset": 192
-                },
-                "from": {
-                    "file": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/values-xlarge-v4/values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 3,
-                        "startColumn": 4,
-                        "startOffset": 126,
-                        "endColumn": 70,
-                        "endOffset": 192
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 4,
-                    "startColumn": 4,
-                    "startOffset": 197,
-                    "endColumn": 69,
-                    "endOffset": 262
-                },
-                "from": {
-                    "file": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/values-xlarge-v4/values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 197,
-                        "endColumn": 69,
-                        "endOffset": 262
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 5,
-                    "startColumn": 4,
-                    "startOffset": 267,
-                    "endColumn": 69,
-                    "endOffset": 332
-                },
-                "from": {
-                    "file": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/values-xlarge-v4/values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 5,
-                        "startColumn": 4,
-                        "startOffset": 267,
-                        "endColumn": 69,
-                        "endOffset": 332
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 6,
-                    "startColumn": 4,
-                    "startOffset": 337,
-                    "endColumn": 67,
-                    "endOffset": 400
-                },
-                "from": {
-                    "file": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/values-xlarge-v4/values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 6,
-                        "startColumn": 4,
-                        "startOffset": 337,
-                        "endColumn": 67,
-                        "endOffset": 400
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 7,
-                    "startColumn": 4,
-                    "startOffset": 405,
-                    "endColumn": 67,
-                    "endOffset": 468
-                },
-                "from": {
-                    "file": "/Users/leig/.android/build-cache/ed844978de0a9f0fd42c99b1b98b99d543ad3044/output/res/values-xlarge-v4/values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 7,
-                        "startColumn": 4,
-                        "startOffset": 405,
-                        "endColumn": 67,
-                        "endOffset": 468
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 8,
-                    "startColumn": 4,
-                    "startOffset": 473,
-                    "endColumn": 52,
-                    "endOffset": 521
-                },
-                "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/bundles/debug/res/values-xlarge-v4/values-xlarge-v4.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 52,
-                        "endOffset": 103
-                    }
-                }
-            },
-            {
-                "to": {
-                    "startLine": 9,
-                    "startColumn": 4,
-                    "startOffset": 526,
-                    "endColumn": 53,
-                    "endOffset": 575
-                },
-                "from": {
-                    "file": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/bundles/debug/res/values-xlarge-v4/values-xlarge-v4.xml",
+                    "file": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/bundles/debug/res/values-xlarge-v4/values-xlarge-v4.xml",
                     "position": {
                         "startLine": 3,
                         "startColumn": 4,

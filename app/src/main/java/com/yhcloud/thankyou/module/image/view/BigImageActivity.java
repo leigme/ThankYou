@@ -10,13 +10,13 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateInterpolator;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.image.adapter.BigImageViewPagerAdapter;
 import com.yhcloud.thankyou.module.image.manage.BigImageManage;
 
 import java.util.ArrayList;
 
-public class BigImageActivity extends ABaseActivity implements IBigImageActivityView {
+public class BigImageActivity extends BaseActivity implements BigImageActivityView {
 
     //视图控件
     private ViewPager vpImages;

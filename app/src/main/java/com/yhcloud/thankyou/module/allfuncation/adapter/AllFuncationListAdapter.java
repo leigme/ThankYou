@@ -13,7 +13,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.utils.myview.drag.DragHolderCallBack;
 import com.yhcloud.thankyou.utils.myview.drag.RecycleCallBack;
 
@@ -31,7 +31,7 @@ public class AllFuncationListAdapter extends RecyclerView.Adapter<AllFuncationLi
     private LayoutInflater mInflater;
     private ArrayList<FunctionBean> mBeen;
     private RecycleCallBack mCallBack;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
     private ISelectItem mISelectItem;
     public SparseArray<Integer> show = new SparseArray<>();
     private boolean mEdited;
@@ -88,8 +88,8 @@ public class AllFuncationListAdapter extends RecyclerView.Adapter<AllFuncationLi
 
         void setSelectItem(SparseArray<Integer> show, View view, int position);
     }
-    public void setIOnClickListener(IOnClickListener IOnClickListener) {
-        this.mIOnClickListener = IOnClickListener;
+    public void setIOnClickListener(SubmitCallBack SubmitCallBack) {
+        this.mSubmitCallBack = SubmitCallBack;
     }
 
     public void setISelectItem(ISelectItem iSelectItem) {
@@ -135,8 +135,8 @@ public class AllFuncationListAdapter extends RecyclerView.Adapter<AllFuncationLi
                 show.clear();
                 mCallBack.itemOnClick(getAdapterPosition(), v);
             }
-            if (null != mIOnClickListener) {
-                mIOnClickListener.OnItemClickListener(v, getAdapterPosition());
+            if (null != mSubmitCallBack) {
+                mSubmitCallBack.OnItemClickListener(v, getAdapterPosition());
             }
         }
     }

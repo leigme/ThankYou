@@ -20,8 +20,8 @@ import com.yhcloud.thankyou.adapter.ClassDrawerListAdapter;
 import com.yhcloud.thankyou.adapter.FragmentViewPagerAdapter;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.FunctionBean;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.BaseActivity;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.manage.MainManage;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
@@ -33,7 +33,7 @@ import java.util.ArrayList;
 
 import static com.yhcloud.thankyou.R.id.iv_header_left;
 
-public class MainActivity extends ABaseActivity implements IMainActivityView,
+public class MainActivity extends BaseActivity implements MainActivityView,
         HomeFragment.OnFragmentInteractionListener, ClassFragment.OnFragmentInteractionListener,
         MineFragment.OnFragmentInteractionListener {
 
@@ -148,7 +148,7 @@ public class MainActivity extends ABaseActivity implements IMainActivityView,
     public void showDrawer(final ArrayList<ClassInfoBean> classInfoBeen) {
         if (null == cdla) {
             cdla = new ClassDrawerListAdapter(this, classInfoBeen);
-            cdla.setMyOnClickListener(new IOnClickListener() {
+            cdla.setMyOnClickListener(new SubmitCallBack() {
                 @Override
                 public void OnItemClickListener(View view, int position) {
                     Log.e(TAG, "设置默认班级:" + position);

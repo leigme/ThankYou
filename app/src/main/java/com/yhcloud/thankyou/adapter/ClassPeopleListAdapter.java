@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.UserInfoBean;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.utils.Tools;
 
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class ClassPeopleListAdapter extends RecyclerView.Adapter<ClassPeopleList
     private Context mContext;
     private LayoutInflater mInflater;
     private ArrayList<UserInfoBean> mBeen;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public ClassPeopleListAdapter(Context context, ArrayList<UserInfoBean> list) {
         this.mContext = context;
@@ -44,12 +44,12 @@ public class ClassPeopleListAdapter extends RecyclerView.Adapter<ClassPeopleList
         UserInfoBean userInfoBean = mBeen.get(position);
         Tools.GlideCircleImageUrl(mContext, userInfoBean.getHeadImageURL(), R.mipmap.default_photo, holder.ivHeader);
         holder.tvName.setText(userInfoBean.getRealName());
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -60,8 +60,8 @@ public class ClassPeopleListAdapter extends RecyclerView.Adapter<ClassPeopleList
         return mBeen.size();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 
     public void refreshData(ArrayList<UserInfoBean> list) {

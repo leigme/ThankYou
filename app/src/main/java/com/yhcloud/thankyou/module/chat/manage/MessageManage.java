@@ -10,7 +10,7 @@ import android.os.IBinder;
 import com.hyphenate.chat.EMConversation;
 import com.hyphenate.easeui.EaseConstant;
 import com.yhcloud.thankyou.module.chat.view.EaseChatActivity;
-import com.yhcloud.thankyou.module.chat.view.IMessageView;
+import com.yhcloud.thankyou.module.chat.view.MessageView;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -22,11 +22,11 @@ public class MessageManage {
 
     private String TAG = getClass().getSimpleName();
 
-    private IMessageView mIMessageView;
+    private MessageView mIMessageView;
     private Activity mActivity;
     private LogicService mService;
 
-    public MessageManage(IMessageView iMessageView) {
+    public MessageManage(MessageView iMessageView) {
         this.mIMessageView = iMessageView;
         this.mActivity = (Activity) mIMessageView;
         Intent intent = new Intent(mActivity, LogicService.class);

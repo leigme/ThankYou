@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.mabstract.ABaseActivity;
+import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.curriculum.adapter.CurriculumAdapter;
 import com.yhcloud.thankyou.module.curriculum.bean.CurriculumItemBean;
 import com.yhcloud.thankyou.module.curriculum.manage.CurriculumManage;
@@ -17,7 +17,7 @@ import com.yhcloud.thankyou.utils.DividerGridItemDecoration;
 
 import java.util.ArrayList;
 
-public class CurriculumActivity extends ABaseActivity implements ICurriculumActivityView {
+public class CurriculumActivity extends BaseActivity implements CurriculumActivityView {
 
     //视图控件
     private LinearLayout llBack;

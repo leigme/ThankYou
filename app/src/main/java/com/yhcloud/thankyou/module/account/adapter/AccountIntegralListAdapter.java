@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.minterface.IOnClickListener;
+import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.account.bean.AccountIntegralBean;
 
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ public class AccountIntegralListAdapter extends RecyclerView.Adapter<AccountInte
     private Context mContext;
     private ArrayList<AccountIntegralBean> mBeen;
     private LayoutInflater mInflater;
-    private IOnClickListener mIOnClickListener;
+    private SubmitCallBack mSubmitCallBack;
 
     public AccountIntegralListAdapter(Context context, ArrayList<AccountIntegralBean> list) {
         this.mContext = context;
@@ -47,12 +47,12 @@ public class AccountIntegralListAdapter extends RecyclerView.Adapter<AccountInte
         } else {
             holder.llItemIntegralbg.setBackgroundResource(R.mipmap.bg_recharge_item);
         }
-        if (null != mIOnClickListener) {
+        if (null != mSubmitCallBack) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int pos = holder.getLayoutPosition();
-                    mIOnClickListener.OnItemClickListener(holder.itemView, pos);
+                    mSubmitCallBack.OnItemClickListener(holder.itemView, pos);
                 }
             });
         }
@@ -63,8 +63,8 @@ public class AccountIntegralListAdapter extends RecyclerView.Adapter<AccountInte
         return mBeen.size();
     }
 
-    public void setIOnClickListener(IOnClickListener iOnClickListener) {
-        this.mIOnClickListener = iOnClickListener;
+    public void setIOnClickListener(SubmitCallBack submitCallBack) {
+        this.mSubmitCallBack = submitCallBack;
     }
 
     public void refreshData(ArrayList<AccountIntegralBean> list) {

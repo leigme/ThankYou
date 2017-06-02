@@ -54,7 +54,7 @@ public class PropsListManage {
         mActivity.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                mService = ((LogicService.MyBinder)service).getService();
+//                mService = ((LogicService.MyBinder)service).getService();
                 mIPropsListView.initView();
                 mIPropsListView.initEvent();
                 mIPropsListView.setTitle("道具记录");

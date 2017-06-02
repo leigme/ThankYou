@@ -3,7 +3,6 @@ package com.yhcloud.thankyou.service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Binder;
 import android.os.IBinder;
 import android.util.SparseArray;
 
@@ -14,13 +13,6 @@ import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.comm.BaseService;
 import com.yhcloud.thankyou.comm.ResponseCallBack;
-import com.yhcloud.thankyou.service.logic.mimplement.ClassLogic;
-import com.yhcloud.thankyou.service.logic.mimplement.HomeLogic;
-import com.yhcloud.thankyou.service.logic.minterface.IClassLogic;
-import com.yhcloud.thankyou.service.logic.minterface.IHomeLogic;
-import com.yhcloud.thankyou.service.logic.minterface.ILoginLogic;
-import com.yhcloud.thankyou.service.logic.mimplement.LoginLogic;
-import com.yhcloud.thankyou.service.logic.mimplement.MainLogic;
 import com.yhcloud.thankyou.module.aboutus.logic.AboutUsLogic;
 import com.yhcloud.thankyou.module.account.logic.AccountIntegralLogic;
 import com.yhcloud.thankyou.module.account.logic.AccountLogic;
@@ -41,6 +33,13 @@ import com.yhcloud.thankyou.module.homework.logic.HomeworkLogic;
 import com.yhcloud.thankyou.module.propslist.logic.PropsListLogic;
 import com.yhcloud.thankyou.module.schoolannouncement.logic.SchoolAnnouncementLogic;
 import com.yhcloud.thankyou.module.todayrecipes.logic.TodayRecipesLogic;
+import com.yhcloud.thankyou.service.logic.mimplement.ClassLogic;
+import com.yhcloud.thankyou.service.logic.mimplement.HomeLogic;
+import com.yhcloud.thankyou.service.logic.mimplement.LoginLogic;
+import com.yhcloud.thankyou.service.logic.mimplement.MainLogic;
+import com.yhcloud.thankyou.service.logic.minterface.IClassLogic;
+import com.yhcloud.thankyou.service.logic.minterface.IHomeLogic;
+import com.yhcloud.thankyou.service.logic.minterface.ILoginLogic;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 
@@ -54,7 +53,6 @@ public class LogicService extends BaseService {
 
     private String TAG = getClass().getSimpleName();
 
-    private MyBinder mBinder = new MyBinder();
     private UserInfo mUserInfo;
     private ArrayList<UserInfoBean> mUserInfoBeen;
     private HashMap<String, String[]> mMap;
@@ -65,6 +63,7 @@ public class LogicService extends BaseService {
     private String shortcut;
 
     public LogicService() {
+
     }
 
     @Override
@@ -96,12 +95,6 @@ public class LogicService extends BaseService {
 
     public void setUserInfoBeen(ArrayList<UserInfoBean> userInfoBeen) {
         mUserInfoBeen = userInfoBeen;
-    }
-
-    public class MyBinder extends Binder {
-        public LogicService getService() {
-            return LogicService.this;
-        }
     }
 
     public UserInfo getUserInfo() {

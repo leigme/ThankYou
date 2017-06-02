@@ -62,7 +62,7 @@ public class MainManage {
         mActivity.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder binder) {
-                mService = ((LogicService.MyBinder)binder).getService();
+//                mService = ((LogicService.MyBinder)binder).getService();
                 if (null == mUserInfoBeen) {
                     mUserInfoBeen = new ArrayList<>();
                     getFriendList("-1");

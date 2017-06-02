@@ -13,7 +13,7 @@ import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.view.MineActivityView;
-import com.yhcloud.thankyou.view.LoginActivity;
+import com.yhcloud.thankyou.module.login.view.LoginActivity;
 
 import java.util.ArrayList;
 

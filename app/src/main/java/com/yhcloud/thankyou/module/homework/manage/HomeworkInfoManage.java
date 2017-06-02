@@ -68,7 +68,7 @@ public class HomeworkInfoManage {
         mActivity.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                mService = ((LogicService.MyBinder)service).getService();
+//                mService = ((LogicService.MyBinder)service).getService();
                 mBeen = new ArrayList<>();
                 mInflater = LayoutInflater.from(mActivity);
                 roleId = mService.getUserInfo().getUserInfoBean().getUserRoleId();

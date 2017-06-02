@@ -42,7 +42,7 @@ public class SchoolAnnouncementDetailManage {
         mActivity.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                mService = ((LogicService.MyBinder)service).getService();
+//                mService = ((LogicService.MyBinder)service).getService();
                 mBeen = new ArrayList<>();
                 mISchoolAnnouncementDetailView.initView();
                 mISchoolAnnouncementDetailView.initEvent();

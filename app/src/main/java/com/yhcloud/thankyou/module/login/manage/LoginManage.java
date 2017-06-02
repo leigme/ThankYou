@@ -1,6 +1,5 @@
-package com.yhcloud.thankyou.manage;
+package com.yhcloud.thankyou.module.login.manage;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -12,14 +11,15 @@ import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
+import com.yhcloud.thankyou.comm.BaseManager;
 import com.yhcloud.thankyou.comm.BaseService;
 import com.yhcloud.thankyou.comm.BindServiceCallBack;
 import com.yhcloud.thankyou.comm.ResponseCallBack;
+import com.yhcloud.thankyou.module.login.view.LoginActivity;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.service.logic.mimplement.LoginLogic;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.view.LoginActivityView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,37 +31,36 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/11/14.
  */
 
-public class LoginManage implements BindServiceCallBack, ResponseCallBack<String>, EMCallBack {
+public class LoginManage extends BaseManager implements BindServiceCallBack, ResponseCallBack<String>, EMCallBack {
 
     private String TAG = LoginManage.class.getName();
 
-    private LoginActivityView mILoginView;
-    private Activity mActivity;
+    private LoginActivity mLoginActivity;
     private LogicService mService;
     private LoginLogic mLoginLogic;
     private String username, password;
     private UserInfo userInfo;
 
-    public LoginManage(LoginActivityView loginView) {
-        this.mILoginView = loginView;
-        this.mActivity = (Activity) loginView;
-        SharedPreferences mPreferences = mActivity.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);
+    public LoginManage(LoginActivity loginActivity) {
+        super(loginActivity);
+        this.mLoginActivity = loginActivity;
+        mLoginActivity.bindBaseService(LogicService.class, this);
+        SharedPreferences mPreferences = loginActivity.getSharedPreferences(Constant.USER_INFO, Context.MODE_PRIVATE);
         username = mPreferences.getString(Constant.USER_NAME, "");
         password = mPreferences.getString(Constant.USER_PWD, "");
-        Tools.bingBaseService(mActivity, this);
     }
 
     public void login() {
-        mILoginView.showLoading(R.string.logging);
+        mLoginActivity.showLoading(R.string.logging);
         mLoginLogic = (LoginLogic) mService.getLoginLogic();
-        mLoginLogic.login(mILoginView.getUserName(), mILoginView.getPassWord(), this);
+        mLoginLogic.login(mLoginActivity.getUserName(), mLoginActivity.getPassWord(), this);
     }
 
     @Override
     public void callSuccess(String s) {
         userInfo = new UserInfo();
-        userInfo.setUsername(mILoginView.getUserName());
-        userInfo.setPassword(mILoginView.getPassWord());
+        userInfo.setUsername(mLoginActivity.getUserName());
+        userInfo.setPassword(mLoginActivity.getPassWord());
         try {
             JSONObject jsonObject = new JSONObject(s);
             if (!jsonObject.getBoolean("errorFlag")) {
@@ -85,37 +84,37 @@ public class LoginManage implements BindServiceCallBack, ResponseCallBack<String
                 EMClient.getInstance().login(userInfo.getUserInfoBean().getHXUserName(), userInfo.getUserInfoBean().getHXPwd(), this);
                 mService.setUserInfo(userInfo);
                 mService.saveUserInfo(userInfo);
-                mILoginView.pushMainActivity(userInfo.getClassInfoBeen());
-                mILoginView.closeActivity();
+                mLoginActivity.pushMainActivity(userInfo.getClassInfoBeen());
+                mLoginActivity.closeActivity();
             } else {
-                mILoginView.showMsg(R.string.error_login);
+                mLoginActivity.showMsg(R.string.error_login);
             }
         } catch (JSONException e) {
             e.printStackTrace();
-            mILoginView.showMsg(R.string.error_connection);
+            mLoginActivity.showMsg(R.string.error_connection);
         }
-        mILoginView.hiddenLoading();
+        mLoginActivity.hiddenLoading();
     }
 
     @Override
     public void callFailure() {
-        mILoginView.hiddenLoading();
-        mILoginView.showMsg(R.string.error_connection);
+        mLoginActivity.hiddenLoading();
+        mLoginActivity.showMsg(R.string.error_connection);
     }
 
     @Override
     public void bindBaseServiceSuccess(BaseService baseService) {
         mService = (LogicService) baseService;
-        mILoginView.initView();
+        mLoginActivity.initView();
         if (!"".equals(username) && !"".equals(password)) {
-            mILoginView.initData(username, password);
+            mLoginActivity.initData(username, password);
         }
-        mILoginView.initEvent();
+        mLoginActivity.initEvent();
     }
 
     @Override
     public void bindBaseServiceFailure() {
-        mActivity.finish();
+        mLoginActivity.finish();
     }
 
     @Override

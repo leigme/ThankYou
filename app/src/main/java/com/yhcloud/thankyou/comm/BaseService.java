@@ -11,7 +11,7 @@ import android.os.IBinder;
 
 public abstract class BaseService extends Service {
 
-    private BaseBinder mBinder = new BaseBinder();
+    public BaseBinder mBinder = new BaseBinder();
 
     public class BaseBinder extends Binder {
         public BaseService getService() {

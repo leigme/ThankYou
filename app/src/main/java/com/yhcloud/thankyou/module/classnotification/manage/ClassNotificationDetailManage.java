@@ -45,7 +45,7 @@ public class ClassNotificationDetailManage {
         mActivity.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder service) {
-                mService = ((LogicService.MyBinder)service).getService();
+//                mService = ((LogicService.MyBinder)service).getService();
                 mIClassNotificationDetailView.initView();
                 mIClassNotificationDetailView.initEvent();
                 mIClassNotificationDetailView.setTitle("通知详情");

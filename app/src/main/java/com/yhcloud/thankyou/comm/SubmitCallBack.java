@@ -5,5 +5,11 @@ package com.yhcloud.thankyou.comm;
  */
 
 public interface SubmitCallBack {
+
+    /**
+     * 按钮点击回调方法
+     * @author leig
+     * @version 20170301
+     */
     void btnOnClick();
 }

@@ -17,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
 /**
@@ -36,22 +35,17 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView,
     private Dialog mDialog;
     // 对话框提交回调接口
     private SubmitCallBack mSubmitCallBack;
-    // 基础服务
-    private BaseService mBaseService;
     // 服务连接器
     private ServiceConnection mServiceConnection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Tools.print(TAG, "开始跑程序咯1");
         mViews = new SparseArray<>();
         setContentView(getLayoutId());
-        Tools.print(TAG, "开始跑程序咯2");
         initViews();
         initDatas();
         initEvents();
-        Tools.print(TAG, "开始跑程序咯3");
     }
 
     @Override
@@ -68,13 +62,11 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView,
         super.onResume();
     }
 
-    public void bindBaseService(Class<BaseService> baseServiceClass, final BindServiceCallBack bindServiceCallBack) {
-        Tools.print(TAG, "开始绑定服务咯。。。");
+    public void bindBaseService(Class<? extends BaseService> baseServiceClass, final BindServiceCallBack bindServiceCallBack) {
         mServiceConnection = new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName componentName, IBinder iBinder) {
                 BaseService mBaseService = ((BaseService.BaseBinder)iBinder).getService();
-                Tools.print(TAG, "开始回调绑定服务咯。。。");
                 bindServiceCallBack.bindBaseServiceSuccess(mBaseService);
             }
 
@@ -95,20 +87,6 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView,
             unbindService(mServiceConnection);
         }
     }
-
-    public <E extends View> E findView(int resId) {
-        E view = (E) mViews.get(resId);
-        if (null == view) {
-            view = (E) findViewById(resId);
-            mViews.put(resId, view);
-        }
-        return view;
-    }
-
-    public <E extends View> void setOnClick(E view) {
-        view.setOnClickListener(this);
-    }
-
 
     @Override
     public void showLoading(int msgId) {
@@ -160,7 +138,7 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView,
         TextView dMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
         dMsg.setText(msg);
         Button dCancel = (Button) mDialog.findViewById(R.id.btn_dialog_cancel);
-        dCancel.setText(R.string.ok);
+        dCancel.setText("我知道了");
         dCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -183,5 +161,22 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView,
 
     public void setSubmitCallBack(SubmitCallBack submitCallBack) {
         this.mSubmitCallBack = submitCallBack;
+    }
+
+    public <E extends View> E findView(int resId) {
+        E view = (E) mViews.get(resId);
+        if (null == view) {
+            view = (E) findViewById(resId);
+            mViews.put(resId, view);
+        }
+        return view;
+    }
+
+    public <E extends View> void setOnClick(E view) {
+        view.setOnClickListener(this);
+    }
+
+    public void onClick(View view) {
+        processClick(view);
     }
 }

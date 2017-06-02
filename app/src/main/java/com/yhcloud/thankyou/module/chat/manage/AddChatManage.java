@@ -30,7 +30,7 @@ public class AddChatManage {
         mActivity.bindService(intent, new ServiceConnection() {
             @Override
             public void onServiceConnected(ComponentName name, IBinder binder) {
-                mService = ((LogicService.MyBinder)binder).getService();
+//                mService = ((LogicService.MyBinder)binder).getService();
                 mIAddChatView.initView();
                 mIAddChatView.initEvent();
                 mIAddChatView.setTitle("选择联系人");

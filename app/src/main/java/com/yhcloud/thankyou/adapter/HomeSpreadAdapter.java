@@ -6,7 +6,7 @@ import android.widget.ImageView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.SpreadBean;
-import com.yhcloud.thankyou.utils.CommonAdapter;
+import com.yhcloud.thankyou.comm.CommonAdapter;
 import com.yhcloud.thankyou.utils.ViewHolder;
 
 import java.util.List;

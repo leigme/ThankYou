@@ -1,10 +1,12 @@
-package com.yhcloud.thankyou.utils;
+package com.yhcloud.thankyou.comm;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+
+import com.yhcloud.thankyou.utils.ViewHolder;
 
 import java.util.List;
 

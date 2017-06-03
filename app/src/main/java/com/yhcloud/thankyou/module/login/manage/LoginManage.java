@@ -20,11 +20,11 @@ import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.service.logic.mimplement.LoginLogic;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
+import com.yhcloud.thankyou.utils.myview.MyToast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
@@ -51,6 +51,12 @@ public class LoginManage extends BaseManager implements BindServiceCallBack, Res
     }
 
     public void login() {
+        if (null == mLoginActivity.getUserName() || null == mLoginActivity.getPassWord() ||
+                "".equals(mLoginActivity.getUserName()) || "".equals(mLoginActivity.getPassWord())) {
+            Tools.print(TAG, "用户名和密码不能为空");
+            MyToast.showToast(mLoginActivity, "用户名和密码不能为空");
+            return;
+        }
         mLoginActivity.showLoading(R.string.logging);
         mLoginLogic = (LoginLogic) mService.getLoginLogic();
         mLoginLogic.login(mLoginActivity.getUserName(), mLoginActivity.getPassWord(), this);
@@ -105,15 +111,19 @@ public class LoginManage extends BaseManager implements BindServiceCallBack, Res
     @Override
     public void bindBaseServiceSuccess(BaseService baseService) {
         mService = (LogicService) baseService;
-        mLoginActivity.initView();
-        if (!"".equals(username) && !"".equals(password)) {
-            mLoginActivity.initData(username, password);
+        if (null != mService.getUserInfo()) {
+            username = mService.getUserInfo().getUsername();
+            password = mService.getUserInfo().getPassword();
+            if (null != username && null != password && !"".equals(username) && !"".equals(password)) {
+                mLoginActivity.initData(username, password);
+            }
         }
-        mLoginActivity.initEvent();
     }
 
     @Override
     public void bindBaseServiceFailure() {
+        Tools.print(TAG, "基础服务绑定失败");
+        MyToast.showToast(mLoginActivity, "基础服务绑定失败");
         mLoginActivity.finish();
     }
 
@@ -125,7 +135,7 @@ public class LoginManage extends BaseManager implements BindServiceCallBack, Res
 
     @Override
     public void onError(int i, String s) {
-        Tools.print(TAG, MessageFormat.format("环信登录失败... 错误码:{0}, 错误信息:{1}", i, s));
+        Tools.print(TAG, "环信登录失败... 错误码:{0}, 错误信息:{1}", i, s);
         mService.setCanMessage(false);
     }
 

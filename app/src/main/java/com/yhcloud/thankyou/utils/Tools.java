@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.comm.BaseService;
 import com.yhcloud.thankyou.comm.BindServiceCallBack;
 import com.yhcloud.thankyou.module.aboutus.view.AboutUsActivity;
 import com.yhcloud.thankyou.module.account.view.AccountActivity;
@@ -30,11 +31,11 @@ import com.yhcloud.thankyou.module.homework.view.HomeworkActivity;
 import com.yhcloud.thankyou.module.propslist.view.PropsListActivity;
 import com.yhcloud.thankyou.module.schoolannouncement.view.SchoolAnnouncementActivity;
 import com.yhcloud.thankyou.module.todayrecipes.view.TodayRecipesActivity;
-import com.yhcloud.thankyou.comm.BaseService;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yuyh.library.imgsel.ImageLoader;
 import com.yuyh.library.imgsel.ImgSelConfig;
 
+import java.text.MessageFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -194,10 +195,29 @@ public class Tools {
         }
     }
 
-    //打印信息方法
+
+
+    /**
+     * 打印输出日志方法
+     * 
+     * @author leig
+     * 
+     */
     public static void print(String tag, String msg) {
         if (Constant.printLog) {
-            Log.e(tag, msg);
+            Log.d(tag, msg);
+        }
+    }
+
+    /**
+     * 打印输出日志方法
+     * 
+     * @author leig
+     * 
+     */
+    public static void print(String tag, String msg, Object... arguments) {
+        if (Constant.printLog) {
+            Log.d(tag, MessageFormat.format(msg, arguments));
         }
     }
 

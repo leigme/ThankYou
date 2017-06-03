@@ -103,7 +103,7 @@ public class LogicService extends BaseService {
 
     public void setUserInfo(UserInfo userInfo) {
         mUserInfo = userInfo;
-        shortcut = mUserInfo.getUserInfoBean().getUserId() + "的快捷方式";
+//        shortcut = mUserInfo.getUserInfoBean().getUserId() + "的快捷方式";
     }
 
     public HashMap<String, String[]> getMap() {

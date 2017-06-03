@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/dl_main_drawer"
-    tools:context="com.yhcloud.thankyou.view.MainActivity">
+    tools:context="com.yhcloud.thankyou.module.index.view.MainActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

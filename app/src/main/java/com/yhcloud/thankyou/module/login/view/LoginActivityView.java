@@ -1,7 +1,7 @@
 package com.yhcloud.thankyou.module.login.view;
 
 import com.yhcloud.thankyou.bean.ClassInfoBean;
-import com.yhcloud.thankyou.minterface.BaseActivityView;
+import com.yhcloud.thankyou.comm.BaseView;
 
 import java.util.ArrayList;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by Administrator on 2016/11/10.
  */
 
-public interface LoginActivityView extends BaseActivityView {
+public interface LoginActivityView extends BaseView {
     /**
      * 获取用户名
      *

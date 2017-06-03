@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.yhcloud.thankyou.AIDLService;
-import com.yhcloud.thankyou.view.MainActivity;
+import com.yhcloud.thankyou.module.index.view.MainActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 

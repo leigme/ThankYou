@@ -1,9 +1,8 @@
-package com.yhcloud.thankyou.view;
+package com.yhcloud.thankyou.module.index.view;
 
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -31,8 +30,6 @@ import com.yhcloud.thankyou.utils.myview.toprightmenu.TopRightMenu;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 
-import static com.yhcloud.thankyou.R.id.iv_header_left;
-
 public class MainActivity extends BaseActivity implements MainActivityView,
         HomeFragment.OnFragmentInteractionListener, ClassFragment.OnFragmentInteractionListener,
         MineFragment.OnFragmentInteractionListener {
@@ -53,85 +50,69 @@ public class MainActivity extends BaseActivity implements MainActivityView,
     //管理器
     private MainManage mManage;
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+    public int getLayoutId() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    public void initViews() {
+        llHeaderLeft = findView(R.id.ll_header_left);
+        ivHeaderLeft = findView(R.id.iv_header_left);
+        tvHeaderTitle = findView(R.id.tv_header_title);
+        llHeaderRight = findView(R.id.ll_header_right);
+        dlDrawer = findView(R.id.dl_main_drawer);
+        ivDrawerHeadimg = findView(R.id.iv_drawer_image);
+        tvDraweUsername = findView(R.id.tv_drawer_username);
+        tvDrawerClass = findView(R.id.tv_drawer_class);
+        rvDrawerList = findView(R.id.rv_drawer_list);
+        llFooterHome = findView(R.id.ll_footer_home);
+        llFooterClass = findView(R.id.ll_footer_class);
+        llFooterMine = findView(R.id.ll_footer_mine);
+        ivFooterHome = findView(R.id.iv_footer_home);
+        ivFooterClass = findView(R.id.iv_footer_class);
+        ivFooterMine = findView(R.id.iv_footer_mine);
+        tvFooterHome = findView(R.id.tv_footer_home);
+        tvFooterClass = findView(R.id.tv_footer_class);
+        tvFooterMine = findView(R.id.tv_footer_mine);
+        nsvpList = findView(R.id.nsvp_main);
+    }
+
+    @Override
+    public void initEvents() {
+        setOnClick(llHeaderLeft);
+        setOnClick(llHeaderRight);
+        setOnClick(llFooterHome);
+        setOnClick(llFooterClass);
+        setOnClick(llFooterMine);
+    }
+
+    @Override
+    public void initDatas() {
         mManage = new MainManage(this);
-    }
-
-    @Override
-    public void initView() {
-        llHeaderLeft = (LinearLayout) findViewById(R.id.ll_header_left);
-        ivHeaderLeft = (ImageView) findViewById(iv_header_left);
-        tvHeaderTitle = (TextView) findViewById(R.id.tv_header_title);
-        llHeaderRight = (LinearLayout) findViewById(R.id.ll_header_right);
-        dlDrawer = (DrawerLayout) findViewById(R.id.dl_main_drawer);
-        ivDrawerHeadimg = (ImageView) findViewById(R.id.iv_drawer_image);
-        tvDraweUsername = (TextView) findViewById(R.id.tv_drawer_username);
-        tvDrawerClass = (TextView) findViewById(R.id.tv_drawer_class);
-        rvDrawerList = (RecyclerView) findViewById(R.id.rv_drawer_list);
-        llFooterHome = (LinearLayout) findViewById(R.id.ll_footer_home);
-        llFooterClass = (LinearLayout) findViewById(R.id.ll_footer_class);
-        llFooterMine = (LinearLayout) findViewById(R.id.ll_footer_mine);
-        ivFooterHome = (ImageView) findViewById(R.id.iv_footer_home);
-        ivFooterClass = (ImageView) findViewById(R.id.iv_footer_class);
-        ivFooterMine = (ImageView) findViewById(R.id.iv_footer_mine);
-        tvFooterHome = (TextView) findViewById(R.id.tv_footer_home);
-        tvFooterClass = (TextView) findViewById(R.id.tv_footer_class);
-        tvFooterMine = (TextView) findViewById(R.id.tv_footer_mine);
-        nsvpList = (NoScrollViewPager) findViewById(R.id.nsvp_main);
-    }
-
-    @Override
-    public void initData(){
         ivHeaderLeft.setImageResource(R.mipmap.icon_default_avatar);
     }
 
     @Override
-    public void initEvent() {
-        View.OnClickListener myOnClickListener = new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                switch (view.getId()) {
-                    case R.id.ll_header_left:
-                        mManage.showDrawer();
-                        break;
-                    case R.id.ll_header_right:
-                        mManage.showTrm();
-                        break;
-                    case R.id.ll_footer_home:
-                        showFragment(0);
-                        break;
-                    case R.id.ll_footer_class:
-                        showFragment(1);
-                        break;
-                    case R.id.ll_footer_mine:
-                        showFragment(2);
-                        break;
-                }
-            }
-        };
-        llHeaderLeft.setOnClickListener(myOnClickListener);
-        llHeaderRight.setOnClickListener(myOnClickListener);
-        llFooterHome.setOnClickListener(myOnClickListener);
-        llFooterClass.setOnClickListener(myOnClickListener);
-        llFooterMine.setOnClickListener(myOnClickListener);
-    }
-
-    @Override
-    public void showDefault(boolean showed) {
-
-    }
-
-    @Override
-    public void setTitle(String str) {
-        tvHeaderTitle.setText(str);
-    }
-
-    @Override
-    public void setRightTitle(String title) {
-
+    public void processClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_header_left:
+                mManage.showDrawer();
+                break;
+            case R.id.ll_header_right:
+                mManage.showTrm();
+                break;
+            case R.id.ll_footer_home:
+                showFragment(0);
+                break;
+            case R.id.ll_footer_class:
+                showFragment(1);
+                break;
+            case R.id.ll_footer_mine:
+                showFragment(2);
+                break;
+        }
     }
 
     @Override
@@ -293,33 +274,10 @@ public class MainActivity extends BaseActivity implements MainActivityView,
         return;
     }
 
-    @Override
-    public void onClick(View view) {
-
+    public void setTitle(String title) {
+        if (null != tvHeaderTitle) {
+            tvHeaderTitle.setText(title);
+        }
     }
 
-    @Override
-    public int getLayoutId() {
-        return 0;
-    }
-
-    @Override
-    public void initViews() {
-
-    }
-
-    @Override
-    public void initEvents() {
-
-    }
-
-    @Override
-    public void initDatas() {
-
-    }
-
-    @Override
-    public void processClick(View view) {
-
-    }
 }

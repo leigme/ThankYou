@@ -48,8 +48,8 @@ public class Constant {
      * 服务器API
      */
     //服务地址
-//    public static final String SERVICEADDRESS = "http://www.k12chn.com";
-        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
+    public static final String SERVICEADDRESS = "http://www.k12chn.com";
+//        public static final String SERVICEADDRESS = "http://192.168.0.139/edu";
 
     //登录请求 uid pwd
     public static final String LOGIN = SERVICEADDRESS + "/m17/M1708I/M1708I001";

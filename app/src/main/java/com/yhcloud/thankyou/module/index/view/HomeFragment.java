@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.view;
+package com.yhcloud.thankyou.module.index.view;
 
 import android.content.Context;
 import android.net.Uri;

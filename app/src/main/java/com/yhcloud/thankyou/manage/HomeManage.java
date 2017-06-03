@@ -14,7 +14,7 @@ import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.view.HomeActivityView;
+import com.yhcloud.thankyou.module.index.view.HomeActivityView;
 import com.yhcloud.thankyou.view.WebActivity;
 
 import org.json.JSONException;

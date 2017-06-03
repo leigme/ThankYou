@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.view;
+package com.yhcloud.thankyou.module.index.view;
 
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.minterface.BaseActivityView;

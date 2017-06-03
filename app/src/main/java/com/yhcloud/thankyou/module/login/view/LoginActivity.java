@@ -2,7 +2,6 @@ package com.yhcloud.thankyou.module.login.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -14,131 +13,18 @@ import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.module.login.manage.LoginManage;
 import com.yhcloud.thankyou.utils.myview.MyToast;
-import com.yhcloud.thankyou.view.MainActivity;
+import com.yhcloud.thankyou.module.index.view.MainActivity;
 
 import java.util.ArrayList;
 
-import rx.Observable;
-import rx.Observer;
-
 public class LoginActivity extends BaseActivity implements LoginActivityView {
 
-    private String TAG = getClass().getSimpleName();
+    private String TAG = LoginActivity.class.getName();
     //视图控件
     private EditText et_login_username, et_login_password;
     private TextView btn_login_send;
     //管理器
     private LoginManage mLoginManage;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        mLoginManage = new LoginManage(this);
-
-        final Observer<String> observer = new Observer<String>() {
-            @Override
-            public void onCompleted() {
-                Log.e(TAG, "RxJava测试~");
-            }
-
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(String s) {
-                Log.e(TAG, "Item:" + s);
-            }
-        };
-
-        Observable observable = Observable.create(new Observable.OnSubscribe() {
-            @Override
-            public void call(Object o) {
-                observer.onNext("Hello");
-                observer.onNext(" World!");
-                observer.onCompleted();
-            }
-        });
-
-        observable.subscribe(observer);
-    }
-
-    @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initEvent() {
-
-    }
-
-    @Override
-    public void showDefault(boolean showed) {
-
-    }
-
-    @Override
-    public void setTitle(String title) {
-
-    }
-
-    @Override
-    public void setRightTitle(String title) {
-
-    }
-
-    @Override
-    public String getUserName() {
-        return et_login_username.getText().toString().trim();
-    }
-
-    @Override
-    public String getPassWord() {
-        return et_login_password.getText().toString().trim();
-    }
-
-    @Override
-    public void showMsg(int msg) {
-        MyToast.showToast(this, msg);
-    }
-
-    @Override
-    public void pushMainActivity(ArrayList<ClassInfoBean> classInfoBeen) {
-        Intent intent = new Intent(this, MainActivity.class);
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("ClassInfos", classInfoBeen);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
-
-    @Override
-    public void clearUsername() {
-
-    }
-
-    @Override
-    public void clearPassword() {
-
-    }
-
-    @Override
-    public void closeActivity() {
-        finish();
-    }
-
-    @Override
-    public void initData(String username, String password) {
-        et_login_username.setText(username);
-        et_login_password.setText(password);
-    }
-
-    @Override
-    public void onClick(View view) {
-
-    }
 
     @Override
     public int getLayoutId() {
@@ -193,4 +79,50 @@ public class LoginActivity extends BaseActivity implements LoginActivityView {
                 break;
         }
     }
+
+    @Override
+    public String getUserName() {
+        return et_login_username.getText().toString().trim();
+    }
+
+    @Override
+    public String getPassWord() {
+        return et_login_password.getText().toString().trim();
+    }
+
+    @Override
+    public void showMsg(int msg) {
+        MyToast.showToast(this, msg);
+    }
+
+    @Override
+    public void pushMainActivity(ArrayList<ClassInfoBean> classInfoBeen) {
+        Intent intent = new Intent(this, MainActivity.class);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ClassInfos", classInfoBeen);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    @Override
+    public void clearUsername() {
+
+    }
+
+    @Override
+    public void clearPassword() {
+
+    }
+
+    @Override
+    public void closeActivity() {
+        finish();
+    }
+
+    @Override
+    public void initData(String username, String password) {
+        et_login_username.setText(username);
+        et_login_password.setText(password);
+    }
+
 }

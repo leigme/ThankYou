@@ -10,6 +10,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,9 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.utils.myview.MyToast;
+
+import rx.Observable;
+import rx.Observer;
 
 /**
  * Created by Administrator on 2017/1/21.
@@ -46,6 +50,43 @@ public abstract class BaseActivity extends FragmentActivity implements BaseView,
         initViews();
         initDatas();
         initEvents();
+        initObserver();
+    }
+
+    /**
+     * 观察者初始化
+     *
+     * @author leig
+     *
+     */
+    private void initObserver() {
+        final Observer<String> observer = new Observer<String>() {
+            @Override
+            public void onCompleted() {
+                Log.e(TAG, "RxJava测试~");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+
+            @Override
+            public void onNext(String s) {
+                Log.e(TAG, "Item:" + s);
+            }
+        };
+
+        Observable observable = Observable.create(new Observable.OnSubscribe() {
+            @Override
+            public void call(Object o) {
+                observer.onNext("Hello");
+                observer.onNext(" World!");
+                observer.onCompleted();
+            }
+        });
+
+        observable.subscribe(observer);
     }
 
     @Override

@@ -1,23 +1,26 @@
-package com.yhcloud.thankyou.view;
+package com.yhcloud.thankyou.module.index.view;
 
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.yhcloud.thankyou.R;
-import com.yhcloud.thankyou.adapter.MineFunctionAdapter;
-import com.yhcloud.thankyou.bean.FunctionBean;
+import com.yhcloud.thankyou.adapter.ClassPeopleListAdapter;
+import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.comm.BaseFragment;
 import com.yhcloud.thankyou.comm.ItemClinkListener;
-import com.yhcloud.thankyou.manage.MineManage;
+import com.yhcloud.thankyou.manage.ClassManage;
 import com.yhcloud.thankyou.service.LogicService;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
@@ -25,27 +28,31 @@ import java.util.ArrayList;
  * Activities that contain this fragment must implement the
  * {@link OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link MineFragment#newInstance} factory method to
+ * Use the {@link ClassFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MineFragment extends BaseFragment implements MineActivityView {
+public class ClassFragment extends BaseFragment implements ClassActivityView {
+
+    private String TAG = getClass().getSimpleName();
 
     private OnFragmentInteractionListener mListener;
 
     //视图控件
     private View mView;
-    private RecyclerView rvMineFunction;
-    private MineFunctionAdapter mfa;
+    private LinearLayout llTeachers;
+    private RecyclerView rvPeopleList;
+    //适配器
+    private ClassPeopleListAdapter cpla;
     //管理器
-    private MineManage mManage;
+    private ClassManage mManage;
     private LogicService mService;
 
-    public MineFragment() {
+    public ClassFragment() {
         // Required empty public constructor
     }
 
-    public static MineFragment newInstance(LogicService service) {
-        MineFragment fragment = new MineFragment();
+    public static ClassFragment newInstance(LogicService service) {
+        ClassFragment fragment = new ClassFragment();
         fragment.mService = service;
         return fragment;
     }
@@ -59,8 +66,8 @@ public class MineFragment extends BaseFragment implements MineActivityView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_mine, container, false);
-        mManage = new MineManage(this, mService);
+        mView = inflater.inflate(R.layout.fragment_class, container, false);
+        mManage = new ClassManage(this, mService);
         return mView;
     }
 
@@ -90,39 +97,28 @@ public class MineFragment extends BaseFragment implements MineActivityView {
 
     @Override
     public void initView() {
-        rvMineFunction = (RecyclerView) mView.findViewById(R.id.rv_mine_function);
+        llTeachers = (LinearLayout) mView.findViewById(R.id.ll_class_teachers);
+        rvPeopleList = (RecyclerView) mView.findViewById(R.id.rv_class_people_list);
     }
 
     @Override
     public void initEvent() {
-
+        View.OnClickListener myOnClickListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch (v.getId()) {
+                    case R.id.ll_class_teachers:
+                        mManage.goTeacherList();
+                        break;
+                }
+            }
+        };
+        llTeachers.setOnClickListener(myOnClickListener);
     }
 
     @Override
     public void showDefault(boolean showed) {
 
-    }
-
-    @Override
-    public void showList(ArrayList<FunctionBean> list) {
-        if (null == mfa) {
-            mfa = new MineFunctionAdapter(getActivity(), list);
-            rvMineFunction.setLayoutManager(new LinearLayoutManager(getActivity()));
-            mfa.setIOnClickListener(new ItemClinkListener() {
-                @Override
-                public void OnItemClickListener(View view, int position) {
-                    mManage.goFunction(position);
-                }
-
-                @Override
-                public void OnItemLongClickListener(View view, int position) {
-
-                }
-            });
-            rvMineFunction.setAdapter(mfa);
-        } else {
-            mfa.refreshData(list);
-        }
     }
 
     @Override
@@ -133,6 +129,34 @@ public class MineFragment extends BaseFragment implements MineActivityView {
     @Override
     public void setRightTitle(String title) {
 
+    }
+
+    @Override
+    public void showList(ArrayList<UserInfoBean> list) {
+        if (null == cpla) {
+            cpla = new ClassPeopleListAdapter(getActivity(), list);
+            cpla.setIOnClickListener(new ItemClinkListener() {
+                @Override
+                public void OnItemClickListener(View view, int position) {
+                    Log.e(TAG, MessageFormat.format("点击了第{0}个学生", position));
+                    mManage.goDetailInfo(position);
+                }
+
+                @Override
+                public void OnItemLongClickListener(View view, int position) {
+
+                }
+            });
+            rvPeopleList.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+            rvPeopleList.setAdapter(cpla);
+        } else {
+            cpla.refreshData(list);
+        }
+    }
+
+    @Override
+    public ClassManage getClassManage() {
+        return mManage;
     }
 
     @Override

@@ -21,7 +21,7 @@ import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
-import com.yhcloud.thankyou.view.MainActivity;
+import com.yhcloud.thankyou.module.index.view.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,8 +60,10 @@ public class LoadingManage extends BaseManager implements BindServiceCallBack{
             String username = preferences.getString(Constant.USER_NAME, "");
             String password = preferences.getString(Constant.USER_PWD, "");
             if (null != username && !"".equals(username) && null != password && !"".equals(password)) {
+                mUserInfo = new UserInfo();
                 mUserInfo.setUsername(username);
                 mUserInfo.setPassword(password);
+                mService.setUserInfo(mUserInfo);
                 mService.login(username, password, new ResponseCallBack<String>() {
                     @Override
                     public void callSuccess(String s) {

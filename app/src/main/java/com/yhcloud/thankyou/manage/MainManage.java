@@ -1,12 +1,6 @@
 package com.yhcloud.thankyou.manage;
 
-import android.app.Activity;
-import android.app.Service;
-import android.content.ComponentName;
-import android.content.Intent;
-import android.content.ServiceConnection;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.util.SparseArray;
@@ -19,16 +13,18 @@ import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.UserInfo;
 import com.yhcloud.thankyou.bean.UserInfoBean;
+import com.yhcloud.thankyou.comm.BaseManager;
+import com.yhcloud.thankyou.comm.BaseService;
+import com.yhcloud.thankyou.comm.BindServiceCallBack;
 import com.yhcloud.thankyou.comm.ResponseCallBack;
-import com.yhcloud.thankyou.service.logic.minterface.IMainLogic;
+import com.yhcloud.thankyou.module.index.view.ClassActivityView;
+import com.yhcloud.thankyou.module.index.view.ClassFragment;
+import com.yhcloud.thankyou.module.index.view.HomeFragment;
+import com.yhcloud.thankyou.module.index.view.MainActivity;
+import com.yhcloud.thankyou.module.index.view.MineFragment;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
-import com.yhcloud.thankyou.view.ClassFragment;
-import com.yhcloud.thankyou.view.HomeFragment;
-import com.yhcloud.thankyou.view.ClassActivityView;
-import com.yhcloud.thankyou.view.MainActivityView;
-import com.yhcloud.thankyou.view.MineFragment;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,12 +37,12 @@ import java.util.Iterator;
  * Created by leig on 2016/11/19.
  */
 
-public class MainManage {
+public class MainManage extends BaseManager implements BindServiceCallBack {
 
-    private String TAG = getClass().getSimpleName();
-    private IMainLogic mIMainLogic;
-    private MainActivityView mIMainView;
-    private Activity mActivity;
+    private static String TAG = MainManage.class.getName();
+
+    private MainActivity mMainActivity;
+
     private LogicService mService;
     private UserInfo mUserInfo;
     private SparseArray<FunctionBean> mSparseArray;
@@ -55,50 +51,10 @@ public class MainManage {
     private ArrayList<FunctionBean> mMenuBeen;
     private ArrayList<UserInfoBean> mUserInfoBeen;
 
-    public MainManage(MainActivityView mainView) {
-        this.mIMainView = mainView;
-        this.mActivity = (Activity) mainView;
-        Intent intent = new Intent(mActivity, LogicService.class);
-        mActivity.bindService(intent, new ServiceConnection() {
-            @Override
-            public void onServiceConnected(ComponentName name, IBinder binder) {
-//                mService = ((LogicService.MyBinder)binder).getService();
-                if (null == mUserInfoBeen) {
-                    mUserInfoBeen = new ArrayList<>();
-                    getFriendList("-1");
-                }
-                mUserInfo = mService.getUserInfo();
-                mSparseArray = Tools.initFunction(mActivity);
-                mService.setBeanSparseArray(mSparseArray);
-                mService.getUserAddFuncation();
-                Tools.print(TAG, "开始处理未添加应用");
-                mService.getUserNoneFuncation();
-                mIMainView.initView();
-                mIMainView.initData();
-                mIMainView.initEvent();
-                initViewPages();
-                mIMainView.showFragment(0);
-                mIMainView.setHeaderLeftImage(mUserInfo.getUserInfoBean().getHeadImageURL());
-                mIMainView.setTitle(mUserInfo.getUserInfoBean().getSchoolName());
-                mIMainView.setDrawerHeadImg(mUserInfo.getUserInfoBean().getHeadImageURL());
-                mIMainView.setDrawerUsername(mUserInfo.getUserInfoBean().getRealName());
-                if (null != mActivity.getIntent()) {
-                    Bundle bundle = mActivity.getIntent().getExtras();
-                    mClassInfoBeen = (ArrayList<ClassInfoBean>) bundle.getSerializable("ClassInfos");
-                    for (ClassInfoBean classInfoBean: mClassInfoBeen) {
-                        if (classInfoBean.getClassId().equals(mUserInfo.getUserInfoBean().getDefaultClassId())) {
-                            classInfoBean.setSelected(true);
-                            mIMainView.setDrawerClassname(classInfoBean.getClassName());
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void onServiceDisconnected(ComponentName name) {
-
-            }
-        }, Service.BIND_AUTO_CREATE);
+    public MainManage(MainActivity mainActivity) {
+        super(mainActivity);
+        this.mMainActivity = mainActivity;
+        mMainActivity.bindBaseService(LogicService.class, this);
     }
 
     private void getFriendList(String updateTime) {
@@ -146,32 +102,32 @@ public class MainManage {
         mFragments.add(classFragment);
         MineFragment mineFragment = MineFragment.newInstance(mService);
         mFragments.add(mineFragment);
-        mIMainView.initFragments(mFragments);
+        mMainActivity.initFragments(mFragments);
     }
 
     public void setTitle(int i) {
         switch (i) {
             case 0:
-                mIMainView.setTitle(mUserInfo.getUserInfoBean().getSchoolName());
+                mMainActivity.setTitle(mUserInfo.getUserInfoBean().getSchoolName());
                 break;
             case 1:
                 if (null != mClassInfoBeen) {
                     for (ClassInfoBean classInfoBean: mClassInfoBeen) {
                         if (classInfoBean.getClassId().equals(mUserInfo.getUserInfoBean().getDefaultClassId())) {
-                            mIMainView.setTitle(classInfoBean.getClassName());
+                            mMainActivity.setTitle(classInfoBean.getClassName());
                         }
                     }
                 }
                 break;
             case 2:
-                mIMainView.setTitle("我的");
+                mMainActivity.setTitle("我的");
                 break;
         }
     }
 
     public void showDrawer() {
         if (null != mClassInfoBeen) {
-            mIMainView.showDrawer(mClassInfoBeen);
+            mMainActivity.showDrawer(mClassInfoBeen);
         }
     }
 
@@ -179,13 +135,13 @@ public class MainManage {
         mUserInfo.getUserInfoBean().setDefaultClassId(classId);
         for (ClassInfoBean classInfoBean: mClassInfoBeen) {
             if (classInfoBean.getClassId().equals(mUserInfo.getUserInfoBean().getDefaultClassId())) {
-                mIMainView.setDrawerClassname(classInfoBean.getClassName());
+                mMainActivity.setDrawerClassname(classInfoBean.getClassName());
             }
         }
     }
 
     public void setRightButton(boolean showed) {
-        mIMainView.initHeaderRightButton(showed);
+        mMainActivity.initHeaderRightButton(showed);
         if (showed) {
             if (null == mMenuBeen || 0 == mMenuBeen.size()) {
                 mMenuBeen = new ArrayList<>();
@@ -204,7 +160,7 @@ public class MainManage {
     }
 
     public void showTrm() {
-        mIMainView.showTrm(mMenuBeen);
+        mMainActivity.showTrm(mMenuBeen);
     }
 
     public void refreshFuncations() {
@@ -267,5 +223,42 @@ public class MainManage {
             }
         }
         return map;
+    }
+
+    @Override
+    public void bindBaseServiceSuccess(BaseService baseService) {
+        mService = (LogicService) baseService;
+        if (null == mUserInfoBeen) {
+            mUserInfoBeen = new ArrayList<>();
+            getFriendList("-1");
+        }
+        mUserInfo = mService.getUserInfo();
+        mSparseArray = Tools.initFunction(mMainActivity);
+        mService.setBeanSparseArray(mSparseArray);
+        mService.getUserAddFuncation();
+        Tools.print(TAG, "开始处理未添加应用");
+        mService.getUserNoneFuncation();
+
+        initViewPages();
+        mMainActivity.showFragment(0);
+        mMainActivity.setHeaderLeftImage(mUserInfo.getUserInfoBean().getHeadImageURL());
+        mMainActivity.setTitle(mUserInfo.getUserInfoBean().getSchoolName());
+        mMainActivity.setDrawerHeadImg(mUserInfo.getUserInfoBean().getHeadImageURL());
+        mMainActivity.setDrawerUsername(mUserInfo.getUserInfoBean().getRealName());
+        if (null != mMainActivity.getIntent()) {
+            Bundle bundle = mMainActivity.getIntent().getExtras();
+            mClassInfoBeen = (ArrayList<ClassInfoBean>) bundle.getSerializable("ClassInfos");
+            for (ClassInfoBean classInfoBean: mClassInfoBeen) {
+                if (classInfoBean.getClassId().equals(mUserInfo.getUserInfoBean().getDefaultClassId())) {
+                    classInfoBean.setSelected(true);
+                    mMainActivity.setDrawerClassname(classInfoBean.getClassName());
+                }
+            }
+        }
+    }
+
+    @Override
+    public void bindBaseServiceFailure() {
+
     }
 }

@@ -13,7 +13,7 @@ import com.yhcloud.thankyou.comm.ResponseCallBack;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.module.classteachers.view.ClassTeacherListActivity;
 import com.yhcloud.thankyou.module.detailinfo.view.DetailPeopleActivity;
-import com.yhcloud.thankyou.view.ClassActivityView;
+import com.yhcloud.thankyou.module.index.view.ClassActivityView;
 
 import org.json.JSONException;
 import org.json.JSONObject;

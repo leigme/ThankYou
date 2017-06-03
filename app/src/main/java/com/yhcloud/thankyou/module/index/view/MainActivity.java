@@ -21,7 +21,7 @@ import com.yhcloud.thankyou.bean.ClassInfoBean;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.comm.BaseActivity;
 import com.yhcloud.thankyou.comm.ItemClinkListener;
-import com.yhcloud.thankyou.manage.MainManage;
+import com.yhcloud.thankyou.module.index.manage.MainManage;
 import com.yhcloud.thankyou.utils.Tools;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 import com.yhcloud.thankyou.utils.myview.NoScrollViewPager;

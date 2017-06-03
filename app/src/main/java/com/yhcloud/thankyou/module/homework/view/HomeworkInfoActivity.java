@@ -1,8 +1,8 @@
 package com.yhcloud.thankyou.module.homework.view;
 
 import android.content.Intent;
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.module.homework.adapter.HomeworkInfoViewPagerAdapter;
 import com.yhcloud.thankyou.module.homework.bean.HomeworkInfoViewPagerBean;
 import com.yhcloud.thankyou.module.homework.manage.HomeworkInfoManage;
@@ -140,13 +139,13 @@ public class HomeworkInfoActivity extends BaseActivity implements HomeworkInfoAc
 
     @Override
     public void showDialog() {
-        super.showDialog("", "提交之后将无法更改,是否确认提交本次作业？");
-        this.setSubmitCallBack(new SubmitCallBack() {
-            @Override
-            public void btnOnClick() {
-                mManage.updateStudentHomework();
-            }
-        });
+//        super.showDialog("", "提交之后将无法更改,是否确认提交本次作业？");
+//        this.setSubmitCallBack(new SubmitCallBack() {
+//            @Override
+//            public void btnOnClick() {
+//                mManage.updateStudentHomework();
+//            }
+//        });
     }
 
     @Override

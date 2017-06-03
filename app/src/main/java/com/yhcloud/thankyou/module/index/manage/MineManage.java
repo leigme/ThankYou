@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.manage;
+package com.yhcloud.thankyou.module.index.manage;
 
 import android.app.Activity;
 import android.content.Intent;

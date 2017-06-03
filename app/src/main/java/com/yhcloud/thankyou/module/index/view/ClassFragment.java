@@ -17,7 +17,7 @@ import com.yhcloud.thankyou.adapter.ClassPeopleListAdapter;
 import com.yhcloud.thankyou.bean.UserInfoBean;
 import com.yhcloud.thankyou.comm.BaseFragment;
 import com.yhcloud.thankyou.comm.ItemClinkListener;
-import com.yhcloud.thankyou.manage.ClassManage;
+import com.yhcloud.thankyou.module.index.manage.ClassManage;
 import com.yhcloud.thankyou.service.LogicService;
 
 import java.text.MessageFormat;

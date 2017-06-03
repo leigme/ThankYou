@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.manage;
+package com.yhcloud.thankyou.module.index.manage;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

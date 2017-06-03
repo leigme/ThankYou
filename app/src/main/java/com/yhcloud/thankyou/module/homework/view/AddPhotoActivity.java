@@ -2,11 +2,11 @@ package com.yhcloud.thankyou.module.homework.view;
 
 import android.Manifest;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
-import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.comm.SubmitCallBack;
 import com.yhcloud.thankyou.comm.ItemClinkListener;
 import com.yhcloud.thankyou.module.homework.adapter.AddPhotoListAdapter;
 import com.yhcloud.thankyou.module.homework.manage.AddPhotoManage;
@@ -163,13 +162,13 @@ public class AddPhotoActivity extends BaseActivity implements AddPhotoActivityVi
 
     @Override
     public void showDialog() {
-        super.showDialog("", "提交之后将无法更改,是否确认提交本次作业？");
-        this.setSubmitCallBack(new SubmitCallBack() {
-            @Override
-            public void btnOnClick() {
-                mManage.updateStudentHomework();
-            }
-        });
+//        super.showDialog("", "提交之后将无法更改,是否确认提交本次作业？");
+//        this.setSubmitCallBack(new SubmitCallBack() {
+//            @Override
+//            public void btnOnClick() {
+//                mManage.updateStudentHomework();
+//            }
+//        });
     }
 
     @Override

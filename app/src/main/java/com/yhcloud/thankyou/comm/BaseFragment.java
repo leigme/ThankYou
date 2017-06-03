@@ -1,25 +1,85 @@
 package com.yhcloud.thankyou.comm;
 
-import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.SparseArray;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.view.ViewGroup;
 
-import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.utils.myview.MyToast;
 
 /**
  * Created by Administrator on 2017/1/22.
  */
 
-public abstract class BaseFragment extends Fragment implements BaseView {
+public abstract class BaseFragment extends Fragment implements BaseView, View.OnClickListener {
 
+    private static String TAG = BaseFragment.class.getName();
+
+    private boolean isVisible = false;
+    private boolean isInitView = false;
+    private boolean isFirstLoad = false;
+    private SparseArray<View> mViews;
+    public View convertView;
+
+    // 加载等待框
     private ProgressDialog mProgressDialog;
-    private Dialog mDialog;
-    private SubmitCallBack mSubmitCallBack;
+
+
+    @Override
+    public void onClick(View view) {
+        processClick(view);
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            isVisible = true;
+            lazyLoad();
+        } else {
+            isVisible = false;
+        }
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        mViews = new SparseArray<>();
+        convertView = inflater.inflate(getLayoutId(), container, false);
+        initViews();
+        isInitView = true;
+        lazyLoad();
+        return convertView;
+    }
+
+    private void lazyLoad() {
+        if (!isFirstLoad || !isVisible || !isInitView) {
+            return;
+        }
+        initDatas();
+        initEvents();
+        isFirstLoad = false;
+    }
+
+    public <E extends View> E findView(int resId) {
+        if (null != convertView) {
+            E view = (E) mViews.get(resId);
+            if (null == view) {
+                view = (E) convertView.findViewById(resId);
+                mViews.put(resId, view);
+            }
+            return view;
+        }
+        return null;
+    }
+
+    public <E extends View> void setOnClick(E view) {
+        view.setOnClickListener(this);
+    }
 
     @Override
     public void showLoading(int msgId) {
@@ -35,54 +95,6 @@ public abstract class BaseFragment extends Fragment implements BaseView {
     }
 
     @Override
-    public void showDialog(String title, String msg) {
-        if (null != mDialog) {
-            mDialog.dismiss();
-        }
-        mDialog = new Dialog(getActivity(), R.style.MyDialog);
-        mDialog.setContentView(R.layout.base_dialog);
-        TextView dTitle = (TextView) mDialog.findViewById(R.id.tv_dialog_title);
-        dTitle.setText(title);
-        TextView dMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
-        dMsg.setText(msg);
-        Button dCancel = (Button) mDialog.findViewById(R.id.btn_dialog_cancel);
-        dCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDialog.dismiss();
-            }
-        });
-        Button dSubmit = (Button) mDialog.findViewById(R.id.btn_dialog_submit);
-        dSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mSubmitCallBack.btnOnClick();
-            }
-        });
-    }
-
-    @Override
-    public void showDialog(String msg) {
-        if (null != mDialog) {
-            mDialog.dismiss();
-        }
-        mDialog = new Dialog(getActivity(), R.style.MyDialog);
-        mDialog.setContentView(R.layout.base_dialog);
-        TextView dMsg = (TextView) mDialog.findViewById(R.id.tv_dialog_msg);
-        dMsg.setText(msg);
-        Button dCancel = (Button) mDialog.findViewById(R.id.btn_dialog_cancel);
-        dCancel.setText("我知道了");
-        dCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDialog.dismiss();
-            }
-        });
-        LinearLayout llSubmit = (LinearLayout) mDialog.findViewById(R.id.ll_dialog_submit);
-        llSubmit.setVisibility(View.GONE);
-    }
-
-    @Override
     public void showToastMsg(int msgId) {
         MyToast.showToast(getActivity(), msgId);
     }
@@ -92,7 +104,4 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         MyToast.showToast(getActivity(), msg);
     }
 
-    public void setSubmitCallBack(SubmitCallBack submitCallBack) {
-        this.mSubmitCallBack = submitCallBack;
-    }
 }

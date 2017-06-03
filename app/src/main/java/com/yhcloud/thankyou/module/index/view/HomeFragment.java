@@ -18,7 +18,7 @@ import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.bean.SpreadBean;
 import com.yhcloud.thankyou.comm.BaseFragment;
 import com.yhcloud.thankyou.comm.ItemClinkListener;
-import com.yhcloud.thankyou.manage.HomeManage;
+import com.yhcloud.thankyou.module.index.manage.HomeManage;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.GlideImageLoader;
 import com.yhcloud.thankyou.utils.Tools;

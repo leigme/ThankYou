@@ -15,7 +15,7 @@ import com.yhcloud.thankyou.adapter.MineFunctionAdapter;
 import com.yhcloud.thankyou.bean.FunctionBean;
 import com.yhcloud.thankyou.comm.BaseFragment;
 import com.yhcloud.thankyou.comm.ItemClinkListener;
-import com.yhcloud.thankyou.manage.MineManage;
+import com.yhcloud.thankyou.module.index.manage.MineManage;
 import com.yhcloud.thankyou.service.LogicService;
 
 import java.util.ArrayList;

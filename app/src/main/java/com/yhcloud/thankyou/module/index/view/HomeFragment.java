@@ -61,47 +61,82 @@ public class HomeFragment extends BaseFragment implements HomeActivityView {
     private HomeManage mManage;
     private LogicService mService;
 
-    public HomeFragment() {
-        // Required empty public constructor
-    }
 
-    public static HomeFragment newInstance(LogicService service) {
-        HomeFragment fragment = new HomeFragment();
-        fragment.mService = service;
-        return fragment;
+    @Override
+    public int getLayoutId() {
+        return R.layout.fragment_home;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initViews() {
+        mBanner = findView(R.id.banner);
+        rvFunctionList = findView(R.id.rv_home_function_list);
+        llflSpreadList = findView(R.id.llflv_plv_spread);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_home, container, false);
-        mManage = new HomeManage(this, mService);
-        return mView;
-    }
+    public void initDatas() {
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
+    public void initEvents() {
+        mBanner.setOnBannerClickListener(new OnBannerClickListener() {
+            @Override
+            public void OnBannerClick(int position) {
+                mManage.goBannerInfo(position);
+            }
+        });
     }
+
+    @Override
+    public void processClick(View view) {
+
+    }
+
+
+
+//    public HomeFragment() {
+//        // Required empty public constructor
+//    }
+//
+//    public static HomeFragment newInstance(LogicService service) {
+//        HomeFragment fragment = new HomeFragment();
+//        fragment.mService = service;
+//        return fragment;
+//    }
+//
+//    @Override
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//    }
+//
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        // Inflate the layout for this fragment
+//        mView = inflater.inflate(R.layout.fragment_home, container, false);
+//        mManage = new HomeManage(this, mService);
+//        return mView;
+//    }
+//
+//    // TODO: Rename method, update argument and hook method into UI event
+//    public void onButtonPressed(Uri uri) {
+//        if (mListener != null) {
+//            mListener.onFragmentInteraction(uri);
+//        }
+//    }
+//
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
     @Override
     public void onDetach() {
@@ -218,19 +253,12 @@ public class HomeFragment extends BaseFragment implements HomeActivityView {
 
     @Override
     public void initView() {
-        mBanner = (Banner) mView.findViewById(R.id.banner);
-        rvFunctionList = (RecyclerView) mView.findViewById(R.id.rv_home_function_list);
-        llflSpreadList = (LinearLayoutForListView) mView.findViewById(R.id.llflv_plv_spread);
+
     }
 
     @Override
     public void initEvent() {
-        mBanner.setOnBannerClickListener(new OnBannerClickListener() {
-            @Override
-            public void OnBannerClick(int position) {
-                mManage.goBannerInfo(position);
-            }
-        });
+
     }
 
     @Override
@@ -252,30 +280,6 @@ public class HomeFragment extends BaseFragment implements HomeActivityView {
         mManage.setBeen(list);
     }
 
-    @Override
-    public int getLayoutId() {
-        return 0;
-    }
-
-    @Override
-    public void initViews() {
-
-    }
-
-    @Override
-    public void initEvents() {
-
-    }
-
-    @Override
-    public void initDatas() {
-
-    }
-
-    @Override
-    public void processClick(View view) {
-
-    }
 
     /**
      * This interface must be implemented by activities that contain this

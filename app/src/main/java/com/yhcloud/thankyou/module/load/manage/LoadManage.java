@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.module.loading.manage;
+package com.yhcloud.thankyou.module.load.manage;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,7 +16,7 @@ import com.yhcloud.thankyou.comm.BaseManager;
 import com.yhcloud.thankyou.comm.BaseService;
 import com.yhcloud.thankyou.comm.BindServiceCallBack;
 import com.yhcloud.thankyou.comm.ResponseCallBack;
-import com.yhcloud.thankyou.module.loading.view.LoadingActivity;
+import com.yhcloud.thankyou.module.load.view.LoadActivity;
 import com.yhcloud.thankyou.service.LogicService;
 import com.yhcloud.thankyou.utils.Constant;
 import com.yhcloud.thankyou.utils.Tools;
@@ -36,25 +36,25 @@ import static android.content.Context.MODE_PRIVATE;
  * @version 20170301
  */
 
-public class LoadingManage extends BaseManager implements BindServiceCallBack{
+public class LoadManage extends BaseManager implements BindServiceCallBack{
 
-    private String TAG = LoadingManage.class.getSimpleName();
+    private String TAG = LoadManage.class.getSimpleName();
 
-    private LoadingActivity mLoadingActivity;
+    private LoadActivity mLoadActivity;
     private LogicService mService;
     private UserInfo mUserInfo;
 
-    public LoadingManage(LoadingActivity loadingActivity) {
-        super(loadingActivity);
+    public LoadManage(LoadActivity loadActivity) {
+        super(loadActivity);
         mBaseActivity.bindBaseService(LogicService.class, this);
-        this.mLoadingActivity = loadingActivity;
+        this.mLoadActivity = loadActivity;
     }
 
     @Override
     public void bindBaseServiceSuccess(BaseService baseService) {
         Tools.print(TAG, "绑定服务成功...");
         mService = (LogicService) baseService;
-        SharedPreferences preferences = mLoadingActivity.getSharedPreferences(Constant.USER_INFO, MODE_PRIVATE);
+        SharedPreferences preferences = mLoadActivity.getSharedPreferences(Constant.USER_INFO, MODE_PRIVATE);
         boolean logined = preferences.getBoolean(Constant.USER_LOGINED, false);
         if (logined) {
             String username = preferences.getString(Constant.USER_NAME, "");
@@ -106,40 +106,40 @@ public class LoadingManage extends BaseManager implements BindServiceCallBack{
 
                                         }
                                     });
-                                    Intent intent = new Intent(mLoadingActivity, MainActivity.class);
+                                    Intent intent = new Intent(mLoadActivity, MainActivity.class);
                                     Bundle bundle = new Bundle();
                                     bundle.putSerializable("ClassInfos", classInfoBeen);
                                     intent.putExtras(bundle);
-                                    mLoadingActivity.startActivity(intent);
-                                    mLoadingActivity.finish();
+                                    mLoadActivity.startActivity(intent);
+                                    mLoadActivity.finish();
                                 }
                                 return;
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            mLoadingActivity.goLoginActivity();
+                            mLoadActivity.goLoginActivity();
                         }
                     }
 
                     @Override
                     public void callFailure() {
-                        MyToast.showToast(mLoadingActivity, R.string.error_connection);
-                        mLoadingActivity.goLoginActivity();
+                        MyToast.showToast(mLoadActivity, R.string.error_connection);
+                        mLoadActivity.goLoginActivity();
                     }
                 });
             } else {
-                MyToast.showToast(mLoadingActivity, R.string.error_connection);
-                mLoadingActivity.goLoginActivity();
+                MyToast.showToast(mLoadActivity, R.string.error_connection);
+                mLoadActivity.goLoginActivity();
             }
         } else {
-            MyToast.showToast(mLoadingActivity, R.string.error_connection);
-            mLoadingActivity.goLoginActivity();
+            MyToast.showToast(mLoadActivity, R.string.error_connection);
+            mLoadActivity.goLoginActivity();
         }
     }
 
     @Override
     public void bindBaseServiceFailure() {
         Tools.print(TAG, "基础服务绑定失败。。。");
-        mLoadingActivity.finish();
+        mLoadActivity.finish();
     }
 }

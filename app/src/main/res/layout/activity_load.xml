@@ -7,5 +7,5 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="@mipmap/background_app"
-    tools:context="com.yhcloud.thankyou.module.loading.view.LoadingActivity">
+    tools:context="com.yhcloud.thankyou.module.load.view.LoadActivity">
 </LinearLayout>

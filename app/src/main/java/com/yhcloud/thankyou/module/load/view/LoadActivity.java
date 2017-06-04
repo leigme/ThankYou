@@ -1,4 +1,4 @@
-package com.yhcloud.thankyou.module.loading.view;
+package com.yhcloud.thankyou.module.load.view;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,17 +7,17 @@ import android.view.WindowManager;
 
 import com.yhcloud.thankyou.R;
 import com.yhcloud.thankyou.comm.BaseActivity;
-import com.yhcloud.thankyou.module.loading.manage.LoadingManage;
+import com.yhcloud.thankyou.module.load.manage.LoadManage;
 import com.yhcloud.thankyou.module.login.view.LoginActivity;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class LoadingActivity extends BaseActivity {
+public class LoadActivity extends BaseActivity {
 
-    private String TAG = LoadingActivity.class.getSimpleName();
+    private String TAG = LoadActivity.class.getSimpleName();
 
-    private LoadingManage mLoadingManage;
+    private LoadManage mLoadManage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class LoadingActivity extends BaseActivity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
-                Intent intent = new Intent(LoadingActivity.this, LoginActivity.class);
+                Intent intent = new Intent(LoadActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
@@ -49,7 +49,7 @@ public class LoadingActivity extends BaseActivity {
 
     @Override
     public int getLayoutId() {
-        return R.layout.activity_loading;
+        return R.layout.activity_load;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class LoadingActivity extends BaseActivity {
 
     @Override
     public void initDatas() {
-        mLoadingManage = new LoadingManage(this);
+        mLoadManage = new LoadManage(this);
     }
 
     @Override

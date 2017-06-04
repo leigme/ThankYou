@@ -32,7 +32,7 @@
 
         <!-- android:theme="@style/AppTheme"> -->
         <activity
-            android:name=".module.loading.view.LoadingActivity"
+            android:name=".module.load.view.LoadActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

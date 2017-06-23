@@ -17,7 +17,7 @@ import com.yhcloud.thankyou.utils.myview.MyToast;
 
 public abstract class BaseFragment extends Fragment implements BaseView, View.OnClickListener {
 
-    private static String TAG = BaseFragment.class.getName();
+    public static String TAG = BaseFragment.class.getName();
 
     private boolean isVisible = false;
     private boolean isInitView = false;

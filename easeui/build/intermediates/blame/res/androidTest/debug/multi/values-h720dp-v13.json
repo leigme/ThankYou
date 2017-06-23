@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/leig/Programs/androidstudio/ThankYouPhone/easeui/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+        "outputFile": "/Users/leig/Desktop/Thankyou/easeui/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 117
                 },
                 "from": {
-                    "file": "/Users/leig/.android/build-cache/8872c352bfe38cc06ba037a4181720c1d4bbe1f3/output/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "file": "/Users/leig/.android/build-cache/3f2e56ace0754949baa8fd4c48439eb15a4a2c7a/output/res/values-h720dp-v13/values-h720dp-v13.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
